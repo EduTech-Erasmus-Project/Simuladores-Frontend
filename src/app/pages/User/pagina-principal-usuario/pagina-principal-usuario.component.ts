@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 
 @Component({
   selector: 'app-pagina-principal-usuario',
@@ -83,5 +84,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   isMobile() {
     return window.innerWidth <= 991;
-}
+  }
+
+  
 }
