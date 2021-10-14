@@ -23,7 +23,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   menuClick: boolean;
   sidebarActive: boolean;
   staticMenuActive: boolean;
-
+  topbarMenuActive: boolean;
+  megaMenuMobileClick: boolean;
+  megaMenuMobileActive: boolean;
+  topbarMobileMenuClick: boolean;
+  topbarMobileMenuActive: boolean;
+  menuMobileActive: boolean;
+  activeTopbarItem: any;
+  topbarItemClick: boolean;
 
   constructor() { }
   
@@ -39,5 +46,42 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     event.preventDefault();
   }
 
-  
+  onMenuButtonClick(event) {
+    this.menuClick = true;
+    this.topbarMenuActive = false;
+
+    if (this.isMobile()) {
+        this.menuMobileActive = !this.menuMobileActive;
+    }
+
+    event.preventDefault();
+  }
+
+  onMegaMenuMobileButtonClick(event) {
+    this.megaMenuMobileClick = true;
+    this.megaMenuMobileActive = !this.megaMenuMobileActive;
+
+    event.preventDefault();
+  }
+
+  onTopbarMobileMenuButtonClick(event) {
+    this.topbarMobileMenuClick = true;
+    this.topbarMobileMenuActive = !this.topbarMobileMenuActive;
+
+    event.preventDefault();
+  }
+
+  onTopbarItemClick(event, item) {
+    this.topbarItemClick = true;
+
+    if (this.activeTopbarItem === item) {
+        this.activeTopbarItem = null; } else {
+        this.activeTopbarItem = item; }
+
+    event.preventDefault();
+  }
+
+  isMobile() {
+    return window.innerWidth <= 991;
+}
 }
