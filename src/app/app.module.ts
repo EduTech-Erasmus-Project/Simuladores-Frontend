@@ -148,6 +148,11 @@ import {IconService} from './demo/service/iconservice';
 import {BreadcrumbService} from './breadcrumb.service';
 import {MenuService} from './app.menu.service';
 import {AppCodeModule} from './app.code.component';
+import { LoginUserComponent } from './pages/login-user/login-user.component';
+import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.component';
+import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
+import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
+import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
 
 @NgModule({
     imports: [
@@ -283,6 +288,11 @@ import {AppCodeModule} from './app.code.component';
         TypographyComponent,
         TextComponent,
         WidgetsComponent,
+        LoginUserComponent,
+        RegistrarUserComponent,
+        MisActividadesUsuarioComponent,
+        PaginaPrincipalUsuarioComponent,
+        MenuLateralComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

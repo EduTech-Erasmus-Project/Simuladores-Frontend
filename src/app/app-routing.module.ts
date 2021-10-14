@@ -38,6 +38,10 @@ import {AppLoginComponent} from './pages/app.login.component';
 import {AppCrudComponent} from './pages/app.crud.component';
 import {AppCalendarComponent} from './pages/app.calendar.component';
 import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
+import { LoginUserComponent } from './pages/login-user/login-user.component';
+import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
+import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
+import { AutentificarGuard } from './guards/autentificar.guard';
 
 
 @NgModule({
@@ -84,8 +88,11 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
             {path: 'error', component: AppErrorComponent},
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
-            {path: 'login', component: AppLoginComponent},
+            {path: 'login', component: LoginUserComponent},
+            {path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent, canActivate: [AutentificarGuard]},
+            {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent, canActivate: [AutentificarGuard]},
             {path: '**', redirectTo: '/notfound'},
+            
         ], {scrollPositionRestoration: 'enabled'})
     ],
     exports: [RouterModule]
