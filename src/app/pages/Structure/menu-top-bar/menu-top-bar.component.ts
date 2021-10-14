@@ -1,16 +1,17 @@
-import {Component} from '@angular/core';
-import {AppMainComponent} from './app.main.component';
+import { Component, OnInit } from '@angular/core';
+import { AppMainComponent } from 'src/app/app.main.component';
 
 @Component({
-    selector: 'app-topbar',
-    template: `
-        <div class="layout-topbar">
+  selector: 'app-menu-top-bar',
+  template: `
+    
+    <div class="layout-topbar">
 			<div class="layout-topbar-wrapper">
                 <div class="layout-topbar-left">
 					<div class="layout-topbar-logo-wrapper">
 						<a href="#" class="layout-topbar-logo">
-							<img src="assets/layout/images/logo-mirage@2x.png" alt="mirage-layout" />
-							<span class="app-name">Mirage</span>
+							<img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" alt="mirage-layout" />
+							<span class="app-name">Simulador</span>
 						</a>
 					</div>
 
@@ -27,9 +28,7 @@ import {AppMainComponent} from './app.main.component';
 					</a>
 
 					
-                </div>
-				
-                <div class="layout-topbar-right fadeInDown">
+        <div class="layout-topbar-right fadeInDown">
 					<ul class="layout-topbar-actions">
 						<li #search class="search-item topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === search}">
 							<a href="#" class="topbar-search-mobile-button" (click)="appMain.onTopbarItemClick($event,search)">
@@ -285,17 +284,21 @@ import {AppMainComponent} from './app.main.component';
                 </div>
             </div>
         </div>
-    `
+
+
+  `,
+  styles: [
+  ]
 })
-export class AppTopBarComponent {
+export class MenuTopBarComponent implements OnInit {
 
-    activeItem: number;
+  constructor(public appMain: AppMainComponent) { }
 
-    constructor(public appMain: AppMainComponent) {}
+  ngOnInit(): void {
+  }
 
-    mobileMegaMenuItemClick(index) {
-        this.appMain.megaMenuMobileClick = true;
-        this.activeItem = this.activeItem === index ? null : index;
-    }
-
+  mobileMegaMenuItemClick(index) {
+    this.appMain.megaMenuMobileClick = true;
+    this.activeItem = this.activeItem === index ? null : index;
+  }
 }

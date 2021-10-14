@@ -153,6 +153,7 @@ import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.co
 import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
 import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
 import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
+import { MenuTopBarComponent } from './pages/Structure/menu-top-bar/menu-top-bar.component';
 
 @NgModule({
     imports: [
@@ -292,7 +293,8 @@ import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-latera
         RegistrarUserComponent,
         MisActividadesUsuarioComponent,
         PaginaPrincipalUsuarioComponent,
-        MenuLateralComponent
+        MenuLateralComponent,
+        MenuTopBarComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
