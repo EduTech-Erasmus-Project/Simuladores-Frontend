@@ -1,0 +1,183 @@
+<div class="p-col-12">
+    <div class="card">
+        <h3 style="width: 100%; text-align: center; margin-left: 12.5%;">Mi información Personal</h3>
+        <div class="p-grid">
+            <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
+                
+
+
+                <div class="p-fluid">
+                    <div  class="p-field">
+                        <div>
+                            <div style="text-align: center; line-height: 2em;">
+                                <!--
+                                    Codigo para mostrar fotografia del usuario
+                                    <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
+                                -->
+                                <h3>Perfil de Usuario</h3>
+                                <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px;" alt=""/>
+                                <div class="product-list-detail">
+                                    <h4> Juan Pablo Perez Bojorque <!--{{product.name}}--></h4>
+                                    <span> Estudiante <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
+                                        
+                                    <!--{{product.description}}--></span>
+                                    
+                                </div>
+                                
+                                <span style="font-size: 15px; font-weight: bold;"> Puntuacion Global: 
+
+                                    8.0 <p-rating style="text-align: center;" [ngModel]=4 readonly="true" stars="5" [cancel]="false"></p-rating> 
+                                    <!--
+                                    Etiqueta de rating 
+                                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
+                                    -->
+                               </span>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--Linea de division de componentes-->
+            <div class="p-col-1">
+                <p-divider layout="vertical">
+                    
+                </p-divider>
+            </div>
+
+            
+            <div class="p-col-7 p-ai-center p-jc-center">
+                <div class="p-grid p-fluid">
+                    <div class="p-col-12 p-md-6">
+                        <div class="card">
+                            <h6>Nombres:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-user"></i>
+                                    <input type="text" pInputText placeholder="Nombre"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Email:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-envelope"></i>
+                                    <input type="text" pInputText placeholder="Correo Electronico"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Pais:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="Select a City" scrollHeight="250px" display="chip">
+                                        <ng-template let-group pTemplate="group">
+                                            <div class="p-d-flex p-ai-center">
+                                                <img src="assets/demo/flags/flag_placeholder.png" [class]="'p-mr-2 flag flag-' + group.value" style="width: 20px" />
+                                                <span>{{group.label}}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </span>
+                            </div>
+
+                            <h6>Ocupación:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-info-circle"></i>
+                                    <input type="text" pInputText value="Ocupación que desempeña"/>
+                                </span>
+                                
+                            </div>
+
+                            <h5>Icons</h5>
+                            <div class="p-grid p-formgrid">
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-user"></i>
+                                        <input type="text" pInputText placeholder="Username"/>
+                                    </span>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-right">
+                                        <input type="text" pInputText placeholder="Search"/>
+                                        <i class="pi pi-search"></i>
+                                    </span>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-left p-input-icon-right">
+                                        <i class="pi pi-user"></i>
+                                        <input type="text" pInputText placeholder="Search"/>
+                                        <i class="pi pi-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                        <div class="card">
+                            <h6>Apellidos:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-user"></i>
+                                    <input type="text" pInputText placeholder="Apellido"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Teléfono:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-phone"></i>
+                                    <input type="text" pInputText placeholder="Número de teléfono"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Rol:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-user"></i>
+                                    <input type="text" disabled pInputText value="Estudiante"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Responsable/Tutor:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-user"></i>
+                                    <input type="text" disabled pInputText value="Angel Perez"/>
+                                </span>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                   
+                </div>
+
+                
+                <p-divider layout="horizontal" align="center">
+                    <div class="buttons">
+                        <button
+                          pButton
+                          type="submit"
+                          label="Editar Perfil"
+                          style="margin-right: 2em;"
+                        ></button>
+                        <button
+                          class="p-button-raised p-button-danger"
+                          pButton
+                          type="submit"
+                          label="Eliminar Perfil"
+                        ></button>
+                    </div> 
+                </p-divider>
+            </div>
+        </div>
+    </div>
+</div>
+

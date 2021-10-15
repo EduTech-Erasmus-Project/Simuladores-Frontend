@@ -155,6 +155,7 @@ import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-u
 import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
 import { MenuTopBarComponent } from './pages/Structure/menu-top-bar/menu-top-bar.component';
 import { MenuFooterPageComponent } from './pages/Structure/menu-footer-page/menu-footer-page.component';
+import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.component';
 
 @NgModule({
     imports: [
@@ -296,7 +297,8 @@ import { MenuFooterPageComponent } from './pages/Structure/menu-footer-page/menu
         PaginaPrincipalUsuarioComponent,
         MenuLateralComponent,
         MenuTopBarComponent,
-        MenuFooterPageComponent
+        MenuFooterPageComponent,
+        DatosUsuarioComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -42,6 +42,7 @@ import { LoginUserComponent } from './pages/login-user/login-user.component';
 import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
 import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
 import { AutentificarGuard } from './guards/autentificar.guard';
+import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.component';
 
 
 @NgModule({
@@ -89,8 +90,15 @@ import { AutentificarGuard } from './guards/autentificar.guard';
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
             {path: 'login', component: LoginUserComponent},
-            {path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent, canActivate: [AutentificarGuard]},
-            {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent, canActivate: [AutentificarGuard]},
+            {
+                path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent,
+                children: [
+                    //{path: '', component: PaginaPrincipalUsuarioComponent},
+                    {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent},
+                    {path: 'datosUsuario', component: DatosUsuarioComponent}
+                ]
+            },
+            
             {path: '**', redirectTo: '/notfound'},
             
         ], {scrollPositionRestoration: 'enabled'})

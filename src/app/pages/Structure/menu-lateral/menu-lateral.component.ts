@@ -14,10 +14,10 @@ export class MenuLateralComponent implements OnInit {
   ngOnInit() {
         this.modelItem = [
             {
-                label: 'Mi Perfil', icon: 'pi pi-fw pi-user', routerLink: ['/Pagina-Principal-Usuario']
+                label: 'Mi Perfil', icon: 'pi pi-fw pi-user', routerLink: ['/Pagina-Principal-Usuario/datosUsuario']
             },
             {
-                label: 'Mis Actividades', icon: 'pi pi-fw pi-chart-line', routerLink: ['/Mis-Actividades-Usuario']
+                label: 'Mis Actividades', icon: 'pi pi-fw pi-chart-line', routerLink: ['/Pagina-Principal-Usuario/Mis-Actividades-Usuario']
             },
             {
                 label: 'Acerca de', icon: 'pi pi-fw pi-users', url: ['https://www.primefaces.org/store']
