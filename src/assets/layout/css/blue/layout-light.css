@@ -9289,7 +9289,7 @@ a {
   margin: 0;
 }
 .widget-news .news-row .news.news-1 {
-  background-image: url("../../images/dashboard/news-1.png");
+  background-image: url("../../images/dashboard/fisica.png");
 }
 .widget-news .news-row .news.news-1 .news-title {
   background: -moz-linear-gradient(246deg, #f2c260 0%, #ebcb8b 100%);
@@ -9311,7 +9311,7 @@ a {
   color: #ebcb8b;
 }
 .widget-news .news-row .news.news-2 {
-  background-image: url("../../images/dashboard/news-2.png");
+  background-image: url("../../images/dashboard/visual.png");
 }
 .widget-news .news-row .news.news-2 .news-title {
   background: -moz-linear-gradient(246deg, #8fb56f 0%, #a3be8c 100%);
@@ -9333,7 +9333,7 @@ a {
   color: #a3be8c;
 }
 .widget-news .news-row .news.news-3 {
-  background-image: url("../../images/dashboard/news-3.png");
+  background-image: url("../../images/dashboard/auditiva.png");
 }
 .widget-news .news-row .news.news-3 .news-title {
   background-color: #45b0d5;

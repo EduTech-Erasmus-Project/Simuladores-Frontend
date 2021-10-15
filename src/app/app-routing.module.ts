@@ -42,6 +42,7 @@ import { LoginUserComponent } from './pages/login-user/login-user.component';
 import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
 import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
 import { AutentificarGuard } from './guards/autentificar.guard';
+import { InicioEComponent } from './pages/Experto/inicio-e/inicio-e.component';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { AutentificarGuard } from './guards/autentificar.guard';
             {path: 'login', component: LoginUserComponent},
             {path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent, canActivate: [AutentificarGuard]},
             {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent, canActivate: [AutentificarGuard]},
+            {path : 'inicioe', component: InicioEComponent},
             {path: '**', redirectTo: '/notfound'},
             
         ], {scrollPositionRestoration: 'enabled'})
