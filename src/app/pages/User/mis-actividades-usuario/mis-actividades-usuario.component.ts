@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { MenuLateralComponent } from '../../Structure/menu-lateral/menu-lateral.component';
 import { MenuFooterPageComponent } from '../../Structure/menu-footer-page/menu-footer-page.component';
 import { MenuTopBarComponent } from '../../Structure/menu-top-bar/menu-top-bar.component';
+import { Customer, Representative } from 'src/app/demo/domain/customer';
+import { CustomerService } from 'src/app/demo/service/customerservice';
+import { ProductService } from 'src/app/demo/service/productservice';
+import { BreadcrumbService } from 'src/app/breadcrumb.service';
 
 @Component({
   selector: 'app-mis-actividades-usuario',
@@ -33,10 +37,49 @@ export class MisActividadesUsuarioComponent implements OnInit {
   menuMobileActive: boolean;
   activeTopbarItem: any;
   topbarItemClick: boolean;
-
-  constructor() { }
+  buscarTextoRegistro: string;
+  representatives: Representative[];
+  customers1: Customer[];
+  selectedCustomers1: Customer[];
+  statuses: any[];
+  
+  constructor(private customerService: CustomerService, private productService: ProductService,
+    private breadcrumbService: BreadcrumbService) { 
+      this.breadcrumbService.setItems([
+        { label: 'UI Kit' },
+        { label: 'Table', routerLink: ['/uikit/table'] }
+    ]);
+    }
 
   ngOnInit(): void {
+    this.customerService.getCustomersLarge().then(customers => {
+      this.customers1 = customers;
+      // @ts-ignore
+      this.customers1.forEach(customer => customer.date = new Date(customer.date));
+    });
+  
+  
+    this.representatives = [
+        {name: 'Amy Elsner', image: 'amyelsner.png'},
+        {name: 'Anna Fali', image: 'annafali.png'},
+        {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
+        {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
+        {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
+        {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
+        {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
+        {name: 'Onyama Limba', image: 'onyamalimba.png'},
+        {name: 'Stephen Shaw', image: 'stephenshaw.png'},
+        {name: 'XuXue Feng', image: 'xuxuefeng.png'}
+    ];
+  
+    this.statuses = [
+        {label: 'Unqualified', value: 'unqualified'},
+        {label: 'Qualified', value: 'qualified'},
+        {label: 'New', value: 'new'},
+        {label: 'Negotiation', value: 'negotiation'},
+        {label: 'Renewal', value: 'renewal'},
+        {label: 'Proposal', value: 'proposal'}
+    ];
   }
 
   onSidebarClick(event: Event) {

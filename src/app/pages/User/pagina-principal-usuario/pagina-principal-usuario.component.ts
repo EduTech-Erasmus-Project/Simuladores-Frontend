@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { BreadcrumbService } from 'src/app/breadcrumb.service';
+import { PhotoService } from 'src/app/demo/service/photoservice';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 
 @Component({
@@ -32,10 +34,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   menuMobileActive: boolean;
   activeTopbarItem: any;
   topbarItemClick: boolean;
+  
 
-  constructor() { }
+  constructor() { 
+    
+  }
   
   ngOnInit(): void {
+    
   }
 
   onSidebarClick(event: Event) {

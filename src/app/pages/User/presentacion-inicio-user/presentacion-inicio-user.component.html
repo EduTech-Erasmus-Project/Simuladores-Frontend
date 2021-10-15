@@ -1,0 +1,143 @@
+<div class="p-col-12">
+    <div class="card">
+        <h5>UNITY ESCENARIOS</h5>
+        <div class="p-grid">
+            <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
+                <div class="p-fluid">
+                  <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions"
+                    [containerStyle]="{'max-width': '500px'}" [numVisible]="7" [circular]="true">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item.itemImageSrc" style="width: 100%; display: block;"/>
+                    </ng-template>
+  
+                    <ng-template pTemplate="thumbnail" let-item>
+                        <div class="p-grid p-nogutter p-justify-center">
+                            <img [src]="item.thumbnailImageSrc" style=" width: 100px; height: 50px; display: block;"/>
+                        </div>
+                    </ng-template>
+                 </p-galleria>
+  
+                </div>
+            </div>
+  
+  
+            <div class="p-col-1">
+                <p-divider layout="vertical">
+                    <b>O</b>
+                </p-divider>
+            </div>
+  
+  
+            <div class="p-col-5 p-ai-center p-jc-center">
+                
+  
+              <div class="card">
+                <h2 style="color: #71d5ea; font-weight: bold;" >Ejercitarios </h2>
+                <p-tabView orientation="left">
+                      <p-tabPanel header=" Ejercitario 1" leftIcon="pi pi-image"  >
+                          <div class="card">
+                            <p>
+                                <b>Tipo:</b> Diálogo <br>
+                                <b>Nombre:</b> La venta <br>
+                                <b>Instrucción principal: </b> Se le pide al participante que visite a un cliente y lo convenza 
+                                    de asistir a una feria.<br>
+                                <b> Principales Competencias medidas:</b> Comunicación efectiva 
+                                   
+                                <b> Categoría del ejercicio: </b> Interacciones uno a uno<br>
+                                <b> Duración:</b> Usualmente corta, no más de 10 minutos <br>
+                                <b> Variaciones: </b> Presentaciones con uso de material audiovisual 
+          
+                            </p>
+  
+                            <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                            
+                          </div>
+          
+                      </p-tabPanel>
+          
+                      <p-tabPanel header=" Ejercitario 2" leftIcon="pi pi-image" >
+  
+                        
+                        <p>
+                          <b>Tipo:</b> Diálogo <br>
+                           <b>Nombre:</b> Empleado problema  <br>
+                           <b>Instrucción principal: </b> El participante es un jefe nuevo y nota a las tres semanas que 
+                           uno de sus colaboradores siempre llega con 45 ó 50 minutos 
+                           de retraso. Decide hablar con el empleado para lograr algún 
+                           acuerdo.<br>
+                           <b> Principales Competencias medidas:</b> Habilidades interpersonales 
+                          <b> Duración:</b> 10 a 15 minutos. <br> 
+  
+                       </p> 
+                          
+                       <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                      </p-tabPanel>
+          
+                      <p-tabPanel header="Ejercitario 3" leftIcon="pi pi-image" >
+                        <p>
+                          <b>Tipo:</b> Selección <br>
+                          <b>Nombre:</b> Mi agenda  <br>
+                          <b>Instrucción principal: </b> El participante debe priorizar y tomar decisiones sobre el 
+                          orden de las actividades descritas y organizar agenda personal 
+                          y de trabajo.<br>
+                          <b> Principales Competencias medidas:</b> Capacidad de priorización 
+                          <b> Duración:</b> 5 minutos <br>
+                          </p>
+                          <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                      </p-tabPanel>
+          
+                      <p-tabPanel header="Ejercitario 4" leftIcon="pi pi-image" >
+                        <p>
+                          <b>Tipo:</b> Selección <br>
+                          <b>Nombre:</b> Funciones y competencias <br>
+                          <b>Instrucción principal: </b> El participante debe leer las actividades descritas y 
+                          seleccionar que competencias corresponde a cada actividad.
+                          Principales
+                          <b> Principales Competencias medidas:</b> Capacidad para la toma de decisiones
+                          <b> Duración:</b> 5 minutos <br>
+                          <b> Variaciones: </b> Presentaciones con uso de material audiovisual 
+                       </p>
+  
+                       <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                      </p-tabPanel>
+                    
+          
+                      <p-tabPanel header=" Ejercitario 5" leftIcon="pi pi-image" >
+  
+                        <p>
+                          <b>Tipo:</b> Seleeción <br>
+                          <b>Nombre:</b>El tiempo <br>
+                          <b>Instrucción principal: </b> Planificación y manejo del tiempo
+                          <b> Principales Competencias medidas:</b> Comunicación efectiva 
+                          <b> Variaciones: </b> Presentaciones con uso de material audiovisual
+                      </p>
+  
+                      <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                      </p-tabPanel>
+  
+                      
+  
+   
+          
+                      <p-tabPanel header="Ejercitario 6" leftIcon="pi pi-image" >
+                          <p>
+                            <b>Tipo:</b> Selección <br>
+                            <b>Nombre:</b>Un día de trabajo <br>
+                            <b> Principales Competencias medidas:</b>Planificación y manejo del tiempo <br>Capacidad de toma de decisiones
+                            <b> Categoría del ejercicio :</b> Interacciones uno a uno  <br>
+                        </p>
+                        <button  pButton pRipple type="button" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+  
+                      </p-tabPanel> 
+          
+                </p-tabView>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>

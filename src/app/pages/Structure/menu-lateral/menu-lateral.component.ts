@@ -14,6 +14,9 @@ export class MenuLateralComponent implements OnInit {
   ngOnInit() {
         this.modelItem = [
             {
+                label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/Pagina-Principal-Usuario']
+            },
+            {
                 label: 'Mi Perfil', icon: 'pi pi-fw pi-user', routerLink: ['/Pagina-Principal-Usuario/datosUsuario']
             },
             {
