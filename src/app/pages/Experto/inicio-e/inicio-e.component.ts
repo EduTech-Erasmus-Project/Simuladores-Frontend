@@ -1,8 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
+import { Customer, Representative } from 'src/app/demo/domain/customer';
+import { Product } from 'src/app/demo/domain/product';
+import { CustomerService } from 'src/app/demo/service/customerservice';
 import { PhotoService } from 'src/app/demo/service/photoservice';
+import { ProductService } from 'src/app/demo/service/productservice';
 
 @Component({
   selector: 'app-inicio-e',
@@ -17,8 +22,19 @@ import { PhotoService } from 'src/app/demo/service/photoservice';
             opacity: 0.8
         })),
         transition('* => *', animate('250ms cubic-bezier(0, 0, 0.2, 1)'))
-    ])
-]
+        ])
+    ],
+    //para tabla 
+    styles: [`
+        @media screen and (max-width: 960px) {
+            :host ::ng-deep .p-datatable.p-datatable-customers.rowexpand-table .p-datatable-tbody > tr > td:nth-child(6) {
+                display: flex;
+            }
+        }
+
+    `],
+
+    
 })
 export class InicioEComponent implements OnInit {
 
@@ -44,7 +60,7 @@ export class InicioEComponent implements OnInit {
 
     radarData: any;
 
-    
+    //imagens
     images: any[];
 
     galleriaResponsiveOptions: any[] = [
@@ -67,22 +83,51 @@ export class InicioEComponent implements OnInit {
   ];
 
 
-
+    // para instrucciones en orden
   customEvents: any[];
 
-
+// para imagenes de f
   activeNews = 1;
-  constructor( private breadcrumbService: BreadcrumbService, private photoService: PhotoService) { 
+
+  // para tabla 
+    customers1: Customer[];
+
+    customers2: Customer[];
+
+    customers3: Customer[];
+
+    selectedCustomers1: Customer[];
+
+    selectedCustomer: Customer;
+
+    representatives: Representative[];
+
+    statuses: any[];
+
+    products: Product[];
+
+    rowGroupMetadata: any;
+
+    activityValues: number[] = [0, 100];
+
+    @ViewChild('dt') table: Table;
+
+
+
+  constructor( private breadcrumbService: BreadcrumbService, private photoService: PhotoService,
+    private customerService: CustomerService, private productService: ProductService) { 
     this.breadcrumbService.setItems([
       { label: 'UI Kit' },
       { label: 'Charts', routerLink: ['/uikit/chart'] },
       { label: 'Media', routerLink: ['/uikit/media'] },
-      {label: 'Timeline', routerLink: ['/pages/timeline']}
+      {label: 'Timeline', routerLink: ['/pages/timeline']},
+      { label: 'Table', routerLink: ['/uikit/table'] }
   ]);
   }
   
   ngOnInit() {
 
+    // para instrucciones... como en orden 
     this.customEvents = [
         {
             status: 'Ingresar al Juego',
@@ -107,87 +152,156 @@ export class InicioEComponent implements OnInit {
     }
     ];
 
- 
+ //para fotos
     this.photoService.getImages().then(images => {
       this.images = images;
   });
 
-
+//analisis
     this.lineData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
           {
-              label: 'First Dataset',
+              label: 'Escenario 1',
               data: [65, 59, 80, 81, 56, 55, 40],
               fill: false,
               backgroundColor: 'rgb(255, 205, 86)',
               borderColor: 'rgb(255, 205, 86)'
           },
           {
-              label: 'Second Dataset',
+              label: 'Escenario 2',
               data: [28, 48, 40, 19, 86, 27, 90],
               fill: false,
-              backgroundColor: 'rgb(75, 192, 192)',
-              borderColor: 'rgb(75, 192, 192)'
-          }
+              backgroundColor: 'rgb(47, 100, 12)',
+              borderColor: 'rgb(47, 100, 12)'
+          },
+
+          {
+            label: 'Escenario 3',
+            data: [56, 95, 8, 18, 37, 5, 10],
+            fill: false,
+            backgroundColor: 'rgb(255, 25, 36)',
+            borderColor: 'rgb(255, 25, 36)'
+        },
+        {
+            label: 'Escenario 4',
+            data: [82, 84, 60, 30, 36, 27, 20],
+            fill: false,
+            backgroundColor: 'rgb(50, 12, 192)',
+            borderColor: 'rgb(50, 12, 192)'
+        },
+
+        {
+            label: 'Escenario 5',
+            data: [15, 19, 40, 11, 26, 15, 30],
+            fill: false,
+            backgroundColor: 'rgb(25, 205, 68)',
+            borderColor: 'rgb(25, 205, 68)'
+        },
+        {
+            label: 'Escenario 6',
+            data: [18, 28, 10, 29, 26, 17, 10],
+            fill: false,
+            backgroundColor: 'rgb(255, 129, 192)',
+            borderColor: 'rgb(255, 129, 192)'
+        }
       ]
   };
-
+//analisis
   this.barData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
-          {
-              label: 'My First dataset',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: [65, 59, 80, 81, 56, 55, 40]
-          },
-          {
-              label: 'My Second dataset',
-              backgroundColor: 'rgb(54, 162, 235)',
-              borderColor: 'rgb(54, 162, 235)',
-              data: [28, 48, 40, 19, 86, 27, 90]
-          }
+         
+        {
+            label: 'Escenario 1',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            backgroundColor: 'rgb(255, 205, 86)',
+            borderColor: 'rgb(255, 205, 86)'
+        },
+        {
+            label: 'Escenario 2',
+            data: [28, 48, 40, 19, 86, 27, 90],
+            fill: false,
+            backgroundColor: 'rgb(47, 100, 12)',
+            borderColor: 'rgb(47, 100, 12)'
+        },
+
+        {
+          label: 'Escenario 3',
+          data: [56, 95, 8, 18, 37, 5, 10],
+          fill: false,
+          backgroundColor: 'rgb(255, 25, 36)',
+          borderColor: 'rgb(255, 25, 36)'
+      },
+      {
+          label: 'Escenario 4',
+          data: [82, 84, 60, 30, 36, 27, 20],
+          fill: false,
+          backgroundColor: 'rgb(50, 12, 192)',
+          borderColor: 'rgb(50, 12, 192)'
+      },
+
+      {
+          label: 'Escenario 5',
+          data: [15, 19, 40, 11, 26, 15, 30],
+          fill: false,
+          backgroundColor: 'rgb(25, 205, 68)',
+          borderColor: 'rgb(25, 205, 68)'
+      },
+      {
+          label: 'Escenario 6',
+          data: [18, 28, 10, 29, 26, 17, 10],
+          fill: false,
+          backgroundColor: 'rgb(255, 129, 192)',
+          borderColor: 'rgb(255, 129, 192)'
+      }
       ]
   };
-
+//analisis
   this.pieData = {
-      labels: ['A', 'B', 'C'],
+      labels: ['Esc 1', 'Esc 2', 'Esc3', 'Esc4', 'Esc5', 'Esc6'],
       datasets: [
           {
-              data: [540, 325, 702, 421],
+              data: [30, 15, 30, 10, 5, 10],
               backgroundColor: [
                   'rgb(54, 162, 235)',
                   'rgb(255, 99, 132)',
                   'rgb(255, 205, 86)',
-                  'rgb(75, 192, 192)'
+                  'rgb(75, 192, 192)',
+                  'rgb(75, 19, 192)',
+                  'rgb(75, 192, 19)'
               ]
           }]
   };
+  //analisis
 
   this.polarData = {
       datasets: [{
           data: [
-              11,
-              16,
-              7,
-              3
+              100,
+              77,
+              53,
+              39,
+              25,
+              17
           ],
           backgroundColor: [
               'rgb(54, 162, 235)',
               'rgb(255, 99, 132)',
               'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)'
+              'rgb(75, 192, 192)',
+              'rgb(75, 19, 192)',
+              'rgb(75, 192, 19)'
           ],
           label: 'My dataset'
       }],
       labels: [
-          'Blue',
-          'Purple',
-          'Orange',
-          'Green'
+        'Esc 1', 'Esc 2', 'Esc3', 'Esc4', 'Esc5', 'Esc6'
       ]
   };
+
+  // para anlsis
 
   this.radarData = {
       labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
@@ -215,7 +329,41 @@ export class InicioEComponent implements OnInit {
       ]
   };
 
+  //para tabla 
+  this.customerService.getCustomersLarge().then(customers => {
+    this.customers1 = customers;
+    // @ts-ignore
+    this.customers1.forEach(customer => customer.date = new Date(customer.date));
+});
+this.customerService.getCustomersMedium().then(customers => this.customers2 = customers);
+this.customerService.getCustomersMedium().then(customers => this.customers3 = customers);
+this.productService.getProductsWithOrdersSmall().then(data => this.products = data);
+
+this.representatives = [
+    {name: 'Amy Elsner', image: 'amyelsner.png'},
+    {name: 'Anna Fali', image: 'annafali.png'},
+    {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
+    {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
+    {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
+    {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
+    {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
+    {name: 'Onyama Limba', image: 'onyamalimba.png'},
+    {name: 'Stephen Shaw', image: 'stephenshaw.png'},
+    {name: 'XuXue Feng', image: 'xuxuefeng.png'}
+];
+
+this.statuses = [
+    {label: 'Bajo Bajo', value: 'Bajo Bajo'},
+    {label: 'Calificado', value: 'Calificado'},
+    {label: 'Nuevo', value: 'Nuevo'},
+    {label: 'Medio Alto', value: 'Medio Alto'},
+    {label: 'Bajo Alto', value: 'Bajo Alto'},
+    {label: 'Alto Alto', value: 'Alto Alto'}
+];
+
   }
+
+  
 
   onSidebarClick(event: Event) {
     this.menuClick = true;
@@ -264,5 +412,36 @@ export class InicioEComponent implements OnInit {
   isMobile() {
     return window.innerWidth <= 991;
 }
+
+// para tabla 
+onSort() {
+    this.updateRowGroupMetaData();
+}
+
+updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+
+    if (this.customers3) {
+        for (let i = 0; i < this.customers3.length; i++) {
+            const rowData = this.customers3[i];
+            const representativeName = rowData.representative.name;
+
+            if (i === 0) {
+                this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+            }
+            else {
+                const previousRowData = this.customers3[i - 1];
+                const previousRowGroup = previousRowData.representative.name;
+                if (representativeName === previousRowGroup) {
+                    this.rowGroupMetadata[representativeName].size++;
+                }
+                else {
+                    this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+                }
+            }
+        }
+    }
+}
+
 
 }
