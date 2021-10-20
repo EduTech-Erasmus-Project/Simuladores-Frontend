@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PrimeIcons } from 'primeng/api';
+import { PrimeIcons, SelectItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
@@ -113,9 +113,27 @@ export class InicioEComponent implements OnInit {
     @ViewChild('dt') table: Table;
 
 
+// para mostrar productos
+products2: Product[];
+
+sortOptions: SelectItem[];
+
+sortOrder: number;
+
+sortField: string;
+
+sourceCities: any[];
+
+targetCities: any[];
+
+orderCities: any[];
+
+sortKey: any
+
+
 
   constructor( private breadcrumbService: BreadcrumbService, private photoService: PhotoService,
-    private customerService: CustomerService, private productService: ProductService) { 
+    private customerService: CustomerService, private productService: ProductService, private productService2: ProductService) { 
     this.breadcrumbService.setItems([
       { label: 'UI Kit' },
       { label: 'Charts', routerLink: ['/uikit/chart'] },
@@ -361,8 +379,48 @@ this.statuses = [
     {label: 'Alto Alto', value: 'Alto Alto'}
 ];
 
+// para mostrar los productos 
+
+this.productService.getProducts().then(data => this.products = data);
+
+        this.sourceCities = [
+            {name: 'San Francisco', code: 'SF'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Paris', code: 'PRS'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Berlin', code: 'BRL'},
+            {name: 'Barcelona', code: 'BRC'},
+            {name: 'Rome', code: 'RM'}];
+        this.targetCities = [];
+
+        this.orderCities = [
+            {name: 'San Francisco', code: 'SF'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Paris', code: 'PRS'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Berlin', code: 'BRL'},
+            {name: 'Barcelona', code: 'BRC'},
+            {name: 'Rome', code: 'RM'}];
+
+        this.sortOptions = [
+            {label: 'Price High to Low', value: '!price'},
+            {label: 'Price Low to High', value: 'price'}
+        ];
+
   }
 
+
+  onSortChange(event) {
+    const value = event.value;
+
+    if (value.indexOf('!') === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+    } else {
+        this.sortOrder = 1;
+        this.sortField = value;
+    }
+}
   
 
   onSidebarClick(event: Event) {
