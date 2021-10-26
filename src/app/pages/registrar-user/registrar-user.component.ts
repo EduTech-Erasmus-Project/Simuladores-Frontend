@@ -13,6 +13,9 @@ export class RegistrarUserComponent implements OnInit {
   groupedCities: SelectItemGroup[];  
   selectedCities4: any[];
   variableGeneroRadio: string;
+  password: string;
+  seleccionEstadoCivil: any = null;
+
 
   constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
     this.groupedCities = [
@@ -83,6 +86,15 @@ export class RegistrarUserComponent implements OnInit {
       { label: 'Input', routerLink: ['/uikit/input'] }
     ]);
   }
+
+  estadosCiviles: any[] = [
+    {name: 'Casado/a', value: 'Casado'},
+    {name: 'Soltero/a', value: 'Soltero'},
+    {name: 'Viudo/a', value: 'Viudo'},
+    {name: 'Separado/a', value: 'Separado'},
+    {name: 'Union Libre', value: 'Union Libre'},
+    {name: 'Otro', value: 'Otro'}
+  ];
 
   ngOnInit(): void {
   }

@@ -75,53 +75,50 @@
 
                             <h6>Carrera Universitaria:</h6>
                             <div class="p-grid p-formgrid">
-                                <span class="p-input-icon-left">
-                                    <i class="pi pi-info-circle"></i>
-                                    <input type="text" pInputText value="Carrera universitaria que desempeña"/>
-                                </span>
-                                
+                                <input type="text" pInputText placeholder="Carrera universitaria que desempeña"/>
                             </div>
 
                             <h6>Estado Civil:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-info-circle"></i>
-                                    <input type="text" pInputText value="Ingrese estado civil"/>
+                                    <p-dropdown inputId="state" [options]="estadosCiviles" [(ngModel)]="seleccionEstadoCivil" placeholder="Seleccionar estado civil" optionLabel="name"></p-dropdown>
                                 </span>
                                 
                             </div>
 
                             <h6>Etnia:</h6>
                             <div class="p-grid p-formgrid">
-                                <span class="p-input-icon-left">
-                                    <i class="pi pi-info-circle"></i>
-                                    <input type="text" pInputText value="Ingrese su etnia"/>
-                                </span>
-                                
+                                <input type="text" pInputText placeholder="Ingrese su etnia"/>
                             </div>
 
-                            <h5>Icons</h5>
+                            <h6>Estudios Previos:</h6>
                             <div class="p-grid p-formgrid">
-                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-user"></i>
-                                        <input type="text" pInputText placeholder="Username"/>
-                                    </span>
-                                </div>
-                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                    <span class="p-input-icon-right">
-                                        <input type="text" pInputText placeholder="Search"/>
-                                        <i class="pi pi-search"></i>
-                                    </span>
-                                </div>
-                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                    <span class="p-input-icon-left p-input-icon-right">
-                                        <i class="pi pi-user"></i>
-                                        <input type="text" pInputText placeholder="Search"/>
-                                        <i class="pi pi-search"></i>
-                                    </span>
-                                </div>
+                                <input type="text" pInputText placeholder="Ingrese sus estudios"/>   
                             </div>
+
+                            <h6>Nivel de Formación:</h6>
+                            <div class="p-grid p-formgrid">
+                               <input type="text" pInputText placeholder="Ingrese su nivel de formación"/>
+                            </div>
+                            
+                            <h6>Ingrese una contraseña:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-lock"></i>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Ingrese su contraseña"
+                                        pPassword
+                                        required
+                                        ngModel
+                                        [feedback]="false"
+                                    />
+                                </span>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="p-col-12 p-md-6">
@@ -206,10 +203,63 @@
                                 </span>
                                 
                             </div>
+
+                            <h6>Código de Estudiante:</h6>
+                            <div class="p-grid p-formgrid">
+                                <input type="text" pInputText placeholder="Ingrese código Estudiante"/>
+                            </div>
+
+                            <h6>Repita la contraseña:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-lock"></i>
+                                    <input
+                                        type="password"
+                                        id="passwordVerificacion"
+                                        name="passwordVerificacion"
+                                        placeholder="Ingrese su contraseña"
+                                        pPassword
+                                        required
+                                        ngModel
+                                        [feedback]="false"
+                                    />
+                                </span>
+                            </div>
+
+                            
+                        </div>
+                        
+                        
+
+                    </div>
+                    <div class="p-col-12 p-md-12">
+                        <div class="card">
+                            <h6>Experiencia Laboral</h6>
+                            <div class="p-grid p-formgrid">
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-user"></i>
+                                        <input type="text" pInputText placeholder="Área Laboral"/>
+                                    </span>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-right">
+                                        <input type="text" pInputText placeholder="Años de experiencia"/>
+                                        <i class="pi pi-search"></i>
+                                    </span>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <span class="p-input-icon-left p-input-icon-right">
+                                        <i class="pi pi-user"></i>
+                                        <input type="text" pInputText placeholder="Sector Económico"/>
+                                        <i class="pi pi-search"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
-
+                    
                    
                 </div>
 
