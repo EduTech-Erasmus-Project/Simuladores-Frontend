@@ -12,6 +12,7 @@ export class RegistrarUserComponent implements OnInit {
 
   groupedCities: SelectItemGroup[];  
   selectedCities4: any[];
+  variableGeneroRadio: string;
 
   constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
     this.groupedCities = [

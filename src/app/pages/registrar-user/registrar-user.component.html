@@ -59,10 +59,10 @@
                                 
                             </div>
 
-                            <h6>Pais:</h6>
+                            <h6>Ciudad:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
-                                    <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="Select a City" scrollHeight="250px" display="chip">
+                                    <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="Selecciona una Ciudad" scrollHeight="250px" display="chip">
                                         <ng-template let-group pTemplate="group">
                                             <div class="p-d-flex p-ai-center">
                                                 <img src="assets/demo/flags/flag_placeholder.png" [class]="'p-mr-2 flag flag-' + group.value" style="width: 20px" />
@@ -73,11 +73,29 @@
                                 </span>
                             </div>
 
-                            <h6>Ocupación:</h6>
+                            <h6>Carrera Universitaria:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-info-circle"></i>
-                                    <input type="text" pInputText value="Ocupación que desempeña"/>
+                                    <input type="text" pInputText value="Carrera universitaria que desempeña"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Estado Civil:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-info-circle"></i>
+                                    <input type="text" pInputText value="Ingrese estado civil"/>
+                                </span>
+                                
+                            </div>
+
+                            <h6>Etnia:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-info-circle"></i>
+                                    <input type="text" pInputText value="Ingrese su etnia"/>
                                 </span>
                                 
                             </div>
@@ -126,13 +144,58 @@
                                 
                             </div>
 
-                            <h6>Rol:</h6>
+                            <h6>Fecha de Nacimiento:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" disabled pInputText value="Estudiante"/>
+                                    <p-calendar [showIcon]="true" inputId="icon" placeholder="07/20/1998"></p-calendar>
                                 </span>
                                 
+                            </div>
+
+                            <h6>Grado de Discapacidad:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <p-inputNumber mode="decimal" prefix="% " [showButtons]="true" [min]="0" [max]="100"></p-inputNumber>
+                                </span>    
+                            </div>
+
+                            <h6>Número de Hijos:</h6>
+                            <div class="p-grid p-formgrid">
+                                <span class="p-input-icon-left">
+                                    <p-inputNumber mode="decimal" [showButtons]="true" [min]="0" [max]="30"></p-inputNumber>
+                                </span>
+                                
+                            </div>
+
+                           
+
+                            <h6>Seleccionar</h6>
+                            <div class="p-grid p-formgrid" style="text-align: center;">
+                                <div class="p-col-5 p-md-3">
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton name="genero" value="Masculino" [(ngModel)]="variableGeneroRadio" id="city1"></p-radioButton>
+                                        <label for="city1">Masculino</label>
+                                    </div>
+                                </div>
+                                <div class="p-col-5 p-md-3">
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton name="genero" value="Femenino" [(ngModel)]="variableGeneroRadio" id="city2"></p-radioButton>
+                                        <label for="city2">Femenino</label>
+                                    </div>
+                                </div>
+                                <div class="p-col-5 p-md-3">
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton name="genero" value="LGBT" [(ngModel)]="variableGeneroRadio" id="city3"></p-radioButton>
+                                        <label for="city3">LGBT</label>
+                                    </div>
+                                </div>
+                                <div class="p-col-5 p-md-3">
+                                    <div class="p-field-radiobutton">
+                                        <p-radioButton name="genero" value="Otro" [(ngModel)]="variableGeneroRadio" id="city4"></p-radioButton>
+                                        <label for="city4">Otro</label>
+                                    </div>
+                                </div>
                             </div>
 
                             <h6>Responsable/Tutor:</h6>
