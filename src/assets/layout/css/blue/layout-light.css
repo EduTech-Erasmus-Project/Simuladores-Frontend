@@ -8273,23 +8273,24 @@ a {
 }
 .landing-body .landing-nav-menu {
   width: 100%;
-  height: 72px;
-  background-color: #eceff4;
+  height: 75px;
+  background-color: #fcfdff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  padding: 0 10%;
+  padding: 0 3%;
 }
 .landing-body .landing-nav-menu .logo {
-  width: 155px;
+  width: 25%;
+  align-items: center;
 }
 .landing-body .landing-nav-menu .logo a {
   display: flex;
   align-items: center;
 }
 .landing-body .landing-nav-menu .logo .app-name {
-  font-size: 22.5px;
+  font-size: 22px;
   color: #2e3440;
   margin-left: 10px;
 }
@@ -8308,7 +8309,7 @@ a {
 }
 .landing-body .landing-nav-menu .nav-menu-wrapper ul li a {
   color: #5a657c;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
 }
 .landing-body .landing-nav-menu .nav-menu-wrapper ul li a:hover {
@@ -8319,16 +8320,18 @@ a {
   transition: color 0.15s;
 }
 .landing-body .landing-nav-menu .buy-button {
-  width: 155px;
+  width: 232px;
+  display: flex;
+  align-items: center;
 }
 .landing-body .landing-nav-menu .buy-button button {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background-color: #d08770;
-  padding: 6px 12px;
   border: none;
   padding: 15px 20px;
+  margin-left: 5px;
 }
 .landing-body .landing-nav-menu .buy-button button:hover {
   background-color: #ea987c;
@@ -8367,6 +8370,7 @@ a {
   height: 600px;
   position: relative;
   background-color: #20252e;
+  
 }
 .landing-body .landing-header-wrapper .sun {
   display: flex;
@@ -8389,11 +8393,14 @@ a {
   align-items: center;
   top: 0;
   position: absolute;
-  width: 100%;
+  width: 50%;
   z-index: 999;
+  margin-left: 50%;
+  padding: 0% 2%;
+  background-color: #826a6a;
 }
 .landing-body .landing-header-wrapper .landing-header-content h1 {
-  color: #c3ccdd;
+  color: #d7dce6;
 }
 .landing-body .landing-header-wrapper .landing-header-content p {
   font-size: 24px;
@@ -8423,6 +8430,8 @@ a {
   justify-content: flex-start;
   align-items: flex-end;
   height: 100%;
+  margin-left: -13%;
+  
 }
 .landing-body .section .section-title {
   text-align: center;
@@ -8435,14 +8444,14 @@ a {
 }
 .landing-body .section#meet-mirage {
   background-color: #eceff4;
-  padding: 24px 10% 170px;
+  padding: 24px 0% 50px;
   position: relative;
 }
 .landing-body .section#meet-mirage .feature-cards {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: 65px;
+  padding-top: 30px;
   flex-flow: wrap;
 }
 .landing-body .section#meet-mirage .feature-cards .feature-card {
@@ -8467,7 +8476,7 @@ a {
 }
 .landing-body .section#meet-mirage .feature-cards .feature-card .feature-card-content {
   color: #5a657c;
-  padding: 12px 18px 25px;
+  padding: 12px 18px 20px;
   width: 300px;
 }
 .landing-body .section#meet-mirage .buy-mirage-promo-wrapper {
@@ -8524,7 +8533,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 140px 10% 60px;
+  padding: 30px 10% 60px;
   position: relative;
   flex-flow: wrap;
 }
@@ -8647,9 +8656,10 @@ a {
   border-radius: 4.4px;
   box-shadow: 0 1px 30px 3px rgba(0, 0, 0, 0.07);
   background-color: #ffffff;
-  padding: 40px 60px 23px;
+  padding: 27px 10px 23px;
   text-align: center;
-  min-height: 400px;
+  min-height: 310px;
+  max-width: 310px;
   margin-bottom: 36px;
 }
 .landing-body .section#pricing .pricing-cards .pricing-card .pricing-card-title h2 {
@@ -8781,7 +8791,7 @@ a {
   align-items: center;
   justify-content: flex-end;
   font-size: 18px;
-  color: #9199a9;
+  color: #e6e7e9;
   height: 100%;
 }
 .landing-body .footer .icons .icon:first-child img {

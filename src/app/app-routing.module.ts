@@ -45,6 +45,7 @@ import { AutentificarGuard } from './guards/autentificar.guard';
 import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.component';
 import { PresentacionInicioUserComponent } from './Pages/User/presentacion-inicio-user/presentacion-inicio-user.component';
 import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.component';
+import { LandingComponent } from './pages/inicio/landing/landing.component';
 
 
 @NgModule({
@@ -92,11 +93,12 @@ import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.co
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
             {path: 'login', component: LoginUserComponent},
+            {path: 'inicio', component: LandingComponent},
             {path: 'registrar', component: RegistrarUserComponent},
             {
                 path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent,
                 children: [
-                    {path: '', component: PresentacionInicioUserComponent},
+                    {path: '', component: PresentacionInicioUserComponent},  
                     {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent},
                     {path: 'datosUsuario', component: DatosUsuarioComponent}
                 ]
