@@ -6,7 +6,10 @@ import { CountryService } from 'src/app/demo/service/countryservice';
 @Component({
   selector: 'app-registrar-user',
   templateUrl: './registrar-user.component.html',
-  styleUrls: ['./registrar-user.component.css']
+  styleUrls: ['./registrar-user.component.css',
+    '../../../assets/theme/blue/theme-light.css',
+    '../../../assets/layout/css/blue/layout-light.css'
+]
 })
 export class RegistrarUserComponent implements OnInit {
 
