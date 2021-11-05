@@ -17,21 +17,12 @@
                                 <h3>Perfil de Usuario</h3>
                                 <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px;" alt=""/>
                                 <div class="product-list-detail">
-                                    <h4> Juan Pablo Perez Bojorque <!--{{product.name}}--></h4>
-                                    <span> Estudiante <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
+                                    <h4> Angel Perez <!--{{product.name}}--></h4>
+                                    <span style="font-weight: bold;"> Experto <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
                                         
                                     <!--{{product.description}}--></span>
                                     
                                 </div>
-                                
-                                <span style="font-size: 15px; font-weight: bold;"> Puntuacion Global: 
-
-                                    8.0 <p-rating style="text-align: center;" [ngModel]=4 readonly="true" stars="5" [cancel]="false"></p-rating> 
-                                    <!--
-                                    Etiqueta de rating 
-                                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
-                                    -->
-                               </span>
                             </div>    
                         </div>
                     </div>
@@ -142,16 +133,7 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" disabled pInputText value="Estudiante"/>
-                                </span>
-                                
-                            </div>
-
-                            <h6>Responsable/Tutor:</h6>
-                            <div class="p-grid p-formgrid">
-                                <span class="p-input-icon-left">
-                                    <i class="pi pi-user"></i>
-                                    <input type="text" disabled pInputText value="Angel Perez"/>
+                                    <input type="text" disabled pInputText value="Experto"/>
                                 </span>
                                 
                             </div>
@@ -160,6 +142,11 @@
                             <div class="p-grid p-formgrid">
                                 <input type="text" pInputText placeholder="Ingrese su nivel de formación"/>
                             </div>
+
+                            <h6>Estudios Previos:</h6>
+                                <div class="p-grid p-formgrid">
+                                    <input type="text" pInputText placeholder="Ingrese sus estudios"/>   
+                                </div>
 
                             <h6>Repita la contraseña:</h6>
                             <div class="p-grid p-formgrid">

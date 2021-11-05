@@ -160,6 +160,9 @@ import { PresentacionInicioUserComponent } from './Pages/User/presentacion-inici
 import { LandingComponent } from './pages/inicio/landing/landing.component';
 import { MenuLandingComponent } from './pages/inicio/menu-landing/menu-landing.component';
 import { FooterLandingComponent } from './pages/inicio/footer-landing/footer-landing.component';
+import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
+import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
+import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
 
 @NgModule({
     imports: [
@@ -306,7 +309,10 @@ import { FooterLandingComponent } from './pages/inicio/footer-landing/footer-lan
         PresentacionInicioUserComponent,
         LandingComponent,
         MenuLandingComponent,
-        FooterLandingComponent
+        FooterLandingComponent,
+        PaginaPrincipalExpertoComponent,
+        DatosExpertoComponent,
+        AgregarAlumnoAExpertoComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

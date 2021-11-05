@@ -46,6 +46,8 @@ import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.
 import { PresentacionInicioUserComponent } from './Pages/User/presentacion-inicio-user/presentacion-inicio-user.component';
 import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.component';
 import { LandingComponent } from './pages/inicio/landing/landing.component';
+import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
+import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
 
 
 @NgModule({
@@ -101,6 +103,14 @@ import { LandingComponent } from './pages/inicio/landing/landing.component';
                     {path: '', component: PresentacionInicioUserComponent},  
                     {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent},
                     {path: 'datosUsuario', component: DatosUsuarioComponent}
+                ]
+            },
+            {
+                path: 'Pagina-Principal-Experto', component: PaginaPrincipalUsuarioComponent,
+                children: [
+                    {path: '', component: PresentacionInicioUserComponent},  
+                    {path: 'datosExperto', component: DatosExpertoComponent},
+                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent}
                 ]
             },
             

@@ -73,12 +73,12 @@ export class MisActividadesUsuarioComponent implements OnInit {
     ];
   
     this.statuses = [
-        {label: 'Unqualified', value: 'unqualified'},
-        {label: 'Qualified', value: 'qualified'},
-        {label: 'New', value: 'new'},
-        {label: 'Negotiation', value: 'negotiation'},
-        {label: 'Renewal', value: 'renewal'},
-        {label: 'Proposal', value: 'proposal'}
+        {label: '10', value: '10'},
+        {label: '9', value: '9'},
+        {label: '9', value: '9'},
+        {label: '9', value: '9'},
+        {label: '5', value: '5'},
+        {label: '4', value: '4'}
     ];
   }
 

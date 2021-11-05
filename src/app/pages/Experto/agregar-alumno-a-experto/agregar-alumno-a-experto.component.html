@@ -17,8 +17,8 @@
                                 <h3>Perfil de Usuario</h3>
                                 <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px;" alt=""/>
                                 <div class="product-list-detail">
-                                    <h4> Juan Pablo Perez Bojorque <!--{{product.name}}--></h4>
-                                    <span> Estudiante <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
+                                    <h4> Angel Perez <!--{{product.name}}--></h4>
+                                    <span style="font-weight: bold;"> Experto <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
                                         
                                     <!--{{product.description}}--></span>
                                     
@@ -47,17 +47,12 @@
 
             
             <div class="p-col-7 p-ai-center p-jc-center">
-                <div class="card">
-                    <h5>Barrera de Progreso:</h5>
-                    <p-progressBar [value]="20"></p-progressBar>
-                </div>
-                
                 <div class="p-grid p-fluid">
                     
                     <div class="p-grid table-demo">
                         <div class="p-col-12">
-                            <div class="card">
-                                <h5>Actividades Realizadas</h5>
+                            <div class="card" style="text-align: center;">
+                                <h5>Agregar un nuevo alumano</h5>
                                 
                                 <p-table #dt [value]="customers1" [(selection)]="selectedCustomers1" dataKey="id"
                                         styleClass="p-datatable-customers" [rowHover]="true" [rows]="10" [paginator]="true"
@@ -79,35 +74,34 @@
                                             </th>
                                             <th pSortableColumn="name">
                                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Simulador
+                                                    Nombre
                                                     <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter>
                                                 </div>
                                             </th>
                                             <th pSortableColumn="tiempo">
                                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Tiempo
+                                                    Apellido
                                                     <p-columnFilter type="text" field="tiempo" display="menu" class="p-ml-auto"></p-columnFilter>
                                                 </div>
                                             </th>
                                            
                                             <th pSortableColumn="date">
                                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Fecha
+                                                    Ocupacion
                                                     <p-columnFilter type="date" field="date" display="menu" class="p-ml-auto"></p-columnFilter>
                                                 </div>
                                             </th>
                                             <th pSortableColumn="correctas">
                                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Correctas
+                                                    Localización
                                                     <p-columnFilter type="numeric" field="correctas" display="menu"  class="p-ml-auto"></p-columnFilter>
                                                 </div>
                                             </th>
 
-                                            <th pSortableColumn="puntuación">
+                                            <th>
                                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Puntuación
-                                                    <p-columnFilter type="numeric" field="puntuación" display="menu"  class="p-ml-auto"></p-columnFilter>
-                                                </div>
+                                                    Seleccionar
+                                               </div>
                                             </th>
 
                                             <th style="width: 8rem"></th>
@@ -115,7 +109,7 @@
                                     </ng-template>
 
 
-                                    <ng-template pTemplate="body" let-customer>
+                                    <ng-template pTemplate="body" let-customer style="text-align: center;">
                                         <tr class="p-selectable-row">
                                             <td>
                                                 <p-tableCheckbox [value]="customer"></p-tableCheckbox>
@@ -133,12 +127,9 @@
                                             <td>
                                                 {{customer.balance }}
                                             </td>
-                                            <td>
-                                                {{customer.status}}
-                                            </td>
                                             
                                             <td style="text-align: center">
-                                                <button pButton type="button" class="p-button-primary" icon="pi pi-file-pdf"></button>
+                                                <button pButton type="button" class="p-button-primary" icon="pi pi-user-plus"></button>
                                             </td>
                                         </tr>
                                     </ng-template>
