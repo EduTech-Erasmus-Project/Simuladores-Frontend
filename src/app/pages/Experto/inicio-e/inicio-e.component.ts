@@ -9,6 +9,11 @@ import { CustomerService } from 'src/app/demo/service/customerservice';
 import { PhotoService } from 'src/app/demo/service/photoservice';
 import { ProductService } from 'src/app/demo/service/productservice';
 
+
+
+
+
+
 @Component({
   selector: 'app-inicio-e',
   templateUrl: './inicio-e.component.html',

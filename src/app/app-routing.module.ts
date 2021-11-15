@@ -43,6 +43,8 @@ import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-u
 import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
 import { AutentificarGuard } from './guards/autentificar.guard';
 import { InicioEComponent } from './pages/Experto/inicio-e/inicio-e.component';
+import { GraficaGeneralComponent } from './pages/Experto/grafica-general/grafica-general.component';
+import { RepEscenario1Component } from './pages/Experto/rep-escenario1/rep-escenario1.component';
 
 
 @NgModule({
@@ -93,6 +95,8 @@ import { InicioEComponent } from './pages/Experto/inicio-e/inicio-e.component';
             {path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent, canActivate: [AutentificarGuard]},
             {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent, canActivate: [AutentificarGuard]},
             {path : 'inicioe', component: InicioEComponent},
+            {path : 'grafica', component: GraficaGeneralComponent},
+            {path : 'escenario1', component: RepEscenario1Component},
             {path: '**', redirectTo: '/notfound'},
             
         ], {scrollPositionRestoration: 'enabled'})

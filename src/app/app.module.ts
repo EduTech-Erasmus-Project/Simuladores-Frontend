@@ -155,6 +155,8 @@ import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-u
 import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
 import { MenuTopBarComponent } from './pages/Structure/menu-top-bar/menu-top-bar.component';
 import { InicioEComponent } from './pages/Experto/inicio-e/inicio-e.component';
+import { RepEscenario1Component } from './pages/Experto/rep-escenario1/rep-escenario1.component';
+import { GraficaGeneralComponent } from './pages/Experto/grafica-general/grafica-general.component';
 
 @NgModule({
     imports: [
@@ -296,7 +298,9 @@ import { InicioEComponent } from './pages/Experto/inicio-e/inicio-e.component';
         PaginaPrincipalUsuarioComponent,
         MenuLateralComponent,
         MenuTopBarComponent,
-        InicioEComponent
+        InicioEComponent,
+        RepEscenario1Component,
+        GraficaGeneralComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

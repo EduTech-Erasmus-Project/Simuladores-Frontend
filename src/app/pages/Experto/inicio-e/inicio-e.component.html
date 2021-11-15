@@ -294,6 +294,26 @@
 
   
 
+<div style="margin-bottom: 2%;">
+  <h4>Modo de Evaluación</h4>
+  <p-timeline   style="margin-bottom: -15%;"     [value]="customEvents" align="alternate" styleClass="customized-timeline" >
+      <ng-template pTemplate="marker" let-event >
+      <span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color"   >
+          <i [ngClass]="event.icon"></i>
+      </span>
+      </ng-template>
+      <ng-template  pTemplate="content" let-event  >
+          <p-card [header]="event.status" [subheader]="event.data"   >
+              <img *ngIf="event.image" [src]="'assets/demo/images/product/' + event.image" [alt]="event.name" width="200" class="p-shadow-2" />
+              <br>
+              <p-card [textContent]= "event.content" ></p-card>
+              <br>
+              <button pButton label="Read more" class="p-button-text"></button>
+          </p-card>
+      </ng-template> 
+  </p-timeline>
+</div>
+
   
   <div class="p-col-12" style="width: 100%;" >
     <div class="card"  >
