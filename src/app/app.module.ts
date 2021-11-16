@@ -163,6 +163,10 @@ import { FooterLandingComponent } from './pages/inicio/footer-landing/footer-lan
 import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
 import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
 import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
+import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-footer-page-experto/menu-footer-page-experto.component';
+import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
+import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
+import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 
 @NgModule({
     imports: [
@@ -312,7 +316,11 @@ import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a
         FooterLandingComponent,
         PaginaPrincipalExpertoComponent,
         DatosExpertoComponent,
-        AgregarAlumnoAExpertoComponent
+        AgregarAlumnoAExpertoComponent,
+        MenuFooterPageExpertoComponent,
+        MenuLateralPageExpertoComponent,
+        TopBarPageExpertoComponent,
+        PresentacionInicioExpertoComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
