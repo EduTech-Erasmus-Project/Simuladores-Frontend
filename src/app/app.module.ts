@@ -165,6 +165,10 @@ import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-exper
 import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
 import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
 import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
+import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-footer-page-experto/menu-footer-page-experto.component';
+import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
+import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
+import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 
 @NgModule({
     imports: [
@@ -317,6 +321,10 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
         AgregarAlumnoAExpertoComponent,
         EscenarioComponent,
         ParticipanteInfoComponent
+        MenuFooterPageExpertoComponent,
+        MenuLateralPageExpertoComponent,
+        TopBarPageExpertoComponent,
+        PresentacionInicioExpertoComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
