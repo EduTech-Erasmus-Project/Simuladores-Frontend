@@ -50,6 +50,8 @@ import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-exper
 import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
 import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
+import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
+import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion
                 children: [
                     {path: '', component: PresentacionInicioExpertoComponent},  
                     {path: 'datosExperto', component: DatosExpertoComponent},
-                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent}
+                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent},
+                    {path: 'escenarioInfo', component: EscenarioComponent},
+                    {path: 'participanteInfo', component: ParticipanteInfoComponent}
                 ]
             },
             

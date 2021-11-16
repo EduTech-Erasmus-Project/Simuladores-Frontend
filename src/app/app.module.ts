@@ -320,7 +320,7 @@ import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion
         DatosExpertoComponent,
         AgregarAlumnoAExpertoComponent,
         EscenarioComponent,
-        ParticipanteInfoComponent
+        ParticipanteInfoComponent,
         MenuFooterPageExpertoComponent,
         MenuLateralPageExpertoComponent,
         TopBarPageExpertoComponent,
