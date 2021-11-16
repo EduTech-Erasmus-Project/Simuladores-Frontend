@@ -48,6 +48,9 @@ import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.co
 import { LandingComponent } from './pages/inicio/landing/landing.component';
 import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
 import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
+import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
+import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
+import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
 
 
 @NgModule({
@@ -110,7 +113,9 @@ import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a
                 children: [
                     {path: '', component: PresentacionInicioUserComponent},  
                     {path: 'datosExperto', component: DatosExpertoComponent},
-                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent}
+                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent},
+                    {path: 'escenarioInfo', component: EscenarioComponent},
+                    {path: 'infoParticipante', component: ParticipanteInfoComponent}
                 ]
             },
             

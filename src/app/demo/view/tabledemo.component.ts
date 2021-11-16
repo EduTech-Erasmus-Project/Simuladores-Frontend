@@ -15,7 +15,6 @@ import {BreadcrumbService} from '../../breadcrumb.service';
                 display: flex;
             }
         }
-
     `],
 })
 export class TableDemoComponent implements OnInit {

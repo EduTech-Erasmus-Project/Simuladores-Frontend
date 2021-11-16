@@ -4,13 +4,13 @@
             "id": 1000,
             "name": "James Butt",
             "country": {
-                "name": "Algeria",
+                "name": "Nuevo",
                 "code": "dz"
             },
             "company": "Benton, John B Jr",
             "date": "2015-09-13",
-            "status": "unqualified",
-            "activity": 17,
+            "status": "No Calificado",
+            "activity": 30,
             "representative": {
                 "name": "Ioni Bowcher",
                 "image": "ionibowcher.png"
@@ -25,8 +25,8 @@
             },
             "company": "Chanay, Jeffrey A Esq",
             "date": "2019-02-09",
-            "status": "proposal",
-            "activity": 0,
+            "status": "Calificado",
+            "activity": 95,
             "representative": {
                 "name": "Amy Elsner",
                 "image": "amyelsner.png"
@@ -41,8 +41,8 @@
             },
             "company": "Chemel, James L Cpa",
             "date": "2017-05-13",
-            "status": "qualified",
-            "activity": 63,
+            "status": "Pendiente",
+            "activity": 0,
             "representative": {
                 "name": "Asiya Javayant",
                 "image": "asiyajavayant.png"
@@ -57,8 +57,8 @@
             },
             "company": "Feltz Printing Service",
             "date": "2020-09-15",
-            "status": "new",
-            "activity": 37,
+            "status": "Calificado",
+            "activity": 90,
             "representative": {
                 "name": "Xuxue Feng",
                 "image": "xuxuefeng.png"
@@ -73,8 +73,8 @@
             },
             "company": "Printing Dimensions",
             "date": "2016-05-20",
-            "status": "proposal",
-            "activity": 33,
+            "status": "No calificado",
+            "activity": 59,
             "representative": {
                 "name": "Asiya Javayant",
                 "image": "asiyajavayant.png"
