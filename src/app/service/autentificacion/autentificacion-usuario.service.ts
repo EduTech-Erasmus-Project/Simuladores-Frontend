@@ -31,6 +31,7 @@ export class AutentificacionUsuarioService {
 
   private checkCorreo(correo: string): boolean {
     return correo === this.mockUser.getCorreo();
+    
   }
 
   private checkPassword(password: string): boolean {
