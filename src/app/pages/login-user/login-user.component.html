@@ -40,10 +40,10 @@
               id="username"
               pInputText
               placeholder="ejemplo@gmail.com"
-              name="login"
+              name="username"
               required
               autofocus
-              ngModel
+              [(ngModel)] = "username"
             />
             <i class="pi pi-user"></i>
           </div>
@@ -57,10 +57,11 @@
               placeholder="Ingrese su contraseña"
               pPassword
               required
-              ngModel
+              [(ngModel)]= "password"
               [feedback]="false"
+              appPassword
             />
-            <i class="pi pi-lock"></i>
+          
           </div>
 
           <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483;" *ngIf="isFormValid">
@@ -83,6 +84,7 @@
                 label="Mantener Sesión"
                 value="SaveInfo"
                 binary="true"
+                name= "checked"
               ></p-checkbox>
             </div>
             <div class="p-col-5">

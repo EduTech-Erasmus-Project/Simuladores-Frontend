@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/model/Usuario';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { rejects } from 'assert';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +13,28 @@ export class AutentificacionUsuarioService {
 
   private readonly mockUser: Usuario = new Usuario('test', 'test5665');
   isAuthenticated = false;
+  private login = "";
+  
+  constructor(private router: Router, private http: HttpClient) { }
+
+  public checkEmail(correo: string): Observable<any>{
+    const config = { headers: new HttpHeaders({
+                      'Content-Type':  'application/json',}) 
+                    };
+    return this.http.post<any>(environment.WS_PATH+"verficicarCorreo", {"correo":correo}, config)
+  }
+
+  public checkCredencialesLogin(userData: Usuario, tipoUsuario: string): Observable<any>{
+    const config = { headers: new HttpHeaders({
+      'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"loginAcceso", {"correo":userData.getCorreo(),"password":userData.getPassword(), "tipoUsuario": tipoUsuario}, config)
+  }
 
 
-  constructor(private router: Router) { }
-
-  autentificacionUsuario(userData: Usuario): boolean {
-    
-    if (this.checkCredenciales(userData)) {
+  autentificacionUsuario(userData: Usuario) {
+    if (this.login == 'true') {
       this.isAuthenticated = true;
-      console.log('Hemos entrado a: Pagina-Principal-Usuario');
       this.router.navigate(['Pagina-Principal-Usuario']);
       return true;
     }
@@ -25,19 +42,7 @@ export class AutentificacionUsuarioService {
     return false;
   }
 
-  private checkCredenciales(userData: Usuario): boolean{
-    return this.checkCorreo(userData.getCorreo()) && this.checkPassword(userData.getPassword());
-  }
-
-  private checkCorreo(correo: string): boolean {
-    return correo === this.mockUser.getCorreo();
-    
-  }
-
-  private checkPassword(password: string): boolean {
-    return password === this.mockUser.getPassword();
-  }
-
+  
   logout() {
     this.isAuthenticated = false;
     this.router.navigate(['']);
