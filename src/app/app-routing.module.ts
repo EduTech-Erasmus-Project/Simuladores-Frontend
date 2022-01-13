@@ -107,7 +107,7 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
                     {path: '', component: PresentacionInicioUserComponent},  
                     {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent},
                     {path: 'datosUsuario', component: DatosUsuarioComponent}
-                ]
+                ]//, canActivate: [AutentificarGuard]
             },
             {
                 path: 'Pagina-Principal-Experto', component: PaginaPrincipalExpertoComponent,

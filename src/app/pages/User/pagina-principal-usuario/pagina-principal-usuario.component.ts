@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { PhotoService } from 'src/app/demo/service/photoservice';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
@@ -23,25 +24,50 @@ import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/a
 export class PaginaPrincipalUsuarioComponent implements OnInit {
   
 
-  menuClick: boolean;
-  sidebarActive: boolean;
-  staticMenuActive: boolean;
-  topbarMenuActive: boolean;
-  megaMenuMobileClick: boolean;
-  megaMenuMobileActive: boolean;
-  topbarMobileMenuClick: boolean;
-  topbarMobileMenuActive: boolean;
-  menuMobileActive: boolean;
-  activeTopbarItem: any;
-  topbarItemClick: boolean;
+  public menuClick: boolean;
+  public sidebarActive: boolean;
+  public staticMenuActive: boolean;
+  public topbarMenuActive: boolean;
+  public megaMenuMobileClick: boolean;
+  public megaMenuMobileActive: boolean;
+  public topbarMobileMenuClick: boolean;
+  public  topbarMobileMenuActive: boolean;
+  public  menuMobileActive: boolean;
+  public  activeTopbarItem: any;
+  public topbarItemClick: boolean;
   
+  //varibales para paginas usuario
+  private correo: string;
 
-  constructor() { 
-    
+  constructor(private router: Router, private route: ActivatedRoute, private autenficarCorreo: AutentificacionUsuarioService) { 
+   
   }
   
   ngOnInit(): void {
+    var correoAux = '';
+    this.route.queryParams
+      .subscribe(params => {
+        correoAux = params.correo;
+        console.log("correo: "+correoAux)
+      }
+    );
+
+    this.autenficarCorreo.checkEmail(correoAux).subscribe(
+      response => {
+        if(response.tipoUsuario!='notExist' && response.tipoUsuario != ''){
+          this.correo = correoAux;
+        }
+      },
+      error => {
+        console.log(error);
+        this.autenficarCorreo.isAuthenticated= false;
+        this.router.navigate(['/login']);
+      });
     
+  }
+
+  getCorreo():string{
+    return this.correo;
   }
 
   onSidebarClick(event: Event) {
