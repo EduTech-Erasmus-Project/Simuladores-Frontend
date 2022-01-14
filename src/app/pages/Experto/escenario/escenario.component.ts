@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
+import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
+import { InfoExpertoPorEscenarioService } from 'src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service';
 
 @Component({
   selector: 'app-escenario',
@@ -9,6 +11,12 @@ import { CustomerService } from 'src/app/demo/service/customerservice';
   styleUrls: ['./escenario.component.css']
 })
 export class EscenarioComponent implements OnInit {
+
+  private listaDiscapacidad : [];
+  private listaGenero: [];
+  private listaParaFiltroGrafica1: ['Tiempo', 'Nota'];
+  private listaParaFiltroGrafica2: [''];
+
 
   // PARA LA GRAFICA
   lineData: any;
@@ -31,7 +39,9 @@ export class EscenarioComponent implements OnInit {
 
     ///
 
-  constructor(/**PARA LA TABLA */private customerService: CustomerService ) { }
+  constructor(/**PARA LA TABLA */private customerService: CustomerService,
+              public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
+              public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService) { }
 
   ngOnInit(): void {
 
@@ -149,6 +159,38 @@ export class EscenarioComponent implements OnInit {
     ];
   
     ////////
+
+
+
+    ///llmadas a servicios
+    listarLabelsTipoDeDiscacidadPorEscenario(){
+    
+      this.servicioConsultasLabelsGrafica.recuperarListaDiscapacidadesEscenario();
+    }
+
+    listarLabelsTipoDeGenero(){
+      this.servicioConsultasLabelsGrafica.recuperarListaGeneroEscenario();
+    }
+
+    crearGrafica1(listadoGeneroEscenario: [], listadoDiscapacidadEscenario: [], numEscenario:String){
+      this.servicioGraficaPorEscenario.recuperarListadoNotaPorEscenario(listadoGeneroEscenario, listadoDiscapacidadEscenario, numEscenario);
+    }
+
+    promedioNota(){
+      
+    }
+
+    crearGrafica2tiempoCompleto(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionCompletaPorEscenario(listaGeneroEscenario, listadoDiscapacidadesEscenario, numEscenario);
+    }
+
+    crearGrafica2tiempoSoloRespuesta(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionSoloRespuestaPorEscenario(listaGeneroEscenario, listadoDiscapacidadesEscenario, numEscenario);
+    }
+
+    crearGrafica2PromedioNota (listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+
+    }
 
 
 }

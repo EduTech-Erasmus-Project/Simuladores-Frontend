@@ -8,10 +8,30 @@ import { environment } from 'src/environments/environment';
 })
 export class PaginaInicioExpertoService {
 
+  private readonly  escenario :  Escenario = new Escenario();
+  
+  private  config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+
   constructor(private http:HttpClient) { }
 
-  recuperarInformacionDeEscenario(numeroEjercitario: number){
-    const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-    return this.http.post<any>(environment.WS_PATH+"obtenerEscenario", {"numeroEjercitario":numeroEjercitario}, config).toPromise();
+  recuperarInformacionDeEscenario(numeroEjercitario: number): Escenario{
+    this.http.post<any>(environment.WS_PATH+"obtenerEscenario", {"numeroEjercitario":numeroEjercitario}, this.config).
+    toPromise().then(res => {
+        this.escenario.setNombreDeEjercitario = res.nombreDeEjercitario;
+        this.escenario.setTipoDeEjercitario = res.tipoDeEjercitario;
+        this.escenario.setInstruccionPrincipalEjercitario = res.instruccionPrincipalEjercitario;
+        this.escenario.setPrincipalCompetenciasEjercitario = res.principalCompetenciasEjercitario;
+        this.escenario.setDuracionEjercitarioPorMinutos = res.duracionEjercitarioPorMinutos;
+        this.escenario.setUrlEjercitarios = res.urlEjercitarios;
+      }
+    )
+    return this.escenario;
+
   }
+
+  crearGraficaPaginaInicio(listaFiltroParaBuscar: [], listaGenero: [], listaDiscapacidad: []){
+    this.http.post<any>(environment.WS_PATH+"crearGrafica", {"listaFiltroParaBuscar": listaFiltroParaBuscar, "listaGenero": listaGenero, "listaDiscapacidad" : listaDiscapacidad}, this.config).toPromise();
+  }
+
+
 }
