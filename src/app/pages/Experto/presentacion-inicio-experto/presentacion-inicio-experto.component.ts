@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { promise } from 'protractor';
+import { Escenario } from 'src/app/model/Escenario';
 import { Usuario } from 'src/app/model/Usuario';
+import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
+import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
 @Component({
   selector: 'app-presentacion-inicio-experto',
@@ -11,16 +15,22 @@ import { Usuario } from 'src/app/model/Usuario';
 })
 export class PresentacionInicioExpertoComponent implements OnInit {
 
+
+  private  escenario :  Escenario = new Escenario();
+  private listafiltroParaBuscar : ['tiempo', 'nota'];
+  private listaGenero: [];
+  private listaDiscapacidad: [];
+
   barData: any;
   options: any;
+
   tipoEscenario: string = "Diálogo";
   nombreEscenario: string = "La venta";
   instruccionPrincipalEscenario: string = "Se le pide al participante que visite a un cliente y lo convenza de asistir a una feria.";
   principalesCompetenciasEscenario: string = "Comunicación efectiva"; 
-  categoriaEscenario: string = "Interacciones uno a uno";
-  duracionEscenario: string = "Usualmente corta, no más de 10 minutos"; 
-  variacionesEscenario: string =  "Presentaciones con uso de material audiovisual";
-  linkEscenrario: string = 'https://www.youtube.com/embed/WxzcD04rwc8';
+  duracionEscenario: number = 15.00; 
+  linkEscenario: string = 'https://www.youtube.com/embed/WxzcD04rwc8';
+
 
 
   selectedState: any = {name: 'Notas', value: 'Notas'};
@@ -41,7 +51,8 @@ export class PresentacionInicioExpertoComponent implements OnInit {
       {name: 'Tiempo', value: 'Tiempo'}
   ];
 
-  constructor() {
+  constructor( public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
+               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService) {
 
   }
 
@@ -58,6 +69,9 @@ export class PresentacionInicioExpertoComponent implements OnInit {
         }]
       }
     };
+
+
+
     this.barData = {
       labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'NA'],
       datasets: [
@@ -83,18 +97,18 @@ export class PresentacionInicioExpertoComponent implements OnInit {
     };  
   }
 
+
   seleccionTipoGrafico():void {
 
     console.log("change from the code"+this.selectedState.name);
-
-
     if(this.selectedState.name == "Tiempo"){
+    
       this.options = {
         scales: {
           yAxes: [{
               ticks: {
                   beginAtZero: true,
-                  
+ 
               }
           }]
         }
@@ -153,8 +167,35 @@ export class PresentacionInicioExpertoComponent implements OnInit {
 
   seleccionEscenario(): void{
     console.log(this.selectedEjercitario.value);
+
+    this.escenario = this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(this.selectedEjercitario.value);
     
+    this.tipoEscenario= this.escenario.getTipoDeEjercitario;
+    this.nombreEscenario= this.escenario.getNombreDeEjercitario;
+    this.instruccionPrincipalEscenario= this.escenario.getInstruccionPrincipalDeEjercitario;
+    this.principalesCompetenciasEscenario= this.escenario.getPrincipalCompetenciasEjercitario; 
+    this.duracionEscenario = this.escenario.getDuracionEjercitarioPorMinutos; 
+    this.linkEscenario = this.escenario.getUrlEjercitarios;
 
   }
+
+  abrirReporte(){
+    window.location.href=("http://localhost:4200/#/Pagina-Principal-Experto/escenarioInfo");
+    //window.location.href=(this.linkEscenario);
+  }
+  
+  listarLabelsTipoDeDiscacidad(){
+    
+    this.servicioConsultasLabelsGrafica.recuperarListaDeDiscapacidades();
+  }
+
+  listarLabelsTipoDeGenero(){
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero();
+  }
+
+  crearGraficaInicioExperto(){
+    //this.servicioSeleccionarEjercitario.crearGraficaPaginaInicio();
+  }
+
   
 }

@@ -138,14 +138,13 @@
                         <b>Nombre:</b> {{nombreEscenario}} <br>
                         <b>Instrucción principal: </b> {{instruccionPrincipalEscenario}}<br>
                         <b> Principales Competencias medidas:</b>{{principalesCompetenciasEscenario}} <br>   
-                        <b> Categoría del ejercicio: </b> {{categoriaEscenario}}<br>
                         <b> Duración:</b> {{duracionEscenario}}<br>
-                        <b> Variaciones: </b> {{variacionesEscenario}}
+                        <b> Link de Video</b> {{linkEscenario }}
                     </p>
                     <iframe src="https://www.youtube.com/embed/WxzcD04rwc8" width="530px" height="280px" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
                                 
                     <div style="width: 100%; text-align: center; margin-top: 2em;">
-                        <button style="text-align: center;" pButton pRipple type="button" label="Ver Reporte" class="p-button-info p-mr-2 p-mb-2"></button>
+                        <button style="text-align: center;" pButton pRipple type="button" label="Ver Reporte" class="p-button-info p-mr-2 p-mb-2" (click) = "abrirReporte()" ></button>
                     </div>
                    
                 </div>

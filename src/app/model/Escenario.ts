@@ -11,10 +11,7 @@ export class Escenario {
     private urlEjercitarios : string;
     //private asignacion
 
-    constructor( numeroDeEjercitario: number, tipoDeEjercitario : string,
-                nombreDeEjercitario: string, instruccionPrincipalEjercitario: string,
-                principalCompetenciasEjercitario:string, duracionEjercitarioPorMinuto: number,
-                urlEjercitarios: string){
+    constructor( ){
 
     }
 
