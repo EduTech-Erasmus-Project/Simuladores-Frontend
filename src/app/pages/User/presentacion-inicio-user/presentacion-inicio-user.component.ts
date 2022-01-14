@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { PhotoService } from 'src/app/demo/service/photoservice';
+import { EjercitarioParticipanteService } from 'src/app/service/ejercitarioParticipante/ejercitario-participante.service';
 
 @Component({
   selector: 'app-presentacion-inicio-user',
@@ -10,27 +12,29 @@ import { PhotoService } from 'src/app/demo/service/photoservice';
 })
 export class PresentacionInicioUserComponent implements OnInit {
 
-    images: any[];
+  public correoParticanteInicio: string = '';
+  images: any[];
 
-    galleriaResponsiveOptions: any[] = [
-      {
-          breakpoint: '1024px',
-          numVisible: 5
-      },
-      {
-          breakpoint: '960px',
-          numVisible: 4
-      },
-      {
-          breakpoint: '768px',
-          numVisible: 3
-      },
-      {
-          breakpoint: '560px',
-          numVisible: 1
-      }
+  galleriaResponsiveOptions: any[] = [
+    {
+        breakpoint: '1024px',
+        numVisible: 5
+    },
+    {
+        breakpoint: '960px',
+        numVisible: 4
+    },
+    {
+        breakpoint: '768px',
+        numVisible: 3
+    },
+    {
+        breakpoint: '560px',
+        numVisible: 1
+    }
   ];
-  constructor(private breadcrumbService: BreadcrumbService, private photoService: PhotoService) {
+
+  constructor(private ejercitarioService: EjercitarioParticipanteService, private _Activatedroute:ActivatedRoute, private route: ActivatedRoute, private breadcrumbService: BreadcrumbService, private photoService: PhotoService) {
     this.breadcrumbService.setItems([
       { label: 'UI Kit' },
       { label: 'Charts', routerLink: ['/uikit/chart'] },
@@ -43,6 +47,22 @@ export class PresentacionInicioUserComponent implements OnInit {
     this.photoService.getImages().then(images => {
       this.images = images;
     });
+
+    this.correoParticanteInicio=this._Activatedroute.snapshot.paramMap.get("correo");
+    console.log("Pagina de Inicio:", this.correoParticanteInicio)
+    this.obtenercionAsignacionesEjercitario();
   }
+  
+  obtenercionAsignacionesEjercitario(){
+    this.ejercitarioService.obtenerAsignacionesEjercitario(this.correoParticanteInicio).subscribe(
+      response => {
+        console.log(response.asignaciones);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+
 
 }

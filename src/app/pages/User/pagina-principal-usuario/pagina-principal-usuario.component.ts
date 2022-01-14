@@ -49,21 +49,10 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       .subscribe(params => {
         correoAux = params.correo;
         console.log("correo: "+correoAux)
+        this.correo = correoAux;
       }
     );
-
-    this.autenficarCorreo.checkEmail(correoAux).subscribe(
-      response => {
-        if(response.tipoUsuario!='notExist' && response.tipoUsuario != ''){
-          this.correo = correoAux;
-        }
-      },
-      error => {
-        console.log(error);
-        this.autenficarCorreo.isAuthenticated= false;
-        this.router.navigate(['/login']);
-      });
-    
+    this.router.navigate(['Pagina-Principal-Usuario/inicio', this.correo]);
   }
 
   getCorreo():string{

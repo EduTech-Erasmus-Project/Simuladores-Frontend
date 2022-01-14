@@ -169,9 +169,11 @@ import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Ex
 import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
 import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
+        RouterModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,

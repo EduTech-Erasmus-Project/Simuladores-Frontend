@@ -104,9 +104,10 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
             {
                 path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent,
                 children: [
-                    {path: '', component: PresentacionInicioUserComponent},  
-                    {path: 'Mis-Actividades-Usuario', component: MisActividadesUsuarioComponent},
-                    {path: 'datosUsuario', component: DatosUsuarioComponent}
+                    {path: '', component: PresentacionInicioUserComponent}, 
+                    {path: 'inicio/:correo', component: PresentacionInicioUserComponent},  
+                    {path: 'Mis-Actividades-Usuario/:correo', component: MisActividadesUsuarioComponent},
+                    {path: 'datosUsuario/:correo', component: DatosUsuarioComponent}
                 ]//, canActivate: [AutentificarGuard]
             },
             {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SelectItem, SelectItemGroup } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
@@ -104,8 +105,9 @@ export class DatosUsuarioComponent implements OnInit {
     
     selectedCities4: any[];
 
+    private correoParticanteDatos: string = '';
 
-  constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
+  constructor(private _Activatedroute:ActivatedRoute, private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
     this.groupedCities = [
       {
           label: 'Alemania', value: 'de', 
@@ -176,7 +178,8 @@ export class DatosUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+    console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
   }
 
   filterCountry(event) {
