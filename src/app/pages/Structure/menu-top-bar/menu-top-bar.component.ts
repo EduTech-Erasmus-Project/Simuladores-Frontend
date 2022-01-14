@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { PaginaPrincipalUsuarioComponent } from '../../User/pagina-principal-usuario/pagina-principal-usuario.component';
 
@@ -84,13 +84,10 @@ import { PaginaPrincipalUsuarioComponent } from '../../User/pagina-principal-usu
 					<!--Perfil de usuario presentacion menu-->
 					<li #profile class="topbar-item profile-item" style="width: 15%;" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}">
 						<a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
-						<span class="profile-image-wrapper">
-							<img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" />
+						<span class="profile-info-wrapper">
+							<h3>{{getCorreo()}}</h3>
+							<span>Estudiante</span>
 						</span>
-							<span class="profile-info-wrapper">
-								<h3>Olivia Eklund</h3>
-								<span>Estudiante</span>
-							</span>
 						</a>
 					</li>
 
@@ -120,11 +117,17 @@ import { PaginaPrincipalUsuarioComponent } from '../../User/pagina-principal-usu
 export class MenuTopBarComponent implements OnInit {
 
 	activeItem: number;
+	private correoParticipante: string = '';
+
 	constructor(public appMain: PaginaPrincipalUsuarioComponent, public autentificacionServices: AutentificacionUsuarioService) { }
 	
 	ngOnInit(): void {
+		this.correoParticipante = this.appMain.getCorreo();
 	}
-
+	
+	getCorreo():string{
+		return this.correoParticipante;
+	}
 	mobileMegaMenuItemClick(index) {
 	this.appMain.megaMenuMobileClick = true;
 	this.activeItem = this.activeItem === index ? null : index;
@@ -137,4 +140,6 @@ export class MenuTopBarComponent implements OnInit {
 	buscarEnPagina(){
 
 	}
+
+	
 }
