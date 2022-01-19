@@ -179,7 +179,12 @@ export class DatosUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo");
-    console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
+    //console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
+    this.obtenerInformacionUsuario();
+  }
+
+  obtenerInformacionUsuario(){
+
   }
 
   filterCountry(event) {

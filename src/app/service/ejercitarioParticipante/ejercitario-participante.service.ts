@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Asignacion } from 'src/app/model/Asignacion';
+import { Escenario } from 'src/app/model/Escenario';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,6 +17,13 @@ export class EjercitarioParticipanteService {
     const config = { headers: new HttpHeaders({
                       'Content-Type':  'application/json',}) 
                     };
-    return this.http.post<any>(environment.WS_PATH+"obtenerAsignacionesEjercitariosDeParticipante", {"correo":correo}, config)
+    return (this.http.post<any>(environment.WS_PATH+"obtenerAsignacionesEjercitariosDeParticipante", {"correo":correo}, config))
+  }
+
+  public obtenerEjercitario(id: number): Observable<any>{
+    const config = { 
+                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+                    };
+    return (this.http.get<any>(environment.WS_PATH+"getEjercitario/"+id, config))
   }
 }
