@@ -17,8 +17,8 @@
                                 <h3>Perfil de Usuario</h3>
                                 <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px;" alt=""/>
                                 <div class="product-list-detail">
-                                    <h4> Juan Pablo Perez Bojorque <!--{{product.name}}--></h4>
-                                    <span> Estudiante <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
+                                    <h4> {{participante.getNombre}} {{participante.getApellido}}</h4>
+                                    <span> Participante <i class="pi pi-map-marker product-category-icon"></i> {{participante.getCiudad+" - "+participante.getPais}}
                                         
                                     <!--{{product.description}}--></span>
                                     
@@ -32,10 +32,91 @@
                                     <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
                                     -->
                                </span>
-                            </div>    
+
+                            <p-divider layout="horizontal" align="center"></p-divider>
+            
+                            
+                            
+                            <div style="text-align: center; ">
+                                <h4>Cambio de Contraseña</h4>
+                                <form class="forms" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
+                                    
+                                    <div class="login-input-wrapper">
+                                        <input
+                                          type="password"
+                                          id="password"
+                                          name="password"
+                                          placeholder="Ingrese su contraseña"
+                                          pPassword
+                                          required
+                                          [(ngModel)]= "password"
+                                          [feedback]="false"
+                                          appPassword
+                                        />  
+                                    </div>
+
+                                    <div class="login-input-wrapper">
+                                        <input
+                                          type="password"
+                                          id="newPassword"
+                                          name="newPassword"
+                                          placeholder="Ingrese su nueva contraseña"
+                                          pPassword
+                                          required
+                                          [(ngModel)]= "newPassword"
+                                          [feedback]="false"
+                                          appPassword
+                                        />  
+                                    </div>
+
+                                    <div class="login-input-wrapper">
+                                        <input
+                                          type="password"
+                                          id="repPassword"
+                                          name="repPassword"
+                                          placeholder="Repita su nueva contraseña"
+                                          pPassword
+                                          required
+                                          [(ngModel)]= "repPassword"
+                                          [feedback]="false"
+                                          appPassword
+                                        />  
+                                    </div>
+
+                                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483;" *ngIf="isFormValid">
+                                        Por favor ingrese todos los campos.
+                                    </div>
+                            
+                                    <div
+                                        class="alert alert-danger"
+                                        role="alert"
+                                        style="margin-bottom: 1em; color: #ce7483;"
+                                        *ngIf="areCredentialsInvalid"
+                                    >
+                                        Las contraseñas no coinciden
+                                    </div>
+                                    
+                                </form>
+                                
+                                <button
+                                  pButton
+                                  type="submit"
+                                  label="Cambiar Contraseña"
+                                  style="margin-right: 2em;"
+                                ></button>
+                                
+                            </div> 
+
+                            </div>  
+                            
+                            
+
                         </div>
                     </div>
                 </div>
+
+               
+
             </div>
             
             <!--Linea de division de componentes-->
@@ -54,24 +135,23 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" pInputText placeholder="Nombre"/>
+                                    <input type="text" pInputText placeholder="Nombre" value="{{participante.getNombre}}"/>
                                 </span>
-                                
                             </div>
 
                             <h6>Email:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-envelope"></i>
-                                    <input type="text" pInputText placeholder="Correo Electronico"/>
+                                    <input type="text" pInputText placeholder="Correo Electronico" readonly="true" value="{{participante.getEmail}}"/>
                                 </span>
                                 
                             </div>
 
-                            <h6>Pais:</h6>
+                            <h6>Pais y Ciudad:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
-                                    <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="Select a City" scrollHeight="250px" display="chip">
+                                    <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="{{participante.getPais}} - {{participante.getCiudad}} " scrollHeight="250px" display="chip">
                                         <ng-template let-group pTemplate="group">
                                             <div class="p-d-flex p-ai-center">
                                                 <img src="assets/demo/flags/flag_placeholder.png" [class]="'p-mr-2 flag flag-' + group.value" style="width: 20px" />
@@ -81,20 +161,27 @@
                                     </p-multiSelect>
                                 </span>
                             </div>
+                            
+                            <h6>Dirección de Vivienda:</h6>
+                            <div class="p-grid p-formgrid">
+                                <input type="text" pInputText placeholder="Dirección del Participante" value="{{participante.getDireccion}}"/>
+                            </div>
 
-                            <h6>Ocupación:</h6>
+                            <h6>Carrera Universitaria:</h6>
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-info-circle"></i>
-                                    <input type="text" pInputText value="Ocupación que desempeña"/>
+                                    <input type="text" pInputText placeholder="Carrera Universitaria del Participante" value="{{participante.getCarreraUniversitaria}}"/>
                                 </span>
                                 
                             </div>
 
-                            <h6>Nivel de Formación:</h6>
+                            <h6>Estudios Previos:</h6>
                             <div class="p-grid p-formgrid">
-                                <input type="text" pInputText placeholder="Ingrese su nivel de formación"/>
+                                <input type="text" pInputText placeholder="Estudios previos del Participante" value="{{participante.getEstudiosPrevios}}"/>
                             </div>
+
+                            
 
 
                             <h6>Ingrese una contraseña:</h6>
@@ -124,7 +211,7 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" pInputText placeholder="Apellido"/>
+                                    <input type="text" pInputText placeholder="Apellido" value="{{participante.getApellido}}"/>
                                 </span>
                                 
                             </div>
@@ -133,7 +220,7 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-phone"></i>
-                                    <input type="text" pInputText placeholder="Número de teléfono"/>
+                                    <input type="text" pInputText placeholder="Número de teléfono" value="{{participante.getTelefono}}"/>
                                 </span>
                                 
                             </div>
@@ -142,7 +229,7 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" disabled pInputText value="Estudiante"/>
+                                    <input type="text" readonly="True" pInputText value="Participante"/>
                                 </span>
                                 
                             </div>
@@ -151,14 +238,19 @@
                             <div class="p-grid p-formgrid">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-user"></i>
-                                    <input type="text" disabled pInputText value="Angel Perez"/>
+                                    <input type="text" readonly="True" pInputText value="{{participante.getResponsable.getNombre}} {{participante.getResponsable.getApellido}} "/>
                                 </span>
                                 
                             </div>
 
-                            <h6>Nivel de Formación:</h6>
+                            <h6>Código Universitario:</h6>
                             <div class="p-grid p-formgrid">
-                                <input type="text" pInputText placeholder="Ingrese su nivel de formación"/>
+                                <input type="text" pInputText placeholder="Código Universitario del Participante" value="{{participante.getCodigoEstudiante}}"/>
+                            </div>
+
+                            <h6>Estado Civil:</h6>
+                            <div class="p-grid p-formgrid">
+                                <input type="text" pInputText placeholder="Estado Civil del Participante" value="{{participante.getEstadoCivil}}"/>
                             </div>
 
                             <h6>Repita la contraseña:</h6>
@@ -201,8 +293,10 @@
                         ></button>
                     </div> 
                 </p-divider>
+                
             </div>
-        </div>
+
+        </div>  
     </div>
 </div>
 

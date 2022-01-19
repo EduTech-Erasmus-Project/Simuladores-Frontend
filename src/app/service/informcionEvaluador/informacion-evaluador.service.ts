@@ -6,15 +6,14 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class InformacionParticipanteService {
+export class InformacionEvaluadorService {
 
   constructor(private http: HttpClient) { }
 
-  public obtenerInformacionUsuario(correo: string): Observable<any>{
+  public obtenerInformacionEvaluador(id: number): Observable<any>{
     const config = { 
                       headers: new HttpHeaders({'Content-Type':  'application/json',}) 
                     };
-    return (this.http.get<any>(environment.WS_PATH+"getParticipante/"+correo, config))
+    return (this.http.get<any>(environment.WS_PATH+"getEvaluador/"+id, config))
   }
-
 }
