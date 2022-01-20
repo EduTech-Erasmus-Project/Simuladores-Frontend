@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { SelectItem, SelectItemGroup } from 'primeng/api';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
+import { Participante } from 'src/app/model/Participante';
+import { Responsable } from 'src/app/model/Responsable';
+import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
+import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
 
 interface City {
   name: string,
@@ -64,132 +70,182 @@ interface Country {
     `]
 })
 export class DatosUsuarioComponent implements OnInit {
+    
+  public groupedCities: SelectItemGroup[];
+  public selectedCities4: any[];
+  private correoParticanteDatos: string = '';
+  public participante: Participante;
   
-    countries: any[];
+  public password: string;
+  public newPassword: string;
+  public repPassword: string;
+  public isFormValid = false;
+  public areCredentialsInvalid = false;
+  public passwordIncorrect = false;
+  public passwordRepetida = false;
+  public nombreParticipante: string;
+  public direccionParticipante: string;
+  public carreraParticipante: string;
+  public estudiosParticipante: string;
+  public apellidoParticipante: string;
+  public telefonoParticipante: string;
+  public codigoParticipante: string;
+  public estadoCivilParticipante: string;
+  public paisParticipante: string = "-------------";
+  public ciudadParticipante: string = "-------------";
 
-    filteredCountries: any[];
+  constructor(private confirmationService: ConfirmationService,private messageService: MessageService,
+    private router: Router, private evaluadorService: InformacionEvaluadorService,
+    private usuarioService: InformacionParticipanteService ,private _Activatedroute:ActivatedRoute, 
+    private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
 
-    selectedCountryAdvanced: any[];
-
-    valSlider = 50;
-
-    valColor = '#424242';
-
-    valRadio: string;
-
-    valCheck: string[] = [];
-
-    valSwitch: boolean;
-
-    cities: SelectItem[];
-
-    selectedList: SelectItem;
-
-    selectedDrop: SelectItem;
-
-    selectedMulti: string[] = [];
-
-    valToggle = false;
-
-    paymentOptions: any[];
-
-    valSelect1: string;
-
-    valSelect2: string;
-
-    valueKnob = 20;
-
+    countryService.getCountriesCity().subscribe(res => {
+        this.groupedCities = res.data as any[]
+      }
+    );
     
-    groupedCities: SelectItemGroup[];
-    
-    selectedCities4: any[];
-
-
-  constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
-    this.groupedCities = [
-      {
-          label: 'Alemania', value: 'de', 
-          items: [
-              {label: 'Berlin', value: 'Berlin'},
-              {label: 'Frankfurt', value: 'Frankfurt'},
-              {label: 'Hamburg', value: 'Hamburg'},
-              {label: 'Munich', value: 'Munich'}
-          ]
-      },
-      {
-          label: 'Ecuador', value: 'ec', 
-          items: [
-              {label: 'Cuenca', value: 'Cuenca'},
-              {label: 'Quito', value: 'Quito'},
-              {label: 'Guayaquil', value: 'Guayaquil'},
-              {label: 'Santo Domingo', value: 'Santo Domingo'},
-              {label: 'Machala', value: 'Machala'},
-              {label: 'Durán', value: 'Durán'},
-              {label: 'Manta', value: 'Manta'},
-              {label: 'Portoviejo', value: 'Portoviejo'},
-              {label: 'Loja', value: 'Loja'},
-              {label: 'Ambato', value: 'Ambato'}
-              
-          ]
-      },
-      {
-        label: 'Japón', value: 'jp', 
-        items: [
-            {label: 'Kyoto', value: 'Kyoto'},
-            {label: 'Osaka', value: 'Osaka'},
-            {label: 'Tokyo', value: 'Tokyo'},
-            {label: 'Yokohama', value: 'Yokohama'}
-        ]
-      },
-      {
-        label: 'Mexico', value: 'mx', 
-        items: [
-            {label: 'Guadalajara', value: 'Guadalajara'},
-            {label: 'Guanajuato', value: 'Guanajuato'},
-            {label: 'Puebla', value: 'Puebla'},
-            {label: 'Morelia', value: 'Morelia'},
-            {label: 'Monterrey', value: 'Monterrey'},
-            {label: 'Querétaro', value: 'Querétaro'},
-            {label: 'Mérida', value: 'Mérida'},
-            {label: 'Ciudad de México', value: 'Ciudad de México'},
-            {label: 'Xalapa', value: 'Xalapa'},
-            {label: 'Zacatecas', value: 'Zacatecas'}
-            
-        ]
-      },
-      {
-        label: 'USA', value: 'us', 
-        items: [
-            {label: 'Chicago', value: 'Chicago'},
-            {label: 'Los Angeles', value: 'Los Angeles'},
-            {label: 'New York', value: 'New York'},
-            {label: 'San Francisco', value: 'San Francisco'}
-        ]
-      } 
-
-    ];
-    
-    this.breadcrumbService.setItems([
-      { label: 'UI Kit' },
-      { label: 'Input', routerLink: ['/uikit/input'] }
-    ]);
   }
 
   ngOnInit(): void {
+    this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+    //console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
+    this.obtenerInformacionUsuario();
+   
+  }
+
+  obtenerInformacionUsuario(){
+    this.usuarioService.obtenerInformacionUsuario(this.correoParticanteDatos).subscribe(
+      usuario => {this.getInformacionUsuario(usuario)}
+    );
+  }
+
+  getInformacionUsuario(usuario: any){
+    var evaluador: Responsable;
+   
+    this.evaluadorService.obtenerInformacionEvaluador(usuario.responsable).subscribe(
+      responsable => {
+        evaluador = new Responsable(
+          responsable.id, responsable.email, responsable.nombre, responsable.apellido, responsable.telefono, 
+          responsable.pais, responsable.ciudad, responsable.direccion, responsable.nivelDeFormacion
+        );
+
+        this.participante = new Participante(
+          usuario.id, usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, 
+          usuario.pais, usuario.ciudad, usuario.direccion, usuario.fechaNacimiento, usuario.carreraUniversitaria,
+          usuario.genero, usuario.numeroDeHijos, usuario.estadoCivil, usuario.etnia, usuario.estudiosPrevios, 
+          usuario.codigoEstudiante, usuario.nivelDeFormacion, evaluador 
+        );
+
+        this.nombreParticipante = this.participante.getNombre;
+        this.direccionParticipante = this.participante.getDireccion;
+        this.carreraParticipante = this.participante.getCarreraUniversitaria;
+        this.estudiosParticipante = this.participante.getEstudiosPrevios;
+        this.apellidoParticipante = this.participante.getApellido;
+        this.telefonoParticipante = this.participante.getTelefono;
+        this.codigoParticipante = this.participante.getCodigoEstudiante;
+        this.estadoCivilParticipante = this.participante.getEstadoCivil;
+        this.paisParticipante  = this.participante.getPais;
+        this.ciudadParticipante  = this.participante.getCiudad;
+
+      }
+    );
     
   }
 
-  filterCountry(event) {
-    const filtered: any[] = [];
-    const query = event.query;
-    for (let i = 0; i < this.countries.length; i++) {
-        const country = this.countries[i];
-        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(country);
-        }
+  onSubmit(signInForm: NgForm){
+    if (!signInForm.valid) {
+      this.isFormValid = true;
+      this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
+      return;
+    }
+    this.verificarPassword();
+  }
+  
+  verificarPassword(){
+    if (this.newPassword != this.repPassword) {
+      this.isFormValid = false;
+      this.areCredentialsInvalid = true;
+      this.passwordIncorrect = false;
+      return;
     }
 
-    this.filteredCountries = filtered;
+    if(this.password == this.newPassword){
+      this.isFormValid = false;
+      this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
+      this.passwordRepetida = true;
+      return;
+    }
+
+    this.usuarioService.cambiarPassword(this.correoParticanteDatos, this.password, this.newPassword).subscribe(
+      res => {
+        console.log("valores: "+res.change)
+        if(res.change == 'ok'){
+          this.router.navigate(['login']);
+          return;
+        }
+        
+      },error => {
+        this.isFormValid = false;
+        this.areCredentialsInvalid = false;
+        this.passwordIncorrect = true;
+        return;
+       
+      }
+      );
+    
+  }
+ 
+  confirm1() {
+    this.confirmationService.confirm({
+        key: 'confirm1',
+        message: 'Are you sure to perform this action?'
+    });
+}
+
+  eliminarCuenta(){
+
+    this.confirmationService.confirm({
+      key: 'eliminarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({key: 'eliminarTOAST', severity: 'success', summary: 'Cuenta Eliminada', detail: 'La cuenta a sido Eliminada de manera satisfactoria'});
+        this.usuarioService.eliminarCuenta(this.correoParticanteDatos, this.participante.getPassword);
+      },
+      reject: () => {
+          this.messageService.add({key: 'eliminarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
+  }
+
+  editarCuenta(){
+    this.confirmationService.confirm({
+      key: 'editarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.participante.setNombre = this.nombreParticipante;
+        this.participante.setDireccion = this.direccionParticipante;
+        this.participante.setcarreraUniversitaria = this.carreraParticipante;
+        this.participante.setEstudiosPrevios = this.estudiosParticipante;
+        this.participante.setApellido = this.apellidoParticipante;
+        this.participante.setTelefono = this.telefonoParticipante;
+        this.participante.setCodigoEstudiante = this.codigoParticipante;
+        this.participante.setEstadoCivil = this.estadoCivilParticipante;
+        this.participante.setPais = this.paisParticipante;
+        this.participante.setCiudad = this.ciudadParticipante;
+        this.usuarioService.editarCuenta(this.participante);
+        this.messageService.add({key: 'editarTOAST', severity: 'success', summary: 'Cuenta Actualizada', detail: 'La cuenta a sido actualizada de manera satisfactoria'});
+        
+      },
+      reject: () => {
+          this.messageService.add({key: 'editarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
   }
 
 }

@@ -1,7 +1,7 @@
 import { variable } from "@angular/compiler/src/output/output_ast";
 
 export class Escenario {
-    
+    private idEjercitario: number;
     private numeroDeEjercitario : number;
     private tipoDeEjercitario : string;
     private nombreDeEjercitario: string;
@@ -9,10 +9,19 @@ export class Escenario {
     private principalCompetenciasEjercitario : string;
     private duracionEjercitarioPorMinutos: number;
     private urlEjercitarios : string;
+    private instruccionesParticipantes: string;
     //private asignacion
 
     constructor( ){
 
+    }
+
+    get getidEjercitario(){
+        return this.idEjercitario;
+    }
+
+    set setidEjercitario(id: number){
+        this.idEjercitario = id
     }
 
     get getNumeroDeEjercitario(){
@@ -51,6 +60,7 @@ export class Escenario {
         return this.principalCompetenciasEjercitario;
     }
 
+
     set setPrincipalCompetenciasEjercitario ( principalCompetenciasEjercitario: string){
         this.principalCompetenciasEjercitario = principalCompetenciasEjercitario;
     }
@@ -70,6 +80,12 @@ export class Escenario {
     set setUrlEjercitarios( urlEjercitarios: string ){
         this.urlEjercitarios  = urlEjercitarios;
     }
-}
 
-let escenario : Escenario;
+    get getInstruccionesParticipantes(){
+        return this.instruccionesParticipantes;
+    }
+
+    set setInstruccionesParticipantes(instruccionesPrincipales: string){
+        this.instruccionesParticipantes = instruccionesPrincipales;
+    }
+}

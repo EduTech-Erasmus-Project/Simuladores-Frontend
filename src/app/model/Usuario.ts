@@ -1,6 +1,7 @@
 export class Usuario {
     private correo: string;
     private password: string;
+    private tipoUsuario: string;
 
     constructor(correo: string, password: string) {
         this.correo = correo;
@@ -13,5 +14,13 @@ export class Usuario {
 
     getPassword(): string {
         return this.password;
+    }
+
+    getTipoUsuario(): string {
+        return this.tipoUsuario;
+    }
+
+    setTipoUsuario(tipo: string): void {
+        this.tipoUsuario = tipo;
     }
 }

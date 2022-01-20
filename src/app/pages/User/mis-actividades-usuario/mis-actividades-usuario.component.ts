@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuLateralComponent } from '../../Structure/menu-lateral/menu-lateral.component';
 import { MenuFooterPageComponent } from '../../Structure/menu-footer-page/menu-footer-page.component';
 import { MenuTopBarComponent } from '../../Structure/menu-top-bar/menu-top-bar.component';
@@ -7,6 +7,7 @@ import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
 import { ProductService } from 'src/app/demo/service/productservice';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mis-actividades-usuario',
@@ -42,8 +43,9 @@ export class MisActividadesUsuarioComponent implements OnInit {
   customers1: Customer[];
   selectedCustomers1: Customer[];
   statuses: any[];
-  
-  constructor(private customerService: CustomerService, private productService: ProductService,
+  private correoParticanteActividades: string = '';
+
+  constructor(private _Activatedroute:ActivatedRoute, private customerService: CustomerService, private productService: ProductService,
     private breadcrumbService: BreadcrumbService) { 
       this.breadcrumbService.setItems([
         { label: 'UI Kit' },
@@ -52,6 +54,10 @@ export class MisActividadesUsuarioComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    this.correoParticanteActividades = this._Activatedroute.snapshot.paramMap.get("correo");
+    console.log("Pagina de Mis actividades: ", this.correoParticanteActividades)
+
     this.customerService.getCustomersLarge().then(customers => {
       this.customers1 = customers;
       // @ts-ignore

@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   //WS_PATH: "http://192.168.100.184:8080/api/"
   WS_PATH: "http://localhost:8000/api/"
-  
 };
 
 /*

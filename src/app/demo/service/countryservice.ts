@@ -12,4 +12,8 @@ export class CountryService {
       .then(res => res.data as any[])
       .then(data => data);
     }
+
+    getCountriesCity() {
+      return this.http.get<any>('assets/demo/data/CountriesCity.json')
+      }
 }

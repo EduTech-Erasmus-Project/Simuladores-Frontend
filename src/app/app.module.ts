@@ -169,9 +169,12 @@ import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Ex
 import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
 import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
+import { RouterModule } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
+        RouterModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,
@@ -329,7 +332,7 @@ import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService
+        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService
     ],
     bootstrap: [AppComponent]
 })
