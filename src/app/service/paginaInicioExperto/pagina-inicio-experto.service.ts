@@ -29,8 +29,8 @@ export class PaginaInicioExpertoService {
 
   }
 
-  crearGraficaPaginaInicio(listaFiltroParaBuscar: [], listaGenero: [], listaDiscapacidad: []){
-    this.http.post<any>(environment.WS_PATH+"crearGrafica", {"listaFiltroParaBuscar": listaFiltroParaBuscar, "listaGenero": listaGenero, "listaDiscapacidad" : listaDiscapacidad}, this.config).toPromise();
+  crearGraficaPaginaInicio(correo: string){
+    this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo}, this.config);
   }
 
 

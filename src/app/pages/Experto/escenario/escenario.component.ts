@@ -17,6 +17,11 @@ export class EscenarioComponent implements OnInit {
   private listaParaFiltroGrafica1: ['Tiempo', 'Nota'];
   private listaParaFiltroGrafica2: [''];
 
+  private discapacidad : String;
+  private genero: String;
+  private evaluador: String;
+  private escenario: String;
+
 
   // PARA LA GRAFICA
   lineData: any;
@@ -172,6 +177,8 @@ export class EscenarioComponent implements OnInit {
       this.servicioConsultasLabelsGrafica.recuperarListaGeneroEscenario();
     }
 
+
+
     crearGrafica1(listadoGeneroEscenario: [], listadoDiscapacidadEscenario: [], numEscenario:String){
       this.servicioGraficaPorEscenario.recuperarListadoNotaPorEscenario(listadoGeneroEscenario, listadoDiscapacidadEscenario, numEscenario);
     }
@@ -180,8 +187,8 @@ export class EscenarioComponent implements OnInit {
       
     }
 
-    crearGrafica2tiempoCompleto(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
-      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionCompletaPorEscenario(listaGeneroEscenario, listadoDiscapacidadesEscenario, numEscenario);
+    crearGrafica2tiempoCompleto(genero: String, discapacidad:String, escenario:String, evaluador:String){
+      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionCompletaPorEscenario(genero, discapacidad, escenario, evaluador);
     }
 
     crearGrafica2tiempoSoloRespuesta(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){

@@ -19,11 +19,12 @@ export class InfoExpertoPorEscenarioService {
       "escenario": numEscenario}, this.config).toPromise();
   }
 
-  recuperarListadoTiempoResolucionCompletaPorEscenario(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+  recuperarListadoTiempoResolucionCompletaPorEscenario(Genero: String, Discapacidad: String, numEscenario:String, evaluador: String){
     return this.http.post<any>(environment.WS_PATH+"obtenerlistaTiempoResolucionCompletaEscenario", 
-    {"generoPorEscenario": listaGeneroEscenario, 
-     "discapacidadEscenario": listadoDiscapacidadesEscenario,
-     "escenario":numEscenario},this.config).toPromise();  
+    {"genero": Genero, 
+     "discapacida": Discapacidad,
+     "escenario":numEscenario,
+     "evaluador": evaluador},this.config).toPromise();  
   
   }
 
@@ -35,6 +36,8 @@ export class InfoExpertoPorEscenarioService {
       "escenario": numEscenario}, this.config).toPromise();
 
   }
+
+
 
 
 }
