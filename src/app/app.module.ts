@@ -170,6 +170,7 @@ import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-E
 import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 import { RouterModule } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -331,7 +332,7 @@ import { RouterModule } from '@angular/router';
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService
+        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService
     ],
     bootstrap: [AppComponent]
 })

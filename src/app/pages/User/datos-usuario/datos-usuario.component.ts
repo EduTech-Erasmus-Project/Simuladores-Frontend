@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { SelectItem, SelectItemGroup } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
 import { Participante } from 'src/app/model/Participante';
@@ -81,8 +81,24 @@ export class DatosUsuarioComponent implements OnInit {
   public repPassword: string;
   public isFormValid = false;
   public areCredentialsInvalid = false;
+  public passwordIncorrect = false;
+  public passwordRepetida = false;
+  public nombreParticipante: string;
+  public direccionParticipante: string;
+  public carreraParticipante: string;
+  public estudiosParticipante: string;
+  public apellidoParticipante: string;
+  public telefonoParticipante: string;
+  public codigoParticipante: string;
+  public estadoCivilParticipante: string;
+  public paisParticipante: string = "-------------";
+  public ciudadParticipante: string = "-------------";
 
-  constructor(private evaluadorService: InformacionEvaluadorService,private usuarioService: InformacionParticipanteService ,private _Activatedroute:ActivatedRoute, private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
+  constructor(private confirmationService: ConfirmationService,private messageService: MessageService,
+    private router: Router, private evaluadorService: InformacionEvaluadorService,
+    private usuarioService: InformacionParticipanteService ,private _Activatedroute:ActivatedRoute, 
+    private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
+
     countryService.getCountriesCity().subscribe(res => {
         this.groupedCities = res.data as any[]
       }
@@ -94,6 +110,7 @@ export class DatosUsuarioComponent implements OnInit {
     this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo");
     //console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
     this.obtenerInformacionUsuario();
+   
   }
 
   obtenerInformacionUsuario(){
@@ -118,6 +135,18 @@ export class DatosUsuarioComponent implements OnInit {
           usuario.genero, usuario.numeroDeHijos, usuario.estadoCivil, usuario.etnia, usuario.estudiosPrevios, 
           usuario.codigoEstudiante, usuario.nivelDeFormacion, evaluador 
         );
+
+        this.nombreParticipante = this.participante.getNombre;
+        this.direccionParticipante = this.participante.getDireccion;
+        this.carreraParticipante = this.participante.getCarreraUniversitaria;
+        this.estudiosParticipante = this.participante.getEstudiosPrevios;
+        this.apellidoParticipante = this.participante.getApellido;
+        this.telefonoParticipante = this.participante.getTelefono;
+        this.codigoParticipante = this.participante.getCodigoEstudiante;
+        this.estadoCivilParticipante = this.participante.getEstadoCivil;
+        this.paisParticipante  = this.participante.getPais;
+        this.ciudadParticipante  = this.participante.getCiudad;
+
       }
     );
     
@@ -127,10 +156,96 @@ export class DatosUsuarioComponent implements OnInit {
     if (!signInForm.valid) {
       this.isFormValid = true;
       this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
       return;
     }
+    this.verificarPassword();
+  }
+  
+  verificarPassword(){
+    if (this.newPassword != this.repPassword) {
+      this.isFormValid = false;
+      this.areCredentialsInvalid = true;
+      this.passwordIncorrect = false;
+      return;
+    }
+
+    if(this.password == this.newPassword){
+      this.isFormValid = false;
+      this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
+      this.passwordRepetida = true;
+      return;
+    }
+
+    this.usuarioService.cambiarPassword(this.correoParticanteDatos, this.password, this.newPassword).subscribe(
+      res => {
+        console.log("valores: "+res.change)
+        if(res.change == 'ok'){
+          this.router.navigate(['login']);
+          return;
+        }
+        
+      },error => {
+        this.isFormValid = false;
+        this.areCredentialsInvalid = false;
+        this.passwordIncorrect = true;
+        return;
+       
+      }
+      );
+    
+  }
+ 
+  confirm1() {
+    this.confirmationService.confirm({
+        key: 'confirm1',
+        message: 'Are you sure to perform this action?'
+    });
+}
+
+  eliminarCuenta(){
+
+    this.confirmationService.confirm({
+      key: 'eliminarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({key: 'eliminarTOAST', severity: 'success', summary: 'Cuenta Eliminada', detail: 'La cuenta a sido Eliminada de manera satisfactoria'});
+        this.usuarioService.eliminarCuenta(this.correoParticanteDatos, this.participante.getPassword);
+      },
+      reject: () => {
+          this.messageService.add({key: 'eliminarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
   }
 
- 
+  editarCuenta(){
+    this.confirmationService.confirm({
+      key: 'editarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.participante.setNombre = this.nombreParticipante;
+        this.participante.setDireccion = this.direccionParticipante;
+        this.participante.setcarreraUniversitaria = this.carreraParticipante;
+        this.participante.setEstudiosPrevios = this.estudiosParticipante;
+        this.participante.setApellido = this.apellidoParticipante;
+        this.participante.setTelefono = this.telefonoParticipante;
+        this.participante.setCodigoEstudiante = this.codigoParticipante;
+        this.participante.setEstadoCivil = this.estadoCivilParticipante;
+        this.participante.setPais = this.paisParticipante;
+        this.participante.setCiudad = this.ciudadParticipante;
+        this.usuarioService.editarCuenta(this.participante);
+        this.messageService.add({key: 'editarTOAST', severity: 'success', summary: 'Cuenta Actualizada', detail: 'La cuenta a sido actualizada de manera satisfactoria'});
+        
+      },
+      reject: () => {
+          this.messageService.add({key: 'editarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
+  }
 
 }
