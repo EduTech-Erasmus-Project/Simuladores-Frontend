@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,8 +16,8 @@ export class ConsultasParaGraficasService {
       return this.http.get<any>(environment.WS_PATH+"obtenerListaDiscapacidades",this.config).toPromise();
     }
    
-    recuperarListaDeGenero(){
-       return this.http.get<any>(environment.WS_PATH+"obtenerListaGenero", this.config).toPromise();
+    recuperarListaDeGenero(correo: string): Observable<any>{
+       return this.http.post<any>(environment.WS_PATH+"obtenerTipoGeneroPorEvaluador",{"evaluador": correo} , this.config)
     }
 
     recuperarListaDeEscenarios(){
