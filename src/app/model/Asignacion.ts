@@ -57,3 +57,14 @@ export class Asignacion {
     }
    
 }
+
+
+export interface AsignacionTabla {
+    idActividad?: number;
+    tiempoTotalResolucionEjercitario?: number;
+    fechaDeActividad?: string;
+    totalRespuestasCorrectasIngresadasParticipante?: number;
+    numeroTotalDePreguntasDelEjercitario?: number;
+    calificacionActividad?: number;
+    ejercitario?: string;
+}

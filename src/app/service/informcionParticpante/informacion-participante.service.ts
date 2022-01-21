@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AsignacionTabla } from 'src/app/model/Asignacion';
 import { Participante } from 'src/app/model/Participante';
 import { environment } from 'src/environments/environment';
 
@@ -32,12 +33,22 @@ export class InformacionParticipanteService {
     return this.http.put<any>(environment.WS_PATH+"eliminarCuenta", {"correo":correo, "password":password}, config)
   }
 
-  public editarCuenta(participante: Participante): Observable<any>{
+  public editarCuenta(participante: Participante){
     const config = { headers: new HttpHeaders({
       'Content-Type':  'application/json',}) 
     };
-    return this.http.put<any>(environment.WS_PATH+"editarCuenta", {"correo":participante.getEmail, "participante": participante}, config)
+    return this.http.put<any>(environment.WS_PATH+"editarCuenta", {"correo":participante.getEmail, "participante":participante}, config)
   }
   
+  public obtenerInformacionActividadesParticipantes(correo: string){
+    const config = { headers: new HttpHeaders({
+      'Content-Type':  'application/json',}) 
+    };
+    return this.http.get<any>(environment.WS_PATH+"informacionActividadesParticipante/"+correo, config)
+    .toPromise()
+    .then(res => res.actividades as AsignacionTabla[])
+    .then(actividades => actividades);
+   
+  }
 
 }

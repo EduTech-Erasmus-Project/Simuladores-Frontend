@@ -1,13 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuLateralComponent } from '../../Structure/menu-lateral/menu-lateral.component';
-import { MenuFooterPageComponent } from '../../Structure/menu-footer-page/menu-footer-page.component';
-import { MenuTopBarComponent } from '../../Structure/menu-top-bar/menu-top-bar.component';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
 import { ProductService } from 'src/app/demo/service/productservice';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { ActivatedRoute } from '@angular/router';
+import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
+import { Responsable } from 'src/app/model/Responsable';
+import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
+import { Participante } from 'src/app/model/Participante';
+import { AsignacionTabla } from 'src/app/model/Asignacion';
 
 @Component({
   selector: 'app-mis-actividades-usuario',
@@ -27,109 +29,78 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MisActividadesUsuarioComponent implements OnInit {
 
-  menuClick: boolean;
-  sidebarActive: boolean;
-  staticMenuActive: boolean;
-  topbarMenuActive: boolean;
-  megaMenuMobileClick: boolean;
-  megaMenuMobileActive: boolean;
-  topbarMobileMenuClick: boolean;
-  topbarMobileMenuActive: boolean;
-  menuMobileActive: boolean;
-  activeTopbarItem: any;
-  topbarItemClick: boolean;
-  buscarTextoRegistro: string;
   representatives: Representative[];
   customers1: Customer[];
-  selectedCustomers1: Customer[];
+  listActividadesParticpante: AsignacionTabla[];
+  selectedCustomers1: AsignacionTabla[];
   statuses: any[];
   private correoParticanteActividades: string = '';
+  public participante: Participante;
+  public listaActividades: Array<any>;
 
-  constructor(private _Activatedroute:ActivatedRoute, private customerService: CustomerService, private productService: ProductService,
-    private breadcrumbService: BreadcrumbService) { 
-      this.breadcrumbService.setItems([
-        { label: 'UI Kit' },
-        { label: 'Table', routerLink: ['/uikit/table'] }
-    ]);
+  constructor(private evaluadorService: InformacionEvaluadorService, private usuarioService: InformacionParticipanteService , private _Activatedroute:ActivatedRoute, private customerService: CustomerService) { 
+
     }
 
-  ngOnInit(): void {
+  ngOnInit():void {
 
     this.correoParticanteActividades = this._Activatedroute.snapshot.paramMap.get("correo");
-    console.log("Pagina de Mis actividades: ", this.correoParticanteActividades)
-
+    this.obtenerInformacionUsuario();
+    //this.obtenerActividadesUsuario();
+    
+    this.usuarioService.obtenerInformacionActividadesParticipantes(this.correoParticanteActividades).then(listActividades => {
+      
+      this.listActividadesParticpante = listActividades
+      console.log("++++++++++++",this.listActividadesParticpante)
+      //this.listActividadesParticpante.forEach(actividad => actividad.fechaDeActividad = new Date(actividad.fechaDeActividad));
+      
+    });
+    
+    
     this.customerService.getCustomersLarge().then(customers => {
       this.customers1 = customers;
       // @ts-ignore
-      this.customers1.forEach(customer => customer.date = new Date(customer.date));
+      console.log("++++++++++++",this.customers1)
+      
     });
   
   
-    this.representatives = [
-        {name: 'Amy Elsner', image: 'amyelsner.png'},
-        {name: 'Anna Fali', image: 'annafali.png'},
-        {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
-        {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
-        {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
-        {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
-        {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
-        {name: 'Onyama Limba', image: 'onyamalimba.png'},
-        {name: 'Stephen Shaw', image: 'stephenshaw.png'},
-        {name: 'XuXue Feng', image: 'xuxuefeng.png'}
-    ];
+  }
+
+  obtenerInformacionUsuario(){
+    this.usuarioService.obtenerInformacionUsuario(this.correoParticanteActividades).subscribe(
+      usuario => {this.getInformacionUsuario(usuario)}
+    );
+  }
+
+  getInformacionUsuario(usuario: any){
+    var evaluador: Responsable;
+   
+    this.evaluadorService.obtenerInformacionEvaluador(usuario.responsable).subscribe(
+      responsable => {
+        evaluador = new Responsable(
+          responsable.id, responsable.email, responsable.nombre, responsable.apellido, responsable.telefono, 
+          responsable.pais, responsable.ciudad, responsable.direccion, responsable.nivelDeFormacion
+        );
+
+        this.participante = new Participante(
+          usuario.id, usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, 
+          usuario.pais, usuario.ciudad, usuario.direccion, usuario.fechaNacimiento, usuario.carreraUniversitaria,
+          usuario.genero, usuario.numeroDeHijos, usuario.estadoCivil, usuario.etnia, usuario.estudiosPrevios, 
+          usuario.codigoEstudiante, usuario.nivelDeFormacion, evaluador 
+        );
+
+      }
+    );
+    
+  }
+
+  obtenerActividadesUsuario(){
+    this.usuarioService.obtenerInformacionActividadesParticipantes(this.correoParticanteActividades).then(listActividades => {
+      this.listActividadesParticpante = listActividades;
+      //this.listActividadesParticpante.forEach(actividad => actividad.date = new Date(actividad.date));
+    });
   
-    this.statuses = [
-        {label: '10', value: '10'},
-        {label: '9', value: '9'},
-        {label: '9', value: '9'},
-        {label: '9', value: '9'},
-        {label: '5', value: '5'},
-        {label: '4', value: '4'}
-    ];
-  }
-
-  onSidebarClick(event: Event) {
-    this.menuClick = true;
-  }
-
-  onToggleMenuClick(event: Event) {
-    this.staticMenuActive = !this.staticMenuActive;
-    event.preventDefault();
-  }
-
-  onMenuButtonClick(event) {
-    this.menuClick = true;
-    this.topbarMenuActive = false;
-
-    if (this.isMobile()) {
-        this.menuMobileActive = !this.menuMobileActive;
-    }
-
-    event.preventDefault();
-  }
-
-  onMegaMenuMobileButtonClick(event) {
-    this.megaMenuMobileClick = true;
-    this.megaMenuMobileActive = !this.megaMenuMobileActive;
-
-    event.preventDefault();
-  }
-
-  onTopbarMobileMenuButtonClick(event) {
-    this.topbarMobileMenuClick = true;
-    this.topbarMobileMenuActive = !this.topbarMobileMenuActive;
-
-    event.preventDefault();
-  }
-
-  onTopbarItemClick(event, item) {
-    this.topbarItemClick = true;
-
-    if (this.activeTopbarItem === item) {
-        this.activeTopbarItem = null; } else {
-        this.activeTopbarItem = item; }
-
-    event.preventDefault();
   }
 
   isMobile() {
