@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, SelectItemGroup } from 'primeng/api';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
+import { Responsable } from 'src/app/model/Responsable';
+import { EditarInformacionExpertoService } from 'src/app/service/informcionEvaluador/editar-informacion-experto.service';
+import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
+import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
 
 interface City {
@@ -68,131 +74,147 @@ interface Country {
 })
 export class DatosExpertoComponent implements OnInit {
 
-  countries: any[];
-
-    filteredCountries: any[];
-
-    selectedCountryAdvanced: any[];
-
-    valSlider = 50;
-
-    valColor = '#424242';
-
-    valRadio: string;
-
-    valCheck: string[] = [];
-
-    valSwitch: boolean;
-
-    cities: SelectItem[];
-
-    selectedList: SelectItem;
-
-    selectedDrop: SelectItem;
-
-    selectedMulti: string[] = [];
-
-    valToggle = false;
-
-    paymentOptions: any[];
-
-    valSelect1: string;
-
-    valSelect2: string;
-
-    valueKnob = 20;
-
     
     groupedCities: SelectItemGroup[];
-    
     selectedCities4: any[];
 
-
-  constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
-    this.groupedCities = [
-      {
-          label: 'Alemania', value: 'de', 
-          items: [
-              {label: 'Berlin', value: 'Berlin'},
-              {label: 'Frankfurt', value: 'Frankfurt'},
-              {label: 'Hamburg', value: 'Hamburg'},
-              {label: 'Munich', value: 'Munich'}
-          ]
-      },
-      {
-          label: 'Ecuador', value: 'ec', 
-          items: [
-              {label: 'Cuenca', value: 'Cuenca'},
-              {label: 'Quito', value: 'Quito'},
-              {label: 'Guayaquil', value: 'Guayaquil'},
-              {label: 'Santo Domingo', value: 'Santo Domingo'},
-              {label: 'Machala', value: 'Machala'},
-              {label: 'Durán', value: 'Durán'},
-              {label: 'Manta', value: 'Manta'},
-              {label: 'Portoviejo', value: 'Portoviejo'},
-              {label: 'Loja', value: 'Loja'},
-              {label: 'Ambato', value: 'Ambato'}
-              
-          ]
-      },
-      {
-        label: 'Japón', value: 'jp', 
-        items: [
-            {label: 'Kyoto', value: 'Kyoto'},
-            {label: 'Osaka', value: 'Osaka'},
-            {label: 'Tokyo', value: 'Tokyo'},
-            {label: 'Yokohama', value: 'Yokohama'}
-        ]
-      },
-      {
-        label: 'Mexico', value: 'mx', 
-        items: [
-            {label: 'Guadalajara', value: 'Guadalajara'},
-            {label: 'Guanajuato', value: 'Guanajuato'},
-            {label: 'Puebla', value: 'Puebla'},
-            {label: 'Morelia', value: 'Morelia'},
-            {label: 'Monterrey', value: 'Monterrey'},
-            {label: 'Querétaro', value: 'Querétaro'},
-            {label: 'Mérida', value: 'Mérida'},
-            {label: 'Ciudad de México', value: 'Ciudad de México'},
-            {label: 'Xalapa', value: 'Xalapa'},
-            {label: 'Zacatecas', value: 'Zacatecas'}
-            
-        ]
-      },
-      {
-        label: 'USA', value: 'us', 
-        items: [
-            {label: 'Chicago', value: 'Chicago'},
-            {label: 'Los Angeles', value: 'Los Angeles'},
-            {label: 'New York', value: 'New York'},
-            {label: 'San Francisco', value: 'San Francisco'}
-        ]
-      } 
-
-    ];
+    private correoResponsableDatos: string = '';
+    public responsable: Responsable;
     
-    this.breadcrumbService.setItems([
-      { label: 'UI Kit' },
-      { label: 'Input', routerLink: ['/uikit/input'] }
-    ]);
+    public password: string;
+    public newPassword: string;
+    public repPassword: string;
+    public isFormValid = false;
+    public areCredentialsInvalid = false;
+    public passwordIncorrect = false;
+    public passwordRepetida = false;
+    
+    public nombreResponsable: string;
+    public direccionResponsable: string;
+    public nivelDeFormacionResponsable: string;
+    public apellidoResponsable: string;
+    public telefonoResponsable: string;
+    public paisResponsable: string = ""
+    public ciudadResponsable: string = "";
+  
+    
+  constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService, 
+    private _Activatedroute:ActivatedRoute, private editarresponsableService: EditarInformacionExpertoService,
+    private responsableServiceInformacion: InformacionEvaluadorService, private confirmationService: ConfirmationService,
+    private messageService: MessageService, private router: Router) { 
+    
   }
 
   ngOnInit(): void {
+    this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+    this.obtenerInformacionExperto();
+  }
+
+  obtenerInformacionExperto(){
+    this.responsableServiceInformacion.obtenerInformacionEvaluadorCorreo(this.correoResponsableDatos).then(
+      responsable => {
+        this.responsable = new Responsable(responsable.id, responsable.email, responsable.nombre, 
+                            responsable.apellido, responsable.telefono, responsable.pais, responsable.ciudad, 
+                            responsable.direccion, responsable.nivelDeFormacion);
+      
+        this.nombreResponsable = this.responsable.getNombre
+        this.direccionResponsable = this.responsable.getDireccion
+        this.nivelDeFormacionResponsable = this.responsable.getnivelDeFormacion
+        this.apellidoResponsable = this.responsable.getApellido
+        this.telefonoResponsable = this.responsable.getTelefono
+        this.paisResponsable = this.responsable.getPais
+        this.ciudadResponsable = this.responsable.getCiudad
+
+      }
+    )
+  }
+
+  onSubmit(signInForm: NgForm){
+    if (!signInForm.valid) {
+      this.isFormValid = true;
+      this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
+      return;
+    }
+    this.verificarPassword();
+  }
+
+  verificarPassword(){
+    if (this.newPassword != this.repPassword) {
+      this.isFormValid = false;
+      this.areCredentialsInvalid = true;
+      this.passwordIncorrect = false;
+      return;
+    }
+
+    if(this.password == this.newPassword){
+      this.isFormValid = false;
+      this.areCredentialsInvalid = false;
+      this.passwordIncorrect = false;
+      this.passwordRepetida = true;
+      return;
+    }
+
+    this.editarresponsableService.cambiarPassword(this.correoResponsableDatos, this.password, this.newPassword).subscribe(
+      res => {
+        console.log("valores: "+res.change)
+        if(res.change == 'ok'){
+          this.router.navigate(['login']);
+          return;
+        }
+        
+      },error => {
+        this.isFormValid = false;
+        this.areCredentialsInvalid = false;
+        this.passwordIncorrect = true;
+        return;
+       
+      }
+      );
     
   }
 
-  filterCountry(event) {
-    const filtered: any[] = [];
-    const query = event.query;
-    for (let i = 0; i < this.countries.length; i++) {
-        const country = this.countries[i];
-        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(country);
-        }
-    }
+  eliminarCuenta(){
 
-    this.filteredCountries = filtered;
+    this.confirmationService.confirm({
+      key: 'eliminarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({key: 'eliminarTOAST', severity: 'success', summary: 'Cuenta Eliminada', detail: 'La cuenta a sido Eliminada de manera satisfactoria'});
+        this.editarresponsableService.eliminarCuenta(this.correoResponsableDatos, this.responsable.getPassword);
+        this.router.navigate(['login']);
+      },
+      reject: () => {
+          this.messageService.add({key: 'eliminarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
+  }
+
+  editarCuenta(){
+    this.confirmationService.confirm({
+      key: 'editarCuenta',
+      message: '¿Esta seguro de eliminar tu cuenta?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+
+        this.responsable.setNombre = this.nombreResponsable;
+        this.responsable.setDireccion = this.direccionResponsable;
+        this.responsable.setNivelDeFormacion = this.nivelDeFormacionResponsable;
+        this.responsable.setApellido = this.apellidoResponsable;
+        this.responsable.setTelefono = this.telefonoResponsable;
+        this.responsable.setPais = this.paisResponsable;
+        this.responsable.setCiudad = this.ciudadResponsable;
+        this.editarresponsableService.editarCuenta(this.responsable);
+        this.messageService.add({key: 'editarTOAST', severity: 'success', summary: 'Cuenta Actualizada', detail: 'La cuenta a sido actualizada de manera satisfactoria'});
+        
+      },
+      reject: () => {
+          this.messageService.add({key: 'editarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});
+      }
+    });
+    
   }
 
 

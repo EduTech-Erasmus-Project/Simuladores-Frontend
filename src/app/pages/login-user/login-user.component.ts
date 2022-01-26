@@ -35,14 +35,20 @@ export class LoginUserComponent implements OnInit {
     //check existencia de correo 
     
     this.autentificacionService.checkEmail(this.username).subscribe(
-      response => {
+      responseAut => {
         
         
-        if(response.tipoUsuario!='notExist' && response.tipoUsuario != ''){
+        if(responseAut.tipoUsuario!='notExist' && responseAut.tipoUsuario != ''){
+         
           const userData = new Usuario(this.username, this.password);
-          this.autentificacionService.checkCredencialesLogin(userData, response.tipoUsuario).subscribe(
+          this.autentificacionService.checkCredencialesLogin(userData, responseAut.tipoUsuario).subscribe(
             response => {
               if (response.login == 'true') {
+                if(responseAut.tipoUsuario =='evaluador'){
+                  this.autentificacionService.isAuthenticated = true;
+                  this.router.navigate(['Pagina-Principal-Experto/'], { queryParams: { 'correo': this.username }});
+                  return true;
+                }
                 this.autentificacionService.isAuthenticated = true;
                 this.router.navigate(['Pagina-Principal-Usuario/'], { queryParams: { 'correo': this.username }});
                 return true;

@@ -213,6 +213,7 @@ export class DatosUsuarioComponent implements OnInit {
       accept: () => {
         this.messageService.add({key: 'eliminarTOAST', severity: 'success', summary: 'Cuenta Eliminada', detail: 'La cuenta a sido Eliminada de manera satisfactoria'});
         this.usuarioService.eliminarCuenta(this.correoParticanteDatos, this.participante.getPassword);
+        this.router.navigate(['login']);
       },
       reject: () => {
           this.messageService.add({key: 'eliminarTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo'});

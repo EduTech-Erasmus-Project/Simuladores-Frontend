@@ -13,22 +13,34 @@
     <!-- Codigo Para Manu Lateral -->
     <div class="layout-menu-container"  (click)="onMenuClick()">
         <ul class="layout-menu">
-            <li *ngFor="let item of modelItem; let i = index;" [item]="item" [index]="i" [root]="true">
+            <li>
                 <ng-container>
-                    <a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="!item.routerLink || item.items" (mouseenter)="onMouseEnter()" (keydown.enter)="itemClick($event)"
-                    [attr.target]="item.target" [attr.tabindex]="0" [ngClass]="item.class">
-                        <span class="menuitem-text">{{item.label}}</span>
-                        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-                        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+                    <a [routerLink]="['/Pagina-Principal-Experto/inicio', correoParticipanteLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-home"></i>
+                        Inicio
                     </a>
-                    <a (click)="itemClick($event)" (mouseenter)="onMouseEnter()" *ngIf="item.routerLink && !item.items"
-                        [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" [ngClass]="item.class"
-                        [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0">
-                        <span class="menuitem-text">{{item.label}}</span>
-                        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-                        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+    
+                    <a [routerLink]="['/Pagina-Principal-Experto/datosExperto', correoParticipanteLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-user"></i>
+                        Mi Perfil
                     </a>
+    
+                    <a [routerLink]="['/Pagina-Principal-Experto/agregarAlumno', correoParticipanteLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-chart-line"></i>
+                        Agregar/Listar Alumanos
+                    </a>
+    
+                    <a [routerLink]="['/Pagina-Principal-Usuario/datosUsuario']" [queryParams]="{correo: correoParticipanteLateral}" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-users"></i>
+                        Acerca de
+                    </a>
+    
                 </ng-container>
+                    
             </li>
         </ul>
     </div>

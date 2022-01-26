@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-principal-experto',
@@ -31,11 +32,23 @@ export class PaginaPrincipalExpertoComponent implements OnInit {
   menuMobileActive: boolean;
   activeTopbarItem: any;
   topbarItemClick: boolean;
-  
+  private correo: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    var correoAux = '';
+    this.route.queryParams
+      .subscribe(params => {
+        correoAux = params.correo;
+        console.log("correo: "+correoAux)
+        this.correo = correoAux;
+      }
+    );
+  }
+
+  getCorreo():string{
+    return this.correo;
   }
 
   onSidebarClick(event: Event) {

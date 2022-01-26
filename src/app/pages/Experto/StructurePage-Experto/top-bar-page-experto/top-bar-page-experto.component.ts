@@ -54,7 +54,7 @@ import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/a
 						</ul>
 					</li>
 					
-					<li class="topbar-item" style="width: 50%;">
+					<li class="topbar-item" style="width: 45%;">
 						<span class="fadeInDown" style="text-align: center;">
 							<h4> Asistencia tecnológica a la accesibilidad en la <br> Educación Superior Virtual </h4>
 						</span>
@@ -82,15 +82,13 @@ import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/a
 					</li>
 					
 					<!--Perfil de usuario presentacion menu-->
-					<li #profile class="topbar-item profile-item" style="width: 15%;" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}">
+					<li #profile class="topbar-item profile-item" style="width: 20%;" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}">
 						<a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
-						<span class="profile-image-wrapper">
-							<img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" />
+						
+						<span class="profile-info-wrapper">
+							<h3>{{getCorreo()}}</h3>
+							<span>Psicologo(a)/Experto</span>
 						</span>
-							<span class="profile-info-wrapper">
-								<h3>Olivia Eklund</h3>
-								<span>Psicologo(a)/Experto</span>
-							</span>
 						</a>
 					</li>
 
@@ -120,9 +118,15 @@ import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/a
 export class TopBarPageExpertoComponent implements OnInit {
 
   activeItem: number;
+  private correoParticipante: string = '';
 	constructor(public appMain: PaginaPrincipalExpertoComponent, public autentificacionServices: AutentificacionUsuarioService) { }
 	
 	ngOnInit(): void {
+		this.correoParticipante = this.appMain.getCorreo();
+	}
+
+	getCorreo():string{
+		return this.correoParticipante;
 	}
 
 	mobileMegaMenuItemClick(index) {

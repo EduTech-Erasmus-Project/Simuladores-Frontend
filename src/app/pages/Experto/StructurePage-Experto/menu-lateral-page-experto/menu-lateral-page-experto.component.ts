@@ -9,20 +9,14 @@ export class MenuLateralPageExpertoComponent implements OnInit {
 
   modelItem: any[];
   //sidebarActive: boolean;
+  correoParticipanteLateral: string = '';
 
   constructor(public appMainUser :PaginaPrincipalExpertoComponent) { }
 
   ngOnInit() {
+    this.correoParticipanteLateral = this.appMainUser.getCorreo();
+
     this.modelItem = [
-        {
-            label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/Pagina-Principal-Experto']
-        },
-        {
-            label: 'Mi Perfil', icon: 'pi pi-fw pi-user', routerLink: ['/Pagina-Principal-Experto/datosExperto']
-        },
-        {
-            label: 'Agregar/Listar Alumanos', icon: 'pi pi-fw pi-chart-line', routerLink: ['/Pagina-Principal-Experto/agregarAlumno']
-        },
         {
             label: 'Acerca de', icon: 'pi pi-fw pi-users', url: ['https://www.primefaces.org/store']
         }

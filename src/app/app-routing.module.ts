@@ -114,10 +114,11 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
                 path: 'Pagina-Principal-Experto', component: PaginaPrincipalExpertoComponent,
                 children: [
                     {path: '', component: PresentacionInicioExpertoComponent},  
-                    {path: 'datosExperto', component: DatosExpertoComponent},
-                    {path: 'agregarAlumno', component: AgregarAlumnoAExpertoComponent},
-                    {path: 'escenarioInfo', component: EscenarioComponent},
-                    {path: 'participanteInfo', component: ParticipanteInfoComponent}
+                    {path: 'inicio/:correo', component: PresentacionInicioExpertoComponent},  
+                    {path: 'datosExperto/:correo', component: DatosExpertoComponent},
+                    {path: 'agregarAlumno/:correo', component: AgregarAlumnoAExpertoComponent},
+                    {path: 'escenarioInfo/:correo', component: EscenarioComponent},
+                    {path: 'participanteInfo/:correo', component: ParticipanteInfoComponent}
                 ]
             },
             
