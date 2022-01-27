@@ -19,11 +19,12 @@ export class InfoExpertoPorEscenarioService {
       "escenario": numEscenario}, this.config).toPromise();
   }
 
-  recuperarListadoTiempoResolucionCompletaPorEscenario(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+  recuperarListadoTiempoResolucionCompletaPorEscenario(Genero: String, Discapacidad: String, numEscenario:String, evaluador: String){
     return this.http.post<any>(environment.WS_PATH+"obtenerlistaTiempoResolucionCompletaEscenario", 
-    {"generoPorEscenario": listaGeneroEscenario, 
-     "discapacidadEscenario": listadoDiscapacidadesEscenario,
-     "escenario":numEscenario},this.config).toPromise();  
+    {"genero": Genero, 
+     "discapacida": Discapacidad,
+     "escenario":numEscenario,
+     "evaluador": evaluador},this.config).toPromise();  
   
   }
 
@@ -34,6 +35,18 @@ export class InfoExpertoPorEscenarioService {
       "discapacidadEscenario": listadoDiscapacidadesEscenario,
       "escenario": numEscenario}, this.config).toPromise();
 
+  }
+
+
+  crearGraficaTipoDiscapacidadVsNotaVsTiempo(correo : String, numeroEjercitario : number){
+    return this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo, "numeroEjercitario": numeroEjercitario}, this.config);
+
+  }
+
+  graficaPastelGeneroPorEjercitario(correo : String, numeroEjercitario : number){
+    return this.http.post<any>(environment.WS_PATH+"graficaPastelGeneroPorEjercitario", {"evaluador": correo, "numeroEjercitario": numeroEjercitario}, this.config).toPromise().then(
+      res => res.participantes as any[]
+    ).then(participantes=>participantes);
   }
 
 
