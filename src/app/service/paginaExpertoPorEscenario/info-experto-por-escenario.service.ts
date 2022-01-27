@@ -38,6 +38,16 @@ export class InfoExpertoPorEscenarioService {
   }
 
 
+  crearGraficaTipoDiscapacidadVsNotaVsTiempo(correo : String, numeroEjercitario : number){
+    return this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo, "numeroEjercitario": numeroEjercitario}, this.config);
+
+  }
+
+  graficaPastelGeneroPorEjercitario(correo : String, numeroEjercitario : number){
+    return this.http.post<any>(environment.WS_PATH+"graficaPastelGeneroPorEjercitario", {"evaluador": correo, "numeroEjercitario": numeroEjercitario}, this.config).toPromise().then(
+      res => res.participantes as any[]
+    ).then(participantes=>participantes);
+  }
 
 
 }

@@ -4,6 +4,7 @@ import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
 import { InfoExpertoPorEscenarioService } from 'src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service';
+import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
 @Component({
   selector: 'app-escenario',
@@ -21,7 +22,45 @@ export class EscenarioComponent implements OnInit {
   private genero: String;
   private evaluador: String;
   private escenario: String;
+  
 
+  public generos: Array<string>
+  public discapacidades: Array<any>
+
+  public discacidadFisicaPuntosNota: number = 0;
+  public discacidadFisicaPuntosTiempo: number = 0;
+
+  public discacidadVisualPuntosNota: number = 0;
+  public discacidadVisualPuntosTiempo: number = 0;
+
+  public discacidadAuditivaPuntosNota: number = 0;
+  public discacidadAuditivaPuntosTiempo: number = 0;
+
+  public discacidadIntelectualPuntosNota: number = 0;
+  public discacidadIntelectualPuntosTiempo: number = 0;
+
+  public discacidadOtrosPuntosNota: number = 0;
+  public discacidadOtrosPuntosTiempo: number = 0;
+
+  public contMujer : number =0;
+  public contHombre : number = 0;
+  public contLgtb: number = 0;
+  public contOtros: number = 0;
+
+
+  selectedState: any = {name: 'Notas', value: 'Notas'};
+  selectedState2: any = {name: 'Notas', value: 'Notas'};
+   options: any;
+
+  states: any[] = [
+    {name: 'Notas', value: 'Notas'},
+    {name: 'Tiempo', value: 'Tiempo'}
+  ];
+
+  states2: any[] = [
+    {name: 'Notas', value: 'Notas'},
+    {name: 'Tiempo', value: 'Tiempo'}
+  ];
 
   // PARA LA GRAFICA
   lineData: any;
@@ -44,68 +83,203 @@ export class EscenarioComponent implements OnInit {
 
     ///
 
+
+    public datosParaGraficaInicialDiscapacidadVsNota = [] 
+    public mujerLista = [];
+    public hombreLista = [];
+    public lgbtLista = [];
+    public otrosLista = [];
+    public mujerListaTiempo = [];
+    public hombreListaTiempo = [];
+    public lgbtListaTiempo = [];
+    public otrosListaTiempo = [];
+    public listaTodasLasNotas = [];
+    public listaTodosLosTiempos = [];
+  
+
   constructor(/**PARA LA TABLA */private customerService: CustomerService,
               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
-              public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService) { }
+              public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService,
+              public servicioSeleccionarEjercitario : PaginaInicioExpertoService) { }
 
-  ngOnInit(): void {
 
-    // PARA LA GRAFICA 
-    this.lineData = {
-      labels: ['0','Fisica', 'Visual', 'Intelectual', 'Auditiva', 'N/A'],
-      datasets: [
-          {
-              label: 'Escenario 1',
-              data: [0, 7, 4, 6 , 5, 10],
-              fill: false,
-              backgroundColor: 'rgb(149, 225, 102)',
-              borderColor: 'rgb(66, 201, 225)'
-          }
-      
-      ]
-  };
 
-  this.barData = {
-      labels: ['Fisica', 'Visual', 'Intelectual', 'Auditiva', 'N/A'],
-      datasets: [
-          {
-              label: 'Hombres',
-              backgroundColor: 'rgb(202, 106, 199)',
-              borderColor: 'rgb(202, 106, 199)',
-              data: [ 11, 14, 10, 14, 10,0]
-          },
-          {
-              label: 'Mujeres',
-              backgroundColor: 'rgb(149, 225, 102)',
-              borderColor: 'rgb(54, 162, 235)',
-              data: [10, 13, 10, 15, 10, 0]
-          },
-          {
-            label: 'Otros',
-            backgroundColor: 'rgb(66, 201, 225)',
-            borderColor: 'rgb(54, 162, 235)',
-            data: [ 10, 14, 11, 12, 11, 0]
-        }
-      ]
-  };
+async ngOnInit() {
+    this.listarLabelsTipoDeDiscacidad();
+    this.tablaEstudiantes();
+    await this.listarLabelsTipoDeGenero();
+    await this.seccionarListas();
+    await this.seleccionTipoGrafico();
+    await this.graficaSimplePuntos();
+    await this.graficaPastel();
+    this.servicioGraficaPorEscenario.graficaPastelGeneroPorEjercitario("martinbojorque@gmail.com", 1).then(
+      generosCont=> {
+        this.pieData = {
+          labels: ['Hombre', 'Mujer', 'LGTB', 'OTROS'],
+          datasets: [
+              {
+                  data: [generosCont[0], generosCont[1], generosCont[2], generosCont[3]],
+                  backgroundColor: [
+                      'rgb(202, 106, 199)',
+                      'rgb(149, 225, 102)',
+                      'rgb(66, 201, 225)',
+                      'rgb(45, 201, 225)' 
+                  ]
+              }]
+        };
+      }
+    );
 
-  this.pieData = {
-      labels: ['Hombre', 'Mujer', 'Otros'],
-      datasets: [
-          {
-              data: [45, 30, 25],
-              backgroundColor: [
-                  'rgb(202, 106, 199)',
-                  'rgb(149, 225, 102)',
-                  'rgb(66, 201, 225)'
-              ]
+  }
+
+  graficaPastel():void{
+  
+  
+    
+
+  }
+
+  graficaSimplePuntos():void{
+    console.log("valor++++++++:"+this.discacidadFisicaPuntosNota)
+    console.log("change from the code"+this.selectedState2.name);
+
+    if(this.selectedState2.name == "Tiempo"){
+
+          
+      this.options = {
+        scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true,
+              }
           }]
-  };
-    ///////////////
+        }
+      };
+
+
+      this.lineData = {
+        labels: ['Fisica', 'Visual', 'Intelectual', 'Auditiva', 'Otros'],
+        datasets: [
+            {
+                label: 'Escenario 1',
+                data: [this.discacidadFisicaPuntosTiempo, this.discacidadVisualPuntosTiempo, this.discacidadIntelectualPuntosTiempo , this.discacidadAuditivaPuntosTiempo, this.discacidadOtrosPuntosTiempo],
+                fill: false,
+                backgroundColor: 'rgb(149, 225, 102)',
+                borderColor: 'rgb(66, 201, 225)'
+            }
+        
+        ]
+    };
+    }else  {
+      this.lineData = {
+        labels: ['Fisica', 'Visual', 'Intelectual', 'Auditiva', 'N/A'],
+        datasets: [
+            {
+                label: 'Escenario 1',
+                data: [this.discacidadFisicaPuntosNota, this.discacidadVisualPuntosNota , this.discacidadVisualPuntosNota , this.discacidadIntelectualPuntosTiempo, this.discacidadAuditivaPuntosNota, this.discacidadOtrosPuntosNota],
+                fill: false,
+                backgroundColor: 'rgb(149, 225, 102)',
+                borderColor: 'rgb(66, 201, 225)'
+            }
+        
+        ]
+    };
+
+    }
+   
+
+  }
 
 
 
+  seleccionTipoGrafico():void {
+    
+    console.log("change from the code"+this.selectedState.name);
+    if(this.selectedState.name == "Tiempo"){
 
+    
+      this.options = {
+        scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true,
+              }
+          }]
+        }
+      };
+
+      this.barData = {
+        labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'Otras'],
+        datasets: [
+            {
+                label: 'Mujeres',
+                backgroundColor: 'rgb(202, 106, 199)',
+                borderColor: 'rgb(149, 225, 102)',
+                data: this.mujerListaTiempo
+            },
+            {
+              label: 'Hombres',
+              backgroundColor: 'rgb(149, 225, 102)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.hombreListaTiempo
+            },
+            {
+              label: 'LGBT',
+              backgroundColor: 'rgb(66, 201, 225)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.lgbtListaTiempo
+            },
+            {
+              label: 'Otros',
+              backgroundColor: 'rgb(66, 201, 225)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.otrosListaTiempo
+            }
+        ]
+      }; 
+    }else{
+      this.barData = {
+        labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'Otros'],
+        datasets: [
+            {
+                label: 'Mujeres',
+                backgroundColor: 'rgb(202, 106, 199)',
+                borderColor: 'rgb(149, 225, 102)',
+                data: this.mujerLista
+            },
+            {
+              label: 'Hombres',
+              backgroundColor: 'rgb(149, 225, 102)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.hombreLista
+            },
+            {
+              label: 'LGBT',
+              backgroundColor: 'rgb(66, 201, 225)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.lgbtLista
+            },
+            {
+              label: 'Otros',
+              backgroundColor: 'rgb(66, 201, 225)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.otrosLista
+            }
+        ]
+      }; 
+    }
+  }
+
+  seccionarListas(){
+    this.datosParaGraficaInicialDiscapacidadVsNota.forEach(informacion => {
+      console.log("**********+++++++++"+informacion)        
+    });
+    
+  }
+  
+
+
+  tablaEstudiantes(): void {
     ///// PARA LA TABLA 
     this.customerService.getCustomersMedium().then(customers => {
       this.customers = customers;
@@ -145,7 +319,7 @@ export class EscenarioComponent implements OnInit {
   }
 
   // PARA SELECT DE GRAFICA tIPO DE DISCAPACIDAD GENERAL 
-  seleccionGrafica1: any = null;
+  seleccionGrafica1: any = {name: 'Notas', value: 'Notas'};
 
   opciones: any[] = [
       {name: 'Nota', code: 'Nota'},
@@ -155,49 +329,157 @@ export class EscenarioComponent implements OnInit {
   ////////
 
     // PARA SELECT DE GRAFICA tipo discapacidad 2 
-    seleccionGrafica2: any = null;
+    //seleccionGrafica2: any = null;
 
-    opciones2: any[] = [
-        {name: 'Tiempo total de resolución completa', code: 'tiempoTotal'},
-        {name: 'Tiempo solo de respuesta', value: 'tiempoRespuesta'},
-        {name: 'Promedio de nota'}
-    ];
+    //opciones2: any[] = [
+      //  {name: 'Tiempo total de resolución completa', code: 'tiempoTotal'},
+      //  {name: 'Tiempo solo de respuesta', value: 'tiempoRespuesta'},
+      //  {name: 'Promedio de nota'}
+    //];
   
     ////////
 
 
 
     ///llmadas a servicios
-    listarLabelsTipoDeDiscacidadPorEscenario(){
     
-      this.servicioConsultasLabelsGrafica.recuperarListaDiscapacidadesEscenario();
-    }
+  listarLabelsTipoDeDiscacidad(){
+    this.servicioSeleccionarEjercitario.obtenerDiscapacidades().subscribe(
+      dispapacidades => {
+          this.discapacidades = []
+          dispapacidades.discapacidades.forEach(discapacidad => {
+            this.discapacidades.push(discapacidad.tipoDiscapacidad)            
+          });
+      }
+    );
+  }
 
-    listarLabelsTipoDeGenero(){
-      this.servicioConsultasLabelsGrafica.recuperarListaGeneroEscenario();
-    }
+  listarLabelsTipoDeGenero(){
+    
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero("martinbojorque@gmail.com").subscribe(
+      genero => {
+        this.generos = genero.participanteGenero as Array<string>
+        this.crearGraficaInicioExperto()
+        console.log("*******"+this.generos)
+      }
+    );
+  }
 
+  crearGraficaPastelGeneros(){
+    this.servicioGraficaPorEscenario.graficaPastelGeneroPorEjercitario("martinbojorque@gmail.com", 1).then(
+      generosCont=> {
+        console.log("--------"+generosCont)
+      }
+    );
 
+  }
 
-    crearGrafica1(listadoGeneroEscenario: [], listadoDiscapacidadEscenario: [], numEscenario:String){
-      this.servicioGraficaPorEscenario.recuperarListadoNotaPorEscenario(listadoGeneroEscenario, listadoDiscapacidadEscenario, numEscenario);
-    }
+  crearGraficaInicioExperto(){
+    
+    var discapacidadFisica: number = 0;
+    var discapacidadIntelectual: number = 0;
+    var discapacidadVisual: number = 0;
+    var discapacidadAuditiva: number = 0;
+    var discapacidadOtros: number = 0;
 
-    promedioNota(){
-      
-    }
+    var discapacidadFisicaTiempo: number = 0;
+    var discapacidadIntelectualTiempo: number = 0;
+    var discapacidadVisualTiempo: number = 0;
+    var discapacidadAuditivaTiempo: number = 0;
+    var discapacidadOtrosTiempo: number = 0;
 
-    crearGrafica2tiempoCompleto(genero: String, discapacidad:String, escenario:String, evaluador:String){
-      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionCompletaPorEscenario(genero, discapacidad, escenario, evaluador);
-    }
+    
+    
+    var valoresJSON = []
+    this.generos.forEach(genero => {
+      this.servicioGraficaPorEscenario.crearGraficaTipoDiscapacidadVsNotaVsTiempo("martinbojorque@gmail.com", 1).subscribe(
+        datosParaGrafica => { 
 
-    crearGrafica2tiempoSoloRespuesta(listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
-      this.servicioGraficaPorEscenario.recuperarListadoTiempoResolucionSoloRespuestaPorEscenario(listaGeneroEscenario, listadoDiscapacidadesEscenario, numEscenario);
-    }
+          datosParaGrafica.participantes.forEach(informacionParticipante => {
+            if (genero == informacionParticipante.participanteGenero){
+              
+              if(('Fisica' == informacionParticipante.tipoDiscapacidad)){
+                discapacidadFisica = discapacidadFisica + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadFisicaTiempo = discapacidadFisicaTiempo + informacionParticipante.calificaciones[0].tiempo;
+                
+                this.discacidadFisicaPuntosNota = this.discacidadFisicaPuntosNota + discapacidadFisica;
+                this.discacidadFisicaPuntosTiempo = this.discacidadFisicaPuntosTiempo + discapacidadFisicaTiempo;
+              }
 
-    crearGrafica2PromedioNota (listaGeneroEscenario: [], listadoDiscapacidadesEscenario: [], numEscenario:String){
+              if(('Intelectual' == informacionParticipante.tipoDiscapacidad)){
+                discapacidadIntelectual = discapacidadIntelectual + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadIntelectualTiempo = discapacidadIntelectualTiempo + informacionParticipante.calificaciones[0].tiempo;
+                this.discacidadIntelectualPuntosNota = this.discacidadIntelectualPuntosNota + discapacidadIntelectual;
+                this.discacidadIntelectualPuntosTiempo = this.discacidadIntelectualPuntosTiempo + discapacidadIntelectualTiempo;
 
-    }
+              }
+              
+              if(('Visual' == informacionParticipante.tipoDiscapacidad)){
+                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].tiempo;
+                this.discacidadVisualPuntosNota = this.discacidadVisualPuntosNota + discapacidadVisual;
+                this.discacidadVisualPuntosTiempo = this.discacidadVisualPuntosTiempo + discapacidadVisualTiempo;
+              
+              }
 
+              if(('Auditiva' == informacionParticipante.tipoDiscapacidad)){
+                discapacidadAuditiva = discapacidadAuditiva + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadAuditivaTiempo = discapacidadAuditivaTiempo + informacionParticipante.calificaciones[0].tiempo;
+                this.discacidadAuditivaPuntosNota = this.discacidadAuditivaPuntosNota + discapacidadAuditiva;
+                this.discacidadAuditivaPuntosTiempo = this.discacidadAuditivaPuntosTiempo + discapacidadAuditivaTiempo;  
+              }
+
+              if(('Otros' == informacionParticipante.tipoDiscapacidad)){
+                discapacidadOtros = discapacidadOtros + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadOtrosTiempo = discapacidadOtrosTiempo + informacionParticipante.calificaciones[0].tiempo;
+                this.discacidadOtrosPuntosNota = this.discacidadOtrosPuntosNota + discapacidadOtros;
+                this.discacidadOtrosPuntosTiempo = this.discacidadOtrosPuntosTiempo + discapacidadOtrosTiempo;
+              }                  
+            }  
+          });
+
+          if(genero == 'Mujeres'){
+            this.mujerLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.mujerListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
+            this.contMujer = this.contMujer + 1
+          }
+
+          if(genero == 'Hombres'){
+            this.hombreLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.hombreListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
+            this.contHombre = this.contHombre+1
+          }
+          
+          if(genero == 'LGBT'){
+            this.lgbtLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]            
+            this.lgbtListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
+            this.contLgtb = this.contLgtb+1
+          }
+
+          if(genero == 'Otros'){
+            this.otrosLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.otrosListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
+            this.contOtros = this.contOtros+1
+          }
+ 
+          discapacidadFisica= 0;
+          discapacidadIntelectual= 0;
+          discapacidadVisual= 0;
+          discapacidadAuditiva= 0;
+          discapacidadOtros= 0;
+
+          discapacidadFisicaTiempo= 0;
+          discapacidadIntelectualTiempo= 0;
+          discapacidadVisualTiempo= 0;
+          discapacidadAuditivaTiempo= 0;
+          discapacidadOtrosTiempo= 0;
+          
+        }
+                
+      ); 
+    });  
+    
+    
+  }
 
 }

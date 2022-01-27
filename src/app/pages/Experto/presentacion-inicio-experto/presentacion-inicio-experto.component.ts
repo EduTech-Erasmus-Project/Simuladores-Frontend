@@ -56,6 +56,10 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   public hombreLista = [];
   public lgbtLista = [];
   public otrosLista = [];
+  public mujerListaTiempo = [];
+  public hombreListaTiempo = [];
+  public lgbtListaTiempo = [];
+  public otrosListaTiempo = [];
 
 
   constructor( public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
@@ -83,8 +87,6 @@ export class PresentacionInicioExpertoComponent implements OnInit {
           yAxes: [{
               ticks: {
                   beginAtZero: true,
-                  min: 0,
-                  max: 100,
               }
           }]
         }
@@ -97,19 +99,25 @@ export class PresentacionInicioExpertoComponent implements OnInit {
                 label: 'Mujeres',
                 backgroundColor: 'rgb(202, 106, 199)',
                 borderColor: 'rgb(149, 225, 102)',
-                data: [10.00, 1.00, 12.00, 10.00, 6.00]
+                data: this.mujerListaTiempo
             },
             {
               label: 'Hombres',
               backgroundColor: 'rgb(149, 225, 102)',
               borderColor: 'rgb(149, 225, 102)',
-              data: [5.00, 6.00, 7.00, 5.00, 4.00]
+              data: this.hombreListaTiempo
+            },
+            {
+              label: 'LGBT',
+              backgroundColor: 'rgb(66, 201, 225)',
+              borderColor: 'rgb(149, 225, 102)',
+              data: this.lgbtListaTiempo
             },
             {
               label: 'Otros',
               backgroundColor: 'rgb(66, 201, 225)',
               borderColor: 'rgb(149, 225, 102)',
-              data: [5.00, 2.00, 12.00, 10.00, 5.00]
+              data: this.otrosListaTiempo
             }
         ]
       }; 
@@ -203,6 +211,12 @@ export class PresentacionInicioExpertoComponent implements OnInit {
     var discapacidadAuditiva: number = 0;
     var discapacidadOtros: number = 0;
 
+    var discapacidadFisicaTiempo: number = 0;
+    var discapacidadIntelectualTiempo: number = 0;
+    var discapacidadVisualTiempo: number = 0;
+    var discapacidadAuditivaTiempo: number = 0;
+    var discapacidadOtrosTiempo: number = 0;
+
     
     
     var valoresJSON = []
@@ -215,39 +229,48 @@ export class PresentacionInicioExpertoComponent implements OnInit {
               
               if(('Fisica' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadFisica = discapacidadFisica + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadFisicaTiempo = discapacidadFisicaTiempo + informacionParticipante.calificaciones[0].tiempo;
               }
 
               if(('Intelectual' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadIntelectual = discapacidadIntelectual + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadIntelectualTiempo = discapacidadIntelectualTiempo + informacionParticipante.calificaciones[0].tiempo;
               }
               
               if(('Visual' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].tiempo;
               }
 
               if(('Auditiva' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadAuditiva = discapacidadAuditiva + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadAuditivaTiempo = discapacidadAuditivaTiempo + informacionParticipante.calificaciones[0].tiempo;
               }
               if(('Otros' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadOtros = discapacidadOtros + informacionParticipante.calificaciones[0].calificacion;
+                discapacidadOtrosTiempo = discapacidadOtrosTiempo + informacionParticipante.calificaciones[0].tiempo;
               }                  
             }  
           });
 
           if(genero == 'Mujeres'){
             this.mujerLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.mujerListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
           }
 
           if(genero == 'Hombres'){
             this.hombreLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.hombreListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
           }
           
           if(genero == 'LGBT'){
             this.lgbtLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]            
+            this.lgbtListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
           }
 
           if(genero == 'Otros'){
             this.otrosLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
+            this.otrosListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
           }
 
           discapacidadFisica= 0;
@@ -255,6 +278,12 @@ export class PresentacionInicioExpertoComponent implements OnInit {
           discapacidadVisual= 0;
           discapacidadAuditiva= 0;
           discapacidadOtros= 0;
+
+          discapacidadFisicaTiempo= 0;
+          discapacidadIntelectualTiempo= 0;
+          discapacidadVisualTiempo= 0;
+          discapacidadAuditivaTiempo= 0;
+          discapacidadOtrosTiempo= 0;
           
         }
                 
@@ -262,6 +291,11 @@ export class PresentacionInicioExpertoComponent implements OnInit {
     });  
     
     
+  }
+
+
+  crearGraficaExpertoTiempoGlobal(){
+
   }
 
   
