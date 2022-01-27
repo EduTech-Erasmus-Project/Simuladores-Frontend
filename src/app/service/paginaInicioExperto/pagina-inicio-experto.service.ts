@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Escenario } from 'src/app/model/Escenario';
 import { environment } from 'src/environments/environment';
 
@@ -29,9 +30,11 @@ export class PaginaInicioExpertoService {
 
   }
 
-  crearGraficaPaginaInicio(listaFiltroParaBuscar: [], listaGenero: [], listaDiscapacidad: []){
-    this.http.post<any>(environment.WS_PATH+"crearGrafica", {"listaFiltroParaBuscar": listaFiltroParaBuscar, "listaGenero": listaGenero, "listaDiscapacidad" : listaDiscapacidad}, this.config).toPromise();
+  crearGraficaPaginaInicio(correo: string): Observable<any>{
+    return this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo}, this.config);
   }
 
-
+  obtenerDiscapacidades(): Observable<any>{
+    return this.http.get<any>(environment.WS_PATH+"obtenerDiscapacidad", this.config);
+  }
 }

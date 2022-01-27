@@ -17,17 +17,24 @@
                                 </p>
                 </div>
 
+                
+
                 <div class="p-col-12">
                     <div class="card">
-                        <div class="" style="align-items: center;">
-                            <label for="state"> <h5>Tipo de Discapacidad Vs   </h5> </label>
-                            <span class="p-field p-col-12 p-md-3">
-                                <p-dropdown inputId="state" [options]="opciones" [(ngModel)]="seleccionGrafica1" placeholder="Select" optionLabel="name"></p-dropdown>
-                            </span>
-                                            
+                        <div class="card">
+                            <div>
+                                <label style="font-size: 15px;" for="state">Tipos de Discapacidad vs </label>
+                                <p-dropdown inputId="state" [options]="states2" [(ngModel)]="selectedState2" placeholder="Seleccione" optionLabel="name" (ngModelChange)="graficaSimplePuntos()"></p-dropdown>
+                            </div>
+        
+                            <div class="card">
+                                <h5 class="centerText" class="p-col-12" style="text-align: center;">Tipo de Discapacidad VS {{selectedState2.name}} Globales</h5>
+                                <p-chart type="line" [options]="options" [data]="lineData"></p-chart>
+                            </div>
+        
                         </div>
-
-                        <p-chart type="line" [data]="lineData"></p-chart>
+                        
+                        
                     </div>
                     
                    
@@ -41,7 +48,7 @@
                     <div class="p-grid p-fluid">
                         <div class="p-col-12 p-lg-6"> 
                             <h5 class="centerText">Datos generales</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus ratione, alias in cum cupiditate culpa quibusdam illum dolorum nesciunt facere vitae eligendi nisi libero excepturi labore corrupti! Illum, nobis.</p>
+                            <p>Lorem ipsum dolor sit 0000000000000000000000000amet consectetur adipisicing elit. Id voluptatibus ratione, alias in cum cupiditate culpa quibusdam illum dolorum nesciunt facere vitae eligendi nisi libero excepturi labore corrupti! Illum, nobis.</p>
                         </div>  
 
                         <div class="p-col-12 p-lg-6">
@@ -51,12 +58,18 @@
                 </div>
 
                 <div class="card">
-                    <h5 class="centerText">Tipo de Discapacidad Vs </h5>
-                    <span class="p-field p-col-12 p-md-3">
-                        <p-dropdown inputId="state" [options]="opciones2" [(ngModel)]="seleccionGrafica1" placeholder="Select" optionLabel="name"></p-dropdown>
-                    </span>
-                    <p-chart type="bar" [data]="barData"></p-chart>
+                    <div>
+                        <label style="font-size: 15px;" for="state">Tipos de Discapacidad vs </label>
+                        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Seleccione" optionLabel="name" (ngModelChange)="seleccionTipoGrafico()"></p-dropdown>
+                    </div>
+
+                    <div class="card">
+                        <h5 class="centerText" class="p-col-12" style="text-align: center;">Tipo de Discapacidad VS {{selectedState.name}} Globales</h5>
+                        <p-chart type="bar" [options]="options" [data]="barData"></p-chart>
+                    </div>
+
                 </div>
+
                 
                
             </div>
