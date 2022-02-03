@@ -36,7 +36,6 @@ export class MisActividadesUsuarioComponent implements OnInit {
   statuses: any[];
   private correoParticanteActividades: string = '';
   public participante: Participante;
-  public listaActividades: Array<any>;
 
   constructor(private evaluadorService: InformacionEvaluadorService, private usuarioService: InformacionParticipanteService , private _Activatedroute:ActivatedRoute, private customerService: CustomerService) { 
 
@@ -46,22 +45,14 @@ export class MisActividadesUsuarioComponent implements OnInit {
 
     this.correoParticanteActividades = this._Activatedroute.snapshot.paramMap.get("correo");
     this.obtenerInformacionUsuario();
-    //this.obtenerActividadesUsuario();
     
     this.usuarioService.obtenerInformacionActividadesParticipantes(this.correoParticanteActividades).then(listActividades => {
-      
       this.listActividadesParticpante = listActividades
-      console.log("++++++++++++",this.listActividadesParticpante)
-      //this.listActividadesParticpante.forEach(actividad => actividad.fechaDeActividad = new Date(actividad.fechaDeActividad));
-      
-    });
+     });
     
     
     this.customerService.getCustomersLarge().then(customers => {
       this.customers1 = customers;
-      // @ts-ignore
-      console.log("++++++++++++",this.customers1)
-      
     });
   
   
@@ -80,14 +71,14 @@ export class MisActividadesUsuarioComponent implements OnInit {
       responsable => {
         evaluador = new Responsable(
           responsable.id, responsable.email, responsable.nombre, responsable.apellido, responsable.telefono, 
-          responsable.pais, responsable.ciudad, responsable.direccion, responsable.nivelDeFormacion
+          responsable.pais, responsable.ciudad, responsable.direccion, responsable.estado, responsable.nivelDeFormacion
         );
 
         this.participante = new Participante(
           usuario.id, usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, 
-          usuario.pais, usuario.ciudad, usuario.direccion, usuario.fechaNacimiento, usuario.carreraUniversitaria,
+          usuario.pais, usuario.ciudad, usuario.direccion, usuario.estado, usuario.fechaNacimiento, usuario.carreraUniversitaria,
           usuario.genero, usuario.numeroDeHijos, usuario.estadoCivil, usuario.etnia, usuario.estudiosPrevios, 
-          usuario.codigoEstudiante, usuario.nivelDeFormacion, evaluador 
+          usuario.codigoEstudiante, usuario.nivelDeFormacion, usuario.aceptacionPendianteResponsable, evaluador 
         );
 
       }

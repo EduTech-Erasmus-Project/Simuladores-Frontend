@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
+import { Participante, ParticipanteAceptacionTabla, ParticipanteAceptacionTablaEscenarioResponsable } from 'src/app/model/Participante';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
 import { InfoExpertoPorEscenarioService } from 'src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
@@ -71,7 +73,8 @@ export class EscenarioComponent implements OnInit {
   ///////////////////
 
   //// PARA LA TABLA 
-  customers: Customer[];
+  public listParticipantesEvaluadorEjercitario: ParticipanteAceptacionTablaEscenarioResponsable[];
+  //customers: Customer[];
 
     representatives: Representative[];
 
@@ -95,24 +98,35 @@ export class EscenarioComponent implements OnInit {
     public otrosListaTiempo = [];
     public listaTodasLasNotas = [];
     public listaTodosLosTiempos = [];
-  
+    private correoResponsableDatos: string;
+    private ejercitario: number;
 
   constructor(/**PARA LA TABLA */private customerService: CustomerService,
               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
               public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService,
-              public servicioSeleccionarEjercitario : PaginaInicioExpertoService) { }
+              public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
+              private _Activatedroute:ActivatedRoute) { }
 
 
 
-async ngOnInit() {
+  async ngOnInit() {
+    try {
+      this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+      this.ejercitario = Number(this._Activatedroute.snapshot.paramMap.get("idEjercitario"));
+    } catch (error) {
+      console.log("Ejercitario or correo: "+error)
+    }
+    
     this.listarLabelsTipoDeDiscacidad();
+    this.listarLabelsTipoDeGenero();
+    this.seleccionTipoGrafico();
+    this.graficaSimplePuntos();
+    this.graficaPastel();
     this.tablaEstudiantes();
-    await this.listarLabelsTipoDeGenero();
-    await this.seccionarListas();
-    await this.seleccionTipoGrafico();
-    await this.graficaSimplePuntos();
-    await this.graficaPastel();
-    this.servicioGraficaPorEscenario.graficaPastelGeneroPorEjercitario("martinbojorque@gmail.com", 1).then(
+    }
+
+  graficaPastel(){
+    this.servicioGraficaPorEscenario.graficaPastelGeneroPorEjercitario(this.correoResponsableDatos, this.ejercitario).then(
       generosCont=> {
         this.pieData = {
           labels: ['Hombre', 'Mujer', 'LGTB', 'OTROS'],
@@ -129,19 +143,9 @@ async ngOnInit() {
         };
       }
     );
-
-  }
-
-  graficaPastel():void{
-  
-  
-    
-
   }
 
   graficaSimplePuntos():void{
-    console.log("valor++++++++:"+this.discacidadFisicaPuntosNota)
-    console.log("change from the code"+this.selectedState2.name);
 
     if(this.selectedState2.name == "Tiempo"){
 
@@ -194,7 +198,6 @@ async ngOnInit() {
 
   seleccionTipoGrafico():void {
     
-    console.log("change from the code"+this.selectedState.name);
     if(this.selectedState.name == "Tiempo"){
 
     
@@ -270,47 +273,28 @@ async ngOnInit() {
     }
   }
 
-  seccionarListas(){
-    this.datosParaGraficaInicialDiscapacidadVsNota.forEach(informacion => {
-      console.log("**********+++++++++"+informacion)        
-    });
-    
-  }
   
 
 
   tablaEstudiantes(): void {
     ///// PARA LA TABLA 
-    this.customerService.getCustomersMedium().then(customers => {
-      this.customers = customers;
-      this.loading = false;
-
-     // this.customers.forEach(customer => customer.date = new Date(customer.date));
-  });
-
-  this.representatives = [
-      {name: "Amy Elsner", image: 'amyelsner.png'},
-      {name: "Anna Fali", image: 'annafali.png'},
-      {name: "Asiya Javayant", image: 'asiyajavayant.png'},
-      {name: "Bernardo Dominic", image: 'bernardodominic.png'},
-      {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
-      {name: "Ioni Bowcher", image: 'ionibowcher.png'},
-      {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
-      {name: "Onyama Limba", image: 'onyamalimba.png'},
-      {name: "Stephen Shaw", image: 'stephenshaw.png'},
-      {name: "Xuxue Feng", image: 'xuxuefeng.png'}
-  ];
-
-  this.statuses = [
-      {label: 'No calificado', value: 'No calificado'},
-      {label: 'Calificado', value: 'Calificado'},
-      {label: 'Nuevo', value: 'Nuevo'},
-      {label: 'Pendiente', value: 'Pendiente'}
-  ]
-  /// FIN TABLA
     
-
-  }
+    this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.correoResponsableDatos, this.ejercitario)
+    .then(res =>{
+      this.listParticipantesEvaluadorEjercitario = res;
+      this.listParticipantesEvaluadorEjercitario.forEach(participante => {
+        this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.correoResponsableDatos, this.ejercitario, participante.email)
+        .then(res => {
+          participante.calificacion = res.notas[0].calificacion
+          participante.tiempo = res.notas[0].tiempo
+          
+        });
+      });
+      
+      this.loading = false;
+      
+    });
+    }
 
   // METODO DE TABLA 
 
@@ -326,22 +310,7 @@ async ngOnInit() {
       {name: 'Tiempo', value: 'Tiempo'}
   ];
 
-  ////////
-
-    // PARA SELECT DE GRAFICA tipo discapacidad 2 
-    //seleccionGrafica2: any = null;
-
-    //opciones2: any[] = [
-      //  {name: 'Tiempo total de resolución completa', code: 'tiempoTotal'},
-      //  {name: 'Tiempo solo de respuesta', value: 'tiempoRespuesta'},
-      //  {name: 'Promedio de nota'}
-    //];
-  
-    ////////
-
-
-
-    ///llmadas a servicios
+  ///llamadas a servicios
     
   listarLabelsTipoDeDiscacidad(){
     this.servicioSeleccionarEjercitario.obtenerDiscapacidades().subscribe(
@@ -356,23 +325,14 @@ async ngOnInit() {
 
   listarLabelsTipoDeGenero(){
     
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero("martinbojorque@gmail.com").subscribe(
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero(this.correoResponsableDatos).subscribe(
       genero => {
         this.generos = genero.participanteGenero as Array<string>
         this.crearGraficaInicioExperto()
-        console.log("*******"+this.generos)
       }
     );
   }
 
-  crearGraficaPastelGeneros(){
-    this.servicioGraficaPorEscenario.graficaPastelGeneroPorEjercitario("martinbojorque@gmail.com", 1).then(
-      generosCont=> {
-        console.log("--------"+generosCont)
-      }
-    );
-
-  }
 
   crearGraficaInicioExperto(){
     
@@ -392,7 +352,7 @@ async ngOnInit() {
     
     var valoresJSON = []
     this.generos.forEach(genero => {
-      this.servicioGraficaPorEscenario.crearGraficaTipoDiscapacidadVsNotaVsTiempo("martinbojorque@gmail.com", 1).subscribe(
+      this.servicioGraficaPorEscenario.crearGraficaTipoDiscapacidadVsNotaVsTiempo(this.correoResponsableDatos, this.ejercitario).subscribe(
         datosParaGrafica => { 
 
           datosParaGrafica.participantes.forEach(informacionParticipante => {

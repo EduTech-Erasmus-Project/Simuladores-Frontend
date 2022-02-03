@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ParticipanteAceptacionTabla, ParticipanteAceptacionTablaEscenarioResponsable } from 'src/app/model/Participante';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -49,5 +50,16 @@ export class InfoExpertoPorEscenarioService {
     ).then(participantes=>participantes);
   }
 
+  recuperarEstudiantesEjercitarioResponsable(responsable: string,escenario: number){
+    return this.http.get<any>(environment.WS_PATH+"getEstudiantesEjercitarioResponsable/"+responsable+"/"+escenario, this.config)
+    .toPromise()
+    .then(res => res.participantes as ParticipanteAceptacionTablaEscenarioResponsable[])
+    .then(participantes => participantes);
+  }
+
+  recuperarNotasPorEjercitario(responsable: string, escenario: number, email:string){
+    return this.http.get<any>(environment.WS_PATH+"getNotasEstudianteEjercitarioResponsable/"+responsable+"/"+escenario+"/"+email, this.config)
+    .toPromise()
+  }
 
 }

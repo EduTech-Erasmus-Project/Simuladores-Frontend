@@ -13,15 +13,16 @@ export class Participante extends Perfil{
     private estudiosPrevios : string
     private codigoEstudiante : string
     private nivelDeFormacion : string
+    private aceptacionPendianteResponsable: string
     private responsable : Responsable; 
 
     constructor(id : number, email : string, nombre : string, apellido : string, 
-        telefono : string, pais : string, ciudad : string, direccion : string , 
+        telefono : string, pais : string, ciudad : string, direccion : string , estado: string,
         fechaNacimiento : string, carreraUniversitaria : string, genero : string, numeroDeHijos : number,
         estadoCivil : string, etnia : string, estudiosPrevios : string, codigoEstudianteccion : string, 
-        nivelDeFormacion : string, responsable: Responsable){
+        nivelDeFormacion : string, aceptacionPendianteResponsable: string,responsable: Responsable){
 
-        super(id, email, nombre, apellido, telefono, pais, ciudad, direccion)
+        super(id, email, nombre, apellido, telefono, pais, ciudad, direccion, estado)
         this.fechaNacimiento = fechaNacimiento;
         this.carreraUniversitaria = carreraUniversitaria;
         this.genero = genero;
@@ -31,6 +32,7 @@ export class Participante extends Perfil{
         this.estudiosPrevios = estudiosPrevios;
         this.codigoEstudiante = codigoEstudianteccion;
         this.nivelDeFormacion = nivelDeFormacion;
+        this.aceptacionPendianteResponsable = aceptacionPendianteResponsable;
         this.responsable = responsable;
     }
 
@@ -99,6 +101,13 @@ export class Participante extends Perfil{
     set setDireccion(direccion: string){
         super.setDireccion = direccion;
     }
+    set setEstado(estado: string){
+        super.setEstado = estado;
+    }
+    get getEstado(){
+        return super.getEstado;
+    }
+
 
     get getFechaNacimiento(){
         return this.fechaNacimiento;
@@ -165,6 +174,15 @@ export class Participante extends Perfil{
     set setNivelDeFormacion(nivelDeFormacion: string){
         this.nivelDeFormacion = nivelDeFormacion;
     }
+
+    get getAceptacion(){
+        return this.aceptacionPendianteResponsable;
+    }
+
+    set setAceptacion(aceptacionPendianteResponsable: string){
+        this.aceptacionPendianteResponsable = aceptacionPendianteResponsable;
+    }
+
     get getResponsable(){
         return this.responsable;
     }
@@ -174,4 +192,56 @@ export class Participante extends Perfil{
     }
 
 
+}
+
+export interface ParticipanteAceptacionTabla {
+    id : number;
+    email : string;
+    password : string;
+    nombre : string; 
+    apellido : string;
+    telefono : string;
+    pais : string;
+    ciudad : string;
+    direccion : string;
+    estado:string
+    fechaNacimiento : string
+    carreraUniversitaria : string
+    genero : string
+    numeroDeHijos : number
+    estadoCivil : string
+    etnia : string
+    estudiosPrevios : string
+    codigoEstudiante : string
+    nivelDeFormacion : string
+    aceptacionPendianteResponsable: string
+    responsable : Responsable; 
+}
+
+
+export interface ParticipanteAceptacionTablaEscenarioResponsable {
+    id : number;
+    email : string;
+    nombre : string; 
+    apellido : string;
+    telefono : string;
+    pais : string;
+    ciudad : string;
+    direccion : string;
+    estado:string
+    fechaNacimiento : string
+    carreraUniversitaria : string
+    genero : string
+    numeroDeHijos : number
+    estadoCivil : string
+    etnia : string
+    estudiosPrevios : string
+    codigoEstudiante : string
+    nivelDeFormacion : string
+    aceptacionPendianteResponsable: string
+    responsable : Responsable; 
+    participante: number;
+    ejercitario: number;
+    calificacion: number;
+    tiempo: number;
 }

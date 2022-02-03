@@ -132,19 +132,29 @@
                 </div>
                 
                 <div class="card">
-                    <h5 class="centerText" class="p-col-12" style="text-align: center;">Información del {{selectedEjercitario.name}}</h5>
+                    <h5 class="centerText" class="p-col-12" style="text-align: center;">Información del Ejercitario: {{escenario.getNombreDeEjercitario}}</h5>
                     <p>
-                        <b>Tipo:</b> {{tipoEscenario}} <br>
-                        <b>Nombre:</b> {{nombreEscenario}} <br>
-                        <b>Instrucción principal: </b> {{instruccionPrincipalEscenario}}<br>
-                        <b> Principales Competencias medidas:</b>{{principalesCompetenciasEscenario}} <br>   
-                        <b> Duración:</b> {{duracionEscenario}}<br>
-                        <b> Link de Video</b> {{linkEscenario }}
+                        <b>Tipo de Ejercitario:</b> {{escenario.getTipoDeEjercitario}} <br>
+                        <b>Nombre de Ejercitario:</b> {{escenario.getNombreDeEjercitario}} <br>
+                        <b> Principales Competencias medidas:</b>{{escenario.getPrincipalCompetenciasEjercitario}} <br>   
+                        <b> Duración de Ejercitario:</b> {{escenario.getDuracionEjercitarioPorMinutos}}<br>
+                        <b> Numero de Ejercitario: </b> {{escenario.getNumeroDeEjercitario }}<br>
+                        <b>Instrucción principal: </b> {{escenario.getInstruccionPrincipalDeEjercitario}}<br>
                     </p>
-                    <iframe src="https://www.youtube.com/embed/WxzcD04rwc8" width="530px" height="280px" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                                
+                                 
                     <div style="width: 100%; text-align: center; margin-top: 2em;">
-                        <button style="text-align: center;" pButton pRipple type="button" label="Ver Reporte" class="p-button-info p-mr-2 p-mb-2" (click) = "abrirReporte()" ></button>
+                        <a  [routerLink]="['/Pagina-Principal-Experto/escenarioInfo', correoResponsableDatos, escenario.getNumeroDeEjercitario]" routerLinkActive="active">
+                            <div class="buttons" style="margin-top: 1em">
+                                <button
+                                    pButton
+                                    type="button"
+                                    label="&nbsp; Abrir Reporte"
+                                >
+                                <i class="pi pi-fw pi-chart-line"></i>
+                                </button>
+                            </div>
+                        </a>
+                        
                     </div>
                    
                 </div>

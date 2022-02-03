@@ -115,7 +115,7 @@ export class DatosExpertoComponent implements OnInit {
       responsable => {
         this.responsable = new Responsable(responsable.id, responsable.email, responsable.nombre, 
                             responsable.apellido, responsable.telefono, responsable.pais, responsable.ciudad, 
-                            responsable.direccion, responsable.nivelDeFormacion);
+                            responsable.direccion, responsable.estado, responsable.nivelDeFormacion);
       
         this.nombreResponsable = this.responsable.getNombre
         this.direccionResponsable = this.responsable.getDireccion

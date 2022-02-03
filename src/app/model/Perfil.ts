@@ -8,9 +8,10 @@ export class Perfil {
     private pais : string;
     private ciudad : string;
     private direccion : string;
+    private estado: string;
 
     constructor(id : number, email : string, nombre : string, apellido : string, 
-        telefono : string, pais : string, ciudad : string, direccion : string){
+        telefono : string, pais : string, ciudad : string, direccion : string, estado: string){
         this.id = id;
         this.email = email;
         this.nombre = nombre;
@@ -19,6 +20,7 @@ export class Perfil {
         this.pais = pais;
         this.ciudad = ciudad;
         this.direccion = direccion;
+        this.estado = estado;
     }
 
     get getId(){
@@ -85,6 +87,14 @@ export class Perfil {
 
     set setDireccion(direccion: string){
         this.direccion = direccion
+    }
+
+    get getEstado(){
+        return this.estado;
+    }
+
+    set setEstado(estado: string){
+        this.estado = estado
     }
 
 }

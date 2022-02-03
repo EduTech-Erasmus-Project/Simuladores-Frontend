@@ -89,3 +89,15 @@ export class Escenario {
         this.instruccionesParticipantes = instruccionesPrincipales;
     }
 }
+
+export interface EscenarioInterface{
+    idEjercitario: number;
+    numeroDeEjercitario : number;
+    tipoDeEjercitario : string;
+    nombreDeEjercitario: string;
+    instruccionPrincipalEjercitario: string;
+    principalCompetenciasEjercitario : string;
+    duracionEjercitarioPorMinutos: number;
+    instruccionesParticipantes : string;
+    urlEjercitarios: string;
+}

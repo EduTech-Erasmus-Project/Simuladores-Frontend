@@ -5,10 +5,10 @@ export class Responsable extends Perfil{
     private nivelDeFormacion: string;
 
     constructor(id : number, email : string, nombre : string, apellido : string, 
-        telefono : string, pais : string, ciudad : string, direccion : string , 
+        telefono : string, pais : string, ciudad : string, direccion : string, estado: string , 
         nivelDeFormacion: string){
         
-        super(id, email, nombre, apellido, telefono, pais, ciudad, direccion)
+        super(id, email, nombre, apellido, telefono, pais, ciudad, direccion, estado)
         this.nivelDeFormacion = nivelDeFormacion;
     }
     get getId(){
@@ -71,6 +71,12 @@ export class Responsable extends Perfil{
     }
     get getDireccion(){
         return super.getDireccion;
+    }
+    set setEstado(estado: string){
+        super.setEstado = estado;
+    }
+    get getEstado(){
+        return super.getEstado;
     }
 
     set setDireccion(direccion: string){

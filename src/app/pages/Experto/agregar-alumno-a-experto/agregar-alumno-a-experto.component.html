@@ -1,151 +1,297 @@
 <div class="p-col-12">
-    <div class="card">
-        <h3 style=" text-align: center; margin-left: 12.5%;">Mi información Personal</h3>
-        <div class="p-grid">
-            <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
+  <div class="card">
+    <h3 style="text-align: center; ">
+      Agregar y Listar Participantes 
+    </h3>
+    <div class="p-grid">
+      
+      <div class="p-col-12 p-ai-center p-jc-center">
+        <div class="p-grid p-fluid">
+          <div class="p-grid table-demo">
+            <div class="p-col-12">
+              <h5>Agregar un nuevo Participante</h5>
+              <div class="card" style="text-align: center">
                 
 
-
-                <div class="p-fluid">
-                    <div  class="p-field">
-                        <div>
-                            <div style="text-align: center; line-height: 2em;">
-                                <!--
-                                    Codigo para mostrar fotografia del usuario
-                                    <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
-                                -->
-                                <h3>Perfil de Usuario</h3>
-                                <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px;" alt=""/>
-                                <div class="product-list-detail">
-                                    <h4> Angel Perez <!--{{product.name}}--></h4>
-                                    <span style="font-weight: bold;"> Experto <i class="pi pi-map-marker product-category-icon"></i> Cuenca-Ecuador 
-                                        
-                                    <!--{{product.description}}--></span>
-                                    
-                                </div>
-                                
-                                <span style="font-size: 15px; font-weight: bold;"> Puntuacion Global: 
-
-                                    8.0 <p-rating style="text-align: center;" [ngModel]=4 readonly="true" stars="5" [cancel]="false"></p-rating> 
-                                    <!--
-                                    Etiqueta de rating 
-                                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
-                                    -->
-                               </span>
-                            </div>    
-                        </div>
+                <p-table
+                  #dt
+                  [value]="listParticipanteAceptacion"
+                  [(selection)]="selectedCustomers1"
+                  dataKey="id"
+          
+                  [rowHover]="true"
+                  [rows]="10"
+                  [paginator]="true"
+                  [filterDelay]="0"
+                  [globalFilterFields]="['nombre', 'apellido', 'email']"
+                >
+                  <ng-template pTemplate="caption">
+                    <div
+                      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                    >
+                      <span style="width: 15%; margin-top: 0.3em"
+                        >Buscar por:
+                      </span>
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                          "
+                          placeholder="Global Search"
+                        />
+                      </span>
                     </div>
-                </div>
-            </div>
-            
-            <!--Linea de division de componentes-->
-            <div class="p-col-1">
-                <p-divider layout="vertical">
-                    
-                </p-divider>
-            </div>
-
-            
-            <div class="p-col-7 p-ai-center p-jc-center">
-                <div class="p-grid p-fluid">
-                    
-                    <div class="p-grid table-demo">
-                        <div class="p-col-12">
-                            <div class="card" style="text-align: center;">
-                                <h5>Agregar un nuevo alumano</h5>
-                                
-                                <p-table #dt [value]="customers1" [(selection)]="selectedCustomers1" dataKey="id"
-                                        styleClass="p-datatable-customers" [rowHover]="true" [rows]="10" [paginator]="true"
-                                        [filterDelay]="0" [globalFilterFields]="['name','date','puntuación']">
-                                    <ng-template pTemplate="caption">
-                                        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                                            <span style="width: 15%; margin-top: 0.3em;">Buscar por: </span>
-                                            <span class="p-input-icon-left">
-                                                <i class="pi pi-search"></i>
-                                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                                    placeholder="Global Search"/>
-                                            </span>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template pTemplate="header">
-                                        <tr>
-                                            <th style="width: 3rem">
-                                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                                            </th>
-                                            <th pSortableColumn="name">
-                                                <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Nombre
-                                                    <p-columnFilter type="text" field="name" display="menu" class="p-ml-auto"></p-columnFilter>
-                                                </div>
-                                            </th>
-                                            <th pSortableColumn="tiempo">
-                                                <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Apellido
-                                                    <p-columnFilter type="text" field="tiempo" display="menu" class="p-ml-auto"></p-columnFilter>
-                                                </div>
-                                            </th>
-                                           
-                                            <th pSortableColumn="date">
-                                                <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Ocupacion
-                                                    <p-columnFilter type="date" field="date" display="menu" class="p-ml-auto"></p-columnFilter>
-                                                </div>
-                                            </th>
-                                            <th pSortableColumn="correctas">
-                                                <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Localización
-                                                    <p-columnFilter type="numeric" field="correctas" display="menu"  class="p-ml-auto"></p-columnFilter>
-                                                </div>
-                                            </th>
-
-                                            <th>
-                                                <div class="p-d-flex p-jc-between p-ai-center">
-                                                    Seleccionar
-                                               </div>
-                                            </th>
-
-                                            <th style="width: 8rem"></th>
-                                        </tr>
-                                    </ng-template>
-
-
-                                    <ng-template pTemplate="body" let-customer style="text-align: center;">
-                                        <tr class="p-selectable-row">
-                                            <td>
-                                                <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-                                            </td>
-                                            <td>
-                                                {{customer.name}}
-                                            </td>
-                                            <td>
-                                                {{customer.country.name}}
-                                            </td>
-                                        
-                                            <td>
-                                                {{customer.date | date: 'MM/dd/yyyy'}}
-                                            </td>
-                                            <td>
-                                                {{customer.balance }}
-                                            </td>
-                                            
-                                            <td style="text-align: center">
-                                                <button pButton type="button" class="p-button-primary" icon="pi pi-user-plus"></button>
-                                            </td>
-                                        </tr>
-                                    </ng-template>
-                                    <ng-template pTemplate="emptymessage">
-                                        <tr>
-                                            <td colspan="8">No customers found.</td>
-                                        </tr>
-                                    </ng-template>
-                                </p-table>
-                            </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr style="width: 100%;">
+                      
+                      <th pSortableColumn="nombre" style="width: 15%;"> 
+                        <div class="p-d- p-jc-between p-ai-center">
+                          Nombre
+                         
                         </div>
-                    </div>
-                </div>
+                      </th>
+                      <th pSortableColumn="apellido" style="width: 15%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Apellido
+                          
+                        </div>
+                      </th>
 
+                      <th pSortableColumn="email" style="width: 20%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Email
+                          
+                        </div>
+                      </th>
+                      <th pSortableColumn="direccion" style="width: 20%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Direccion
+                          
+                        </div>
+                      </th>
+                      <th pSortableColumn="carreraUniversitaria" style="width: 15%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Carrera Universitaria
+                          
+                        </div>
+                      </th>
+
+                      <th style="width: 5%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Agregar
+                        </div>
+                      </th>
+
+                      <th style="width: 5%;">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Eliminar
+                        </div>
+                      </th>
+
+                    </tr>
+                  </ng-template>
+
+                  <ng-template
+                    pTemplate="body"
+                    let-listParticipanteAceptacion
+                    style="text-align: center"
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr [pSelectableRow]="listParticipanteAceptacion" class="p-selectable-row">
+                      
+                      <td>
+                        {{ listParticipanteAceptacion.nombre }}
+                      </td>
+                      <td >
+                        {{ listParticipanteAceptacion.apellido }}
+                      </td>
+
+                      <td >
+                        {{ listParticipanteAceptacion.email}}
+                      </td>
+                      <td >
+                        {{ listParticipanteAceptacion.pais }} - {{ listParticipanteAceptacion.ciudad }} - {{ listParticipanteAceptacion.direccion }}
+                      </td>
+                      <td >
+                        {{ listParticipanteAceptacion.carreraUniversitaria }}
+                      </td>
+                      
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-user-plus"
+                          (click)="agregarParticipante(listParticipanteAceptacion.email, rowIndex)"
+                        ></button>
+                      </td>
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-user-minus"
+                          (click)="eliminarParticipante(listParticipanteAceptacion.email, rowIndex)"
+                        ></button>
+                      </td>
+
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="8">No customers found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
             </div>
+
+            <div class="p-col-12">
+                <h5>Listado de Participantes</h5>
+                <div class="card" style="text-align: center">
+                  
+  
+                  <p-table
+                    #dt
+                    [value]="listParticipantes"
+                    [(selection)]="selectedCustomers1"
+                    dataKey="id"
+            
+                    [rowHover]="true"
+                    [rows]="10"
+                    [paginator]="true"
+                    [filterDelay]="0"
+                    [globalFilterFields]="['nombre', 'apellido', 'email']"
+                  >
+                    <ng-template pTemplate="caption">
+                      <div
+                        class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                      >
+                        <span style="width: 15%; margin-top: 0.3em"
+                          >Buscar por:
+                        </span>
+                        <span class="p-input-icon-left">
+                          <i class="pi pi-search"></i>
+                          <input
+                            pInputText
+                            type="text"
+                            (input)="
+                              dt.filterGlobal($event.target.value, 'contains')
+                            "
+                            placeholder="Global Search"
+                          />
+                        </span>
+                      </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                      <tr style="width: 100%;">
+                        
+                        <th pSortableColumn="nombre" style="width: 15%; text-align: center;"> 
+                          <div >
+                            Nombre
+                           
+                          </div>
+                        </th>
+                        <th pSortableColumn="apellido" style="width: 15%; text-align: center;">
+                          <div >
+                            Apellido
+                            
+                          </div>
+                        </th>
+  
+                        <th pSortableColumn="email" style="width: 20%; text-align: center;">
+                          <div >
+                            Email
+                            
+                          </div>
+                        </th>
+                        <th pSortableColumn="direccion" style="width: 15%; text-align: center;">
+                          <div >
+                            Direccion
+                            
+                          </div>
+                        </th>
+                        <th pSortableColumn="carreraUniversitaria" style="width: 15%; text-align: center;">
+                          <div >
+                            Carrera Universitaria
+                            
+                          </div>
+                        </th>
+  
+                        <th pSortableColumn="fechaNacimiento" style="width: 15%; text-align: center;">
+                          <div >
+                            Fecha de Nacimiento
+                          </div>
+                        </th>
+  
+                        <th style="width: 5%; text-align: center;">
+                          <div >
+                            Eliminar
+                          </div>
+                        </th>
+  
+                      </tr>
+                    </ng-template>
+  
+                    <ng-template
+                      pTemplate="body"
+                      let-listParticipantes
+                      style="text-align: center"
+                      let-rowIndex="rowIndex"
+                    >
+                      <tr [pSelectableRow]="listParticipantes" class="p-selectable-row">
+                        
+                        <td>
+                          {{ listParticipantes.nombre }}
+                        </td>
+                        <td >
+                          {{ listParticipantes.apellido }}
+                        </td>
+  
+                        <td >
+                          {{ listParticipantes.email}}
+                        </td>
+                        <td >
+                          {{ listParticipantes.pais }} - {{ listParticipantes.ciudad }} - {{ listParticipantes.direccion }}
+                        </td>
+                        <td >
+                          {{ listParticipantes.carreraUniversitaria }}
+                        </td>
+                        
+                        <td >
+                            {{ listParticipantes.fechaNacimiento | date: "yyyy-MM-dd" }} 
+                        </td>
+  
+                        <td style="text-align: center">
+                          <button
+                            pButton
+                            type="button"
+                            class="p-button-primary"
+                            icon="pi pi-user-minus"
+                            (click)="eliminarParticipanteAceptado(listParticipantes.email, rowIndex)"
+                          ></button>
+                        </td>
+  
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="8">No customers found.</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-

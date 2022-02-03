@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { promise } from 'protractor';
-import { Escenario } from 'src/app/model/Escenario';
+import { Escenario, EscenarioInterface } from 'src/app/model/Escenario';
 import { Usuario } from 'src/app/model/Usuario';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
@@ -16,7 +17,7 @@ import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/
 export class PresentacionInicioExpertoComponent implements OnInit {
 
 
-  private  escenario :  Escenario = new Escenario();
+  public  escenario :  Escenario = new Escenario();;
   private listafiltroParaBuscar : ['tiempo', 'nota'];
   private listaGenero: [];
   private listaDiscapacidad: [];
@@ -24,12 +25,12 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   barData: any;
   options: any;
 
-  tipoEscenario: string = "Diálogo";
-  nombreEscenario: string = "La venta";
-  instruccionPrincipalEscenario: string = "Se le pide al participante que visite a un cliente y lo convenza de asistir a una feria.";
-  principalesCompetenciasEscenario: string = "Comunicación efectiva"; 
-  duracionEscenario: number = 15.00; 
-  linkEscenario: string = 'https://www.youtube.com/embed/WxzcD04rwc8';
+  tipoEscenario: string = "";
+  nombreEscenario: string = "";
+  instruccionPrincipalEscenario: string = "";
+  principalesCompetenciasEscenario: string = ""; 
+  duracionEscenario: number = 0; 
+  linkEscenario: string = '';
 
 
 
@@ -38,13 +39,14 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   public generos: Array<string>
   public discapacidades: Array<any>
   ejercitarios: any[] = [
-    {name: 'Ejercitario 1', value: 'ejercitario1'},
-    {name: 'Ejercitario 2', value: 'ejercitario2'},
-    {name: 'Ejercitario 3', value: 'ejercitario3'},
-    {name: 'Ejercitario 4', value: 'ejercitario4'},
-    {name: 'Ejercitario 5', value: 'ejercitario5'},
-    {name: 'Ejercitario 6', value: 'ejercitario6'},
-    {name: 'Ejercitario 7', value: 'ejercitario7'},
+    {name: 'La venta', value: '1'},
+    {name: 'Empleado problema', value: '2'},
+    {name: 'Mi agenda', value: '2'},
+    {name: 'Funciones y competencias', value: '4'},
+    {name: 'Un día de trabajo', value: '6'},
+    {name: 'La tecnología prima', value: '7'},
+    {name: 'Construcción', value: '8'},
+    {name: 'Construcción de Logo', value: '10'},
   ];
 
   states: any[] = [
@@ -60,18 +62,36 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   public hombreListaTiempo = [];
   public lgbtListaTiempo = [];
   public otrosListaTiempo = [];
-
+  public correoResponsableDatos: string;
 
   constructor( public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
-               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService) {
+               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService, 
+               private _Activatedroute:ActivatedRoute, private router: Router) {
 
   }
 
   
   async ngOnInit() {
+    this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(1).then(
+      escenario => {
+        escenario as EscenarioInterface
+        this.escenario = new Escenario();
+        this.escenario.setidEjercitario = escenario.idEjercitario;
+        this.escenario.setNumeroDeEjercitario = escenario.numeroDeEjercitario;
+        this.escenario.setTipoDeEjercitario = escenario.tipoDeEjercitario;
+        this.escenario.setNombreDeEjercitario = escenario.nombreDeEjercitario;
+        this.escenario.setInstruccionPrincipalEjercitario = escenario.instruccionPrincipalEjercitario;
+        this.escenario.setPrincipalCompetenciasEjercitario = escenario.principalCompetenciasEjercitario;
+        this.escenario.setDuracionEjercitarioPorMinutos = escenario.duracionEjercitarioPorMinutos;
+        this.escenario.setInstruccionesParticipantes = escenario.instruccionesParticipantes;
+        this.escenario.setUrlEjercitarios = escenario.urlEjercitarios;
+        
+      }
+    );
+    this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
     this.listarLabelsTipoDeDiscacidad();
     await this.listarLabelsTipoDeGenero();
-    await this.seccionarListas();
+    
     await this.seleccionTipoGrafico();
      
   }
@@ -154,32 +174,30 @@ export class PresentacionInicioExpertoComponent implements OnInit {
     }
   }
 
-  seccionarListas(){
-    this.datosParaGraficaInicialDiscapacidadVsNota.forEach(informacion => {
-      console.log("**********+++++++++"+informacion)        
-    });
-    
-  }
+  
   
 
   seleccionEscenario(): void{
-    console.log(this.selectedEjercitario.value);
-
-    this.escenario = this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(this.selectedEjercitario.value);
     
-    this.tipoEscenario= this.escenario.getTipoDeEjercitario;
-    this.nombreEscenario= this.escenario.getNombreDeEjercitario;
-    this.instruccionPrincipalEscenario= this.escenario.getInstruccionPrincipalDeEjercitario;
-    this.principalesCompetenciasEscenario= this.escenario.getPrincipalCompetenciasEjercitario; 
-    this.duracionEscenario = this.escenario.getDuracionEjercitarioPorMinutos; 
-    this.linkEscenario = this.escenario.getUrlEjercitarios;
-
+    this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(this.selectedEjercitario.value).then(
+      escenario => {
+        escenario as EscenarioInterface
+        this.escenario = new Escenario();
+        this.escenario.setidEjercitario = escenario.idEjercitario;
+        this.escenario.setNumeroDeEjercitario = escenario.numeroDeEjercitario;
+        this.escenario.setTipoDeEjercitario = escenario.tipoDeEjercitario;
+        this.escenario.setNombreDeEjercitario = escenario.nombreDeEjercitario;
+        this.escenario.setInstruccionPrincipalEjercitario = escenario.instruccionPrincipalEjercitario;
+        this.escenario.setPrincipalCompetenciasEjercitario = escenario.principalCompetenciasEjercitario;
+        this.escenario.setDuracionEjercitarioPorMinutos = escenario.duracionEjercitarioPorMinutos;
+        this.escenario.setInstruccionesParticipantes = escenario.instruccionesParticipantes;
+        this.escenario.setUrlEjercitarios = escenario.urlEjercitarios;
+      }
+    );
+    
+    
   }
 
-  abrirReporte(){
-    window.location.href=("http://localhost:4200/#/Pagina-Principal-Experto/escenarioInfo");
-    //window.location.href=(this.linkEscenario);
-  }
   
   listarLabelsTipoDeDiscacidad(){
     this.servicioSeleccionarEjercitario.obtenerDiscapacidades().subscribe(
@@ -194,11 +212,10 @@ export class PresentacionInicioExpertoComponent implements OnInit {
 
   listarLabelsTipoDeGenero(){
     
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero("martinbojorque@gmail.com").subscribe(
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero(this.correoResponsableDatos).subscribe(
       genero => {
         this.generos = genero.participanteGenero as Array<string>
         this.crearGraficaInicioExperto()
-        console.log("*******"+this.generos)
       }
     );
   }
@@ -221,13 +238,14 @@ export class PresentacionInicioExpertoComponent implements OnInit {
     
     var valoresJSON = []
     this.generos.forEach(genero => {
-      this.servicioSeleccionarEjercitario.crearGraficaPaginaInicio("martinbojorque@gmail.com").subscribe(
+      this.servicioSeleccionarEjercitario.crearGraficaPaginaInicio(this.correoResponsableDatos).subscribe(
         datosParaGrafica => { 
 
           datosParaGrafica.participantes.forEach(informacionParticipante => {
             if (genero == informacionParticipante.participanteGenero){
               
               if(('Fisica' == informacionParticipante.tipoDiscapacidad)){
+                
                 discapacidadFisica = discapacidadFisica + informacionParticipante.calificaciones[0].calificacion;
                 discapacidadFisicaTiempo = discapacidadFisicaTiempo + informacionParticipante.calificaciones[0].tiempo;
               }

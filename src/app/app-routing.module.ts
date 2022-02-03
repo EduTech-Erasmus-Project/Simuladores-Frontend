@@ -117,8 +117,8 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
                     {path: 'inicio/:correo', component: PresentacionInicioExpertoComponent},  
                     {path: 'datosExperto/:correo', component: DatosExpertoComponent},
                     {path: 'agregarAlumno/:correo', component: AgregarAlumnoAExpertoComponent},
-                    {path: 'escenarioInfo/:correo', component: EscenarioComponent},
-                    {path: 'participanteInfo/:correo', component: ParticipanteInfoComponent}
+                    {path: 'escenarioInfo/:correo/:idEjercitario', component: EscenarioComponent},
+                    {path: 'participanteInfo/:correo/:idEjercitario/:correoEstudiante', component: ParticipanteInfoComponent}
                 ]
             },
             

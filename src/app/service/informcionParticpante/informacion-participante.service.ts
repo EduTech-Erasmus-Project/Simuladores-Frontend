@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ActividadInterface } from 'src/app/model/Actividad';
 import { AsignacionTabla } from 'src/app/model/Asignacion';
+import { Comentario, ComentarioInterface } from 'src/app/model/Comentario';
+import { DiscapacidadParticipanteInterface } from 'src/app/model/DiscapacidadParticipante';
+import { ExperienciaLaboralInterface } from 'src/app/model/ExperienciaLaboral';
 import { Participante } from 'src/app/model/Participante';
 import { environment } from 'src/environments/environment';
 
@@ -51,4 +55,51 @@ export class InformacionParticipanteService {
    
   }
 
+  public obtenerExperienciaLaboralUsuario(correo: string){
+    const config = { 
+                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+                    };
+    return (this.http.get<any>(environment.WS_PATH+"getExperienciaLaboralParticipante/"+correo, config))
+    .toPromise()
+    .then(res => res.experienciaLaboral as ExperienciaLaboralInterface[])
+    .then(experiencia => experiencia);
+  }
+
+  public obtenerDiscapacidadesDelParticipante(correo: string){
+    const config = { 
+                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+                    };
+    return (this.http.get<any>(environment.WS_PATH+"getDiscapacidadesDelParticipante/"+correo, config))
+    .toPromise()
+    .then(res => res.discapacidadesParticipante as DiscapacidadParticipanteInterface[])
+    .then(discapacidad => discapacidad);
+  }
+  
+  public recuperarParticipantesIntentosEjercitario(correo: string, ejercitario: number){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return (this.http.get<any>(environment.WS_PATH+"getParticipantesIntentosEjercitario/"+correo+"/"+ejercitario, config))
+    .toPromise()
+    .then(res => res.actividades as ActividadInterface[])
+    .then(actividad => actividad);
+  }
+
+  public obtenerComentariosActividadRealizada(idActividad: number){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return (this.http.get<any>(environment.WS_PATH+"getComentariosActividadRealizada/"+idActividad, config))
+    .toPromise()
+    .then(res => res.comentarios as ComentarioInterface[])
+    .then(comentario => comentario);
+  }
+
+  public agregarNuevoComentarioActividadParticipante(comentario: Comentario){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"agregarNuevoComentarioActividadParticipante", {"comentario": comentario.getComentario, "fecha": comentario.getFecha, "actividad":comentario.getActividad.idActividad}, config).toPromise();
+  }
+  
 }

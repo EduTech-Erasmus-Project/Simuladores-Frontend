@@ -126,14 +126,14 @@ export class DatosUsuarioComponent implements OnInit {
       responsable => {
         evaluador = new Responsable(
           responsable.id, responsable.email, responsable.nombre, responsable.apellido, responsable.telefono, 
-          responsable.pais, responsable.ciudad, responsable.direccion, responsable.nivelDeFormacion
+          responsable.pais, responsable.ciudad, responsable.direccion, responsable.estado, responsable.nivelDeFormacion
         );
 
         this.participante = new Participante(
           usuario.id, usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, 
-          usuario.pais, usuario.ciudad, usuario.direccion, usuario.fechaNacimiento, usuario.carreraUniversitaria,
+          usuario.pais, usuario.ciudad, usuario.direccion, usuario.estado, usuario.fechaNacimiento, usuario.carreraUniversitaria,
           usuario.genero, usuario.numeroDeHijos, usuario.estadoCivil, usuario.etnia, usuario.estudiosPrevios, 
-          usuario.codigoEstudiante, usuario.nivelDeFormacion, evaluador 
+          usuario.codigoEstudiante, usuario.nivelDeFormacion, usuario.aceptacionPendianteResponsable, evaluador 
         );
 
         this.nombreParticipante = this.participante.getNombre;
@@ -197,13 +197,6 @@ export class DatosUsuarioComponent implements OnInit {
     
   }
  
-  confirm1() {
-    this.confirmationService.confirm({
-        key: 'confirm1',
-        message: 'Are you sure to perform this action?'
-    });
-}
-
   eliminarCuenta(){
 
     this.confirmationService.confirm({

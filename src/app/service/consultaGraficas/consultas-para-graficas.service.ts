@@ -32,6 +32,6 @@ export class ConsultasParaGraficasService {
       return this.http.get<any>(environment.WS_PATH+"obtenerlistadoGeneroEscenario", this.config).toPromise();
     }
 
-    recuperarL
+    //recuperarL
 
 }

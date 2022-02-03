@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
 import { ProductService } from 'src/app/demo/service/productservice';
+import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
+import { Responsable } from 'src/app/model/Responsable';
+import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 
 @Component({
   selector: 'app-agregar-alumno-a-experto',
@@ -15,43 +19,58 @@ export class AgregarAlumnoAExpertoComponent implements OnInit {
   representatives: Representative[];
   statuses: any[];
   selectedCustomers1: Customer[];
+  private correoEvaluadorActividades: string = '';
+  public responsable: Responsable;
+  public listParticipanteAceptacion: ParticipanteAceptacionTabla[];
+  public listParticipantes: ParticipanteAceptacionTabla[];
   
-  constructor(private customerService: CustomerService, private productService: ProductService,
-      private breadcrumbService: BreadcrumbService) { 
-        this.breadcrumbService.setItems([
-          { label: 'UI Kit' },
-          { label: 'Table', routerLink: ['/uikit/table'] }
-      ]);
-    }
+  
+  constructor(private _Activatedroute:ActivatedRoute, private responsableServiceInformacion: InformacionEvaluadorService) { 
+      
+  }
   ngOnInit(): void {
-    this.customerService.getCustomersLarge().then(customers => {
-      this.customers1 = customers;
-      // @ts-ignore
-      this.customers1.forEach(customer => customer.date = new Date(customer.date));
-    });
-  
-  
-    this.representatives = [
-        {name: 'Amy Elsner', image: 'amyelsner.png'},
-        {name: 'Anna Fali', image: 'annafali.png'},
-        {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
-        {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
-        {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
-        {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
-        {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
-        {name: 'Onyama Limba', image: 'onyamalimba.png'},
-        {name: 'Stephen Shaw', image: 'stephenshaw.png'},
-        {name: 'XuXue Feng', image: 'xuxuefeng.png'}
-    ];
-  
-    this.statuses = [
-        {label: '10', value: '10'},
-        {label: '9', value: '9'},
-        {label: '9', value: '9'},
-        {label: '9', value: '9'},
-        {label: '5', value: '5'},
-        {label: '4', value: '4'}
-    ];
+    this.correoEvaluadorActividades = this._Activatedroute.snapshot.paramMap.get("correo");
+    this.obtenerInformacionExperto();
+    
+    this.responsableServiceInformacion.obtenerParticipantesPorAceptarEvaluadorCorreo(this.correoEvaluadorActividades).then(listParticipantes => {
+      this.listParticipanteAceptacion = listParticipantes
+     });
+
+     this.responsableServiceInformacion.obtenerParticipantesEvaluadorCorreo(this.correoEvaluadorActividades).then(listParticipantesAceptados => {
+      this.listParticipantes = listParticipantesAceptados
+     });
+    
+  }
+
+  obtenerInformacionExperto(){
+    this.responsableServiceInformacion.obtenerInformacionEvaluadorCorreo(this.correoEvaluadorActividades).then(
+      responsable => {
+        this.responsable = new Responsable(responsable.id, responsable.email, responsable.nombre, 
+          responsable.apellido, responsable.telefono, responsable.pais, responsable.ciudad, 
+          responsable.direccion, responsable.estado, responsable.nivelDeFormacion);
+      }
+    )
+  }
+
+  agregarParticipante(email: string, rowIndex: number){
+   
+    var rowAgregar = this.listParticipanteAceptacion.splice(rowIndex,1)[0] as ParticipanteAceptacionTabla;
+    this.listParticipantes.push(rowAgregar);
+    this.responsableServiceInformacion.agregarParticipante(email);
+  }
+
+  eliminarParticipante(email: string, rowIndex: number){
+    
+    this.listParticipanteAceptacion.splice(rowIndex,1);
+    this.responsableServiceInformacion.eliminarParticipante(email);
+    
+  }
+
+  eliminarParticipanteAceptado(email: string, rowIndex: number){
+    console.log("eliminar: "+email);
+    this.listParticipantes.splice(rowIndex,1);
+    this.responsableServiceInformacion.eliminarParticipante(email);
+    
   }
 
 }
