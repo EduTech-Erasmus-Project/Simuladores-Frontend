@@ -59,4 +59,12 @@ export class InformacionEvaluadorService {
     return (this.http.get<any>(environment.WS_PATH+"eliminarParticipanteEvaluador/"+email, config)).toPromise().then(res => console.log(res));
 
   }
+
+  public recuperarEvaluadoresParaRegistro(){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return (this.http.get<any>(environment.WS_PATH+"getEvaluadores/", config)).toPromise().then(res => res.evaluadores);
+
+  }
 }

@@ -1,327 +1,658 @@
 <body class="landing-body">
-    <div class="landing-nav-menu" style="background-color: #eceef3;">
-        <div class="logo">
-            <a href="#">
-                <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" style="width: 5em;" alt="logo"/>
-                <span class="app-name">Simuladores Laborales</span>
-            </a>
-        </div>
-        
-        <div class="nav-menu-wrapper">
-           
-            <ul class="nav-menu" id="landing-menu">
-                <li class="active-link">
-                    <a href="#home">Inicio</a>
-                </li>
-                <li>
-                    <a href="#meet-mirage">Información</a>
-                </li>
-                <li>
-                    <a href="#features">Simuladores</a>
-                </li>
-                <li>
-                    <a href="#pricing">Acerca de</a>
-                </li>
-                <li>
-                    <a href="#multimedia">Colaboradores</a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="buy-button">
-            <button type="button" class="p-button" routerLink= "/login">
-                Iniciar Sesión
-            </button>
-            <br>
-            <button type="button" class="p-button" routerLink= "/registrar">
-                Registrar
-            </button>
-        </div>
-    
-        <div class="menu-button">
-            <a href="#" class="landing-menu-button" id="landing-menu-button">
-                <div class="landing-menu-button-icon"></div>
-            </a>
-        </div>
+  <div class="landing-nav-menu" style="background-color: #eceef3">
+    <div class="logo">
+      <a href="#">
+        <img
+          src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+          style="width: 5em"
+          alt="logo"
+        />
+        <span class="app-name">Simuladores Laborales</span>
+      </a>
     </div>
-    
-    
-    <div class="p-col-12" style="width: 100%; align-items: center; justify-content: space-between;">
-        <div class="card">
-            <h3 style="width: 100%; align-items: center; text-align: center;">Ingrese su Información Personal</h3>
-            <div class="p-grid">
-                
-                <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
-                    <div class="p-fluid">
-                        <div  class="p-field">
-                            <div>
-                                <div style="text-align: center; line-height: 2.5em;">
-                                    <!--
+
+    <div class="nav-menu-wrapper">
+      <ul class="nav-menu" id="landing-menu">
+        <li class="active-link">
+          <a href="#home">Inicio</a>
+        </li>
+        <li>
+          <a href="#meet-mirage">Información</a>
+        </li>
+        <li>
+          <a href="#features">Simuladores</a>
+        </li>
+        <li>
+          <a href="#pricing">Acerca de</a>
+        </li>
+        <li>
+          <a href="#multimedia">Colaboradores</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="buy-button">
+      <button type="button" class="p-button" routerLink="/login">
+        Iniciar Sesión
+      </button>
+      <br />
+      <button type="button" class="p-button" routerLink="/registrar">
+        Registrar
+      </button>
+    </div>
+
+    <div class="menu-button">
+      <a href="#" class="landing-menu-button" id="landing-menu-button">
+        <div class="landing-menu-button-icon"></div>
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="p-col-12"
+    style="width: 100%; align-items: center; justify-content: space-between"
+  >
+    <div class="card">
+      <h3 style="width: 100%; align-items: center; text-align: center">
+        Ingrese su Información Personal
+      </h3>
+      <div class="p-grid">
+        <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
+          <div class="p-fluid">
+            <div class="p-field">
+              <div>
+                <div style="text-align: center; line-height: 2.5em">
+                  <!--
                                         Codigo para mostrar fotografia del usuario
                                         <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
                                     -->
-                                    <h3>Regístrate gratis ahora mismo!</h3>
-                                    <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" style="width: 100px;" alt="logo"/>
-                                    <div class="product-list-detail">
-                                        <h4> Descripción <!--{{product.name}}--></h4>
-                                        <span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio reprehenderit quis sed. Similique recusandae iusto earum explicabo reiciendis maiores corrupti amet quidem provident, mollitia, a sint adipisci enim itaque.</span>
-                                    </div>
-                                </div>    
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
+                  <h3>Regístrate gratis ahora mismo!</h3>
+                  <img
+                    src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+                    style="width: 100px"
+                    alt="logo"
+                  />
+                  <div class="product-list-detail">
+                    <h4>
+                      Descripción
+                      <!--{{product.name}}-->
+                    </h4>
+                    <span>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Impedit distinctio reprehenderit quis sed. Similique
+                      recusandae iusto earum explicabo reiciendis maiores
+                      corrupti amet quidem provident, mollitia, a sint adipisci
+                      enim itaque.</span
+                    >
+                  </div>
                 </div>
-                
-                <!--Linea de division de componentes-->
-                <div class="p-col-1">
-                    <p-divider layout="vertical">
-                    </p-divider>
-                </div>
-    
-                
-                <div class="p-col-7 p-ai-center p-jc-center">
-                    <div class="p-grid p-fluid">
-                        <div class="p-col-12 p-md-6">
-                            <div class="card">
-                                <h6>Nombres:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-user"></i>
-                                        <input type="text" pInputText placeholder="Nombre"/>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Email:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-envelope"></i>
-                                        <input type="text" pInputText placeholder="Correo Electronico"/>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Ciudad:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <p-multiSelect [options]="groupedCities" [group]="true" [(ngModel)]="selectedCities4" defaultLabel="Selecciona una Ciudad" scrollHeight="250px" display="chip">
-                                            <ng-template let-group pTemplate="group">
-                                                <div class="p-d-flex p-ai-center">
-                                                    <img src="assets/demo/flags/flag_placeholder.png" [class]="'p-mr-2 flag flag-' + group.value" style="width: 20px" />
-                                                    <span>{{group.label}}</span>
-                                                </div>
-                                            </ng-template>
-                                        </p-multiSelect>
-                                    </span>
-                                </div>
-    
-                                <h6>Carrera Universitaria:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <input type="text" pInputText placeholder="Carrera universitaria que desempeña"/>
-                                </div>
-    
-                                <h6>Estado Civil:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-info-circle"></i>
-                                        <p-dropdown inputId="state" [options]="estadosCiviles" [(ngModel)]="seleccionEstadoCivil" placeholder="Seleccionar estado civil" optionLabel="name"></p-dropdown>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Etnia:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <input type="text" pInputText placeholder="Ingrese su etnia"/>
-                                </div>
-    
-                                <h6>Estudios Previos:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <input type="text" pInputText placeholder="Ingrese sus estudios"/>   
-                                </div>
-    
-                                <h6>Nivel de Formación:</h6>
-                                <div class="p-grid p-formgrid">
-                                   <input type="text" pInputText placeholder="Ingrese su nivel de formación"/>
-                                </div>
-                                
-                                <h6>Ingrese una contraseña:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-lock"></i>
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            name="password"
-                                            placeholder="Ingrese su contraseña"
-                                            pPassword
-                                            required
-                                            ngModel
-                                            [feedback]="false"
-                                        />
-                                    </span>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="p-col-12 p-md-6">
-                            <div class="card">
-                                <h6>Apellidos:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-user"></i>
-                                        <input type="text" pInputText placeholder="Apellido"/>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Teléfono:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-phone"></i>
-                                        <input type="text" pInputText placeholder="Número de teléfono"/>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Fecha de Nacimiento:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-user"></i>
-                                        <p-calendar [showIcon]="true" inputId="icon" placeholder="07/20/1998"></p-calendar>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Grado de Discapacidad:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <p-inputNumber mode="decimal" prefix="% " [showButtons]="true" [min]="0" [max]="100"></p-inputNumber>
-                                    </span>    
-                                </div>
-    
-                                <h6>Número de Hijos:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <p-inputNumber mode="decimal" [showButtons]="true" [min]="0" [max]="30"></p-inputNumber>
-                                    </span>
-                                    
-                                </div>
-    
-                               
-    
-                                <h6>Seleccionar</h6>
-                                <div class="p-grid p-formgrid" style="text-align: center;">
-                                    <div class="p-col-5 p-md-3">
-                                        <div class="p-field-radiobutton">
-                                            <p-radioButton name="genero" value="Masculino" [(ngModel)]="variableGeneroRadio" id="city1"></p-radioButton>
-                                            <label for="city1">Masculino</label>
-                                        </div>
-                                    </div>
-                                    <div class="p-col-5 p-md-3">
-                                        <div class="p-field-radiobutton">
-                                            <p-radioButton name="genero" value="Femenino" [(ngModel)]="variableGeneroRadio" id="city2"></p-radioButton>
-                                            <label for="city2">Femenino</label>
-                                        </div>
-                                    </div>
-                                    <div class="p-col-5 p-md-3">
-                                        <div class="p-field-radiobutton">
-                                            <p-radioButton name="genero" value="LGBT" [(ngModel)]="variableGeneroRadio" id="city3"></p-radioButton>
-                                            <label for="city3">LGBT</label>
-                                        </div>
-                                    </div>
-                                    <div class="p-col-5 p-md-3">
-                                        <div class="p-field-radiobutton">
-                                            <p-radioButton name="genero" value="Otro" [(ngModel)]="variableGeneroRadio" id="city4"></p-radioButton>
-                                            <label for="city4">Otro</label>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                                <h6>Responsable/Tutor:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-user"></i>
-                                        <input type="text" disabled pInputText value="Angel Perez"/>
-                                    </span>
-                                    
-                                </div>
-    
-                                <h6>Código de Estudiante:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <input type="text" pInputText placeholder="Ingrese código Estudiante"/>
-                                </div>
-    
-                                <h6>Repita la contraseña:</h6>
-                                <div class="p-grid p-formgrid">
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-lock"></i>
-                                        <input
-                                            type="password"
-                                            id="passwordVerificacion"
-                                            name="passwordVerificacion"
-                                            placeholder="Ingrese su contraseña"
-                                            pPassword
-                                            required
-                                            ngModel
-                                            [feedback]="false"
-                                        />
-                                    </span>
-                                </div>
-    
-                                
-                            </div>
-                            
-                            
-    
-                        </div>
-                        <div class="p-col-12 p-md-12">
-                            <div class="card">
-                                <h6>Experiencia Laboral</h6>
-                                <div class="p-grid p-formgrid">
-                                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                        <span class="p-input-icon-left">
-                                            <i class="pi pi-user"></i>
-                                            <input type="text" pInputText placeholder="Área Laboral"/>
-                                        </span>
-                                    </div>
-                                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                        <span class="p-input-icon-right">
-                                            <input type="text" pInputText placeholder="Años de experiencia"/>
-                                            <i class="pi pi-search"></i>
-                                        </span>
-                                    </div>
-                                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                                        <span class="p-input-icon-left p-input-icon-right">
-                                            <i class="pi pi-user"></i>
-                                            <input type="text" pInputText placeholder="Sector Económico"/>
-                                            <i class="pi pi-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                       
-                    </div>
-    
-                    
-                    <p-divider layout="horizontal" align="center">
-                        <div class="buttons">
-                            <button
-                              pButton
-                              type="submit"
-                              label="Registrarme"
-                              style="margin-right: 2em;"
-                            ></button>
-                        </div> 
-                    </p-divider>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+
+        <!--Linea de division de componentes-->
+        <div class="p-col-1">
+          <p-divider layout="vertical"> </p-divider>
+        </div>
+
+        <div style="margin-top: 2em" class="p-col-7 p-ai-center p-jc-center">
+          <div *ngIf="usuarioNoRegistrado == true">
+            <form
+              class="forms"
+              class="p-grid p-fluid"
+              (ngSubmit)="onSubmit(signInForm)"
+              #signInForm="ngForm"
+            >
+              <div class="p-col-12 p-md-6">
+                <h5 style="text-align: center">
+                  Información Personal y de Contacto
+                </h5>
+                <div class="card">
+                  <h6>Nombres:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-user"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Nombre"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        autofocus
+                        [(ngModel)]="nombreParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Apellidos:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-user"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Apellido"
+                        id="apellido"
+                        name="apellido"
+                        required
+                        autofocus
+                        [(ngModel)]="apellidoParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Teléfono:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-phone"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Número de teléfono"
+                        id="telefono"
+                        name="telefono"
+                        required
+                        autofocus
+                        [(ngModel)]="telefonoParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Pais:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-envelope"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Pais"
+                        id="pais"
+                        name="pais"
+                        required
+                        autofocus
+                        [(ngModel)]="paisParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Ciudad:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-envelope"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Ciudad"
+                        id="ciudad"
+                        name="ciudad"
+                        required
+                        autofocus
+                        [(ngModel)]="ciudadParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Direccion:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-envelope"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Direccion"
+                        id="direccion"
+                        name="direccion"
+                        required
+                        autofocus
+                        [(ngModel)]="direccionParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Fecha de Nacimiento:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-user"></i>
+                      <p-calendar
+                        [showIcon]="true"
+                        inputId="fecha"
+                        placeholder="1998-07-20/"
+                        [(ngModel)]="fechaNacimientoParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      ></p-calendar>
+                    </span>
+                  </div>
+
+                  <h6>Seleccionar</h6>
+                  <div class="p-grid p-formgrid" style="text-align: center">
+                    <div class="p-col-5 p-md-3">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton
+                          name="genero"
+                          value="Hombres"
+                          [(ngModel)]="variableGeneroRadio"
+                          [ngModelOptions]="{ standalone: true }"
+                          id="genero1"
+                          autofocus
+                        ></p-radioButton>
+                        <label for="genero1">Hombres</label>
+                      </div>
+                    </div>
+
+                    <div class="p-col-5 p-md-3">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton
+                          name="genero"
+                          value="Mujeres"
+                          [(ngModel)]="variableGeneroRadio"
+                          [ngModelOptions]="{ standalone: true }"
+                          id="genero2"
+                        ></p-radioButton>
+                        <label for="genero2">Mujeres</label>
+                      </div>
+                    </div>
+                    <div class="p-col-5 p-md-3">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton
+                          name="genero"
+                          value="LGBT"
+                          [(ngModel)]="variableGeneroRadio"
+                          [ngModelOptions]="{ standalone: true }"
+                          id="genero3"
+                        ></p-radioButton>
+                        <label for="genero3">LGBT</label>
+                      </div>
+                    </div>
+
+                    <div class="p-col-5 p-md-3">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton
+                          name="genero"
+                          value="Otro"
+                          [(ngModel)]="variableGeneroRadio"
+                          [ngModelOptions]="{ standalone: true }"
+                          id="genero4"
+                        ></p-radioButton>
+                        <label for="genero4">Otro</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-6">
+                <h5 style="text-align: center">Información Relevante</h5>
+                <div class="card">
+                  <h6>Carrera Universitaria:</h6>
+                  <div class="p-grid p-formgrid">
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Carrera universitaria que desempeña"
+                      id="carrera"
+                      name="carrera"
+                      autofocus
+                      [(ngModel)]="carreraParticipante"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+
+                  <h6>Estudios Previos:</h6>
+                  <div class="p-grid p-formgrid">
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Ingrese sus estudios"
+                      id="estudiosPrevios"
+                      name="estudiosPrevios"
+                      autofocus
+                      [(ngModel)]="estudiosPreviosParticipante"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+
+                  <h6>Nivel de Formación:</h6>
+                  <div class="p-grid p-formgrid">
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Ingrese su nivel de formación"
+                      id="nivelFormacion"
+                      name="nivelFormacion"
+                      autofocus
+                      [(ngModel)]="nivelFormacionParticipante"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+
+                  <h6>Código de Estudiante:</h6>
+                  <div class="p-grid p-formgrid">
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Ingrese código Estudiante"
+                      id="codigoEstudiante"
+                      name="codigoEstudiante"
+                      autofocus
+                      [(ngModel)]="codigoEstudianteParticipante"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+
+                  <h6>Número de Hijos:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <p-inputNumber
+                        mode="decimal"
+                        placeholder="Ingrece el número de hijos que posee"
+                        [showButtons]="true"
+                        [min]="0"
+                        [max]="30"
+                        id="numeroHijos"
+                        name="numeroHijos"
+                        autofocus
+                        [(ngModel)]="numeroHijosParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      ></p-inputNumber>
+                    </span>
+                  </div>
+
+                  <h6>Responsable/Tutor:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-user"></i>
+                      <p-dropdown
+                        inputId="responsable"
+                        required
+                        placeholder="seleccione a su Responsable/experto"
+                        [options]="evaluadoresList"
+                        [(ngModel)]="seleccionEvaluador"
+                        [ngModelOptions]="{ standalone: true }"
+                        optionLabel="name"
+                      ></p-dropdown>
+                    </span>
+                  </div>
+
+                  <h6>Estado Civil:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-info-circle"></i>
+                      <p-dropdown
+                        inputId="estado"
+                        [options]="estadosCiviles"
+                        [(ngModel)]="seleccionEstadoCivil"
+                        [ngModelOptions]="{ standalone: true }"
+                        placeholder="Seleccionar estado civil"
+                        optionLabel="name"
+                      ></p-dropdown>
+                    </span>
+                  </div>
+
+                  <h6>Etnia:</h6>
+                  <div class="p-grid p-formgrid">
+                    <input
+                      type="text"
+                      pInputText
+                      placeholder="Ingrese su etnia"
+                      id="etnia"
+                      name="etnia"
+                      autofocus
+                      [(ngModel)]="etniaParticipante"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-col-12 p-md-12">
+                <h5>Información necesaria para utilizar Apliación</h5>
+                <div class="card">
+                  <h6>Email:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-envelope"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Correo Electronico"
+                        id="email"
+                        name="email"
+                        required
+                        autofocus
+                        [(ngModel)]="emailParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Ingrese una contraseña:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-lock"></i>
+                      <input
+                        type="password"
+                        placeholder="Ingrese su contraseña"
+                        pPassword
+                        required
+                        ngModel
+                        [feedback]="false"
+                        id="password"
+                        name="password"
+                        required
+                        autofocus
+                        [(ngModel)]="passwordParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+
+                  <h6>Repita la contraseña:</h6>
+                  <div class="p-grid p-formgrid">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-lock"></i>
+                      <input
+                        type="password"
+                        placeholder="Ingrese su contraseña"
+                        pPassword
+                        required
+                        ngModel
+                        [feedback]="false"
+                        id="passwordVerificacion"
+                        name="passwordVerificacion"
+                        required
+                        autofocus
+                        [(ngModel)]="passwordVerificacionParticipante"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style="margin-bottom: 1em; color: #ce7483"
+                *ngIf="isFormValid"
+              >
+                Por favor llena todos los espacios.
+              </div>
+
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style="margin-bottom: 1em; color: #ce7483"
+                *ngIf="areCredentialsInvalid"
+              >
+                Correo ya Utilizado
+              </div>
+
+              <div
+                class="buttons"
+                style="width: 100%"
+                *ngIf="usuarioNoRegistrado == true"
+              >
+                <button
+                  pButton
+                  type="submit"
+                  label="Registrarme"
+                  style="margin-right: 2em"
+                ></button>
+              </div>
+            </form>
+          </div>
+
+          <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-12" *ngIf="usuarioRegistrado == true">
+              <h5>Información Relevante para Ejercitarios</h5>
+              <div class="card">
+                <div class="p-col-12 p-md-12">
+                  <h6>Discapacidades que posee, puede ingresar varias:</h6>
+                  <div class="card">
+                    <div class="p-grid p-formgrid">
+                      <div class="p-col-12 p-mb-6 p-lg-6 p-mb-lg-0">
+                        <span class="p-input-icon-left">
+                          <i class="pi pi-info-circle"></i>
+                          <p-dropdown
+                            inputId="tipo"
+                            placeholder="seleccione el tipo de discapacidad"
+                            [options]="discapacidadPersona"
+                            [(ngModel)]="seleccionTipoDiscapacidad"
+                            [ngModelOptions]="{ standalone: true }"
+                            optionLabel="name"
+                          ></p-dropdown>
+                        </span>
+                      </div>
+                      <div class="p-col-12 p-mb-6 p-lg-6 p-mb-lg-0">
+                        <span class="p-input-icon-right">
+                          <p-inputNumber
+                            mode="decimal"
+                            prefix="% "
+                            placeholder="Ingrece el grado de discapacidades"
+                            [showButtons]="true"
+                            [min]="0"
+                            [max]="100"
+                            id="gradoDiscapacidad"
+                            name="gradoDiscapacidad"
+                            required
+                            autofocus
+                            [(ngModel)]="gradoDiscapacidadParticipante"
+                            [ngModelOptions]="{ standalone: true }"
+                          ></p-inputNumber>
+                        </span>
+                      </div>
+
+                      <div
+                        class="p-col-12 p-lg-12 p-mb-3 p-mb-lg-3"
+                        style="margin-top: 0.5em"
+                      >
+                        <button
+                          pButton
+                          (click)="agregarDiscapacidad()"
+                          type="button"
+                          label="Agregar Discapacidad"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-col-5 p-md-12">
+                  <h6>Experiencia Laboral:</h6>
+
+                  <div class="card">
+                    <div class="p-grid p-formgrid">
+                      <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <span class="p-input-icon-left">
+                          <i class="pi pi-user"></i>
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Área Laboral"
+                            id="areaLaboral"
+                            name="areaLaboral"
+                            required
+                            autofocus
+                            [(ngModel)]="areaLaboralParticipante"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                        </span>
+                      </div>
+                      <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <span class="p-input-icon-right">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Años de experiencia"
+                            id="experienciaAnios"
+                            name="experienciaAnios"
+                            required
+                            autofocus
+                            [(ngModel)]="experienciaAniosParticipante"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                          <i class="pi pi-search"></i>
+                        </span>
+                      </div>
+                      <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <span class="p-input-icon-left p-input-icon-right">
+                          <i class="pi pi-user"></i>
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Sector Económico"
+                            id="sectorEconomico"
+                            name="sectorEconomico"
+                            required
+                            autofocus
+                            [(ngModel)]="sectorEconomicoParticipante"
+                            [ngModelOptions]="{ standalone: true }"
+                          />
+                          <i class="pi pi-search"></i>
+                        </span>
+                      </div>
+                      <div
+                        class="p-col-12 p-lg-12 p-mb-3 p-mb-lg-3"
+                        style="margin-top: 0.5em"
+                      >
+                        <button
+                          pButton
+                          (click)="agregarExperiencia()"
+                          type="button"
+                          label="Agregar Discapacidad"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p-divider
+            layout="horizontal"
+            align="center"
+            *ngIf="usuarioRegistrado == true"
+          >
+            <div class="buttons">
+              <button
+                pButton
+                (click)="registrarParticipante()"
+                type="submit"
+                label="Registrarme"
+                style="margin-right: 2em"
+              ></button>
+            </div>
+          </p-divider>
+        </div>
+      </div>
     </div>
-    
-    
+  </div>
 </body>

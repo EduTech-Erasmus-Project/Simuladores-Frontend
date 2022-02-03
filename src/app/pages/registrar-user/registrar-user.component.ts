@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { SelectItemGroup } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
+import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 
 @Component({
   selector: 'app-registrar-user',
@@ -12,82 +14,46 @@ import { CountryService } from 'src/app/demo/service/countryservice';
 ]
 })
 export class RegistrarUserComponent implements OnInit {
-
-  groupedCities: SelectItemGroup[];  
-  selectedCities4: any[];
+  
+  //Varibles para el formulario
+  nombreParticipante: string ="";
+  apellidoParticipante: string ="";
+  telefonoParticipante: string ="";
+  paisParticipante: string ="";
+  ciudadParticipante: string ="";
+  direccionParticipante: string ="";
+  fechaNacimientoParticipante: string ="";
+  carreraParticipante: string ="";
+  estudiosPreviosParticipante: string ="";
+  nivelFormacionParticipante: string ="";
+  codigoEstudianteParticipante: string ="";
+  numeroHijosParticipante: number =0;
+  etniaParticipante: string ="";
+  emailParticipante: string ="";
+  passwordParticipante: string ="";
+  passwordVerificacionParticipante: string ="";
+  gradoDiscapacidadParticipante: number = 0;
+  areaLaboralParticipante: string = "";
+  experienciaAniosParticipante: string = "";
+  sectorEconomicoParticipante: string = "";
+  
   variableGeneroRadio: string;
-  password: string;
   seleccionEstadoCivil: any = null;
+  seleccionTipoDiscapacidad: any = null;
+  seleccionEvaluador: any = null;
+  evaluadoresList: any[] = [];
+  cantidadDiscapacidad: number = 1;
+  listaDiscapacidades: any[] = [];
+  cantidadExperienciaLaboral: number = 1;
+  
+  usuarioRegistrado: boolean = false;
+  usuarioNoRegistrado: boolean = true;
+  
+  isFormValid = false;
+  areCredentialsInvalid = false;
 
-
-  constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
-    this.groupedCities = [
-      {
-          label: 'Alemania', value: 'de', 
-          items: [
-              {label: 'Berlin', value: 'Berlin'},
-              {label: 'Frankfurt', value: 'Frankfurt'},
-              {label: 'Hamburg', value: 'Hamburg'},
-              {label: 'Munich', value: 'Munich'}
-          ]
-      },
-      {
-          label: 'Ecuador', value: 'ec', 
-          items: [
-              {label: 'Cuenca', value: 'Cuenca'},
-              {label: 'Quito', value: 'Quito'},
-              {label: 'Guayaquil', value: 'Guayaquil'},
-              {label: 'Santo Domingo', value: 'Santo Domingo'},
-              {label: 'Machala', value: 'Machala'},
-              {label: 'Durán', value: 'Durán'},
-              {label: 'Manta', value: 'Manta'},
-              {label: 'Portoviejo', value: 'Portoviejo'},
-              {label: 'Loja', value: 'Loja'},
-              {label: 'Ambato', value: 'Ambato'}
-              
-          ]
-      },
-      {
-        label: 'Japón', value: 'jp', 
-        items: [
-            {label: 'Kyoto', value: 'Kyoto'},
-            {label: 'Osaka', value: 'Osaka'},
-            {label: 'Tokyo', value: 'Tokyo'},
-            {label: 'Yokohama', value: 'Yokohama'}
-        ]
-      },
-      {
-        label: 'Mexico', value: 'mx', 
-        items: [
-            {label: 'Guadalajara', value: 'Guadalajara'},
-            {label: 'Guanajuato', value: 'Guanajuato'},
-            {label: 'Puebla', value: 'Puebla'},
-            {label: 'Morelia', value: 'Morelia'},
-            {label: 'Monterrey', value: 'Monterrey'},
-            {label: 'Querétaro', value: 'Querétaro'},
-            {label: 'Mérida', value: 'Mérida'},
-            {label: 'Ciudad de México', value: 'Ciudad de México'},
-            {label: 'Xalapa', value: 'Xalapa'},
-            {label: 'Zacatecas', value: 'Zacatecas'}
-            
-        ]
-      },
-      {
-        label: 'USA', value: 'us', 
-        items: [
-            {label: 'Chicago', value: 'Chicago'},
-            {label: 'Los Angeles', value: 'Los Angeles'},
-            {label: 'New York', value: 'New York'},
-            {label: 'San Francisco', value: 'San Francisco'}
-        ]
-      } 
-
-    ];
+  constructor(private informacionEvaluador: InformacionEvaluadorService) { 
     
-    this.breadcrumbService.setItems([
-      { label: 'UI Kit' },
-      { label: 'Input', routerLink: ['/uikit/input'] }
-    ]);
   }
 
   estadosCiviles: any[] = [
@@ -99,7 +65,56 @@ export class RegistrarUserComponent implements OnInit {
     {name: 'Otro', value: 'Otro'}
   ];
 
+ discapacidadPersona: any[] = [
+    {name: 'Visual', value: 'Visual'},
+    {name: 'Intelectual', value: 'Intelectual'},
+    {name: 'Física', value: 'Fisica'},
+    {name: 'Auditiva', value: 'Auditiva'},
+    {name: 'Otras', value: 'Otras'},
+  ];
+
   ngOnInit(): void {
+    this.recuperarEvaluadores();
   }
+
+  recuperarEvaluadores(){
+    var nombre:string = ''
+    this.informacionEvaluador.recuperarEvaluadoresParaRegistro().then(
+      evaluadores => {
+        evaluadores.forEach(evaluador => {
+          nombre = evaluador.nombre + evaluador.apellido
+          this.evaluadoresList.push({name:nombre, value:evaluador.correo})
+        });
+      }
+    );
+  }
+
+  registrarParticipante(){
+    
+  }
+
+  onSubmit(signInForm: NgForm){
+    console.log("//////"+this.nombreParticipante)
+    if (!signInForm.valid) {
+      this.isFormValid = true;
+      this.areCredentialsInvalid = false;
+      return;
+    }
+    
+    //this.usuarioRegistrado = true;
+    //this.usuarioNoRegistrado = false;
+
+  }
+
+  agregarExperiencia(){
+
+  }
+
+  agregarDiscapacidad(){
+
+  }
+
+
+
 
 }
