@@ -122,9 +122,11 @@
                         required
                         autofocus
                         [(ngModel)]="nombreParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Apellidos:</h6>
@@ -140,9 +142,11 @@
                         required
                         autofocus
                         [(ngModel)]="apellidoParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Teléfono:</h6>
@@ -158,9 +162,11 @@
                         required
                         autofocus
                         [(ngModel)]="telefonoParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Pais:</h6>
@@ -176,9 +182,11 @@
                         required
                         autofocus
                         [(ngModel)]="paisParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Ciudad:</h6>
@@ -194,9 +202,11 @@
                         required
                         autofocus
                         [(ngModel)]="ciudadParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Direccion:</h6>
@@ -212,9 +222,11 @@
                         required
                         autofocus
                         [(ngModel)]="direccionParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Fecha de Nacimiento:</h6>
@@ -224,11 +236,14 @@
                       <p-calendar
                         [showIcon]="true"
                         inputId="fecha"
-                        placeholder="1998-07-20/"
+                        placeholder="1998-07-20"
                         [(ngModel)]="fechaNacimientoParticipante"
                         [ngModelOptions]="{ standalone: true }"
                       ></p-calendar>
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Seleccionar</h6>
@@ -239,7 +254,6 @@
                           name="genero"
                           value="Hombres"
                           [(ngModel)]="variableGeneroRadio"
-                          [ngModelOptions]="{ standalone: true }"
                           id="genero1"
                           autofocus
                         ></p-radioButton>
@@ -253,7 +267,6 @@
                           name="genero"
                           value="Mujeres"
                           [(ngModel)]="variableGeneroRadio"
-                          [ngModelOptions]="{ standalone: true }"
                           id="genero2"
                         ></p-radioButton>
                         <label for="genero2">Mujeres</label>
@@ -265,7 +278,6 @@
                           name="genero"
                           value="LGBT"
                           [(ngModel)]="variableGeneroRadio"
-                          [ngModelOptions]="{ standalone: true }"
                           id="genero3"
                         ></p-radioButton>
                         <label for="genero3">LGBT</label>
@@ -278,12 +290,14 @@
                           name="genero"
                           value="Otro"
                           [(ngModel)]="variableGeneroRadio"
-                          [ngModelOptions]="{ standalone: true }"
                           id="genero4"
                         ></p-radioButton>
                         <label for="genero4">Otro</label>
                       </div>
                     </div>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
                 </div>
               </div>
@@ -300,7 +314,6 @@
                       name="carrera"
                       autofocus
                       [(ngModel)]="carreraParticipante"
-                      [ngModelOptions]="{ standalone: true }"
                     />
                   </div>
 
@@ -314,7 +327,6 @@
                       name="estudiosPrevios"
                       autofocus
                       [(ngModel)]="estudiosPreviosParticipante"
-                      [ngModelOptions]="{ standalone: true }"
                     />
                   </div>
 
@@ -328,7 +340,6 @@
                       name="nivelFormacion"
                       autofocus
                       [(ngModel)]="nivelFormacionParticipante"
-                      [ngModelOptions]="{ standalone: true }"
                     />
                   </div>
 
@@ -342,7 +353,6 @@
                       name="codigoEstudiante"
                       autofocus
                       [(ngModel)]="codigoEstudianteParticipante"
-                      [ngModelOptions]="{ standalone: true }"
                     />
                   </div>
 
@@ -359,7 +369,6 @@
                         name="numeroHijos"
                         autofocus
                         [(ngModel)]="numeroHijosParticipante"
-                        [ngModelOptions]="{ standalone: true }"
                       ></p-inputNumber>
                     </span>
                   </div>
@@ -378,6 +387,9 @@
                         optionLabel="name"
                       ></p-dropdown>
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio</span
+                    >
                   </div>
 
                   <h6>Estado Civil:</h6>
@@ -405,7 +417,6 @@
                       name="etnia"
                       autofocus
                       [(ngModel)]="etniaParticipante"
-                      [ngModelOptions]="{ standalone: true }"
                     />
                   </div>
                 </div>
@@ -427,9 +438,23 @@
                         required
                         autofocus
                         [(ngModel)]="emailParticipante"
-                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="checkRegexCorreo()"
                       />
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio &nbsp;</span
+                    >
+                    <span *ngIf="checkCorreo" style="color: red"
+                      >Correo Invalido &nbsp;</span
+                    >
+                    <div
+                      class="alert alert-danger"
+                      role="alert"
+                      style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="areCredentialsInvalid"
+                    >
+                      Correo utilizado anteriormente
+                    </div>
                   </div>
 
                   <h6>Ingrese una contraseña:</h6>
@@ -448,9 +473,25 @@
                         required
                         autofocus
                         [(ngModel)]="passwordParticipante"
-                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="validarPassword()"
+                        style="width: 85%;"
                       />
+                      <button
+                        pButton
+                        type="button"
+                        id="buttonMostrar"
+                        (click)="mostrarPassword()"
+                        label="Mostrar"
+                        style="width: 15%;"
+                      ></button>
                     </span>
+
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio &nbsp;</span
+                    >
+                    <div class="alert alert-danger" role="alert">
+                      <p id="tipoPassword"></p>
+                    </div>
                   </div>
 
                   <h6>Repita la contraseña:</h6>
@@ -469,9 +510,38 @@
                         required
                         autofocus
                         [(ngModel)]="passwordVerificacionParticipante"
-                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="verificacionSimilaridadPassword()"
+                        (click)="verificacionSimilaridadPassword()"
+                        style="width: 85%;"
                       />
+                      <button
+                        pButton
+                        type="button"
+                        id="buttonMostrarVerificacion"
+                        (click)="mostrarPasswordVerificacion()"
+                        label="Mostrar"
+                        style="width: 15%;"
+                      ></button>
                     </span>
+                    <span *ngIf="isFormValid" style="color: red"
+                      >* Obligatorio &nbsp;</span
+                    >
+                    <div
+                      class="alert alert-danger"
+                      role="alert"
+                      style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="passwordIncorrect == true"
+                    >
+                      Contraseñas no coinciden
+                    </div>
+                    <div
+                      class="alert alert-danger"
+                      role="alert"
+                      style="margin-bottom: 1em; color: #5fe6b2"
+                      *ngIf="passwordIncorrect == false"
+                    >
+                      Contraseñas coinciden
+                    </div>
                   </div>
                 </div>
               </div>
@@ -483,15 +553,6 @@
                 *ngIf="isFormValid"
               >
                 Por favor llena todos los espacios.
-              </div>
-
-              <div
-                class="alert alert-danger"
-                role="alert"
-                style="margin-bottom: 1em; color: #ce7483"
-                *ngIf="areCredentialsInvalid"
-              >
-                Correo ya Utilizado
               </div>
 
               <div
