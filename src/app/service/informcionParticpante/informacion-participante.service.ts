@@ -6,7 +6,7 @@ import { AsignacionTabla } from 'src/app/model/Asignacion';
 import { Comentario, ComentarioInterface } from 'src/app/model/Comentario';
 import { DiscapacidadParticipanteInterface } from 'src/app/model/DiscapacidadParticipante';
 import { ExperienciaLaboralInterface } from 'src/app/model/ExperienciaLaboral';
-import { Participante } from 'src/app/model/Participante';
+import { Participante, ParticipanteAceptacionTabla } from 'src/app/model/Participante';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -101,5 +101,14 @@ export class InformacionParticipanteService {
     };
     return this.http.post<any>(environment.WS_PATH+"agregarNuevoComentarioActividadParticipante", {"comentario": comentario.getComentario, "fecha": comentario.getFecha, "actividad":comentario.getActividad.idActividad}, config).toPromise();
   }
+
+  public registrarNuevoParticipante(participante: ParticipanteAceptacionTabla): Observable<any>{
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"registrarParticipante", participante, config);
+  }
+
+  
   
 }

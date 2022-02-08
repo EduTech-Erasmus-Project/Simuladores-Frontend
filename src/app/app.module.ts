@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {DatePipe, HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 // PrimeNG Components for demos
 import {AccordionModule} from 'primeng/accordion';
@@ -332,7 +332,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService
+        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService, DatePipe
     ],
     bootstrap: [AppComponent]
 })

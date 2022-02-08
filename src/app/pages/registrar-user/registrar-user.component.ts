@@ -1,7 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
+import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
 
 @Component({
   selector: 'app-registrar-user',
@@ -35,7 +38,7 @@ export class RegistrarUserComponent implements OnInit {
   experienciaAniosParticipante: string = "";
   sectorEconomicoParticipante: string = "";
 
-  variableGeneroRadio: string;
+  variableGeneroRadio: string = "";
   seleccionEstadoCivil: any = null;
   seleccionTipoDiscapacidad: any = null;
   seleccionEvaluador: any = null;
@@ -55,7 +58,9 @@ export class RegistrarUserComponent implements OnInit {
   buttonMostrarVerificacion: string = "Mostrar"
   checkCorreo = false;
 
-  constructor(private informacionEvaluador: InformacionEvaluadorService, private autentificacionService: AutentificacionUsuarioService) {
+  participante: ParticipanteAceptacionTabla;
+
+  constructor(private datePipe: DatePipe, private informacionEvaluador: InformacionEvaluadorService, private autentificacionService: AutentificacionUsuarioService, private informacionParticipante: InformacionParticipanteService) {
 
   }
 
@@ -99,80 +104,83 @@ export class RegistrarUserComponent implements OnInit {
     if (!signInForm.valid) {
       this.isFormValid = true;
       this.areCredentialsInvalid = false;
-      //  return;
+      return;
     }
     this.validadCorreo();
   }
 
   validadCorreo() {
-    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    
-    if(regex.test(this.emailParticipante)) {
-      this.autentificacionService.checkEmail(this.emailParticipante).subscribe(res => {
-        if (res.tipoUsuario != "notExist") {
-          this.areCredentialsInvalid = true;
-          return;
-        }
+
+    this.autentificacionService.checkEmail(this.emailParticipante).subscribe(res => {
+      if (res.tipoUsuario == "notExist") {
         this.validarPassword();
-      });
-    }else{
+      }
       this.areCredentialsInvalid = true;
       return;
-    }
-    
+      
+    });
+
   }
 
   checkRegexCorreo() {
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    
-    if(regex.test(this.emailParticipante)) {
+
+    if (regex.test(this.emailParticipante)) {
       this.checkCorreo = false;
       return;
-    }else{
+    } else {
       this.checkCorreo = true;
       return;
     }
-    
+
   }
 
-  validarPassword(){
+  validarPassword() {
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
-    if(strongRegex.test(this.passwordParticipante)) {
+    if (strongRegex.test(this.passwordParticipante)) {
       const p = document.getElementById("tipoPassword");
       p.style.color = "green";
       p.textContent = "Contraseña Fuerte"
       this.validatePasswd = true;
-      this.verificacionSimilaridadPassword();
-    }else if(mediumRegex.test(this.passwordParticipante)) {
+      this.verificacionDePasswordsIguales();
+    } else if (mediumRegex.test(this.passwordParticipante)) {
       const p = document.getElementById("tipoPassword");
       p.style.color = "orange";
       p.textContent = "Contraseña Normal"
       this.validatePasswd = true;
-      this.verificacionSimilaridadPassword();
+      this.verificacionDePasswordsIguales();
     } else {
       const p = document.getElementById("tipoPassword");
       p.style.color = "#ce7483";
       p.textContent = "Contraseña Debil"
       this.validatePasswd = false;
     }
-    
+
   }
 
-  verificacionSimilaridadPassword(){
-    
-    if(this.passwordParticipante != this.passwordVerificacionParticipante){
+  verificacionDePasswordsIguales() {
+
+    if (this.passwordParticipante != this.passwordVerificacionParticipante) {
       this.passwordIncorrect = true;
       return;
-    }else{
-      this.passwordIncorrect = false;
-    }
-    
+    } 
+    this.crearNuevoParticipante();
   }
 
-  mostrarPassword(){
-    
+  verificacionSimilaridadPassword() {
+
+    if (this.passwordParticipante != this.passwordVerificacionParticipante) {
+      this.passwordIncorrect = true;
+      return;
+    } else {
+      this.passwordIncorrect = false;
+    }
+  }
+
+  mostrarPassword() {
+
     if (this.buttonMostrar == "Ocultar") {
       const p = document.getElementById("password") as HTMLInputElement;
       const b = document.getElementById("buttonMostrar") as HTMLInputElement;
@@ -189,11 +197,11 @@ export class RegistrarUserComponent implements OnInit {
       this.buttonMostrar = "Ocultar"
       return;
     }
-    
+
   }
 
-  mostrarPasswordVerificacion(){
-    
+  mostrarPasswordVerificacion() {
+
     if (this.buttonMostrarVerificacion == "Ocultar") {
       const p = document.getElementById("passwordVerificacion") as HTMLInputElement;
       const b = document.getElementById("buttonMostrarVerificacion") as HTMLInputElement;
@@ -210,7 +218,41 @@ export class RegistrarUserComponent implements OnInit {
       this.buttonMostrarVerificacion = "Ocultar"
       return;
     }
-    
+
+  }
+
+  crearNuevoParticipante(){
+    this.participante = {
+      id: 0,
+      email: this.emailParticipante,
+      password: this.passwordParticipante,
+      nombre: this.nombreParticipante,
+      apellido: this.apellidoParticipante,
+      telefono: this.telefonoParticipante,
+      pais: this.paisParticipante,
+      ciudad: this.ciudadParticipante,
+      direccion: this.direccionParticipante,
+      estado: "activo",
+      fechaNacimiento: this.datePipe.transform(this.fechaNacimientoParticipante, 'yyyy-MM-dd'),
+      carreraUniversitaria: this.carreraParticipante,
+      genero: this.variableGeneroRadio,
+      numeroDeHijos: this.numeroHijosParticipante,
+      estadoCivil: this.seleccionEstadoCivil.value,
+      etnia: this.etniaParticipante,
+      estudiosPrevios: this.estudiosPreviosParticipante,
+      codigoEstudiante: this.codigoEstudianteParticipante,
+      nivelDeFormacion: this.nivelFormacionParticipante,
+      aceptacionPendianteResponsable: "faltaAceptacion",
+      responsable: this.seleccionEvaluador.value
+    }
+    this.informacionParticipante.registrarNuevoParticipante(this.participante).subscribe(res=>{
+      if(res.status == "registrado"){
+        console.log("Aquiiiiiii "+ res.status)
+        this.usuarioRegistrado= true;
+        this.usuarioNoRegistrado = false;
+        return;
+      }
+    });
   }
 
   agregarExperiencia() {

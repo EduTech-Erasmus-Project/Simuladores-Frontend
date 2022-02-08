@@ -251,7 +251,7 @@
                     <div class="p-col-5 p-md-3">
                       <div class="p-field-radiobutton">
                         <p-radioButton
-                          name="genero"
+                          name="genero1"
                           value="Hombres"
                           [(ngModel)]="variableGeneroRadio"
                           id="genero1"
@@ -264,7 +264,7 @@
                     <div class="p-col-5 p-md-3">
                       <div class="p-field-radiobutton">
                         <p-radioButton
-                          name="genero"
+                          name="genero2"
                           value="Mujeres"
                           [(ngModel)]="variableGeneroRadio"
                           id="genero2"
@@ -275,7 +275,7 @@
                     <div class="p-col-5 p-md-3">
                       <div class="p-field-radiobutton">
                         <p-radioButton
-                          name="genero"
+                          name="genero3"
                           value="LGBT"
                           [(ngModel)]="variableGeneroRadio"
                           id="genero3"
@@ -287,7 +287,7 @@
                     <div class="p-col-5 p-md-3">
                       <div class="p-field-radiobutton">
                         <p-radioButton
-                          name="genero"
+                          name="genero4"
                           value="Otro"
                           [(ngModel)]="variableGeneroRadio"
                           id="genero4"
@@ -696,22 +696,6 @@
               </div>
             </div>
           </div>
-
-          <p-divider
-            layout="horizontal"
-            align="center"
-            *ngIf="usuarioRegistrado == true"
-          >
-            <div class="buttons">
-              <button
-                pButton
-                (click)="registrarParticipante()"
-                type="submit"
-                label="Registrarme"
-                style="margin-right: 2em"
-              ></button>
-            </div>
-          </p-divider>
         </div>
       </div>
     </div>
