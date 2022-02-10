@@ -109,6 +109,21 @@ export class InformacionParticipanteService {
     return this.http.post<any>(environment.WS_PATH+"registrarParticipante", participante, config);
   }
 
+  public registrarDiscapacidadParticipante(discapacidad: string, porcentaje: number, correo: string): Observable<any>{
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"registrarDiscapacidad", {"discapacidad":discapacidad,"porcentaje":porcentaje,"correo":correo}, config);
+  }
+
+  public registrarExperienciaLaboralParticipante(sectorEconomicoParticipante: string, areaLaboralParticipante: string, experienciaAniosParticipante: number, emailParticipante: string): Observable<any>{
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"registrarExperienciaLaboral", {"sectorEconomico":sectorEconomicoParticipante,"areaLaboral":areaLaboralParticipante,"experienciaAnios":experienciaAniosParticipante,"correo":emailParticipante}, config);
+  }
+
+
   
   
 }

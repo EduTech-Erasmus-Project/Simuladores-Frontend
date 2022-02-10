@@ -74,15 +74,15 @@
                   />
                   <div class="product-list-detail">
                     <h4>
-                      Descripción
-                      <!--{{product.name}}-->
+                      Simuladores Laborales
                     </h4>
                     <span>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Impedit distinctio reprehenderit quis sed. Similique
-                      recusandae iusto earum explicabo reiciendis maiores
-                      corrupti amet quidem provident, mollitia, a sint adipisci
-                      enim itaque.</span
+                      Por una educación de calidad, somos un equipo de trabajo
+                      que brinda su servicio arduamente a la comunidad con
+                      nuestros conocimientos dentro de los diferentes entornos
+                      de desarrollo tecnológico, con habilidades excepcionales
+                      dispuestos ha ayudar con herramientas tecnológicas sin
+                      animo de lucro.</span
                     >
                   </div>
                 </div>
@@ -474,7 +474,7 @@
                         autofocus
                         [(ngModel)]="passwordParticipante"
                         (keyup)="validarPassword()"
-                        style="width: 85%;"
+                        style="width: 85%"
                       />
                       <button
                         pButton
@@ -482,7 +482,7 @@
                         id="buttonMostrar"
                         (click)="mostrarPassword()"
                         label="Mostrar"
-                        style="width: 15%;"
+                        style="width: 15%"
                       ></button>
                     </span>
 
@@ -512,7 +512,7 @@
                         [(ngModel)]="passwordVerificacionParticipante"
                         (keyup)="verificacionSimilaridadPassword()"
                         (click)="verificacionSimilaridadPassword()"
-                        style="width: 85%;"
+                        style="width: 85%"
                       />
                       <button
                         pButton
@@ -520,7 +520,7 @@
                         id="buttonMostrarVerificacion"
                         (click)="mostrarPasswordVerificacion()"
                         label="Mostrar"
-                        style="width: 15%;"
+                        style="width: 15%"
                       ></button>
                     </span>
                     <span *ngIf="isFormValid" style="color: red"
@@ -575,7 +575,9 @@
               <h5>Información Relevante para Ejercitarios</h5>
               <div class="card">
                 <div class="p-col-12 p-md-12">
-                  <h6>Discapacidades que posee, puede ingresar varias:</h6>
+                  <h6>
+                    Discapacidades que posee, puede ingresar varias o ninguna:
+                  </h6>
                   <div class="card">
                     <div class="p-grid p-formgrid">
                       <div class="p-col-12 p-mb-6 p-lg-6 p-mb-lg-0">
@@ -621,12 +623,28 @@
                           label="Agregar Discapacidad"
                         ></button>
                       </div>
+
+                      <span
+                        *ngIf="formularioDiscapacidad"
+                        id="advertenciaDiscapacidad"
+                        style="color: red"
+                        >* {{ advertenciaDiscapacidad }}&nbsp;</span
+                      >
+
+                      <span
+                        *ngIf="discapacidadCorrectoAlmacenamiento"
+                        style="color: #5fe6b2"
+                        >{{ advertenciaDiscapacidad }}&nbsp;</span
+                      >
                     </div>
                   </div>
                 </div>
 
                 <div class="p-col-5 p-md-12">
-                  <h6>Experiencia Laboral:</h6>
+                  <h6>
+                    Experiencia Laboral que posee, puede ingresar varias o
+                    ninguna:
+                  </h6>
 
                   <div class="card">
                     <div class="p-grid p-formgrid">
@@ -642,24 +660,23 @@
                             required
                             autofocus
                             [(ngModel)]="areaLaboralParticipante"
-                            [ngModelOptions]="{ standalone: true }"
                           />
                         </span>
                       </div>
                       <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
                         <span class="p-input-icon-right">
-                          <input
-                            type="text"
-                            pInputText
-                            placeholder="Años de experiencia"
+                          <p-inputNumber
+                            mode="decimal"
+                            prefix="Años de experiencia: "
+                            [showButtons]="true"
+                            [min]="0"
+                            [max]="50"
                             id="experienciaAnios"
                             name="experienciaAnios"
                             required
                             autofocus
                             [(ngModel)]="experienciaAniosParticipante"
-                            [ngModelOptions]="{ standalone: true }"
-                          />
-                          <i class="pi pi-search"></i>
+                          ></p-inputNumber>
                         </span>
                       </div>
                       <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
@@ -674,9 +691,7 @@
                             required
                             autofocus
                             [(ngModel)]="sectorEconomicoParticipante"
-                            [ngModelOptions]="{ standalone: true }"
                           />
-                          <i class="pi pi-search"></i>
                         </span>
                       </div>
                       <div
@@ -691,6 +706,15 @@
                         ></button>
                       </div>
                     </div>
+                    <span *ngIf="formularioExperiencia" style="color: red"
+                      >* {{ advertenciaExpeciencia }}&nbsp;</span
+                    >
+
+                    <span
+                      *ngIf="experienciaCorrectoAlmacenamiento"
+                      style="color: #5fe6b2"
+                      >{{ advertenciaExpeciencia }}&nbsp;</span
+                    >
                   </div>
                 </div>
               </div>

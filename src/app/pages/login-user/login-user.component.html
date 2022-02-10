@@ -25,14 +25,17 @@
             />
           </a>
         </div>
-        
+
         <h1>Iniciar Sesión</h1>
         <p>Bienvenido de Nuevo a Simuladores Laborales</p>
 
         <label style="font-size: larger">Iniciar con Email</label>
-        
-        <form class="forms" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
-          
+
+        <form
+          class="forms"
+          (ngSubmit)="onSubmit(signInForm)"
+          #signInForm="ngForm"
+        >
           <div class="login-input-wrapper">
             <label for="username">Correo Electrónico</label>
             <input
@@ -43,13 +46,14 @@
               name="username"
               required
               autofocus
-              [(ngModel)] = "username"
+              [(ngModel)]="username"
             />
             <i class="pi pi-user"></i>
           </div>
 
           <div class="login-input-wrapper">
             <label for="password">Contraseña</label>
+            <span><br></span>
             <input
               type="password"
               id="password"
@@ -57,24 +61,37 @@
               placeholder="Ingrese su contraseña"
               pPassword
               required
-              [(ngModel)]= "password"
+              [(ngModel)]="password"
               [feedback]="false"
               appPassword
+              style="width: 80%"
             />
-          
+            <button
+              pButton
+              type="button"
+              id="buttonMostrar"
+              (click)="mostrarPassword()"
+              label="Mostrar "
+              style="width: 17%; margin-left: 0.5em;"
+            ></button>
           </div>
 
-          <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483;" *ngIf="isFormValid">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            style="margin-bottom: 1em; color: #ce7483"
+            *ngIf="isFormValid"
+          >
             Por favor llena todos los espacios.
           </div>
 
           <div
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 1em; color: #ce7483;"
-              *ngIf="areCredentialsInvalid"
+            class="alert alert-danger"
+            role="alert"
+            style="margin-bottom: 1em; color: #ce7483"
+            *ngIf="areCredentialsInvalid"
           >
-              Usuario o contraseña ingresa es incorrecta. 
+            Usuario o contraseña ingresa es incorrecta.
           </div>
 
           <div class="p-grid p-justify-between">
@@ -84,7 +101,7 @@
                 label="Mantener Sesión"
                 value="SaveInfo"
                 binary="true"
-                name= "checked"
+                name="checked"
               ></p-checkbox>
             </div>
             <div class="p-col-5">
@@ -93,20 +110,17 @@
           </div>
 
           <div class="buttons">
-            <button
-              pButton
-              type="submit"
-              label="Login"
-            ></button>
+            <button pButton type="submit" label="Login"></button>
           </div>
 
           <div>
             <label>
-              <p>Todavia no tienes cuenta: <a href="#" class="secondary-button"> Registrate</a></p>
+              <p>
+                Todavia no tienes cuenta:
+                <a href="#" class="secondary-button"> Registrate</a>
+              </p>
             </label>
           </div>
-          
-          
         </form>
       </div>
 

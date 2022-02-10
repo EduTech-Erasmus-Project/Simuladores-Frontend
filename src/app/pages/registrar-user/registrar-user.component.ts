@@ -35,12 +35,12 @@ export class RegistrarUserComponent implements OnInit {
   passwordVerificacionParticipante: string = "";
   gradoDiscapacidadParticipante: number = 0;
   areaLaboralParticipante: string = "";
-  experienciaAniosParticipante: string = "";
+  experienciaAniosParticipante: number = 0;
   sectorEconomicoParticipante: string = "";
 
   variableGeneroRadio: string = "";
   seleccionEstadoCivil: any = null;
-  seleccionTipoDiscapacidad: any = null;
+  seleccionTipoDiscapacidad: any = [ { name: 'ninguno', value: 'ninguno' },];
   seleccionEvaluador: any = null;
   evaluadoresList: any[] = [];
   cantidadDiscapacidad: number = 1;
@@ -59,6 +59,16 @@ export class RegistrarUserComponent implements OnInit {
   checkCorreo = false;
 
   participante: ParticipanteAceptacionTabla;
+
+  formularioDiscapacidad= false;
+  discapacidadCorrectoAlmacenamiento= false;
+  advertenciaDiscapacidad: string = "";
+  contadorDiscapacidadesAgregadas: number = 0;
+
+  formularioExperiencia= false;
+  experienciaCorrectoAlmacenamiento= false;
+  advertenciaExpeciencia: string = "";
+  contadorExperienciasAgregadas: number = 0;
 
   constructor(private datePipe: DatePipe, private informacionEvaluador: InformacionEvaluadorService, private autentificacionService: AutentificacionUsuarioService, private informacionParticipante: InformacionParticipanteService) {
 
@@ -247,7 +257,6 @@ export class RegistrarUserComponent implements OnInit {
     }
     this.informacionParticipante.registrarNuevoParticipante(this.participante).subscribe(res=>{
       if(res.status == "registrado"){
-        console.log("Aquiiiiiii "+ res.status)
         this.usuarioRegistrado= true;
         this.usuarioNoRegistrado = false;
         return;
@@ -256,10 +265,52 @@ export class RegistrarUserComponent implements OnInit {
   }
 
   agregarExperiencia() {
-
+    if(this.sectorEconomicoParticipante != "" && this.areaLaboralParticipante != "" && this.experienciaAniosParticipante > 0 && this.emailParticipante != ""){
+      
+      this.informacionParticipante.registrarExperienciaLaboralParticipante(this.sectorEconomicoParticipante, this.areaLaboralParticipante, this.experienciaAniosParticipante, this.emailParticipante).subscribe(
+        res=>{
+          this.contadorExperienciasAgregadas++;
+          this.advertenciaExpeciencia = "Se agrego nueva experiencia laboral al participante "+this.emailParticipante+", discapacidades del participante: "+ this.contadorExperienciasAgregadas; 
+          this.experienciaCorrectoAlmacenamiento = true;
+          this.formularioExperiencia = false;
+        }
+      );
+    }else if(this.sectorEconomicoParticipante == ""){
+      this.advertenciaExpeciencia = "Por favor ingrese el Sector Económico"; 
+      this.formularioExperiencia = true;
+      this.experienciaCorrectoAlmacenamiento = false;
+    }else if(this.areaLaboralParticipante == ""){
+      this.advertenciaExpeciencia = "Por favor ingrese la Área laboral"; 
+      this.formularioExperiencia = true;
+      this.experienciaCorrectoAlmacenamiento = false;
+    }else if(this.experienciaAniosParticipante <= 0){
+      this.advertenciaExpeciencia = "Por favor la experiencia laboral debe ser mayor a 0"; 
+      this.formularioExperiencia = true;
+      this.experienciaCorrectoAlmacenamiento = false;
+    }
   }
 
   agregarDiscapacidad() {
+    
+    if(this.seleccionTipoDiscapacidad.value != "" && this.gradoDiscapacidadParticipante > 0 && this.emailParticipante != ""){
+      
+      this.informacionParticipante.registrarDiscapacidadParticipante(this.seleccionTipoDiscapacidad.value, this.gradoDiscapacidadParticipante, this.emailParticipante).subscribe(
+        res=>{
+          this.contadorDiscapacidadesAgregadas++;
+          this.advertenciaDiscapacidad = "Se agrego nueva discapacidad al participante "+this.emailParticipante+", discapacidades del participante: "+ this.contadorDiscapacidadesAgregadas; 
+          this.discapacidadCorrectoAlmacenamiento = true;
+          this.formularioDiscapacidad = false;
+        }
+      );
+    }else if(this.seleccionTipoDiscapacidad.value == null){
+      this.advertenciaDiscapacidad = "Por favor ingrese un tipo de discapacidad"; 
+      this.formularioDiscapacidad = true;
+      this.discapacidadCorrectoAlmacenamiento = false;
+    }else if(this.gradoDiscapacidadParticipante <= 0){
+      this.advertenciaDiscapacidad = "Por favor el grado de discapacidad debe ser mayor a 0"; 
+      this.formularioDiscapacidad = true;
+      this.discapacidadCorrectoAlmacenamiento = false;
+    }
 
   }
 

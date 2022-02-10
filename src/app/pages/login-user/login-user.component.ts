@@ -18,6 +18,7 @@ export class LoginUserComponent implements OnInit {
   areCredentialsInvalid = false;
   username: string = '';
   password: string = "";
+  buttonMostrar: string = "Mostrar"
   
   constructor(private autentificacionService: AutentificacionUsuarioService, private router: Router) { }
 
@@ -81,6 +82,27 @@ export class LoginUserComponent implements OnInit {
       this.isFormValid = false;
       this.areCredentialsInvalid = true;
     }*/
+  }
+
+  mostrarPassword() {
+
+    if (this.buttonMostrar == "Ocultar") {
+      const p = document.getElementById("password") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrar") as HTMLInputElement;
+      p.type = 'password';
+      b.textContent = 'Mostrar';
+      this.buttonMostrar = "Mostrar"
+      return;
+    }
+    if (this.buttonMostrar == "Mostrar") {
+      const p = document.getElementById("password") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrar") as HTMLInputElement;
+      p.type = 'text';
+      b.textContent = 'Ocultar';
+      this.buttonMostrar = "Ocultar"
+      return;
+    }
+
   }
 
 
