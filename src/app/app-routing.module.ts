@@ -52,49 +52,12 @@ import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principa
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
 import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
-
+import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {
-                path: '', component: AppMainComponent,
-                children: [
-                    {path: '', component: DashboardDemoComponent},
-                    {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
-                    {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
-                    {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},
-                    {path: 'uikit/input', component: InputDemoComponent},
-                    {path: 'uikit/button', component: ButtonDemoComponent},
-                    {path: 'uikit/table', component: TableDemoComponent},
-                    {path: 'uikit/list', component: ListDemoComponent},
-                    {path: 'uikit/tree', component: TreeDemoComponent},
-                    {path: 'uikit/panel', component: PanelsDemoComponent},
-                    {path: 'uikit/overlay', component: OverlaysDemoComponent},
-                    {path: 'uikit/media', component: MediaDemoComponent},
-                    {path: 'uikit/menu', component: MenusDemoComponent},
-                    {path: 'uikit/message', component: MessagesDemoComponent},
-                    {path: 'uikit/misc', component: MiscDemoComponent},
-                    {path: 'uikit/charts', component: ChartsDemoComponent},
-                    {path: 'uikit/file', component: FileDemoComponent},
-                    {path: 'utilities/display', component: DisplayComponent},
-                    {path: 'utilities/elevation', component: ElevationComponent},
-                    {path: 'utilities/flexbox', component: FlexboxComponent},
-                    {path: 'utilities/grid', component: GridComponent},
-                    {path: 'utilities/icons', component: IconsComponent},
-                    {path: 'utilities/widgets', component: WidgetsComponent},
-                    {path: 'utilities/spacing', component: SpacingComponent},
-                    {path: 'utilities/typography', component: TypographyComponent},
-                    {path: 'utilities/text', component: TextComponent},
-                    {path: 'pages/empty', component: EmptyDemoComponent},
-                    {path: 'pages/crud', component: AppCrudComponent},
-                    {path: 'pages/calendar', component: AppCalendarComponent},
-                    {path: 'pages/timeline', component: AppTimelineDemoComponent},
-                    {path: 'components/charts', component: ChartsDemoComponent},
-                    {path: 'components/file', component: FileDemoComponent},
-                    {path: 'documentation', component: DocumentationComponent}
-                ]
-            },
+            {path: '', component: LandingComponent},
             {path: 'error', component: AppErrorComponent},
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
@@ -108,7 +71,7 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
                     {path: 'inicio/:correo', component: PresentacionInicioUserComponent},  
                     {path: 'Mis-Actividades-Usuario/:correo', component: MisActividadesUsuarioComponent},
                     {path: 'datosUsuario/:correo', component: DatosUsuarioComponent}
-                ]//, canActivate: [AutentificarGuard]
+                ], canActivate: [AutentificarGuard]
             },
             {
                 path: 'Pagina-Principal-Experto', component: PaginaPrincipalExpertoComponent,
@@ -116,10 +79,11 @@ import { ParticipanteInfoComponent } from './pages/Experto/participante-info/par
                     {path: '', component: PresentacionInicioExpertoComponent},  
                     {path: 'inicio/:correo', component: PresentacionInicioExpertoComponent},  
                     {path: 'datosExperto/:correo', component: DatosExpertoComponent},
+                    {path: 'agregarActividadParticipantes/:correo', component: AgregarActividadesParticipanteComponent},
                     {path: 'agregarAlumno/:correo', component: AgregarAlumnoAExpertoComponent},
                     {path: 'escenarioInfo/:correo/:idEjercitario', component: EscenarioComponent},
                     {path: 'participanteInfo/:correo/:idEjercitario/:correoEstudiante', component: ParticipanteInfoComponent}
-                ]
+                ]//, canActivate: [AutentificarGuard]
             },
             
             {path: '**', redirectTo: '/notfound'},

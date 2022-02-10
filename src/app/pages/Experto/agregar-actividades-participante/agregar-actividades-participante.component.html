@@ -1,0 +1,150 @@
+<div class="p-col-12">
+  <div class="card">
+    <h3 style="text-align: center">Asignar Actividades a Participantes</h3>
+    <div class="p-grid">
+      <div class="p-col-12 p-ai-center p-jc-center">
+        <div class="p-grid p-fluid">
+          <div class="p-grid table-demo">
+            <div class="card">
+              <h5>Listado de Participantes</h5>
+              <div class="card" style="text-align: center">
+                <p-table
+                  #dt
+                  [value]="listParticipantes"
+                  [(selection)]="responsableSelect"
+                  dataKey="id"
+                  [rowHover]="true"
+                  [rows]="10"
+                  [paginator]="true"
+                  [filterDelay]="0"
+                  [globalFilterFields]="['nombre', 'apellido', 'email']"
+                  
+                >
+                  <ng-template pTemplate="caption">
+                    <div
+                      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                    >
+                      <span style="width: 15%; margin-top: 0.3em"
+                        >Buscar por:
+                      </span>
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                          "
+                          placeholder="Global Search"
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="nombre">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Nombre
+                        </div>
+                      </th>
+                      <th pSortableColumn="apellido">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Apellido
+                        </div>
+                      </th>
+
+                      <th pSortableColumn="email">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Fecha de Nacimiento
+                        </div>
+                      </th>
+                      <th pSortableColumn="direccion">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Direccion
+                        </div>
+                      </th>
+                      <th pSortableColumn="carreraUniversitaria">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Carrera Universitaria
+                        </div>
+                      </th>
+
+                      <th pSortableColumn="fechaNacimiento">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Email
+                        </div>
+                      </th>
+
+                      <th>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Agregar Actividad
+                        </div>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template
+                    pTemplate="body"
+                    let-listParticipantes
+                    style="text-align: center"
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr
+                      [pSelectableRow]="listParticipantes"
+                      class="p-selectable-row"
+                    >
+                      <td>
+                        {{ listParticipantes.nombre }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.apellido }}
+                      </td>
+
+                      <td>
+                        {{
+                          listParticipantes.fechaNacimiento | date: "yyyy-MM-dd"
+                        }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.pais }} -
+                        {{ listParticipantes.ciudad }} -
+                        {{ listParticipantes.direccion }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.carreraUniversitaria }}
+                      </td>
+
+                      <td>
+                        {{ listParticipantes.email }}
+                      </td>
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-user-plus"
+                          (click)="
+                          agregarParticipante(
+                              listParticipantes.email,
+                              rowIndex
+                            )
+                          "
+                        ></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="8">No customers found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

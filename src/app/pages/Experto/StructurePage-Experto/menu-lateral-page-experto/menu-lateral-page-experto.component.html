@@ -15,28 +15,28 @@
         <ul class="layout-menu">
             <li>
                 <ng-container>
-                    <a [routerLink]="['/Pagina-Principal-Experto/inicio', correoParticipanteLateral]" routerLinkActive="active">
+                    <a [routerLink]="['/Pagina-Principal-Experto/inicio', correoEvaluadorLateral]" routerLinkActive="active">
                         <i class="layout-menuitem-icon"></i>
                         <i class="pi pi-fw pi-home"></i>
                         Inicio
                     </a>
     
-                    <a [routerLink]="['/Pagina-Principal-Experto/datosExperto', correoParticipanteLateral]" routerLinkActive="active">
+                    <a [routerLink]="['/Pagina-Principal-Experto/datosExperto', correoEvaluadorLateral]" routerLinkActive="active">
                         <i class="layout-menuitem-icon"></i>
                         <i class="pi pi-fw pi-user"></i>
                         Mi Perfil
                     </a>
     
-                    <a [routerLink]="['/Pagina-Principal-Experto/agregarAlumno', correoParticipanteLateral]" routerLinkActive="active">
+                    <a [routerLink]="['/Pagina-Principal-Experto/agregarAlumno', correoEvaluadorLateral]" routerLinkActive="active">
                         <i class="layout-menuitem-icon"></i>
                         <i class="pi pi-fw pi-chart-line"></i>
                         Agregar/Listar Alumanos
                     </a>
     
-                    <a [routerLink]="['/Pagina-Principal-Usuario/datosUsuario']" [queryParams]="{correo: correoParticipanteLateral}" routerLinkActive="active">
+                    <a [routerLink]="['/Pagina-Principal-Experto/agregarActividadParticipantes', correoEvaluadorLateral]" routerLinkActive="active">
                         <i class="layout-menuitem-icon"></i>
                         <i class="pi pi-fw pi-users"></i>
-                        Acerca de
+                        Asignar Actividades
                     </a>
     
                 </ng-container>

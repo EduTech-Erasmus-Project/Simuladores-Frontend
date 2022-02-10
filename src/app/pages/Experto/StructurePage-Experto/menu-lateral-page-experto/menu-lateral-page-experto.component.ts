@@ -9,12 +9,12 @@ export class MenuLateralPageExpertoComponent implements OnInit {
 
   modelItem: any[];
   //sidebarActive: boolean;
-  correoParticipanteLateral: string = '';
+  correoEvaluadorLateral: string = '';
 
   constructor(public appMainUser :PaginaPrincipalExpertoComponent) { }
 
   ngOnInit() {
-    this.correoParticipanteLateral = this.appMainUser.getCorreo();
+    this.correoEvaluadorLateral = this.appMainUser.getCorreo();
 
     this.modelItem = [
         {

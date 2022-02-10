@@ -171,7 +171,8 @@ import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Expert
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
+import { AsignarActividadesParticipanteComponent } from './src/pages/Experto/asignar-actividades-participante/asignar-actividades-participante.component';
+import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
 @NgModule({
     imports: [
         RouterModule,
@@ -327,7 +328,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
         MenuFooterPageExpertoComponent,
         MenuLateralPageExpertoComponent,
         TopBarPageExpertoComponent,
-        PresentacionInicioExpertoComponent
+        PresentacionInicioExpertoComponent,
+        AsignarActividadesParticipanteComponent,
+        AgregarActividadesParticipanteComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
