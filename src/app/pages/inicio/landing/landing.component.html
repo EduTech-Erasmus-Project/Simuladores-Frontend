@@ -1,100 +1,136 @@
 <body class="landing-body">
-    <div class="landing-nav-menu">
-        <div class="logo">
-            <a href="#">
-                <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" style="width: 5em;" alt="logo"/>
-                <span class="app-name">Simuladores Laborales</span>
-            </a>
-        </div>
-        
-        <div class="nav-menu-wrapper">
-           
-            <ul class="nav-menu" id="landing-menu">
-                <li class="active-link">
-                    <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
-                </li>
-                <li>
-                    <a href="">Información</a>
-                </li>
-                <li>
-                    <a href="">Simuladores</a>
-                </li>
-                <li>
-                    <a href="">Acerca de</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/about-us']" routerLinkActive="active">¿Quiénes  Somos?</a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="buy-button">
-            <button type="button" class="p-button" routerLink= "/login">
-                Iniciar Sesión
-            </button>
-            <br>
-            <button type="button" class="p-button" routerLink= "/registrar">
-                Registrar
-            </button>
-        </div>
-
-        <div class="menu-button">
-            <a href="#" class="landing-menu-button" id="landing-menu-button">
-                <div class="landing-menu-button-icon"></div>
-            </a>
-        </div>
+  <div class="landing-nav-menu">
+    <div class="logo">
+      <a href="#">
+        <img
+          src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+          style="width: 5em"
+          alt="logo"
+        />
+        <span class="app-name">Simuladores Laborales</span>
+      </a>
     </div>
-    <div id="home" class="landing-header-wrapper">
-        
-        <div class="landing-header-content" style="text-align: center;">
-            <h1 style="color: #ffffff;">Bienvenido A nuesto proyecto de Simuladores Laborales</h1>
-            <p>
-                El programa Erasmus conjunto con EduTech colocá a su disposición la oportunidad de ambientes virtuales enfocados a la preparacion de diversos entornos laborales. </p>
-            <div class="video-button">
-                <button routerLink="/login">Comenzar</button>
-            </div>
-        </div>
-        <div class="tree">
-            <img src="https://cdn.pixabay.com/photo/2018/06/07/16/49/vr-3460451_960_720.jpg"  alt="mirage-layout"/>
-        </div>
-    </div>
-    <div id="meet-mirage" class="section">
-        <div class="section-title">
-            <h1>Información</h1>
-            <p>Nuestro Proyecto</p>
-        </div>
-        <div class="feature-cards">
-            <div class="feature-card">
-                <div class="feature-card-img">
-                    <img src="../../../../assets/layout/images/pages/landing/asset-responsivelayout.svg" alt="mirage-layout"/>
-                </div>
-                <div class="feature-card-title">{{participantes}} Participantes</div>
-                <div class="feature-card-content">El proyecto actualmente cuenta con {{participantes}} Participantes que han realizado nuestros simuladores</div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-card-img">
-                    <img src="../../../../assets/layout/images/pages/landing/asset-moderndesign.svg" alt="mirage-layout"/>
-                </div>
-                <div class="feature-card-title">{{simuladores}} Simuladores</div>
-                <div class="feature-card-content">El proyecto cuenta con {{simuladores}} simuladores ya funcionando y a disposición de nuestros participantes</div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-card-img">
-                    <img src="../../../../assets/layout/images/pages/landing/asset-welldocumented.svg" alt="mirage-layout"/>
-                </div>
-                <div class="feature-card-title">{{evaluadores}} Expertos</div>
-                <div class="feature-card-content">El proyecto trabaja en conjunto con {{evaluadores}} expertos en el area de psicología para evaluar su progreso</div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-card-img">
-                    <img src="../../../../assets/layout/images/pages/landing/asset-unlimited.svg" alt="mirage-layout"/>
-                </div>
-                <div class="feature-card-title">8 Colaboradores</div>
-                <div class="feature-card-content">En la parte de colaboradores se encuentran listados</div>
-            </div>
-        </div>
 
-        <!--
+    <div class="nav-menu-wrapper">
+      <ul class="nav-menu" id="landing-menu">
+        <li class="active-link">
+          <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
+        </li>
+        <li>
+          <a href="">Información</a>
+        </li>
+        <li>
+          <a href="">Simuladores</a>
+        </li>
+        <li>
+          <a href="">Acerca de</a>
+        </li>
+        <li>
+          <a [routerLink]="['/about-us']" routerLinkActive="active"
+            >¿Quiénes Somos?</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="buy-button">
+      <button type="button" class="p-button" routerLink="/login">
+        Iniciar Sesión
+      </button>
+      <br />
+      <button type="button" class="p-button" routerLink="/registrar">
+        Registrar
+      </button>
+    </div>
+
+    <div class="menu-button">
+      <a href="#" class="landing-menu-button" id="landing-menu-button">
+        <div class="landing-menu-button-icon"></div>
+      </a>
+    </div>
+  </div>
+  <div id="home" class="landing-header-wrapper">
+    <div class="landing-header-content" style="text-align: center">
+      <h1 style="color: #ffffff">
+        Simuladores laborales en 3D para favorecer la inserción laboral de
+        estudiantes universitarios con discapacidad
+      </h1>
+      <p>
+        La construcción y traducción de una pedagogía acorde a la variabilidad
+        en el aprendizaje para fortalecer el desarrollo de competencias
+        profesionales.
+      </p>
+      <div class="video-button">
+        <button routerLink="/login">Comenzar</button>
+      </div>
+    </div>
+    <div class="tree">
+      <img
+        src="https://cdn.pixabay.com/photo/2018/06/07/16/49/vr-3460451_960_720.jpg"
+        alt="mirage-layout"
+      />
+    </div>
+  </div>
+  <div id="meet-mirage" class="section">
+    <div class="section-title">
+      <h1>Información</h1>
+      <p>Nuestro Proyecto</p>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img
+            src="../../../../assets/layout/images/pages/landing/asset-responsivelayout.svg"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="feature-card-title">{{ participantes }} Participantes</div>
+        <div class="feature-card-content">
+          El proyecto actualmente cuenta con {{ participantes }} Participantes
+          que han realizado nuestros simuladores
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img
+            src="../../../../assets/layout/images/pages/landing/asset-moderndesign.svg"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="feature-card-title">{{ simuladores }} Simuladores</div>
+        <div class="feature-card-content">
+          El proyecto cuenta con {{ simuladores }} simuladores ya funcionando y
+          a disposición de nuestros participantes
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img
+            src="../../../../assets/layout/images/pages/landing/asset-welldocumented.svg"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="feature-card-title">{{ evaluadores }} Expertos</div>
+        <div class="feature-card-content">
+          El proyecto trabaja en conjunto con {{ evaluadores }} expertos en el
+          area de psicología para evaluar su progreso
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img
+            src="../../../../assets/layout/images/pages/landing/asset-unlimited.svg"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="feature-card-title">8 Colaboradores</div>
+        <div class="feature-card-content">
+          En la parte de colaboradores se encuentran listados
+        </div>
+      </div>
+    </div>
+
+    <!--
         <div class="buy-mirage-promo-wrapper">
             <div class="buy-mirage-promo">
                 <div class="promo-content">
@@ -109,330 +145,465 @@
             </div>
         </div>
         -->
+  </div>
+
+  <div id="multimedia" class="section">
+    <div class="section-title">
+      <h1>Simuladores Laborales</h1>
     </div>
+    <div style="width: 100%; margin-top: 2em"></div>
 
-    <div id="multimedia" class="section">
-        <div class="section-title">
-            <h1>Simuladores Laborales</h1>
-            <p>Videos sobre nuestros ejercitarios laborales en acción y como utilizarlos</p>
-        </div>
-        
-        <div class="card">
-            <div class="p-grid" style="text-align: center;">
-                <div class="p-col-5 p-d-flex p-ai-center p-jc-center" >
-                    <div class="p-fluid">
-                        <div  class="p-field">
-                            <div>
-                                <h4>Entornos de nuestros simuladores laborales</h4>
-                                <br>
-                                <iframe src="https://www.youtube.com/embed/B_lYGUtCd0g" style="width: 530px;
-                                height: 280px;" frameborder="0" allowfullscreen="true"></iframe>
-                                <br>
-                                <br>
-                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ullam hic illo unde ad? Veniam, adipisci eaque suscipit tempore neque odit voluptas? Saepe id ad doloribus ipsam velit, iste inventore?</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Linea de division de componentes-->
-                <div class="p-col-1">
-                    <p-divider layout="vertical">
-                        
-                    </p-divider>
-                </div>
-                <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
-                    <div class="p-fluid">
-                        <div  class="p-field">
-                            <div >
-                                <h4>Instrucciones de uso de los simuladores</h4>
-                                <br>
-                                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FUPSalesianaEc%2Fvideos%2F550995959453956%2F&show_text=false&width=560&t=0" width="530px" height="280px" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                                <br>
-                                <br>
-                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam error, inventore assumenda ex adipisci temporibus quae, dicta doloribus ut voluptas id, quas magnam omnis dolore labore est eaque? Perspiciatis, iste.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        
-        
-
-        
-        
-
-        <div class="effect">
-            <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout"/>
-        </div>
-    </div>
-
-
-    <div id="features" class="section">
-        <div class="section-title">
-            <h1>Acerca de nosotros</h1>           
-        </div>
-        <span style="margin-bottom: 2em; margin-top: 2em; font-size: 20px;">Somos un equipo de trabajo que brinda su servicio arduamente a la comunidad con nuestros conocimientos dentro de los diferentes entornos de desarrollo tecnológico, con habilidades excepcionales dispuestos ha ayudar con herramientas tecnológicas sin animo de lucro.</span>
-        <div class="features-content">
-            <div class="features-rows">
-                <div class="features-row">
-                    <div class="features-row-icon">
-                       <div class="feature first"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>OBJETIVO DEL PROYECTO</h3>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet facilisis
-                                    nibh.</span>
-                    </div>
-                </div>
-                <div class="features-row">
-                    <div class="features-row-icon">
-                        <div class="feature second"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>MISIÓN DEL PROYECTO</h3>
-                        <br>
-                        <span>Promover la inclusión educativa y la diversidad empleando como catalizadores a las tecnologías accesibles, la calidad, la innovación y el trabajo en equipo.</span>
-                        
-                        <h3 style="margin-top: 2em;"> VISIÓN DEL PROYECTO</h3>
-                        <br>
-                        <span>Constituirse en  una red de conocimiento y buenas prácticas  para el desarrollo y aplicación eficiente de tecnologías accesibles  en la Educación Superior que contribuyan a la inclusión, participación  y a la empleabilidad. </span>
-                    </div>
-                </div>
-                <div class="features-row">
-                    <div class="features-row-icon">
-                        <div class="feature third"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>RAZÓN DE SER Y VALORES</h3>
-                        <span>Necessitatibus quaerat voluptates aspernatur iure, aperiam possimus sint sit mollitia! Ab perferendis nesciunt ad reiciendis explicabo consequatur sapiente odit ipsa harum illum.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="effect">
-            <img src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg" alt="mirage-layout"/>
-        </div>
-    </div>
-    <div id="pricing" class="section">
-        <div class="section-title">
-            <h1>Nuestros Colaboradores</h1>
-            <p>Instituciones involucradas dentro del proyecto</p>
-        </div>
-        <div class="pricing-cards">
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>UNIVERSIDAD DEL AZUAY</h2>
-                    <p>Cuenca-Ecuador</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://emovies.oui-iohe.org/wp-content/uploads/2020/09/logo-32-300x300.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout"/>
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>UNIVERSIDAD POLITÉCNICA SALESIANA</h2>
-                    <p>Cuenca-Ecuador</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://pbs.twimg.com/profile_images/1233476898694615040/LW3RVGA0_400x400.jpg" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2 >UNIVERSIDAD DE ALICANTE</h2>
-                    <p>España</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://logos-download.com/wp-content/uploads/2017/11/UA_logo.svg" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>ØSTFOLD UNIVERSITY COLLEGE </h2>
-                    <p>Noruega</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/d/da/Hi%C3%98_emblem.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout" style="transform: scaleX(-1);"/>
-                </div>
-            </div>
-            
-
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>UNIVERSIDADE ABERTA</h2>
-                    <p>Portugal</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://epesuica.ch/var/m_4/42/42f/172724/11603051-logo_vertical_UAb_azul-300x287-c9f0f.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout" style="transform: scaleX(1); "/>
-                </div>
-            </div>
-
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>INSTITUTO TECNOLÓGICO DE AGUASCALIENTES </h2>
-                    <p>México</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://pbs.twimg.com/profile_images/3724852317/d78dcc43a9206e5017ce8c93ca0e8df6_400x400.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>UNIVERSIDAD VERACRUZANA</h2>
-                    <p>México</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Logo-UV.jpg" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>UNIVERSIDAD DE ALCALÁ</h2>
-                    <p>Alcalá de Henares, Madrid, España</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmU1DI4oHDWLiJnr7M9biMk2n7HT2fdYxN-947w_s5LPT7bdOmJtYIz4EB3PR2rCZqxXI&usqp=CAU" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="effect">
-                    <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout" style="transform: scaleX(-1);"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="logo-text">
-          <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" alt="mirage-layout" />
-          <div class="text">
-            <h1>Simuladores Laborales</h1>
-            <span>ERASMUS + EDUTECH project</span>
-          </div>
-        </div>
-  
-        <div class="logo-text">
-          <i class="pi pi-map-marker" style="font-size: 2rem"></i>
-          <div class="text">
-            <h1 style="font-weight: bold;">Ubicacion</h1>
-            <span>Calle Vieja, El vecino <br> Cuenca-Ecuador</span>
-          </div>
-        </div>
-  
-        <div class="logo-text">
-          <img src="https://cdn.iconscout.com/icon/free/png-256/whatsapp-158-761636.png" alt="mirage-layout" />
-          <div class="text">
-            <h1 style="font-weight: bold;">Teléfonos</h1>
-            <span style="font-size: 0.80em;"> <a href="tel:+(593)0980552201">(593) 098 055 2201</a> <br> <a href="tel:+(07)2250528">(07) 2250528 </a></span>
-          </div>
-        </div>
-        
-        <div class="logo-text">
-          <i class="pi pi-wifi" style="font-size: 2rem"></i>
-          <div class="text">
-            <h1 style="font-weight: bold;">Redes Sociales</h1>
-            
-              <div class="icon icon-hastag">
-                <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:catedraunescoinclusion@ups.edu.ec">  catedraunescoinclusion@ups.edu.ec </a></span>
+    <div class="card" style="margin-top: 3em">
+      <div class="p-grid" style="text-align: center">
+        <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
+          <div class="p-fluid">
+            <div class="p-field">
+              <div>
+                <h4>Entornos de nuestros simuladores laborales</h4>
+                <br />
+                <iframe
+                  src="https://www.youtube.com/embed/B_lYGUtCd0g"
+                  style="width: 530px; height: 280px"
+                  frameborder="0"
+                  allowfullscreen="true"
+                ></iframe>
+                <br />
+                <br />
+                <span>
+                  Los simuladores de ejercicios laborales son descripciones de
+                  casos de éxito o no éxito que permitan un acercamiento al
+                  contexto laboral con el objetivo de apoyar el proceso de
+                  capacitación y el reforzamiento de conceptos.
+                </span>
               </div>
-  
-              <div class="icon icon-hastag">
-                <span> <i class="pi pi-facebook" style="font-size: 1em;"></i> <a href=" https://www.facebook.com/inclusionups/">  https://www.facebook.com/inclusionups/ </a></span>
+            </div>
+          </div>
+        </div>
+        <!--Linea de division de componentes-->
+        <div class="p-col-1">
+          <p-divider layout="vertical"> </p-divider>
+        </div>
+        <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
+          <div class="p-fluid">
+            <div class="p-field">
+              <div>
+                <h4>Instrucciones de uso de los simuladores</h4>
+                <br />
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FUPSalesianaEc%2Fvideos%2F550995959453956%2F&show_text=false&width=560&t=0"
+                  width="530px"
+                  height="280px"
+                  style="border: none; overflow: hidden"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  allowFullScreen="true"
+                ></iframe>
+                <br />
+                <br />
+                <span
+                  >Se puede navegar sobre el simulador mediante el teclado o
+                  haciendo uso de Touchpad. Se puede realizar configuraciones de
+                  accesibilidad sobre las opciones del Escenario Laboral, por
+                  ejemplo, color, tamaño de fuente, activar o desactivar audios,
+                  entre otras opciones.</span
+                >
               </div>
-            
-          </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect">
+      <img
+        src="../../../../assets/layout/images/pages/landing/effect-bottom.svg"
+        alt="mirage-layout"
+      />
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <div class="section-title">
+      <h1>Competencias laborales</h1>
+    </div>
+    <span
+      style="
+        margin-bottom: 2em;
+        margin-top: 2em;
+        font-size: 20px;
+        text-align: justify;
+      "
+      >La competencia es una característica subyacente en una persona, que está
+      causalmente relacionada con una actuación exitosa en un puesto de trabajo.
+      Las competencias son importantes porque implica atender a rasgos
+      psicológicos y comportamientos observables que son consecuencia de un
+      conjunto de motivaciones, rasgos de personalidad, actitudes, valores,
+      conocimientos, aptitudes, habilidades, y visión de la efectividad laboral
+      que se analiza desde un contexto sistémico. <br /><br />
+      A continuación, se describe brevemente algunas competencias laborales.
+    </span>
+    <div class="features-content">
+      <div class="features-rows">
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature first"></div>
+          </div>
+          <div class="features-row-content">
+            <h3>Capacidad para trabajar en equipo</h3>
+            <span
+              >Se describe como colaborar y trabajar coordinadamente con los
+              demás, su conducta observable se ve reflejada cuando coordina sus
+              tareas y ofrece ayuda a los demás miembros de su equipo. Reconoce
+              los éxitos y aportes de otras personas.
+            </span>
+          </div>
+        </div>
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature second"></div>
+          </div>
+          <div class="features-row-content">
+            <h3>Planificación y manejo del tiempo</h3>
+            <br />
+            <span
+              >Se describe como determinar eficazmente metas y especificar las
+              etapas, acciones, plazos y recursos requeridos para el logro de
+              los objetivos. Su conducta observable se ve reflejada cuando
+              trabaja organizadamente, sin improvisaciones de última hora.
+              Planifica las acciones y/o proyectos que va a emprender.
+            </span>
+          </div>
+        </div>
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature third"></div>
+          </div>
+          <div class="features-row-content">
+            <h3>Capacidad para la toma de decisiones</h3>
+            <span
+              >Se describe como analizar diferentes opciones, considerando las
+              circunstancias existentes, los recursos disponibles y su impacto,
+              para luego seleccionar la alternativa más adecuada. Su conducta
+              observable se ve reflejada cuando ante una situación a resolver,
+              genera opciones viables y convenientes, que consideran las
+              circunstancias existentes.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="effect">
+      <img
+        src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg"
+        alt="mirage-layout"
+      />
+    </div>
+  </div>
+  <div id="pricing" class="section">
+    <div class="section-title">
+      <h1>Nuestros Colaboradores</h1>
+      <p>Instituciones involucradas dentro del proyecto</p>
+    </div>
+    <div class="pricing-cards">
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDAD DEL AZUAY</h2>
+          <p>Cuenca-Ecuador</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://emovies.oui-iohe.org/wp-content/uploads/2020/09/logo-32-300x300.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect">
+          <img
+            src="../../../../assets/layout/images/pages/landing/effect-bottom.svg"
+            alt="mirage-layout"
+          />
+        </div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDAD POLITÉCNICA SALESIANA</h2>
+          <p>Cuenca-Ecuador</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://pbs.twimg.com/profile_images/1233476898694615040/LW3RVGA0_400x400.jpg"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect"></div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDAD DE ALICANTE</h2>
+          <p>España</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://logos-download.com/wp-content/uploads/2017/11/UA_logo.svg"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect"></div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>ØSTFOLD UNIVERSITY COLLEGE</h2>
+          <p>Noruega</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/d/da/Hi%C3%98_emblem.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect">
+          <img
+            src="../../../../assets/layout/images/pages/landing/effect-bottom.svg"
+            alt="mirage-layout"
+            style="transform: scaleX(-1)"
+          />
         </div>
       </div>
 
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDADE ABERTA</h2>
+          <p>Portugal</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://epesuica.ch/var/m_4/42/42f/172724/11603051-logo_vertical_UAb_azul-300x287-c9f0f.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect">
+          <img
+            src="../../../../assets/layout/images/pages/landing/effect-bottom.svg"
+            alt="mirage-layout"
+            style="transform: scaleX(1)"
+          />
+        </div>
+      </div>
 
-<script>
-	MirageLanding = {
-		addClass: function (element, className) {
-			if (element.classList)
-				element.classList.add(className);
-			else
-				element.className += ' ' + className;
-		},
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>INSTITUTO TECNOLÓGICO DE AGUASCALIENTES</h2>
+          <p>México</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://pbs.twimg.com/profile_images/3724852317/d78dcc43a9206e5017ce8c93ca0e8df6_400x400.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect"></div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDAD VERACRUZANA</h2>
+          <p>México</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Logo-UV.jpg"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect"></div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>UNIVERSIDAD DE ALCALÁ</h2>
+          <p>Alcalá de Henares, Madrid, España</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmU1DI4oHDWLiJnr7M9biMk2n7HT2fdYxN-947w_s5LPT7bdOmJtYIz4EB3PR2rCZqxXI&usqp=CAU"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="effect">
+          <img
+            src="../../../../assets/layout/images/pages/landing/effect-bottom.svg"
+            alt="mirage-layout"
+            style="transform: scaleX(-1)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 
-		removeClass: function (element, className) {
-			if (element.classList)
-				element.classList.remove(className);
-			else
-				element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-		},
+  <div class="footer">
+    <div class="logo-text">
+      <img
+        src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+        alt="mirage-layout"
+      />
+      <div class="text">
+        <h1>Simuladores Laborales</h1>
+        <span>ERASMUS + EDUTECH project</span>
+      </div>
+    </div>
 
-		hasClass: function (element, className) {
-			if (element.classList)
-				return element.classList.contains(className);
-			else
-				return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
-		},
+    <div class="logo-text">
+      <i class="pi pi-map-marker" style="font-size: 2rem"></i>
+      <div class="text">
+        <h1 style="font-weight: bold">Ubicacion</h1>
+        <span
+          >Calle Vieja, El vecino <br />
+          Cuenca-Ecuador</span
+        >
+      </div>
+    </div>
 
-		hideMenu: function () {
-			this.removeClass(document.getElementById('landing-menu'), 'landing-menu-active');
-			this.removeClass(document.getElementById('landing-menu-button'), 'landing-menu-active');
-			this.removeClass(document.getElementById('landing-mask'), 'landing-menu-active');
-		},
+    <div class="logo-text">
+        <img
+          src="https://cdn.pixabay.com/photo/2020/04/25/18/14/european-union-flag-5092020_960_720.png"
+          alt="mirage-layout"
+        />
+        <div class="text">
+          <h1 style="font-weight: bold">Cofinanciado por la UE</h1>
+          <span style="font-size: 0.8em">
+              &copy; 2022 Todos los derechos reservados | Developed By <a href="https://edutech-project.org/">EduTech</a>  <br>
+              <a [routerLink]="['/terminos-condiciones']"> Términos y condiciones</a>
+          </span>
+             
+        </div>
+      </div>
 
-		showMenu: function () {
-			this.addClass(document.getElementById('landing-menu'), 'landing-menu-active');
-			this.addClass(document.getElementById('landing-menu-button'), 'landing-menu-active');
-			this.addClass(document.getElementById('landing-mask'), 'landing-menu-active');
-		}
-	};
+    <div class="logo-text">
+      <i class="pi pi-wifi" style="font-size: 2rem"></i>
+      <div class="text">
+        <h1 style="font-weight: bold">Redes Sociales</h1>
 
-	document.getElementById('landing-menu-button').addEventListener('click', function (e) {
-		var menu = document.getElementById('landing-menu');
+        <div class="icon icon-hastag">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:catedraunescoinclusion@ups.edu.ec">
+              catedraunescoinclusion@ups.edu.ec
+            </a></span
+          >
+        </div>
 
-		if (MirageLanding.hasClass(menu, 'landing-menu-active')) {
-			MirageLanding.hideMenu();
-		} else {
-			MirageLanding.showMenu();
-		}
+        <div class="icon icon-hastag">
+          <span>
+            <i class="pi pi-facebook" style="font-size: 1em"></i>
+            <a href=" https://www.facebook.com/inclusionups/">
+              https://www.facebook.com/inclusionups/
+            </a></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 
-		e.preventDefault();
-	});
+  <script>
+    MirageLanding = {
+      addClass: function (element, className) {
+        if (element.classList) element.classList.add(className);
+        else element.className += " " + className;
+      },
 
-	document.getElementById('landing-mask').addEventListener('click', function (e) {
+      removeClass: function (element, className) {
+        if (element.classList) element.classList.remove(className);
+        else
+          element.className = element.className.replace(
+            new RegExp(
+              "(^|\\b)" + className.split(" ").join("|") + "(\\b|$)",
+              "gi"
+            ),
+            " "
+          );
+      },
+
+      hasClass: function (element, className) {
+        if (element.classList) return element.classList.contains(className);
+        else
+          return new RegExp("(^| )" + className + "( |$)", "gi").test(
+            element.className
+          );
+      },
+
+      hideMenu: function () {
+        this.removeClass(
+          document.getElementById("landing-menu"),
+          "landing-menu-active"
+        );
+        this.removeClass(
+          document.getElementById("landing-menu-button"),
+          "landing-menu-active"
+        );
+        this.removeClass(
+          document.getElementById("landing-mask"),
+          "landing-menu-active"
+        );
+      },
+
+      showMenu: function () {
+        this.addClass(
+          document.getElementById("landing-menu"),
+          "landing-menu-active"
+        );
+        this.addClass(
+          document.getElementById("landing-menu-button"),
+          "landing-menu-active"
+        );
+        this.addClass(
+          document.getElementById("landing-mask"),
+          "landing-menu-active"
+        );
+      },
+    };
+
+    document
+      .getElementById("landing-menu-button")
+      .addEventListener("click", function (e) {
+        var menu = document.getElementById("landing-menu");
+
+        if (MirageLanding.hasClass(menu, "landing-menu-active")) {
+          MirageLanding.hideMenu();
+        } else {
+          MirageLanding.showMenu();
+        }
+
+        e.preventDefault();
+      });
+
+    document
+      .getElementById("landing-mask")
+      .addEventListener("click", function (e) {
         MirageLanding.hideMenu();
 
-		e.preventDefault();
-	});
+        e.preventDefault();
+      });
 
-	var menuLinks = document.querySelectorAll('#landing-menu a');
-	for (i = 0; i < menuLinks.length; i++) {
-		menuLinks[i].addEventListener('click', function (e) {
-			MirageLanding.hideMenu();
-		});
-	}
-</script>
+    var menuLinks = document.querySelectorAll("#landing-menu a");
+    for (i = 0; i < menuLinks.length; i++) {
+      menuLinks[i].addEventListener("click", function (e) {
+        MirageLanding.hideMenu();
+      });
+    }
+  </script>
 </body>

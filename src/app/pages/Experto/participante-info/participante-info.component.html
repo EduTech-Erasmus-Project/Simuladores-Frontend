@@ -364,12 +364,11 @@
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-lg-6">
       <div class="card">
-        <h5 class="centerText">Datos generales</h5>
+        <h5 class="centerText">Datos del Estudiante</h5>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-          voluptatibus ratione, alias in cum cupiditate culpa quibusdam illum
-          dolorum nesciunt facere vitae eligendi nisi libero excepturi labore
-          corrupti! Illum, nobis.
+          Esta gráfica representa, los intentos que tuvo un estudiante sobre un
+          escenario especificado, que se puede comprar con dos opciones nota y
+          tiempo.
         </p>
       </div>
 
@@ -397,12 +396,11 @@
     <div class="p-col-12 p-lg-6">
       <div class="card">
         <div class="p-grid p-fluid">
-          <h5 class="centerText">Datos generales</h5>
+          <h5 class="centerText">Datos del Estudiante</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-            voluptatibus ratione, alias in cum cupiditate culpa quibusdam illum
-            dolorum nesciunt facere vitae eligendi nisi libero excepturi labore
-            corrupti! Illum, nobis.
+            Esta grafica representa los porcentajes de discapacidad que presenta
+            el estudiante especificado (Visual, Física, Auditiva, Física y
+            Autismo).
           </p>
         </div>
       </div>
@@ -633,9 +631,16 @@
             [(ngModel)]="newComentarioParticipanteEjercitario"
           ></textarea>
           <p-toast key="addComentTOAST"></p-toast>
-          <p-confirmDialog header="Agregar Comentario" key="agregarComentario" icon="pi pi-exclamation-triangle" message="Agregar nuevo Comentario"
-                             [style]="{width: '425px'}" acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
-            </p-confirmDialog>
+          <p-confirmDialog
+            header="Agregar Comentario"
+            key="agregarComentario"
+            icon="pi pi-exclamation-triangle"
+            message="Agregar nuevo Comentario"
+            [style]="{ width: '425px' }"
+            acceptButtonStyleClass="p-button-text"
+            rejectButtonStyleClass="p-button-text"
+          >
+          </p-confirmDialog>
           <p-button
             label="Agregar Comentario"
             icon="pi pi-bookmark"
@@ -648,7 +653,7 @@
       <div class="p-col-1"></div>
 
       <div class="p-col-5 p-ai-center p-jc-center">
-        <p-scrollPanel #scroll1 [style]="{width: '100%', height: '400px'}">
+        <p-scrollPanel #scroll1 [style]="{ width: '100%', height: '400px' }">
           <h5>Listado de Comentarios del Responsable</h5>
           <div *ngFor="let comentario of listadoComentariosActividad">
             <p-divider layout="horizontal" align="center">
@@ -674,7 +679,7 @@
         </p-scrollPanel>
 
         <h5>Listado de Comentarios del Particpante</h5>
-        <div *ngIf="comentarioPariticipanteHabilitar == true" >
+        <div *ngIf="comentarioPariticipanteHabilitar == true">
           <p-divider layout="horizontal" align="center">
             <span class="p-tag">
               {{ actividadSeleccionada.fechaDeActividad | date: "yyyy/MM/dd" }}

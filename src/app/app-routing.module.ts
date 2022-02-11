@@ -54,6 +54,7 @@ import { EscenarioComponent } from './pages/Experto/escenario/escenario.componen
 import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
 import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { TerminosCondicionesComponent } from './pages/terminos-condiciones/terminos-condiciones.component';
 
 @NgModule({
     imports: [
@@ -65,6 +66,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
             {path: 'login', component: LoginUserComponent},
             {path: 'inicio', component: LandingComponent},
             {path: 'about-us', component: AboutUsComponent},
+            {path: 'terminos-condiciones', component: TerminosCondicionesComponent},
             {path: 'registrar', component: RegistrarUserComponent},
             {
                 path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent,

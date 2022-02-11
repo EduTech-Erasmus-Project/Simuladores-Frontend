@@ -21,12 +21,19 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <div class="logo-text">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/whatsapp-158-761636.png" alt="mirage-layout" />
-        <div class="text">
-          <h1 style="font-weight: bold;">Teléfonos</h1>
-          <span style="font-size: 0.80em;"> <a href="tel:+(593)0980552201">(593) 098 055 2201</a> <br> <a href="tel:+(07)2250528">(07) 2250528 </a></span>
-        </div>
+      <img
+        src="https://cdn.pixabay.com/photo/2020/04/25/18/14/european-union-flag-5092020_960_720.png"
+        alt="mirage-layout"
+      />
+      <div class="text">
+        <h1 style="font-weight: bold">Cofinanciado por la UE</h1>
+        <span style="font-size: 0.8em">
+            &copy; 2022 Todos los derechos reservados | Developed By <a href="https://edutech-project.org/">EduTech</a>  <br>
+            <a [routerLink]="['/terminos-condiciones']"> Términos y condiciones</a>
+        </span>
+           
       </div>
+    </div>
       
       <div class="logo-text">
         <i class="pi pi-wifi" style="font-size: 2rem"></i>

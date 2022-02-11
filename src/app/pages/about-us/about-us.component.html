@@ -1,321 +1,486 @@
 <body class="landing-body">
-    <div class="landing-nav-menu">
-        <div class="logo">
-            <a href="#">
-                <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" style="width: 5em;" alt="logo"/>
-                <span class="app-name">Simuladores Laborales</span>
-            </a>
-        </div>
-        
-        <div class="nav-menu-wrapper">
-           
-            <ul class="nav-menu" id="landing-menu">
-                <li class="active-link">
-                    <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
-                </li>
-                <li>
-                    <a href="">Información</a>
-                </li>
-                <li>
-                    <a href="">Simuladores</a>
-                </li>
-                <li>
-                    <a href="">Acerca de</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/about-us']" routerLinkActive="active">¿Quiénes  Somos?</a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="buy-button">
-            <button type="button" class="p-button" routerLink= "/login">
-                Iniciar Sesión
-            </button>
-            <br>
-            <button type="button" class="p-button" routerLink= "/registrar">
-                Registrar
-            </button>
-        </div>
-
-        <div class="menu-button">
-            <a href="#" class="landing-menu-button" id="landing-menu-button">
-                <div class="landing-menu-button-icon"></div>
-            </a>
-        </div>
+  <div class="landing-nav-menu">
+    <div class="logo">
+      <a href="#">
+        <img
+          src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+          style="width: 5em"
+          alt="logo"
+        />
+        <span class="app-name">Simuladores Laborales</span>
+      </a>
     </div>
-    <div id="home" class="landing-header-wrapper">
-        <div class="tree">
-            <img src="https://cdn.pixabay.com/photo/2016/11/21/13/51/woman-1845517_960_720.jpg"  alt="oculos-img"/>
-        </div>
-        <div class="landing-header-content" style="text-align: center;">
-            <h3 style="color: #ffffff;">Con el Objetivo de Brindar una mejora de la calidad Educatica</h3>
-            <p>
-                El proyecto “Asistencia tecnológica a la accesibilidad en la Educación Superior Virtual (EduTech)” trabaja en cooperación para la innovación y el intercambio de buenas prácticas. La acción está destinada a respaldar la modernización, accesibilidad e internacionalización de la educación superior en los países asociados contribuyendo a su desarrollo y crecimiento socioeconómico sostenible e integrador. 
-            </p>
-        </div>
-        
+
+    <div class="nav-menu-wrapper">
+      <ul class="nav-menu" id="landing-menu">
+        <li class="active-link">
+          <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
+        </li>
+        <li>
+          <a href="">Información</a>
+        </li>
+        <li>
+          <a href="">Simuladores</a>
+        </li>
+        <li>
+          <a href="">Acerca de</a>
+        </li>
+        <li>
+          <a [routerLink]="['/about-us']" routerLinkActive="active"
+            >¿Quiénes Somos?</a
+          >
+        </li>
+      </ul>
     </div>
-    
 
-    <div id="features" class="section">
-        <div class="section-title">
-            <h1>Acerca de nosotros</h1>           
-        </div>
-        <span style="margin-bottom: 2em; margin-top: 2em; font-size: 20px;">Somos un equipo de trabajo que brinda su servicio arduamente a la comunidad con nuestros conocimientos dentro de los diferentes entornos de desarrollo tecnológico, con habilidades excepcionales dispuestos ha ayudar con herramientas tecnológicas sin animo de lucro.</span>
-        <div class="features-content">
-            <div class="features-rows">
-                <div class="features-row">
-                    <div class="features-row-icon">
-                       <div class="feature first"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>OBJETIVO DEL PROYECTO</h3>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet facilisis
-                                    nibh.</span>
-                    </div>
-                </div>
-                <div class="features-row">
-                    <div class="features-row-icon">
-                        <div class="feature second"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>MISIÓN DEL PROYECTO</h3>
-                        <br>
-                        <span>Promover la inclusión educativa y la diversidad empleando como catalizadores a las tecnologías accesibles, la calidad, la innovación y el trabajo en equipo.</span>
-                        
-                        <h3 style="margin-top: 2em;"> VISIÓN DEL PROYECTO</h3>
-                        <br>
-                        <span>Constituirse en  una red de conocimiento y buenas prácticas  para el desarrollo y aplicación eficiente de tecnologías accesibles  en la Educación Superior que contribuyan a la inclusión, participación  y a la empleabilidad. </span>
-                    </div>
-                </div>
-                <div class="features-row">
-                    <div class="features-row-icon">
-                        <div class="feature third"></div>
-                    </div>
-                    <div class="features-row-content">
-                        <h3>RAZÓN DE SER Y VALORES</h3>
-                        <span>Necessitatibus quaerat voluptates aspernatur iure, aperiam possimus sint sit mollitia! Ab perferendis nesciunt ad reiciendis explicabo consequatur sapiente odit ipsa harum illum.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="effect">
-            <img src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg" alt="mirage-layout"/>
-        </div>
+    <div class="buy-button">
+      <button type="button" class="p-button" routerLink="/login">
+        Iniciar Sesión
+      </button>
+      <br />
+      <button type="button" class="p-button" routerLink="/registrar">
+        Registrar
+      </button>
     </div>
-    <div id="pricing" class="section">
-        <div class="section-title">
-            <h1>Equipo de Desarrollo</h1>
-            <p>Personas involucradas dentro del proyecto</p>
-        </div>
-        <div class="pricing-cards">
-            
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2 style="font-size: 21px;">Est. Juan Carlos Barrera Barrera</h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Desarrollo FrontEnd - BackEnd</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://oeradap.edutech-project.org/assets/img/develop.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:barrerajuan930@gmail.com">  barrerajuan930@gmail.com </a></span>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left; ">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:jbarrerab1@est.ups.edu.ec">  jbarrerab1@est.ups.edu.ec </a></span>
-                </div>
-            </div>
 
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>Est. Katherine Michelle Barrera Barrera</h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Desarrollo FrontEnd - BackEnd</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:katerinbarrera21@gmail.com">  katerinbarrera21@gmail.com </a></span>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:kbarrerab1@est.ups.edu.ec">  kbarrerab1@est.ups.edu.ec </a></span>
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2 >Est. Jorge Martin Bojorque Macancela</h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Desarrollo Unity</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://oeradap.edutech-project.org/assets/img/develop3.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:martinbojorque@gmail.com">  martinbojorque@gmail.com </a></span>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:jbojorque@est.ups.edu.ec">  jbojorque@est.ups.edu.ec </a></span>
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>Ing. Paola Cristina Ingavelez Guerra </h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Docente</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://oeradap.edutech-project.org/assets/img/developW.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:pcingavelez@ups.edu.ec">  pcingavelez@ups.edu.ec </a></span>
-                </div>
-            </div>
-
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>Ing. Ángel Andrés Pérez Muñoz </h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Docente</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://oeradap.edutech-project.org/assets/img/develop1.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left; margin-top: 2em;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:aperezm@ups.edu.ec"> aperezm@ups.edu.ec  </a></span>
-                </div>
-            </div>
-            <div class="pricing-card free">
-                <div class="pricing-card-title">
-                    <h2>Ing. Vladimir Espartaco Robles Bykbaev </h2>
-                    <p style="font-size: 13px;">Cuenca-Ecuador</p>
-                    <p style="font-size: 13px;">Docente</p>
-                </div>
-                <br>
-                <div class="feature-card-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922690.png" style="width: 150px;" alt="mirage-layout"/>
-                </div>
-                <div class="icon icon-hastag" style="text-align: left;">
-                    <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:vrobles@ups.edu.ec"> vrobles@ups.edu.ec</a></span>
-                </div>
-                
-            </div>
-            
-
-            
-        </div>
+    <div class="menu-button">
+      <a href="#" class="landing-menu-button" id="landing-menu-button">
+        <div class="landing-menu-button-icon"></div>
+      </a>
     </div>
-    
+  </div>
+  <div id="home" class="landing-header-wrapper">
+    <div class="tree">
+      <img
+        src="https://cdn.pixabay.com/photo/2016/11/21/13/51/woman-1845517_960_720.jpg"
+        alt="oculos-img"
+      />
+    </div>
+    <div class="landing-header-content" style="text-align: center">
+      <h3 style="color: #ffffff">
+        Con el Objetivo de Brindar una mejora de la calidad Educatica
+      </h3>
+      <p>
+        El proyecto “Asistencia tecnológica a la accesibilidad en la Educación
+        Superior Virtual (EduTech)” trabaja en cooperación para la innovación y
+        el intercambio de buenas prácticas. La acción está destinada a respaldar
+        la modernización, accesibilidad e internacionalización de la educación
+        superior en los países asociados contribuyendo a su desarrollo y
+        crecimiento socioeconómico sostenible e integrador.
+      </p>
+    </div>
+  </div>
 
-    <div class="footer">
-        <div class="logo-text">
-          <img src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" alt="mirage-layout" />
-          <div class="text">
-            <h1>Simuladores Laborales</h1>
-            <span>ERASMUS + EDUTECH project</span>
+  <div id="features" class="section">
+    <div class="section-title">
+      <h1>Acerca de nosotros</h1>
+    </div>
+    <span style="margin-bottom: 2em; margin-top: 2em; font-size: 20px"
+      >Somos un equipo de trabajo que brinda su servicio arduamente a la
+      comunidad con nuestros conocimientos dentro de los diferentes entornos de
+      desarrollo tecnológico, con habilidades excepcionales dispuestos ha ayudar
+      con herramientas tecnológicas sin animo de lucro.</span
+    >
+    <div class="features-content">
+      <div class="features-rows">
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature first"></div>
+          </div>
+          <div class="features-row-content">
+            <h3>OBJETIVO DEL PROYECTO</h3>
+            <span
+              >Ayudar a las Instituciones de Educación Superior (IES) de América
+              Latina (AL) y europeas en la instauración de unidades de atención
+              tecnológicas de la accesibilidad, replicables y adaptables según
+              las características de las instituciones, y formar al personal
+              implicado en dichas unidades de atención.</span
+            >
           </div>
         </div>
-  
-        <div class="logo-text">
-          <i class="pi pi-map-marker" style="font-size: 2rem"></i>
-          <div class="text">
-            <h1 style="font-weight: bold;">Ubicacion</h1>
-            <span>Calle Vieja, El vecino <br> Cuenca-Ecuador</span>
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature second"></div>
+          </div>
+          <div class="features-row-content">
+            <h3>MISIÓN DEL PROYECTO</h3>
+            <br />
+            <span
+              >Promover la inclusión educativa y la diversidad mediante
+              simuladores virtuales para que los estudiantes universitarios
+              desarrollen competencias labores.</span
+            >
+
+            
+        </div>
+        <div class="features-row">
+          <div class="features-row-icon">
+            <div class="feature third"></div>
+          </div>
+          <div class="features-row-content">
+            <h3 style="margin-top: 2em">VISIÓN DEL PROYECTO</h3>
+            <br />
+            <span
+              >Constituirse como un gran pilar para la adquisición de
+              conocimiento y buenas prácticas para el desarrollo de la Educación
+              Superior que contribuye a las mayores posibilidades de
+              empleabilidad a personas con discapacidad.</span
+            >
+          </div>
           </div>
         </div>
-  
-        <div class="logo-text">
-          <img src="https://cdn.iconscout.com/icon/free/png-256/whatsapp-158-761636.png" alt="mirage-layout" />
-          <div class="text">
-            <h1 style="font-weight: bold;">Teléfonos</h1>
-            <span style="font-size: 0.80em;"> <a href="tel:+(593)0980552201">(593) 098 055 2201</a> <br> <a href="tel:+(07)2250528">(07) 2250528 </a></span>
-          </div>
+      </div>
+    </div>
+    <div class="effect">
+      <img
+        src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg"
+        alt="mirage-layout"
+      />
+    </div>
+  </div>
+  <div id="pricing" class="section">
+    <div class="section-title">
+      <h1>Equipo de Desarrollo</h1>
+      <p>Personas involucradas dentro del proyecto</p>
+    </div>
+    <div class="pricing-cards">
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2 style="font-size: 21px">Est. Juan Carlos Barrera Barrera</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Desarrollo FrontEnd - BackEnd</p>
         </div>
-        
-        <div class="logo-text">
-          <i class="pi pi-wifi" style="font-size: 2rem"></i>
-          <div class="text">
-            <h1 style="font-weight: bold;">Redes Sociales</h1>
-            
-              <div class="icon icon-hastag">
-                <span> <i class="pi pi-envelope" style="font-size: 1em;"></i> <a href="mailto:catedraunescoinclusion@ups.edu.ec">  catedraunescoinclusion@ups.edu.ec </a></span>
-              </div>
-  
-              <div class="icon icon-hastag">
-                <span> <i class="pi pi-facebook" style="font-size: 1em;"></i> <a href=" https://www.facebook.com/inclusionups/">  https://www.facebook.com/inclusionups/ </a></span>
-              </div>
-            
-          </div>        
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://oeradap.edutech-project.org/assets/img/develop.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:barrerajuan930@gmail.com">
+              barrerajuan930@gmail.com
+            </a></span
+          >
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:jbarrerab1@est.ups.edu.ec">
+              jbarrerab1@est.ups.edu.ec
+            </a></span
+          >
         </div>
       </div>
 
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Est. Katherine Michelle Barrera Barrera</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Desarrollo FrontEnd - BackEnd</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:katerinbarrera21@gmail.com">
+              katerinbarrera21@gmail.com
+            </a></span
+          >
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:kbarrerab1@est.ups.edu.ec">
+              kbarrerab1@est.ups.edu.ec
+            </a></span
+          >
+        </div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Est. Jorge Martin Bojorque Macancela</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Desarrollo Unity</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://oeradap.edutech-project.org/assets/img/develop3.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:martinbojorque@gmail.com">
+              martinbojorque@gmail.com
+            </a></span
+          >
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:jbojorque@est.ups.edu.ec">
+              jbojorque@est.ups.edu.ec
+            </a></span
+          >
+        </div>
+      </div>
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Ing. Paola Cristina Ingavelez Guerra</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Docente</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2922/2922554.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:pcingavelez@ups.edu.ec">
+              pcingavelez@ups.edu.ec
+            </a></span
+          >
+        </div>
+      </div>
 
-<script>
-	MirageLanding = {
-		addClass: function (element, className) {
-			if (element.classList)
-				element.classList.add(className);
-			else
-				element.className += ' ' + className;
-		},
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Ing. Ángel Andrés Pérez Muñoz</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Docente</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://oeradap.edutech-project.org/assets/img/develop1.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left; margin-top: 2em">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:aperezm@ups.edu.ec"> aperezm@ups.edu.ec </a></span
+          >
+        </div>
+      </div>
+      
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Ing. Rodas Tobar Monica Isabel</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Docente</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://oeradap.edutech-project.org/assets/img/developW.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:mrodast@uazuay.edu.ec">
+                mrodast@uazuay.edu.ec
+            </a></span
+          >
+        </div>
+      </div>
 
-		removeClass: function (element, className) {
-			if (element.classList)
-				element.classList.remove(className);
-			else
-				element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-		},
+      <div class="pricing-card free">
+        <div class="pricing-card-title">
+          <h2>Ing. Vladimir Espartaco Robles Bykbaev</h2>
+          <p style="font-size: 13px">Cuenca-Ecuador</p>
+          <p style="font-size: 13px">Docente</p>
+        </div>
+        <br />
+        <div class="feature-card-img">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2922/2922690.png"
+            style="width: 150px"
+            alt="mirage-layout"
+          />
+        </div>
+        <div class="icon icon-hastag" style="text-align: left">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:vrobles@ups.edu.ec"> vrobles@ups.edu.ec</a></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 
-		hasClass: function (element, className) {
-			if (element.classList)
-				return element.classList.contains(className);
-			else
-				return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
-		},
+  <div class="footer">
+    <div class="logo-text">
+      <img
+        src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+        alt="mirage-layout"
+      />
+      <div class="text">
+        <h1>Simuladores Laborales</h1>
+        <span>ERASMUS + EDUTECH project</span>
+      </div>
+    </div>
 
-		hideMenu: function () {
-			this.removeClass(document.getElementById('landing-menu'), 'landing-menu-active');
-			this.removeClass(document.getElementById('landing-menu-button'), 'landing-menu-active');
-			this.removeClass(document.getElementById('landing-mask'), 'landing-menu-active');
-		},
+    <div class="logo-text">
+      <i class="pi pi-map-marker" style="font-size: 2rem"></i>
+      <div class="text">
+        <h1 style="font-weight: bold">Ubicacion</h1>
+        <span
+          >Calle Vieja, El vecino <br />
+          Cuenca-Ecuador</span
+        >
+      </div>
+    </div>
 
-		showMenu: function () {
-			this.addClass(document.getElementById('landing-menu'), 'landing-menu-active');
-			this.addClass(document.getElementById('landing-menu-button'), 'landing-menu-active');
-			this.addClass(document.getElementById('landing-mask'), 'landing-menu-active');
-		}
-	};
+    <div class="logo-text">
+      <img
+        src="https://cdn.pixabay.com/photo/2020/04/25/18/14/european-union-flag-5092020_960_720.png"
+        alt="mirage-layout"
+      />
+      <div class="text">
+        <h1 style="font-weight: bold">Cofinanciado por la UE</h1>
+        <span style="font-size: 0.8em">
+            &copy; 2022 Todos los derechos reservados | Developed By <a href="https://edutech-project.org/">EduTech</a>  <br>
+            <a [routerLink]="['/terminos-condiciones']"> Términos y condiciones</a>
+        </span>
+           
+      </div>
+    </div>
 
-	document.getElementById('landing-menu-button').addEventListener('click', function (e) {
-		var menu = document.getElementById('landing-menu');
+    <div class="logo-text">
+      <i class="pi pi-wifi" style="font-size: 2rem"></i>
+      <div class="text">
+        <h1 style="font-weight: bold">Redes Sociales</h1>
 
-		if (MirageLanding.hasClass(menu, 'landing-menu-active')) {
-			MirageLanding.hideMenu();
-		} else {
-			MirageLanding.showMenu();
-		}
+        <div class="icon icon-hastag">
+          <span>
+            <i class="pi pi-envelope" style="font-size: 1em"></i>
+            <a href="mailto:catedraunescoinclusion@ups.edu.ec">
+              catedraunescoinclusion@ups.edu.ec
+            </a></span
+          >
+        </div>
 
-		e.preventDefault();
-	});
+        <div class="icon icon-hastag">
+          <span>
+            <i class="pi pi-facebook" style="font-size: 1em"></i>
+            <a href=" https://www.facebook.com/inclusionups/">
+              https://www.facebook.com/inclusionups/
+            </a></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 
-	document.getElementById('landing-mask').addEventListener('click', function (e) {
+  <script>
+    MirageLanding = {
+      addClass: function (element, className) {
+        if (element.classList) element.classList.add(className);
+        else element.className += " " + className;
+      },
+
+      removeClass: function (element, className) {
+        if (element.classList) element.classList.remove(className);
+        else
+          element.className = element.className.replace(
+            new RegExp(
+              "(^|\\b)" + className.split(" ").join("|") + "(\\b|$)",
+              "gi"
+            ),
+            " "
+          );
+      },
+
+      hasClass: function (element, className) {
+        if (element.classList) return element.classList.contains(className);
+        else
+          return new RegExp("(^| )" + className + "( |$)", "gi").test(
+            element.className
+          );
+      },
+
+      hideMenu: function () {
+        this.removeClass(
+          document.getElementById("landing-menu"),
+          "landing-menu-active"
+        );
+        this.removeClass(
+          document.getElementById("landing-menu-button"),
+          "landing-menu-active"
+        );
+        this.removeClass(
+          document.getElementById("landing-mask"),
+          "landing-menu-active"
+        );
+      },
+
+      showMenu: function () {
+        this.addClass(
+          document.getElementById("landing-menu"),
+          "landing-menu-active"
+        );
+        this.addClass(
+          document.getElementById("landing-menu-button"),
+          "landing-menu-active"
+        );
+        this.addClass(
+          document.getElementById("landing-mask"),
+          "landing-menu-active"
+        );
+      },
+    };
+
+    document
+      .getElementById("landing-menu-button")
+      .addEventListener("click", function (e) {
+        var menu = document.getElementById("landing-menu");
+
+        if (MirageLanding.hasClass(menu, "landing-menu-active")) {
+          MirageLanding.hideMenu();
+        } else {
+          MirageLanding.showMenu();
+        }
+
+        e.preventDefault();
+      });
+
+    document
+      .getElementById("landing-mask")
+      .addEventListener("click", function (e) {
         MirageLanding.hideMenu();
 
-		e.preventDefault();
-	});
+        e.preventDefault();
+      });
 
-	var menuLinks = document.querySelectorAll('#landing-menu a');
-	for (i = 0; i < menuLinks.length; i++) {
-		menuLinks[i].addEventListener('click', function (e) {
-			MirageLanding.hideMenu();
-		});
-	}
-</script>
+    var menuLinks = document.querySelectorAll("#landing-menu a");
+    for (i = 0; i < menuLinks.length; i++) {
+      menuLinks[i].addEventListener("click", function (e) {
+        MirageLanding.hideMenu();
+      });
+    }
+  </script>
 </body>
