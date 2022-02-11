@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  WS_PATH: "http://192.168.100.184:8080/api/"
+  WS_PATH: "https://simulab.edutech-project.org/api/"
 };

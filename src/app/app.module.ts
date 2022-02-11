@@ -171,7 +171,6 @@ import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Expert
 import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { AsignarActividadesParticipanteComponent } from './src/pages/Experto/asignar-actividades-participante/asignar-actividades-participante.component';
 import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { TerminosCondicionesComponent } from './pages/terminos-condiciones/terminos-condiciones.component';
@@ -331,7 +330,6 @@ import { TerminosCondicionesComponent } from './pages/terminos-condiciones/termi
         MenuLateralPageExpertoComponent,
         TopBarPageExpertoComponent,
         PresentacionInicioExpertoComponent,
-        AsignarActividadesParticipanteComponent,
         AgregarActividadesParticipanteComponent,
         AboutUsComponent,
         TerminosCondicionesComponent,
