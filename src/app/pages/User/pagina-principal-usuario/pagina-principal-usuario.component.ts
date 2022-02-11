@@ -39,20 +39,16 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //varibales para paginas usuario
   private correo: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private autenficarCorreo: AutentificacionUsuarioService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private autentificacionUsuario: AutentificacionUsuarioService) { 
    
   }
   
   ngOnInit(): void {
-    var correoAux = '';
-    this.route.queryParams
-      .subscribe(params => {
-        correoAux = params.correo;
-        console.log("correo: "+correoAux)
-        this.correo = correoAux;
-      }
-    );
-    this.router.navigate(['Pagina-Principal-Usuario/inicio', this.correo]);
+    if(this.autentificacionUsuario.emailUser != null ){
+      this.correo = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correo = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
   }
 
   getCorreo():string{

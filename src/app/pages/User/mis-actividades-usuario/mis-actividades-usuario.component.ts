@@ -10,6 +10,8 @@ import { Responsable } from 'src/app/model/Responsable';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 import { Participante } from 'src/app/model/Participante';
 import { AsignacionTabla } from 'src/app/model/Asignacion';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { ActividadTabla } from 'src/app/model/Actividad';
 
 @Component({
   selector: 'app-mis-actividades-usuario',
@@ -31,19 +33,30 @@ export class MisActividadesUsuarioComponent implements OnInit {
 
   representatives: Representative[];
   customers1: Customer[];
-  listActividadesParticpante: AsignacionTabla[];
-  selectedCustomers1: AsignacionTabla[];
+  listActividadesParticpante: ActividadTabla[];
+  selectedCustomers1: ActividadTabla[];
   statuses: any[];
   private correoParticanteActividades: string = '';
   public participante: Participante;
 
-  constructor(private evaluadorService: InformacionEvaluadorService, private usuarioService: InformacionParticipanteService , private _Activatedroute:ActivatedRoute, private customerService: CustomerService) { 
+  constructor(private autentificacionUsuario: AutentificacionUsuarioService, private evaluadorService: InformacionEvaluadorService, private usuarioService: InformacionParticipanteService , private _Activatedroute:ActivatedRoute, private customerService: CustomerService) { 
 
     }
 
   ngOnInit():void {
 
-    this.correoParticanteActividades = this._Activatedroute.snapshot.paramMap.get("correo");
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoParticanteActividades = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoParticanteActividades = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoParticanteActividades = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
+
     this.obtenerInformacionUsuario();
     
     this.usuarioService.obtenerInformacionActividadesParticipantes(this.correoParticanteActividades).then(listActividades => {

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { promise } from 'protractor';
 import { Escenario, EscenarioInterface } from 'src/app/model/Escenario';
 import { Usuario } from 'src/app/model/Usuario';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
@@ -41,8 +42,9 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   ejercitarios: any[] = [
     {name: 'La venta', value: '1'},
     {name: 'Empleado problema', value: '2'},
-    {name: 'Mi agenda', value: '2'},
+    {name: 'Mi agenda', value: '3'},
     {name: 'Funciones y competencias', value: '4'},
+    {name: 'El tiempo', value: '5'},
     {name: 'Un día de trabajo', value: '6'},
     {name: 'La tecnología prima', value: '7'},
     {name: 'Construcción', value: '8'},
@@ -66,7 +68,8 @@ export class PresentacionInicioExpertoComponent implements OnInit {
 
   constructor( public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
                public servicioConsultasLabelsGrafica: ConsultasParaGraficasService, 
-               private _Activatedroute:ActivatedRoute, private router: Router) {
+               private _Activatedroute:ActivatedRoute, private router: Router, 
+               private autentificacionUsuario: AutentificacionUsuarioService) {
 
   }
 
@@ -88,7 +91,19 @@ export class PresentacionInicioExpertoComponent implements OnInit {
         
       }
     );
-    this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoResponsableDatos = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoResponsableDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
+
     this.listarLabelsTipoDeDiscacidad();
     await this.listarLabelsTipoDeGenero();
     
@@ -248,6 +263,7 @@ export class PresentacionInicioExpertoComponent implements OnInit {
                 
                 discapacidadFisica = discapacidadFisica + informacionParticipante.calificaciones[0].calificacion;
                 discapacidadFisicaTiempo = discapacidadFisicaTiempo + informacionParticipante.calificaciones[0].tiempo;
+                console.log("discapacidadFisicaTiempo: "+discapacidadFisicaTiempo);
               }
 
               if(('Intelectual' == informacionParticipante.tipoDiscapacidad)){
@@ -296,6 +312,8 @@ export class PresentacionInicioExpertoComponent implements OnInit {
           discapacidadVisual= 0;
           discapacidadAuditiva= 0;
           discapacidadOtros= 0;
+
+          
 
           discapacidadFisicaTiempo= 0;
           discapacidadIntelectualTiempo= 0;

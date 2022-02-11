@@ -6,6 +6,7 @@ import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
 import { Participante } from 'src/app/model/Participante';
 import { Responsable } from 'src/app/model/Responsable';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
 
@@ -94,21 +95,24 @@ export class DatosUsuarioComponent implements OnInit {
   public paisParticipante: string = "-------------";
   public ciudadParticipante: string = "-------------";
 
-  constructor(private confirmationService: ConfirmationService,private messageService: MessageService,
+  constructor(private autentificacionUsuario: AutentificacionUsuarioService, private confirmationService: ConfirmationService,private messageService: MessageService,
     private router: Router, private evaluadorService: InformacionEvaluadorService,
-    private usuarioService: InformacionParticipanteService ,private _Activatedroute:ActivatedRoute, 
-    private countryService: CountryService, private breadcrumbService: BreadcrumbService) { 
-
-    countryService.getCountriesCity().subscribe(res => {
-        this.groupedCities = res.data as any[]
-      }
-    );
+    private usuarioService: InformacionParticipanteService ,private _Activatedroute:ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {
-    this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo");
-    //console.log("Pagina de Mis actividades: ", this.correoParticanteDatos)
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoParticanteDatos = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoParticanteDatos = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoParticanteDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
     this.obtenerInformacionUsuario();
    
   }

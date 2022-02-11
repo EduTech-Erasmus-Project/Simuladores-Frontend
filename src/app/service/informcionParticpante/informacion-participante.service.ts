@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActividadInterface } from 'src/app/model/Actividad';
+import { ActividadInterface, ActividadTabla } from 'src/app/model/Actividad';
 import { AsignacionTabla } from 'src/app/model/Asignacion';
 import { Comentario, ComentarioInterface } from 'src/app/model/Comentario';
 import { DiscapacidadParticipanteInterface } from 'src/app/model/DiscapacidadParticipante';
@@ -21,6 +21,13 @@ export class InformacionParticipanteService {
                       headers: new HttpHeaders({'Content-Type':  'application/json',}) 
                     };
     return (this.http.get<any>(environment.WS_PATH+"getParticipante/"+correo, config))
+  }
+
+  public obtenerInformacionUsuarioResponsable(correo: string, correoResponsable: string): Observable<any>{
+    const config = { 
+                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+                    };
+    return (this.http.get<any>(environment.WS_PATH+"getParticipanteDeUnResponsable/"+correo+"/"+correoResponsable, config))
   }
 
   public cambiarPassword(correo: string, password: string, newPassword: string): Observable<any>{
@@ -50,7 +57,7 @@ export class InformacionParticipanteService {
     };
     return this.http.get<any>(environment.WS_PATH+"informacionActividadesParticipante/"+correo, config)
     .toPromise()
-    .then(res => res.actividades as AsignacionTabla[])
+    .then(res => res.actividades as ActividadTabla[])
     .then(actividades => actividades);
    
   }
@@ -124,6 +131,41 @@ export class InformacionParticipanteService {
   }
 
 
+  public obtenerInformacionAsignacionesParticipante(correoParticipante: string, correoEvaluador: string){
+    const config = { headers: new HttpHeaders({
+      'Content-Type':  'application/json',}) 
+    };
+    return this.http.get<any>(environment.WS_PATH+"obtenerInformacionAsignacionesParticipante/"+correoParticipante+"/"+correoEvaluador, config)
+    .toPromise()
+    .then(res => res.asignaciones as AsignacionTabla[])
+    .then(asignaciones => asignaciones);
+   
+  }
+  
+  public agregarAsignacioneParticipante( emailParticipanteSeleccion: string, correoEvaluadorActividades: string,
+                                        fechaActividad: Date, selectedEjercitario: number): Observable<any>{
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"agregarAsignacioneParticipante", {"emailParticipanteSeleccion":emailParticipanteSeleccion,"correoEvaluadorActividades":correoEvaluadorActividades,"fechaActividad":fechaActividad,"selectedEjercitario":selectedEjercitario}, config);
+  }
+
+  public eliminarAsignacion(idAsignacion: number){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return (this.http.get<any>(environment.WS_PATH+"eliminarAsignacion/"+idAsignacion, config)).toPromise().then(res => console.log(res));
+
+  }
+
+  public obtenerInformacionLandingPage(){
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return (this.http.get<any>(environment.WS_PATH+"obtenerInformacionLandingPage/", config)).toPromise();
+
+  }
+  
   
   
 }

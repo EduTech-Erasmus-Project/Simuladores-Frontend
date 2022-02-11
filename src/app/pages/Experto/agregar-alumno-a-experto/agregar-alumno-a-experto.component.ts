@@ -6,6 +6,7 @@ import { CustomerService } from 'src/app/demo/service/customerservice';
 import { ProductService } from 'src/app/demo/service/productservice';
 import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
 import { Responsable } from 'src/app/model/Responsable';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 
 @Component({
@@ -25,11 +26,24 @@ export class AgregarAlumnoAExpertoComponent implements OnInit {
   public listParticipantes: ParticipanteAceptacionTabla[];
   
   
-  constructor(private _Activatedroute:ActivatedRoute, private responsableServiceInformacion: InformacionEvaluadorService) { 
+  constructor(private _Activatedroute:ActivatedRoute, private responsableServiceInformacion: InformacionEvaluadorService,
+    private autentificacionUsuario: AutentificacionUsuarioService) { 
       
   }
   ngOnInit(): void {
-    this.correoEvaluadorActividades = this._Activatedroute.snapshot.paramMap.get("correo");
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoEvaluadorActividades = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoEvaluadorActividades = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoEvaluadorActividades = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
+
+
     this.obtenerInformacionExperto();
     
     this.responsableServiceInformacion.obtenerParticipantesPorAceptarEvaluadorCorreo(this.correoEvaluadorActividades).then(listParticipantes => {

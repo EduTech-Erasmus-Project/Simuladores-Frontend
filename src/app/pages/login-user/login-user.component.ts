@@ -42,28 +42,8 @@ export class LoginUserComponent implements OnInit {
         if(responseAut.tipoUsuario!='notExist' && responseAut.tipoUsuario != ''){
          
           const userData = new Usuario(this.username, this.password);
-          this.autentificacionService.checkCredencialesLogin(userData, responseAut.tipoUsuario).subscribe(
-            response => {
-              if (response.login == 'true') {
-                if(responseAut.tipoUsuario =='evaluador'){
-                  this.autentificacionService.isAuthenticated = true;
-                  this.router.navigate(['Pagina-Principal-Experto/'], { queryParams: { 'correo': this.username }});
-                  return true;
-                }
-                this.autentificacionService.isAuthenticated = true;
-                this.router.navigate(['Pagina-Principal-Usuario/'], { queryParams: { 'correo': this.username }});
-                return true;
-              }else{
-                this.autentificacionService.isAuthenticated = false;
-                this.isFormValid = false;
-                this.areCredentialsInvalid = true;
-              }
-            },
-            error => {
-              console.log(error);
-              this.isFormValid = false;
-              this.areCredentialsInvalid = true;
-            });
+          this.autentificacionService.checkCredencialesLogin(userData, responseAut.tipoUsuario);
+
         }else{
           this.isFormValid = false;
           this.areCredentialsInvalid = true;

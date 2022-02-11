@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 
 @Component({
   selector: 'app-pagina-principal-experto',
@@ -34,17 +35,14 @@ export class PaginaPrincipalExpertoComponent implements OnInit {
   topbarItemClick: boolean;
   private correo: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private autentificacionUsuario: AutentificacionUsuarioService) { }
 
   ngOnInit(): void {
-    var correoAux = '';
-    this.route.queryParams
-      .subscribe(params => {
-        correoAux = params.correo;
-        console.log("correo: "+correoAux)
-        this.correo = correoAux;
-      }
-    );
+    if(this.autentificacionUsuario.emailUser != null ){
+      this.correo = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correo = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
   }
 
   getCorreo():string{

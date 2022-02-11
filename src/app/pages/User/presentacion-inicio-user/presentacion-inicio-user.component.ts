@@ -4,6 +4,7 @@ import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { PhotoService } from 'src/app/demo/service/photoservice';
 import { Asignacion } from 'src/app/model/Asignacion';
 import { Escenario } from 'src/app/model/Escenario';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { EjercitarioParticipanteService } from 'src/app/service/ejercitarioParticipante/ejercitario-participante.service';
 
 @Component({
@@ -19,16 +20,24 @@ export class PresentacionInicioUserComponent implements OnInit {
   public listadoAsignaciones: Array<Asignacion> = [];
   public listadoEjercitarios: Array<any>;
   
-  constructor(private router: Router, private ejercitarioService: EjercitarioParticipanteService, private _Activatedroute:ActivatedRoute, private route: ActivatedRoute, private breadcrumbService: BreadcrumbService, private photoService: PhotoService) {
+  constructor(private autentificacionUsuario: AutentificacionUsuarioService, private router: Router, private ejercitarioService: EjercitarioParticipanteService, private _Activatedroute:ActivatedRoute, private route: ActivatedRoute, private breadcrumbService: BreadcrumbService, private photoService: PhotoService) {
     
   }
 
   ngOnInit():void {
-    this.photoService.getImages().then(images => {
-      this.images = images;
-    });
-
-    this.correoParticanteInicio=this._Activatedroute.snapshot.paramMap.get("correo");
+   
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoParticanteInicio = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoParticanteInicio = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoParticanteInicio = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
+    
     this.obtenercionAsignacionesEjercitario();
   }
   

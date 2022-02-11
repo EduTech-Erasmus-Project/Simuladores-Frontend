@@ -28,3 +28,13 @@ export class Actividad {
     ActividadDeParticipante_id: number;
     
 }
+
+export interface ActividadTabla {
+    idActividad?: number;
+    tiempoTotalResolucionEjercitario?: number;
+    fechaDeActividad?: string;
+    totalRespuestasCorrectasIngresadasParticipante?: number;
+    numeroTotalDePreguntasDelEjercitario?: number;
+    calificacionActividad?: number;
+    ejercitario?: string;
+}

@@ -60,11 +60,12 @@ export class Asignacion {
 
 
 export interface AsignacionTabla {
-    idActividad?: number;
-    tiempoTotalResolucionEjercitario?: number;
-    fechaDeActividad?: string;
-    totalRespuestasCorrectasIngresadasParticipante?: number;
-    numeroTotalDePreguntasDelEjercitario?: number;
-    calificacionActividad?: number;
-    ejercitario?: string;
+    idAsignacion?: number;
+    fechaAsignacion?: string;
+    participante?: string;
+    evaluador?: string;
+    numeroDeEjercitario?: number;
+    nombreDeEjercitario?: string;
+
 }
+

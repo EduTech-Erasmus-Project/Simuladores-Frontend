@@ -173,6 +173,7 @@ import { RouterModule } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AsignarActividadesParticipanteComponent } from './src/pages/Experto/asignar-actividades-participante/asignar-actividades-participante.component';
 import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 @NgModule({
     imports: [
         RouterModule,
@@ -331,6 +332,7 @@ import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar
         PresentacionInicioExpertoComponent,
         AsignarActividadesParticipanteComponent,
         AgregarActividadesParticipanteComponent,
+        AboutUsComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

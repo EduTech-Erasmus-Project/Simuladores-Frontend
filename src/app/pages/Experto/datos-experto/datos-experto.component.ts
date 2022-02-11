@@ -5,6 +5,7 @@ import { ConfirmationService, MessageService, SelectItem, SelectItemGroup } from
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { CountryService } from 'src/app/demo/service/countryservice';
 import { Responsable } from 'src/app/model/Responsable';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { EditarInformacionExpertoService } from 'src/app/service/informcionEvaluador/editar-informacion-experto.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
@@ -101,12 +102,24 @@ export class DatosExpertoComponent implements OnInit {
   constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService, 
     private _Activatedroute:ActivatedRoute, private editarresponsableService: EditarInformacionExpertoService,
     private responsableServiceInformacion: InformacionEvaluadorService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private router: Router) { 
+    private messageService: MessageService, private router: Router, private autentificacionUsuario: AutentificacionUsuarioService) { 
     
   }
 
   ngOnInit(): void {
-    this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+    
+    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+        this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo")
+      }else{
+        this.autentificacionUsuario.logout();
+      }
+    }else if(this.autentificacionUsuario.emailUser != null ){
+      this.correoResponsableDatos = this.autentificacionUsuario.emailUser;
+    }else{
+      this.correoResponsableDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+    }
+
     this.obtenerInformacionExperto();
   }
 

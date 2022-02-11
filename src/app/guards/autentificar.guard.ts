@@ -14,7 +14,8 @@ export class AutentificarGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    if (this.autentificasionService.getIsAuthenticated()) {
+    if (this.autentificasionService.isLoggedIn()) {
+      this.autentificasionService.refreshToken();
       return true;
     }else{
       this.router.navigate(['login']);

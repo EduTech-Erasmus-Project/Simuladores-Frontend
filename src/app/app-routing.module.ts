@@ -53,6 +53,7 @@ import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion
 import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
 import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
 import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
     imports: [
@@ -63,6 +64,7 @@ import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar
             {path: 'notfound', component: AppNotfoundComponent},
             {path: 'login', component: LoginUserComponent},
             {path: 'inicio', component: LandingComponent},
+            {path: 'about-us', component: AboutUsComponent},
             {path: 'registrar', component: RegistrarUserComponent},
             {
                 path: 'Pagina-Principal-Usuario', component: PaginaPrincipalUsuarioComponent,
@@ -83,7 +85,7 @@ import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar
                     {path: 'agregarAlumno/:correo', component: AgregarAlumnoAExpertoComponent},
                     {path: 'escenarioInfo/:correo/:idEjercitario', component: EscenarioComponent},
                     {path: 'participanteInfo/:correo/:idEjercitario/:correoEstudiante', component: ParticipanteInfoComponent}
-                ]//, canActivate: [AutentificarGuard]
+                ], canActivate: [AutentificarGuard]
             },
             
             {path: '**', redirectTo: '/notfound'},

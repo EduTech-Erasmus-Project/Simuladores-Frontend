@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
 import { Participante, ParticipanteAceptacionTabla, ParticipanteAceptacionTablaEscenarioResponsable } from 'src/app/model/Participante';
+import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
 import { InfoExpertoPorEscenarioService } from 'src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
@@ -105,13 +106,25 @@ export class EscenarioComponent implements OnInit {
               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
               public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService,
               public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
-              private _Activatedroute:ActivatedRoute) { }
+              private _Activatedroute:ActivatedRoute, private autentificacionUsuario: AutentificacionUsuarioService) { }
 
 
 
   async ngOnInit() {
     try {
-      this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo");
+      
+      if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
+        if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
+          this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo")
+        }else{
+          this.autentificacionUsuario.logout();
+        }
+      }else if(this.autentificacionUsuario.emailUser != null ){
+        this.correoResponsableDatos = this.autentificacionUsuario.emailUser;
+      }else{
+        this.correoResponsableDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
+      }
+
       this.ejercitario = Number(this._Activatedroute.snapshot.paramMap.get("idEjercitario"));
     } catch (error) {
       console.log("Ejercitario or correo: "+error)

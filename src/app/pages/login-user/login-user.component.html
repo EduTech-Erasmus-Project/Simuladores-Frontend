@@ -53,7 +53,7 @@
 
           <div class="login-input-wrapper">
             <label for="password">Contraseña</label>
-            <span><br></span>
+            <span><br /></span>
             <input
               type="password"
               id="password"
@@ -72,7 +72,7 @@
               id="buttonMostrar"
               (click)="mostrarPassword()"
               label="Mostrar "
-              style="width: 17%; margin-left: 0.5em;"
+              style="width: 17%; margin-left: 0.5em"
             ></button>
           </div>
 
@@ -94,32 +94,23 @@
             Usuario o contraseña ingresa es incorrecta.
           </div>
 
-          <div class="p-grid p-justify-between">
-            <div class="p-col-4">
-              <p-checkbox
-                [(ngModel)]="checked"
-                label="Mantener Sesión"
-                value="SaveInfo"
-                binary="true"
-                name="checked"
-              ></p-checkbox>
-            </div>
-            <div class="p-col-5">
-              <a href="#" class="secondary-button">Recuperar Contraseña</a>
-            </div>
-          </div>
-
-          <div class="buttons">
-            <button pButton type="submit" label="Login"></button>
-          </div>
-
           <div>
-            <label>
-              <p>
-                Todavia no tienes cuenta:
-                <a href="#" class="secondary-button"> Registrate</a>
-              </p>
-            </label>
+            <div style="text-align: center; width: 100%">
+              <button
+                pButton
+                type="submit"
+                label="Login"
+                style="width: 50%"
+              ></button>
+            </div>
+          </div>
+          <div style="margin-top: 15%; align-items: center">
+            <button
+              pButton
+              routerLink="/registrar"
+              label="Todavia no tienes cuenta: Registrate"
+              class="p-button-text"
+            ></button>
           </div>
         </form>
       </div>
