@@ -64,8 +64,11 @@ export class AutentificacionUsuarioService {
     const config = { headers: new HttpHeaders({
       'Content-Type':  'application/json',}) 
     };
-    this.http.post<any>(environment.WS_PATH+"logout", config);
-    this.router.navigate(['']);
+    this.http.post<any>(environment.WS_PATH+"logout", config).subscribe(res=>{
+      console.log("logout: "+res.message)
+      this.router.navigate(['']);
+    });
+    
   }
 
   private updateData(data:any) {

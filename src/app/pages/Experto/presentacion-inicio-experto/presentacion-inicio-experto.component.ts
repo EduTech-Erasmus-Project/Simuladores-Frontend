@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { promise } from 'protractor';
-import { Escenario, EscenarioInterface } from 'src/app/model/Escenario';
+import { Escenario, EscenarioInterface, informacionEjercitarioInterface } from 'src/app/model/Escenario';
 import { Usuario } from 'src/app/model/Usuario';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
@@ -39,17 +39,7 @@ export class PresentacionInicioExpertoComponent implements OnInit {
   selectedEjercitario: any = {name: 'Ejercitario 1', value: 'ejercitario1'};
   public generos: Array<string>
   public discapacidades: Array<any>
-  ejercitarios: any[] = [
-    {name: 'La venta', value: '1'},
-    {name: 'Empleado problema', value: '2'},
-    {name: 'Mi agenda', value: '3'},
-    {name: 'Funciones y competencias', value: '4'},
-    {name: 'El tiempo', value: '5'},
-    {name: 'Un día de trabajo', value: '6'},
-    {name: 'La tecnología prima', value: '7'},
-    {name: 'Construcción', value: '8'},
-    {name: 'Construcción de Logo', value: '10'},
-  ];
+  ejercitarios: informacionEjercitarioInterface[] = [];
 
   states: any[] = [
       {name: 'Notas', value: 'Notas'},
@@ -75,6 +65,11 @@ export class PresentacionInicioExpertoComponent implements OnInit {
 
   
   async ngOnInit() {
+    this.servicioSeleccionarEjercitario.obtenerEjercitarios().then(ejercitariosRep => {
+      this.ejercitarios = ejercitariosRep
+      
+    });
+
     this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(1).then(
       escenario => {
         escenario as EscenarioInterface
@@ -273,7 +268,7 @@ export class PresentacionInicioExpertoComponent implements OnInit {
               
               if(('Visual' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].tiempo;
+                discapacidadVisualTiempo = discapacidadVisualTiempo + informacionParticipante.calificaciones[0].tiempo;
               }
 
               if(('Auditiva' == informacionParticipante.tipoDiscapacidad)){

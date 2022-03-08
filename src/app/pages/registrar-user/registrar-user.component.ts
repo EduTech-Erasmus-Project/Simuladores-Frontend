@@ -100,7 +100,7 @@ export class RegistrarUserComponent implements OnInit {
     this.informacionEvaluador.recuperarEvaluadoresParaRegistro().then(
       evaluadores => {
         evaluadores.forEach(evaluador => {
-          nombre = evaluador.nombre + evaluador.apellido
+          nombre = evaluador.nombre +" "+ evaluador.apellido
           this.evaluadoresList.push({ name: nombre, value: evaluador.correo })
         });
       }
@@ -124,6 +124,8 @@ export class RegistrarUserComponent implements OnInit {
     this.autentificacionService.checkEmail(this.emailParticipante).subscribe(res => {
       if (res.tipoUsuario == "notExist") {
         this.validarPassword();
+        return;
+
       }
       this.areCredentialsInvalid = true;
       return;

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Escenario, EscenarioInterface } from 'src/app/model/Escenario';
+import { Escenario, EscenarioInterface, informacionEjercitarioInterface } from 'src/app/model/Escenario';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,5 +27,10 @@ export class PaginaInicioExpertoService {
 
   obtenerDiscapacidades(): Observable<any>{
     return this.http.get<any>(environment.WS_PATH+"obtenerDiscapacidad", this.config);
+  }
+
+  obtenerEjercitarios(){
+    return this.http.get<any>(environment.WS_PATH+"getEjercitarios/", this.config).
+    toPromise().then(res=> res as any[]).then(res =>  res as informacionEjercitarioInterface[]).then(escenario => escenario);;
   }
 }

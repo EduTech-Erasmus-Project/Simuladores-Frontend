@@ -86,9 +86,10 @@ export class PresentacionInicioUserComponent implements OnInit {
     
   }
 
-  realizarEjercitario(urlEjercitario: string, idEjercitario: number){
-    console.log("abir ejercitario: "+ idEjercitario+" al participante: "+this.correoParticanteInicio+" url: " +urlEjercitario)
-    this.router.navigate([urlEjercitario], { queryParams: { 'correo': this.correoParticanteInicio , 'ejercitario':idEjercitario}});
+  realizarEjercitario(urlEjercitario: string, numeroDeEjercitario: number){
+    console.log("abir ejercitario: "+ numeroDeEjercitario+" al participante: "+this.correoParticanteInicio+" url: " +urlEjercitario)
+    //this.router.navigate([urlEjercitario], { queryParams: { 'correo': this.correoParticanteInicio , 'ejercitario':idEjercitario}});
+    window.open(urlEjercitario+"?correo="+this.correoParticanteInicio+'&ejercitario='+numeroDeEjercitario)
     //Colocar en esta seccion el direccionamiento hacia los ejercitarios 
   }
 

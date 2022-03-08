@@ -9,7 +9,7 @@
             <p-tabView orientation="left">
                   <p-tabPanel leftIcon="pi pi-image"  *ngFor="let asignacion of listadoAsignaciones" header=" {{asignacion.ejercitario.nombreDeEjercitario}}" >
                       <div class="card" >
-                        <p>
+                        <p style="text-align: justify;">
                             <b>Fecha de Asignacion:</b> {{asignacion.fechaAsignacion | date:'yyyy-MM-dd HH:mm:ss'}} <br>
 
                             <b>Ejercitario Asignado</b>  {{asignacion.ejercitario.nombreDeEjercitario}} <br>
@@ -20,7 +20,7 @@
                             <b> Instrucción para el Participante: </b> {{asignacion.ejercitario.instruccionesParticipantes}} <br>
                         </p>
 
-                        <button  pButton pRipple type="button" (click)="realizarEjercitario(asignacion.ejercitario.urlEjercitarios, asignacion.ejercitario.idEjercitario)" label="Más Información" class="p-button-info p-mr-2 p-mb-2"></button>
+                        <button  pButton pRipple type="button" (click)="realizarEjercitario(asignacion.ejercitario.urlEjercitarios, asignacion.ejercitario.numeroDeEjercitario)" label="Realizar Actividad" class="p-button-info p-mr-2 p-mb-2"></button>
                       </div>          
                   </p-tabPanel>
       

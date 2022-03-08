@@ -67,7 +67,16 @@
                         [(ngModel)]="password"
                         [feedback]="false"
                         appPassword
+                        style="width: 70%"
                       />
+                      <button
+                        pButton
+                        type="button"
+                        id="buttonMostrar"
+                        (click)="mostrarPassword()"
+                        label="Mostrar"
+                        style="width: 30%"
+                      ></button>
                     </div>
 
                     <div class="login-input-wrapper" style="margin-top: 0.5em">
@@ -79,9 +88,21 @@
                         pPassword
                         required
                         [(ngModel)]="newPassword"
-                        [feedback]="false"
+                        (keyup)="validarPassword()"
+                        style="width: 70%"
                         appPassword
                       />
+                      <button
+                        pButton
+                        type="button"
+                        id="buttonMostrarNuevo"
+                        (click)="mostrarPasswordNUeva()"
+                        label="Mostrar"
+                        style="width: 30%"
+                      ></button>
+                      <div class="alert alert-danger" role="alert">
+                        <p id="tipoPassword"></p>
+                      </div>
                     </div>
 
                     <div class="login-input-wrapper" style="margin-top: 0.5em">
@@ -95,7 +116,34 @@
                         [(ngModel)]="repPassword"
                         [feedback]="false"
                         appPassword
+                        (keyup)="verificacionSimilaridadPassword()"
+                        (click)="verificacionSimilaridadPassword()"
+                        style="width: 70%"
                       />
+                      <button
+                        pButton
+                        type="button"
+                        id="buttonMostrarRep"
+                        (click)="mostrarPasswordRepeticion()"
+                        label="Mostrar"
+                        style="width: 30%"
+                      ></button>
+                      <div
+                        class="alert alert-danger"
+                        role="alert"
+                        style="margin-bottom: 1em; color: #ce7483"
+                        *ngIf="passwordIncorrect == true"
+                      >
+                        Contraseñas no coinciden
+                      </div>
+                      <div
+                        class="alert alert-danger"
+                        role="alert"
+                        style="margin-bottom: 1em; color: #5fe6b2"
+                        *ngIf="passwordIncorrect == false"
+                      >
+                        Contraseñas coinciden
+                      </div>
                     </div>
 
                     <div
@@ -166,10 +214,9 @@
                     type="text"
                     pInputText
                     placeholder="Nombre"
-                    
                     id="nombre"
                     name="nombre"
-                    [(ngModel)]= "nombreParticipante"
+                    [(ngModel)]="nombreParticipante"
                   />
                 </span>
               </div>
@@ -191,28 +238,24 @@
               <h6>Pais:</h6>
               <div class="p-grid p-formgrid">
                 <input
-                    type="text"
-                    pInputText
-                    placeholder="Pais del Participante"
-                   
-                    id="pais"
-                    name="pais"
-                    [(ngModel)]= "paisParticipante"
+                  type="text"
+                  pInputText
+                  placeholder="Pais del Participante"
+                  id="pais"
+                  name="pais"
+                  [(ngModel)]="paisParticipante"
                 />
               </div>
               <h6>Ciudad:</h6>
               <div class="p-grid p-formgrid">
                 <input
-                    type="text"
-                    pInputText
-                    placeholder="Ciudad del Participante"
-                    
-                    id="ciudad"
-                    name="ciudad"
-                    [(ngModel)]= "ciudadParticipante"
+                  type="text"
+                  pInputText
+                  placeholder="Ciudad del Participante"
+                  id="ciudad"
+                  name="ciudad"
+                  [(ngModel)]="ciudadParticipante"
                 />
-
-                
               </div>
 
               <h6>Dirección de Vivienda:</h6>
@@ -221,10 +264,9 @@
                   type="text"
                   pInputText
                   placeholder="Dirección del Participante"
-                 
                   id="direccion"
                   name="direccion"
-                  [(ngModel)]= "direccionParticipante"
+                  [(ngModel)]="direccionParticipante"
                 />
               </div>
 
@@ -236,15 +278,12 @@
                     type="text"
                     pInputText
                     placeholder="Carrera Universitaria del Participante"
-                    
                     id="carrera"
                     name="carrera"
-                    [(ngModel)]= "carreraParticipante"
+                    [(ngModel)]="carreraParticipante"
                   />
                 </span>
               </div>
-
-              
             </div>
           </div>
           <div class="p-col-12 p-md-6">
@@ -257,10 +296,9 @@
                     type="text"
                     pInputText
                     placeholder="Apellido"
-                   
                     id="apellido"
                     name="apellido"
-                    [(ngModel)]= "apellidoParticipante"
+                    [(ngModel)]="apellidoParticipante"
                   />
                 </span>
               </div>
@@ -273,10 +311,9 @@
                     type="text"
                     pInputText
                     placeholder="Número de teléfono"
-                   
                     id="telefono"
                     name="telefono"
-                    [(ngModel)]= "telefonoParticipante"
+                    [(ngModel)]="telefonoParticipante"
                   />
                 </span>
               </div>
@@ -287,10 +324,9 @@
                   type="text"
                   pInputText
                   placeholder="Estudios previos del Participante"
-                  
                   id="estudios"
                   name="estudios"
-                  [(ngModel)]= "estudiosParticipante"
+                  [(ngModel)]="estudiosParticipante"
                 />
               </div>
 
@@ -315,10 +351,9 @@
                   type="text"
                   pInputText
                   placeholder="Código Universitario del Participante"
-                  
                   id="codigo"
                   name="codigo"
-                  [(ngModel)]= "codigoParticipante"
+                  [(ngModel)]="codigoParticipante"
                 />
               </div>
 
@@ -328,10 +363,9 @@
                   type="text"
                   pInputText
                   placeholder="Estado Civil del Participante"
-                  
                   id="estadoCivil"
                   name="estadoCivil"
-                  [(ngModel)]= "estadoCivilParticipante"
+                  [(ngModel)]="estadoCivilParticipante"
                 />
               </div>
             </div>
@@ -341,8 +375,15 @@
         <p-divider layout="horizontal" align="center">
           <div class="buttons">
             <p-toast key="editarTOAST"></p-toast>
-            <p-confirmDialog header="Editar Cuenta" key="editarCuenta" icon="pi pi-exclamation-triangle" message="¿Esta seguro de editar tu cuenta?"
-                             [style]="{width: '425px'}" acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
+            <p-confirmDialog
+              header="Editar Cuenta"
+              key="editarCuenta"
+              icon="pi pi-exclamation-triangle"
+              message="¿Esta seguro de editar tu cuenta?"
+              [style]="{ width: '425px' }"
+              acceptButtonStyleClass="p-button-text"
+              rejectButtonStyleClass="p-button-text"
+            >
             </p-confirmDialog>
             <button
               pButton
@@ -352,11 +393,25 @@
             ></button>
 
             <p-toast key="eliminarTOAST"></p-toast>
-            <p-confirmDialog header="Eliminar Cuenta" key="eliminarCuenta" icon="pi pi-exclamation-triangle" message="¿Esta seguro de eliminar tu cuenta?"
-                             [style]="{width: '425px'}" acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
+            <p-confirmDialog
+              header="Eliminar Cuenta"
+              key="eliminarCuenta"
+              icon="pi pi-exclamation-triangle"
+              message="¿Esta seguro de eliminar tu cuenta?"
+              [style]="{ width: '425px' }"
+              acceptButtonStyleClass="p-button-text"
+              rejectButtonStyleClass="p-button-text"
+            >
             </p-confirmDialog>
-            <button type="text" (click)="eliminarCuenta()" pButton icon="pi pi-trash" label="Eliminar" class="p-button-danger" style="width: auto"></button>
-            
+            <button
+              type="text"
+              (click)="eliminarCuenta()"
+              pButton
+              icon="pi pi-trash"
+              label="Eliminar"
+              class="p-button-danger"
+              style="width: auto"
+            ></button>
           </div>
         </p-divider>
       </div>

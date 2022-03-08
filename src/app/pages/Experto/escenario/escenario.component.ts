@@ -389,7 +389,7 @@ export class EscenarioComponent implements OnInit {
               
               if(('Visual' == informacionParticipante.tipoDiscapacidad)){
                 discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].tiempo;
+                discapacidadVisualTiempo = discapacidadVisualTiempo + informacionParticipante.calificaciones[0].tiempo;
                 this.discacidadVisualPuntosNota = this.discacidadVisualPuntosNota + discapacidadVisual;
                 this.discacidadVisualPuntosTiempo = this.discacidadVisualPuntosTiempo + discapacidadVisualTiempo;
               
