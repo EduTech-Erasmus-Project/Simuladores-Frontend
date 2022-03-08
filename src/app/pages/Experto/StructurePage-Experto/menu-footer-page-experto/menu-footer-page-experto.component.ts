@@ -21,17 +21,20 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <div class="logo-text">
-      <img
-        src="https://cdn.pixabay.com/photo/2020/04/25/18/14/european-union-flag-5092020_960_720.png"
-        alt="mirage-layout"
-      />
       <div class="text">
-        <h1 style="font-weight: bold">Cofinanciado por la UE</h1>
         <span style="font-size: 0.8em">
-            &copy; 2022 Todos los derechos reservados | Developed By <a href="https://edutech-project.org/">EduTech</a>  <br>
-            <a [routerLink]="['/terminos-condiciones']"> Términos y condiciones</a>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoc3XjPuzTq4QNg9HrchCCOaL8_nMONfzuvCbc-Wx94lGkPX6BpUYqItDx3-xBs0ioVQ&usqp=CAU"
+            alt="mirage-layout"
+            style="width: 100%;"
+          />
+          <br>
+          &copy; 2022 Todos los derechos reservados | Developed By
+          <a href="https://edutech-project.org/">EduTech</a> <br />
+          <a [routerLink]="['/terminos-condiciones']" style="width: 100%; text-align: center; font-size: 12px;">
+            Términos y condiciones</a>
         </span>
-           
+        
       </div>
     </div>
       

@@ -98,7 +98,12 @@ export class DatosExpertoComponent implements OnInit {
     public paisResponsable: string = ""
     public ciudadResponsable: string = "";
   
-    
+    buttonMostrar: string = "Mostrar"
+    buttonMostrarNuevo: string = "Mostrar"
+    buttonMostrarRep: string = "Mostrar"
+    validatePasswd = false;
+
+
   constructor(private countryService: CountryService, private breadcrumbService: BreadcrumbService, 
     private _Activatedroute:ActivatedRoute, private editarresponsableService: EditarInformacionExpertoService,
     private responsableServiceInformacion: InformacionEvaluadorService, private confirmationService: ConfirmationService,
@@ -229,6 +234,104 @@ export class DatosExpertoComponent implements OnInit {
     });
     
   }
+
+  mostrarPassword() {
+
+    if (this.buttonMostrar == "Ocultar") {
+      const p = document.getElementById("password") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrar") as HTMLInputElement;
+      p.type = 'password';
+      b.textContent = 'Mostrar';
+      this.buttonMostrar = "Mostrar"
+      return;
+    }
+    if (this.buttonMostrar == "Mostrar") {
+      const p = document.getElementById("password") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrar") as HTMLInputElement;
+      p.type = 'text';
+      b.textContent = 'Ocultar';
+      this.buttonMostrar = "Ocultar"
+      return;
+    }
+
+  }
+
+  validarPassword() {
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+
+    if (strongRegex.test(this.newPassword)) {
+      const p = document.getElementById("tipoPassword");
+      p.style.color = "green";
+      p.textContent = "Contraseña Fuerte"
+      this.validatePasswd = true;
+    } else if (mediumRegex.test(this.newPassword)) {
+      const p = document.getElementById("tipoPassword");
+      p.style.color = "orange";
+      p.textContent = "Contraseña Normal"
+      this.validatePasswd = true;
+    } else {
+      const p = document.getElementById("tipoPassword");
+      p.style.color = "#ce7483";
+      p.textContent = "Contraseña Debil"
+      this.validatePasswd = false;
+    }
+
+  }
+
+  mostrarPasswordNUeva() {
+
+    if (this.buttonMostrarNuevo == "Ocultar") {
+      const p = document.getElementById("newPassword") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrarNuevo") as HTMLInputElement;
+      p.type = 'password';
+      b.textContent = 'Mostrar';
+      this.buttonMostrarNuevo = "Mostrar"
+      return;
+    }
+    if (this.buttonMostrarNuevo == "Mostrar") {
+      const p = document.getElementById("newPassword") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrarNuevo") as HTMLInputElement;
+      p.type = 'text';
+      b.textContent = 'Ocultar';
+      this.buttonMostrarNuevo = "Ocultar"
+      return;
+    }
+
+  }
+
+  verificacionSimilaridadPassword() {
+
+    if (this.newPassword != this.repPassword) {
+      this.passwordIncorrect = true;
+      return;
+    } else {
+      this.passwordIncorrect = false;
+    }
+  }
+
+  mostrarPasswordRepeticion() {
+
+    if (this.buttonMostrarRep == "Ocultar") {
+      const p = document.getElementById("repPassword") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrarRep") as HTMLInputElement;
+      p.type = 'password';
+      b.textContent = 'Mostrar';
+      this.buttonMostrarRep = "Mostrar"
+      return;
+    }
+    if (this.buttonMostrarRep == "Mostrar") {
+      const p = document.getElementById("repPassword") as HTMLInputElement;
+      const b = document.getElementById("buttonMostrarRep") as HTMLInputElement;
+      p.type = 'text';
+      b.textContent = 'Ocultar';
+      this.buttonMostrarRep = "Ocultar"
+      return;
+    }
+
+  }
+
+
 
 
 }

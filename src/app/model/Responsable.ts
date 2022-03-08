@@ -92,3 +92,17 @@ export class Responsable extends Perfil{
     }
 
 }
+
+
+export interface ExpertoInterface {
+    email : string;
+    password : string;
+    nombre : string; 
+    apellido : string;
+    telefono : string;
+    pais : string;
+    ciudad : string;
+    direccion : string;
+    estado:string
+    nivelDeFormacion : string
+}

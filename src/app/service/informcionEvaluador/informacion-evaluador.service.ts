@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
-import { Responsable } from 'src/app/model/Responsable';
+import { ExpertoInterface, Responsable } from 'src/app/model/Responsable';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -67,4 +67,12 @@ export class InformacionEvaluadorService {
     return (this.http.get<any>(environment.WS_PATH+"getEvaluadores/", config)).toPromise().then(res => res.evaluadores);
 
   }
+
+  public registrarNuevoExperto(experto: ExpertoInterface): Observable<any>{
+    const config = { 
+      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+    };
+    return this.http.post<any>(environment.WS_PATH+"registrarEvaluadores", experto, config);
+  }
+
 }

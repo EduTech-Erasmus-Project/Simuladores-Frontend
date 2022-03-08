@@ -101,3 +101,8 @@ export interface EscenarioInterface{
     instruccionesParticipantes : string;
     urlEjercitarios: string;
 }
+
+export interface informacionEjercitarioInterface{
+    name: string;
+    value : number;
+}

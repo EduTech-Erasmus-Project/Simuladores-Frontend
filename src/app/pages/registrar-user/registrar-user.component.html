@@ -14,19 +14,21 @@
     <div class="nav-menu-wrapper">
       <ul class="nav-menu" id="landing-menu">
         <li class="active-link">
-          <a href="#home">Inicio</a>
+          <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
         </li>
         <li>
-          <a href="#meet-mirage">Información</a>
+          <a href="">Información</a>
         </li>
         <li>
-          <a href="#features">Simuladores</a>
+          <a href="">Simuladores</a>
         </li>
         <li>
-          <a href="#pricing">Acerca de</a>
+          <a href="">Acerca de</a>
         </li>
         <li>
-          <a href="#multimedia">Colaboradores</a>
+          <a [routerLink]="['/about-us']" routerLinkActive="active"
+            >¿Quiénes Somos?</a
+          >
         </li>
       </ul>
     </div>
@@ -702,7 +704,7 @@
                           pButton
                           (click)="agregarExperiencia()"
                           type="button"
-                          label="Agregar Discapacidad"
+                          label="Agregar Experiencia"
                         ></button>
                       </div>
                     </div>

@@ -174,6 +174,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { TerminosCondicionesComponent } from './pages/terminos-condiciones/terminos-condiciones.component';
+import { RegisterExpertoComponent } from './pages/register-experto/register-experto.component';
 @NgModule({
     imports: [
         RouterModule,
@@ -333,6 +334,7 @@ import { TerminosCondicionesComponent } from './pages/terminos-condiciones/termi
         AgregarActividadesParticipanteComponent,
         AboutUsComponent,
         TerminosCondicionesComponent,
+        RegisterExpertoComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
