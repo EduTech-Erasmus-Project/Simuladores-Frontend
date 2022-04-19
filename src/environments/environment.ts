@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  //WS_PATH: "http://192.168.100.184:8080/api/"
-  WS_PATH: "http://localhost:8000/api/"
+  production: true,
+  baseUrl: 'http://localhost:8000/api/v1',
+  // baseUrl: 'https://repositorio.edutech-project.org/api/v1',
+  cryptoSecretKey: "@ROA-QYpTatEMVQ3tem_A5ZHrglKBPuxe9IQjT@"
+
 };
 
 /*

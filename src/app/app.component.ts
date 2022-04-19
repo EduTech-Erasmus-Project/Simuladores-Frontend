@@ -1,31 +1,30 @@
-import {Component, OnInit} from '@angular/core';
-import {PrimeNGConfig} from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import { PrimeNGConfig } from "primeng/api";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+  selector: "app-root",
+  templateUrl: "./app.component.html",
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+  horizontalMenu: boolean;
 
-    horizontalMenu: boolean;
+  darkMode = false;
 
-    darkMode = false;
+  menuColorMode = "light";
 
-    menuColorMode = 'light';
+  menuColor = "layout-menu-light";
 
-    menuColor = 'layout-menu-light';
+  themeColor = "blue";
 
-    themeColor = 'blue';
+  layoutColor = "blue";
 
-    layoutColor = 'blue';
+  ripple = true;
 
-    ripple = true;
+  inputStyle = "outlined";
 
-    inputStyle = 'outlined';
+  constructor(private primengConfig: PrimeNGConfig) {}
 
-    constructor(private primengConfig: PrimeNGConfig) {}
-
-    ngOnInit() {
-        this.primengConfig.ripple = true;
-    }
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
 }

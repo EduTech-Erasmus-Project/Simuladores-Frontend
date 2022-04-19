@@ -1,120 +1,103 @@
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DatePipe, HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { NgModule } from "@angular/core";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from "@angular/common";
 
-// Application Components
-import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
+// PrimeNG Components for demos
+import { AccordionModule } from "primeng/accordion";
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { CalendarModule } from "primeng/calendar";
+import { ChartModule } from "primeng/chart";
+import { CheckboxModule } from "primeng/checkbox";
+import { CodeHighlighterModule } from "primeng/codehighlighter";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmPopupModule } from "primeng/confirmpopup";
+import { ColorPickerModule } from "primeng/colorpicker";
+import { ContextMenuModule } from "primeng/contextmenu";
+import { DataViewModule } from "primeng/dataview";
+import { DialogModule } from "primeng/dialog";
+import { DividerModule } from "primeng/divider";
+import { DropdownModule } from "primeng/dropdown";
+import { FieldsetModule } from "primeng/fieldset";
+import { FileUploadModule } from "primeng/fileupload";
+import { FullCalendarModule } from "primeng/fullcalendar";
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { PaginatorModule } from "primeng/paginator";
+import { TabMenuModule } from "primeng/tabmenu";
+import { TableModule } from "primeng/table";
+import { VirtualScrollerModule } from "primeng/virtualscroller";
 
-
-// Demo pages
-import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
-import {FormLayoutDemoComponent} from './demo/view/formlayoutdemo.component';
-import {FloatLabelDemoComponent} from './demo/view/floatlabeldemo.component';
-import {InvalidStateDemoComponent} from './demo/view/invalidstatedemo.component';
-import {InputDemoComponent} from './demo/view/inputdemo.component';
-import {ButtonDemoComponent} from './demo/view/buttondemo.component';
-import {TableDemoComponent} from './demo/view/tabledemo.component';
-import {ListDemoComponent} from './demo/view/listdemo.component';
-import {TreeDemoComponent} from './demo/view/treedemo.component';
-import {PanelsDemoComponent} from './demo/view/panelsdemo.component';
-import {OverlaysDemoComponent} from './demo/view/overlaysdemo.component';
-import {MediaDemoComponent} from './demo/view/mediademo.component';
-import {MenusDemoComponent} from './demo/view/menusdemo.component';
-import {MessagesDemoComponent} from './demo/view/messagesdemo.component';
-import {MiscDemoComponent} from './demo/view/miscdemo.component';
-import {EmptyDemoComponent} from './demo/view/emptydemo.component';
-import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
-import {FileDemoComponent} from './demo/view/filedemo.component';
-import {DocumentationComponent} from './demo/view/documentation.component';
-import {DisplayComponent} from './utilities/display.component';
-import {ElevationComponent} from './utilities/elevation.component';
-import {FlexboxComponent} from './utilities/flexbox.component';
-import {GridComponent} from './utilities/grid.component';
-import {IconsComponent} from './utilities/icons.component';
-import {SpacingComponent} from './utilities/spacing.component';
-import {TypographyComponent} from './utilities/typography.component';
-import {TextComponent} from './utilities/text.component';
-import {WidgetsComponent} from './utilities/widgets.component';
-
-// Demo services
-import {CountryService} from './demo/service/countryservice';
-import {EventService} from './demo/service/eventservice';
-import {NodeService} from './demo/service/nodeservice';
-import {CustomerService} from './demo/service/customerservice';
-import {PhotoService} from './demo/service/photoservice';
-import {ProductService} from './demo/service/productservice';
-import {IconService} from './demo/service/iconservice';
+// Application Components //** */
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
 
 // Application services
-import {BreadcrumbService} from './service/breadcrumb.service';
-import {MenuService} from './service/app.menu.service';
-import { RouterModule } from '@angular/router';
-import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
-import { PublicModule } from './public/public.module';
-import { UserModule } from './user/user.module';
-import { AdminModule } from './admin/admin.module';
-import { QuicklinkModule } from 'ngx-quicklink';
+import { BreadcrumbService } from "./services/breadcrumb.service";
+import { MenuService } from "./services/app.menu.service";
+import { AdminModule } from "./admin/admin.module";
+import { SharedModule } from "./shared/shared.module";
+import { PublicModule } from "./public/public.module";
+import { QuicklinkModule } from "ngx-quicklink";
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { CookieService } from "ngx-cookie-service";
+import { AuthInterceptor } from './services/auth.interceptor';
+import { FormBuilder } from "@angular/forms";
+
 @NgModule({
-    imports: [
-        RouterModule,
-        BrowserModule,
-        FormsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        PublicModule,
-        UserModule,
-        AdminModule,
-        QuicklinkModule,
-    ],
-    declarations: [
-        AppComponent,
-        
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AccordionModule,
+    AutoCompleteModule,
+    CalendarModule,
+    ChartModule,
+    CheckboxModule,
+    CodeHighlighterModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
+    ColorPickerModule,
+    ContextMenuModule,
+    DataViewModule,
+    DialogModule,
+    DividerModule,
+    DropdownModule,
+    FieldsetModule,
+    FileUploadModule,
+    FullCalendarModule,
+    InputTextareaModule,
+    PaginatorModule,
+    TableModule,
+    TabMenuModule,
+    VirtualScrollerModule,
+    SharedModule,
+    AdminModule,
+    PublicModule,
+    QuicklinkModule,
+    
+  ],
+  declarations: [AppComponent],
+  providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },
+    MenuService,
+    BreadcrumbService,
+    MessageService,
+    CookieService,
+    FormBuilder,
+    ConfirmationService
 
-
-        DashboardDemoComponent,
-        FormLayoutDemoComponent,
-        FloatLabelDemoComponent,
-        InvalidStateDemoComponent,
-        InputDemoComponent,
-        ButtonDemoComponent,
-        TableDemoComponent,
-        ListDemoComponent,
-        TreeDemoComponent,
-        PanelsDemoComponent,
-        OverlaysDemoComponent,
-        MediaDemoComponent,
-        MenusDemoComponent,
-        MessagesDemoComponent,
-        MessagesDemoComponent,
-        MiscDemoComponent,
-        ChartsDemoComponent,
-        EmptyDemoComponent,
-        FileDemoComponent,
-        DocumentationComponent,
-        DisplayComponent,
-        ElevationComponent,
-        FlexboxComponent,
-        GridComponent,
-        IconsComponent,
-        SpacingComponent,
-        TypographyComponent,
-        TextComponent,
-        WidgetsComponent,
- 
-    ],
-    providers: [
-        //{provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: LocationStrategy, useClass: PathLocationStrategy },
-        CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService, DatePipe
-    ],
-    bootstrap: [AppComponent]
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

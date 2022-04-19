@@ -1,16 +1,25 @@
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-
-// PrimeNG Components for demos
-import { AccordionModule } from "primeng/accordion";
-import { AutoCompleteModule } from "primeng/autocomplete";
+import { MenuComponent } from "./menu/menu.component";
+import { FooterComponent } from "./footer/footer.component";
+import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
+import { TopbarComponen } from "./topbar/topbar.component";
+import { ConfigComponent } from "./config/config.component";
+import { MenuitemComponent } from "./menuitem/menuitem.component";
 import { AvatarModule } from "primeng/avatar";
+import { CalendarModule } from "primeng/calendar";
+import { CardModule } from "primeng/card";
+import { RouterModule } from "@angular/router";
+import { MegaMenuModule } from "primeng/megamenu";
+import { MenuModule } from "primeng/menu";
+import { MenubarModule } from "primeng/menubar";
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { AccordionModule } from "primeng/accordion";
 import { AvatarGroupModule } from "primeng/avatargroup";
 import { BadgeModule } from "primeng/badge";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { ButtonModule } from "primeng/button";
-import { CalendarModule } from "primeng/calendar";
-import { CardModule } from "primeng/card";
 import { CarouselModule } from "primeng/carousel";
 import { CascadeSelectModule } from "primeng/cascadeselect";
 import { ChartModule } from "primeng/chart";
@@ -39,9 +48,6 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { KnobModule } from "primeng/knob";
 import { LightboxModule } from "primeng/lightbox";
 import { ListboxModule } from "primeng/listbox";
-import { MegaMenuModule } from "primeng/megamenu";
-import { MenuModule } from "primeng/menu";
-import { MenubarModule } from "primeng/menubar";
 import { MessagesModule } from "primeng/messages";
 import { MessageModule } from "primeng/message";
 import { MultiSelectModule } from "primeng/multiselect";
@@ -81,94 +87,47 @@ import { TooltipModule } from "primeng/tooltip";
 import { TreeModule } from "primeng/tree";
 import { TreeTableModule } from "primeng/treetable";
 import { VirtualScrollerModule } from "primeng/virtualscroller";
-import { HeaderPublicComponent } from './header-public/header-public.component';
-import { FooterComponent } from './footer/footer.component';
+import { MenuPublicComponent } from './menu-public/menu-public.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PrettyprintPipe } from '../pipes/prettyprint.pipe';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { UrlsanitizerPipe } from '../pipes/urlsanitizer.pipe';
+import { MomentPipe } from '../pipes/moment.pipe';
+import { MetadataComponent } from './metadata/metadata.component';
+import { BreadcrumbPublicComponent } from './breadcrumb-public/breadcrumb-public.component';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
-  declarations: [HeaderPublicComponent, FooterComponent],
-  imports: [
-    CommonModule,
-    AccordionModule,
-    AutoCompleteModule,
-    AvatarModule,
-    AvatarGroupModule,
-    BadgeModule,
-    BreadcrumbModule,
-    ButtonModule,
-    CalendarModule,
-    CardModule,
-    CarouselModule,
-    CascadeSelectModule,
-    ChartModule,
-    CheckboxModule,
-    ChipModule,
-    ChipsModule,
-    CodeHighlighterModule,
-    ConfirmDialogModule,
-    ConfirmPopupModule,
-    ColorPickerModule,
-    ContextMenuModule,
-    DataViewModule,
-    DialogModule,
-    DividerModule,
-    DropdownModule,
-    FieldsetModule,
-    FileUploadModule,
-    FullCalendarModule,
-    GalleriaModule,
-    InplaceModule,
-    InputNumberModule,
-    InputMaskModule,
-    InputSwitchModule,
-    InputTextModule,
-    InputTextareaModule,
-    KnobModule,
-    LightboxModule,
-    ListboxModule,
-    MegaMenuModule,
-    MenuModule,
-    MenubarModule,
-    MessageModule,
-    MessagesModule,
-    MultiSelectModule,
-    OrderListModule,
-    OrganizationChartModule,
-    OverlayPanelModule,
-    PaginatorModule,
-    PanelModule,
-    PanelMenuModule,
-    PasswordModule,
-    PickListModule,
-    ProgressBarModule,
-    RadioButtonModule,
-    RatingModule,
-    RippleModule,
-    ScrollPanelModule,
-    ScrollTopModule,
-    SelectButtonModule,
-    SidebarModule,
-    SkeletonModule,
-    SlideMenuModule,
-    SliderModule,
-    SplitButtonModule,
-    SplitterModule,
-    StepsModule,
-    TableModule,
-    TabMenuModule,
-    TabViewModule,
-    TagModule,
-    TerminalModule,
-    TimelineModule,
-    TieredMenuModule,
-    ToastModule,
-    ToggleButtonModule,
-    ToolbarModule,
-    TooltipModule,
-    TreeModule,
-    TreeTableModule,
-    VirtualScrollerModule,
+  declarations: [
+    MenuComponent,
+    FooterComponent,
+    BreadcrumbComponent,
+    TopbarComponen,
+    ConfigComponent,
+    MenuitemComponent,
+    MenuPublicComponent,
+    PrettyprintPipe,
+    UrlsanitizerPipe,
+    MomentPipe,
+    MetadataComponent,
+    BreadcrumbPublicComponent
+
   ],
   exports: [
+    BreadcrumbPublicComponent,
+    MenuComponent,
+    FooterComponent,
+    BreadcrumbComponent,
+    TopbarComponen,
+    ConfigComponent,
+    MenuitemComponent,
+    RouterModule,
+    FormsModule,
     AccordionModule,
     AutoCompleteModule,
     AvatarModule,
@@ -248,6 +207,106 @@ import { FooterComponent } from './footer/footer.component';
     TreeModule,
     TreeTableModule,
     VirtualScrollerModule,
+    MenuPublicComponent,
+    TranslateModule,
+    PrettyprintPipe,
+    UrlsanitizerPipe,
+    MomentPipe,
+    ProgressSpinnerModule,
+    MetadataComponent
+  ],
+  imports: [
+    ProgressSpinnerModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    AccordionModule,
+    AutoCompleteModule,
+    AvatarModule,
+    AvatarGroupModule,
+    BadgeModule,
+    BreadcrumbModule,
+    ButtonModule,
+    CalendarModule,
+    CardModule,
+    CarouselModule,
+    CascadeSelectModule,
+    ChartModule,
+    CheckboxModule,
+    ChipModule,
+    ChipsModule,
+    CodeHighlighterModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
+    ColorPickerModule,
+    ContextMenuModule,
+    DataViewModule,
+    DialogModule,
+    DividerModule,
+    DropdownModule,
+    FieldsetModule,
+    FileUploadModule,
+    FullCalendarModule,
+    GalleriaModule,
+    InplaceModule,
+    InputNumberModule,
+    InputMaskModule,
+    InputSwitchModule,
+    InputTextModule,
+    InputTextareaModule,
+    KnobModule,
+    LightboxModule,
+    ListboxModule,
+    MegaMenuModule,
+    MenuModule,
+    MenubarModule,
+    MessageModule,
+    MessagesModule,
+    MultiSelectModule,
+    OrderListModule,
+    OrganizationChartModule,
+    OverlayPanelModule,
+    PaginatorModule,
+    PanelModule,
+    PanelMenuModule,
+    PasswordModule,
+    PickListModule,
+    ProgressBarModule,
+    RadioButtonModule,
+    RatingModule,
+    RippleModule,
+    ScrollPanelModule,
+    ScrollTopModule,
+    SelectButtonModule,
+    SidebarModule,
+    SkeletonModule,
+    SlideMenuModule,
+    SliderModule,
+    SplitButtonModule,
+    SplitterModule,
+    StepsModule,
+    TableModule,
+    TabMenuModule,
+    TabViewModule,
+    TagModule,
+    TerminalModule,
+    TimelineModule,
+    TieredMenuModule,
+    ToastModule,
+    ToggleButtonModule,
+    ToolbarModule,
+    TooltipModule,
+    TreeModule,
+    TreeTableModule,
+    VirtualScrollerModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'es',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
 })
 export class SharedModule {}
