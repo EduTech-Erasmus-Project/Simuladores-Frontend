@@ -129,7 +129,7 @@
  .token.constant,
  .token.symbol,
  .token.deleted {
-     color: #5e81ac;
+     color: var(--primary-color);
  }
  
  .token.selector,

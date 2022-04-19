@@ -4,4 +4,8 @@ node_modules
 .DS_Store
 sassdoc
 
+/idea
+/.idea
+
+package-lock.json
 
