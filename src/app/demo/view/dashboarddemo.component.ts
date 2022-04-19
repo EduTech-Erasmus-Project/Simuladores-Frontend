@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SelectItem} from 'primeng/api';
-import {BreadcrumbService} from '../../breadcrumb.service';
+import {BreadcrumbService} from '../../service/breadcrumb.service';
 import {ProductService} from '../service/productservice';
 import {Product} from '../domain/product';
 

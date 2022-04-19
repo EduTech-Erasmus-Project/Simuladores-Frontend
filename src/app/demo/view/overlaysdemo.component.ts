@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {BreadcrumbService} from '../../breadcrumb.service';
+import {BreadcrumbService} from '../../service/breadcrumb.service';
 import {Product} from '../domain/product';
 import {ProductService} from '../service/productservice';
 

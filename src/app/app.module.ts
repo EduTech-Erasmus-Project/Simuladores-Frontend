@@ -3,107 +3,12 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DatePipe, HashLocationStrategy, LocationStrategy} from '@angular/common';
-
-// PrimeNG Components for demos
-import {AccordionModule} from 'primeng/accordion';
-import {AutoCompleteModule} from 'primeng/autocomplete';
-import {AvatarModule} from 'primeng/avatar';
-import {AvatarGroupModule} from 'primeng/avatargroup';
-import {BadgeModule} from 'primeng/badge';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
-import {ButtonModule} from 'primeng/button';
-import {CalendarModule} from 'primeng/calendar';
-import {CardModule} from 'primeng/card';
-import {CarouselModule} from 'primeng/carousel';
-import {CascadeSelectModule} from 'primeng/cascadeselect';
-import {ChartModule} from 'primeng/chart';
-import {CheckboxModule} from 'primeng/checkbox';
-import {ChipModule} from 'primeng/chip';
-import {ChipsModule} from 'primeng/chips';
-import {CodeHighlighterModule} from 'primeng/codehighlighter';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {ColorPickerModule} from 'primeng/colorpicker';
-import {ContextMenuModule} from 'primeng/contextmenu';
-import {DataViewModule} from 'primeng/dataview';
-import {DialogModule} from 'primeng/dialog';
-import {DividerModule} from 'primeng/divider';
-import {DropdownModule} from 'primeng/dropdown';
-import {FieldsetModule} from 'primeng/fieldset';
-import {FileUploadModule} from 'primeng/fileupload';
-import {FullCalendarModule} from 'primeng/fullcalendar';
-import {GalleriaModule} from 'primeng/galleria';
-import {InplaceModule} from 'primeng/inplace';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {InputMaskModule} from 'primeng/inputmask';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import {InputTextModule} from 'primeng/inputtext';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {KnobModule} from 'primeng/knob';
-import {LightboxModule} from 'primeng/lightbox';
-import {ListboxModule} from 'primeng/listbox';
-import {MegaMenuModule} from 'primeng/megamenu';
-import {MenuModule} from 'primeng/menu';
-import {MenubarModule} from 'primeng/menubar';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {OrderListModule} from 'primeng/orderlist';
-import {OrganizationChartModule} from 'primeng/organizationchart';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {PaginatorModule} from 'primeng/paginator';
-import {PanelModule} from 'primeng/panel';
-import {PanelMenuModule} from 'primeng/panelmenu';
-import {PasswordModule} from 'primeng/password';
-import {PickListModule} from 'primeng/picklist';
-import {ProgressBarModule} from 'primeng/progressbar';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {RatingModule} from 'primeng/rating';
-import {RippleModule} from 'primeng/ripple';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
-import {ScrollTopModule} from 'primeng/scrolltop';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {SidebarModule} from 'primeng/sidebar';
-import {SkeletonModule} from 'primeng/skeleton';
-import {SlideMenuModule} from 'primeng/slidemenu';
-import {SliderModule} from 'primeng/slider';
-import {SplitButtonModule} from 'primeng/splitbutton';
-import {SplitterModule} from 'primeng/splitter';
-import {StepsModule} from 'primeng/steps';
-import {TabMenuModule} from 'primeng/tabmenu';
-import {TableModule} from 'primeng/table';
-import {TabViewModule} from 'primeng/tabview';
-import {TagModule} from 'primeng/tag';
-import {TerminalModule} from 'primeng/terminal';
-import {TieredMenuModule} from 'primeng/tieredmenu';
-import {TimelineModule} from 'primeng/timeline';
-import {ToastModule} from 'primeng/toast';
-import {ToggleButtonModule} from 'primeng/togglebutton';
-import {ToolbarModule} from 'primeng/toolbar';
-import {TooltipModule} from 'primeng/tooltip';
-import {TreeModule} from 'primeng/tree';
-import {TreeTableModule} from 'primeng/treetable';
-import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {DatePipe, HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 // Application Components
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AppMainComponent} from './app.main.component';
-import {AppNotfoundComponent} from './pages/app.notfound.component';
-import {AppErrorComponent} from './pages/app.error.component';
-import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
-import {AppLoginComponent} from './pages/app.login.component';
-import {AppCrudComponent} from './pages/app.crud.component';
-import {AppCalendarComponent} from './pages/app.calendar.component';
-import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
-import {AppMenuComponent} from './app.menu.component';
-import {AppMenuitemComponent} from './app.menuitem.component';
-import {AppBreadcrumbComponent} from './app.breadcrumb.component';
-import {AppConfigComponent} from './app.config.component';
-import {AppRightPanelComponent} from './app.rightpanel.component';
-import {AppTopBarComponent} from './app.topbar.component';
-import {AppFooterComponent} from './app.footer.component';
+
 
 // Demo pages
 import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
@@ -145,142 +50,33 @@ import {ProductService} from './demo/service/productservice';
 import {IconService} from './demo/service/iconservice';
 
 // Application services
-import {BreadcrumbService} from './breadcrumb.service';
-import {MenuService} from './app.menu.service';
-import {AppCodeModule} from './app.code.component';
-import { LoginUserComponent } from './pages/login-user/login-user.component';
-import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.component';
-import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
-import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
-import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
-import { MenuTopBarComponent } from './pages/Structure/menu-top-bar/menu-top-bar.component';
-import { MenuFooterPageComponent } from './pages/Structure/menu-footer-page/menu-footer-page.component';
-import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.component';
-import { PresentacionInicioUserComponent } from './Pages/User/presentacion-inicio-user/presentacion-inicio-user.component';
-import { LandingComponent } from './pages/inicio/landing/landing.component';
-import { MenuLandingComponent } from './pages/inicio/menu-landing/menu-landing.component';
-import { FooterLandingComponent } from './pages/inicio/footer-landing/footer-landing.component';
-import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
-import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
-import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
-import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
-import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
-import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-footer-page-experto/menu-footer-page-experto.component';
-import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
-import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
-import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
+import {BreadcrumbService} from './service/breadcrumb.service';
+import {MenuService} from './service/app.menu.service';
 import { RouterModule } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
-import { AboutUsComponent } from './pages/about-us/about-us.component';
-import { TerminosCondicionesComponent } from './pages/terminos-condiciones/terminos-condiciones.component';
-import { RegisterExpertoComponent } from './pages/register-experto/register-experto.component';
+import { ConfirmationService, MessageService, SharedModule } from 'primeng/api';
+import { PublicModule } from './public/public.module';
+import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 @NgModule({
     imports: [
         RouterModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        AppCodeModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        AccordionModule,
-        AutoCompleteModule,
-        AvatarModule,
-        AvatarGroupModule,
-        BadgeModule,
-        BreadcrumbModule,
-        ButtonModule,
-        CalendarModule,
-        CardModule,
-        CarouselModule,
-        CascadeSelectModule,
-        ChartModule,
-        CheckboxModule,
-        ChipModule,
-        ChipsModule,
-        CodeHighlighterModule,
-        ConfirmDialogModule,
-        ConfirmPopupModule,
-        ColorPickerModule,
-        ContextMenuModule,
-        DataViewModule,
-        DialogModule,
-        DividerModule,
-        DropdownModule,
-        FieldsetModule,
-        FileUploadModule,
-        FullCalendarModule,
-        GalleriaModule,
-        InplaceModule,
-        InputNumberModule,
-        InputMaskModule,
-        InputSwitchModule,
-        InputTextModule,
-        InputTextareaModule,
-        KnobModule,
-        LightboxModule,
-        ListboxModule,
-        MegaMenuModule,
-        MenuModule,
-        MenubarModule,
-        MessageModule,
-        MessagesModule,
-        MultiSelectModule,
-        OrderListModule,
-        OrganizationChartModule,
-        OverlayPanelModule,
-        PaginatorModule,
-        PanelModule,
-        PanelMenuModule,
-        PasswordModule,
-        PickListModule,
-        ProgressBarModule,
-        RadioButtonModule,
-        RatingModule,
-        RippleModule,
-        ScrollPanelModule,
-        ScrollTopModule,
-        SelectButtonModule,
-        SidebarModule,
-        SkeletonModule,
-        SlideMenuModule,
-        SliderModule,
-        SplitButtonModule,
-        SplitterModule,
-        StepsModule,
-        TableModule,
-        TabMenuModule,
-        TabViewModule,
-        TagModule,
-        TerminalModule,
-        TimelineModule,
-        TieredMenuModule,
-        ToastModule,
-        ToggleButtonModule,
-        ToolbarModule,
-        TooltipModule,
-        TreeModule,
-        TreeTableModule,
-        VirtualScrollerModule,
+        SharedModule,
+        PublicModule,
+        UserModule,
+        AdminModule,
+        QuicklinkModule,
     ],
     declarations: [
         AppComponent,
-        AppMainComponent,
-        AppMenuComponent,
-        AppMenuitemComponent,
-        AppTopBarComponent,
-        AppFooterComponent,
-        AppRightPanelComponent,
-        AppConfigComponent,
-        AppBreadcrumbComponent,
-        AppNotfoundComponent,
-        AppErrorComponent,
-        AppAccessdeniedComponent,
-        AppLoginComponent,
-        AppCrudComponent,
-        AppCalendarComponent,
-        AppTimelineDemoComponent,
+        
+
+
         DashboardDemoComponent,
         FormLayoutDemoComponent,
         FloatLabelDemoComponent,
@@ -310,34 +106,11 @@ import { RegisterExpertoComponent } from './pages/register-experto/register-expe
         TypographyComponent,
         TextComponent,
         WidgetsComponent,
-        LoginUserComponent,
-        RegistrarUserComponent,
-        MisActividadesUsuarioComponent,
-        PaginaPrincipalUsuarioComponent,
-        MenuLateralComponent,
-        MenuTopBarComponent,
-        MenuFooterPageComponent,
-        DatosUsuarioComponent,
-        PresentacionInicioUserComponent,
-        LandingComponent,
-        MenuLandingComponent,
-        FooterLandingComponent,
-        PaginaPrincipalExpertoComponent,
-        DatosExpertoComponent,
-        AgregarAlumnoAExpertoComponent,
-        EscenarioComponent,
-        ParticipanteInfoComponent,
-        MenuFooterPageExpertoComponent,
-        MenuLateralPageExpertoComponent,
-        TopBarPageExpertoComponent,
-        PresentacionInicioExpertoComponent,
-        AgregarActividadesParticipanteComponent,
-        AboutUsComponent,
-        TerminosCondicionesComponent,
-        RegisterExpertoComponent,
+ 
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        //{provide: LocationStrategy, useClass: HashLocationStrategy},
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService, DatePipe
     ],

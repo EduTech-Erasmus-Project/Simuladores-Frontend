@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BreadcrumbService} from '../breadcrumb.service';
+import {BreadcrumbService} from '../service/breadcrumb.service';
 
 @Component({
     templateUrl: './spacing.component.html',

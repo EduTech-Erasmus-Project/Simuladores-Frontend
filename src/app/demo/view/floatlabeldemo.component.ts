@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryService} from '../service/countryservice';
-import {BreadcrumbService} from '../../breadcrumb.service';
+import {BreadcrumbService} from '../../service/breadcrumb.service';
 
 @Component({
     templateUrl: './floatlabeldemo.component.html',
