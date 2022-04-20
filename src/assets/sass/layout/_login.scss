@@ -212,7 +212,7 @@
 
                     .buttons {
                         button, a {
-                            background-color:var(--primary-color);
+                            background-color: #5e81ac;
 
                             &.secondary-button {
                                 background-color: transparent;
@@ -226,7 +226,7 @@
                             }
 
                             &:enabled:hover{
-                                background-color: #314750;
+                                background-color: #76a1d6;
                                 @include transition (background-color $transitionDuration);
                             }
                         }

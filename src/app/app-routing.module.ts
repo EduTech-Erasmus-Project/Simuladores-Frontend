@@ -1,14 +1,35 @@
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
-import { AdminRoutingModule } from "./admin/admin.routing";
 import { QuicklinkStrategy } from "ngx-quicklink";
-import { PublicRoutingModule } from "./public/public-routing.module";
-import { ErrorComponent } from "./shared/error/error.component";
-import { NotfoundComponent } from "./shared/notfound/notfound.component";
+import { AppErrorComponent } from "./public/pages/error/app.error.component";
+import { AppNotfoundComponent } from "./public/pages/notfound/app.notfound.component";
+import { AppAccessdeniedComponent } from "./public/pages/accessdenied/app.accessdenied.component";
 
 const routes: Routes = [
-  { path: "error", component: ErrorComponent },
-  { path: "notfound", component: NotfoundComponent },
+  { path: "error", component: AppErrorComponent },
+  { path: "notfound", component: AppNotfoundComponent },
+  { path: "accessdenied", component: AppAccessdeniedComponent },
+
+  {
+    path: "",
+    loadChildren: () =>
+      import("./public/public.module").then((m) => m.PublicModule),
+  },
+
+  {
+    path: "user",
+    loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
+  },
+  {
+    path: "expert",
+    loadChildren: () =>
+      import("./expert/expert.module").then((m) => m.ExpertModule),
+  },
+  {
+    path: "admin",
+    loadChildren: () =>
+      import("./admin/admin.module").then((m) => m.AdminModule),
+  },
   { path: "**", redirectTo: "notfound", pathMatch: "full" },
 ];
 
@@ -20,8 +41,6 @@ const routes: Routes = [
       enableTracing: false,
       paramsInheritanceStrategy: "always",
     }),
-    PublicRoutingModule,
-    AdminRoutingModule,
   ],
   exports: [RouterModule],
 })

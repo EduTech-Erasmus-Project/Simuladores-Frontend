@@ -1,0 +1,47 @@
+<div class="layout-sidebar" style="background-color: #ffffffeb;" [ngClass]="{'layout-sidebar-active': appMainUser.sidebarActive}" (click)="appMainUser.onSidebarClick($event)"
+     (mouseover)="appMainUser.sidebarActive=true" (mouseleave)="appMainUser.sidebarActive=false">
+    <div class="sidebar-logo">
+        <a href="#" class="sidebar-pin" title="Toggle Menu" (click)="appMainUser.onToggleMenuClick($event)">
+            <i class="pi pi-lock" *ngIf="appMainUser.staticMenuActive"></i>
+            <i class="pi pi-lock-open" *ngIf="!appMainUser.staticMenuActive"></i>
+        </a>
+        <a routerLink="/Pagina-Principal-Usuario">
+            <img alt="logo" src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg" />
+            <span class="app-name">Bienvenido</span>
+        </a>
+    </div>
+    <!-- Codigo Para Manu Lateral -->
+    <div class="layout-menu-container"  (click)="onMenuClick()">
+        <ul class="layout-menu">
+            <li>
+                <ng-container>
+                    <a [routerLink]="['/Pagina-Principal-Experto/inicio', correoEvaluadorLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-home"></i>
+                        Inicio
+                    </a>
+    
+                    <a [routerLink]="['/Pagina-Principal-Experto/datosExperto', correoEvaluadorLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-user"></i>
+                        Mi Perfil
+                    </a>
+    
+                    <a [routerLink]="['/Pagina-Principal-Experto/agregarAlumno', correoEvaluadorLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-chart-line"></i>
+                        Agregar/Listar Alumanos
+                    </a>
+    
+                    <a [routerLink]="['/Pagina-Principal-Experto/agregarActividadParticipantes', correoEvaluadorLateral]" routerLinkActive="active">
+                        <i class="layout-menuitem-icon"></i>
+                        <i class="pi pi-fw pi-users"></i>
+                        Asignar Actividades
+                    </a>
+    
+                </ng-container>
+                    
+            </li>
+        </ul>
+    </div>
+</div>

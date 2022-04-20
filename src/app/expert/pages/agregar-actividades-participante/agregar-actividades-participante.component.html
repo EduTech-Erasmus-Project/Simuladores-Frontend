@@ -1,0 +1,330 @@
+<div class="p-col-12">
+  <div class="card">
+    <h3 style="text-align: center">Asignar Actividades a Participantes</h3>
+    <div class="p-grid">
+      <div class="p-col-12 p-ai-center p-jc-center">
+        <div class="p-grid p-fluid">
+          <div class="p-grid table-demo">
+            <div class="card">
+              <h5>Listado de Participantes</h5>
+              <div class="card" style="text-align: center">
+                <p-table
+                  #dt
+                  [value]="listParticipantes"
+                  [(selection)]="responsableSelect"
+                  dataKey="id"
+                  [rowHover]="true"
+                  [rows]="10"
+                  [paginator]="true"
+                  [filterDelay]="0"
+                  [globalFilterFields]="['nombre', 'apellido', 'email']"
+                  styleClass="p-datatable-gridlines"
+                  responsiveLayout="scroll"
+                  [resizableColumns]="true"
+                >
+                  <ng-template pTemplate="caption">
+                    <div
+                      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                    >
+                      <span style="width: 15%; margin-top: 0.3em"
+                        >Buscar por:
+                      </span>
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                          "
+                          placeholder="Global Search"
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="nombre" pResizableColumn>Nombre</th>
+                      <th pSortableColumn="apellido" pResizableColumn>
+                        Apellido
+                      </th>
+
+                      <th pSortableColumn="email" pResizableColumn>
+                        Fecha de Nacimiento
+                      </th>
+                      <th pSortableColumn="direccion" pResizableColumn>
+                        Direccion
+                      </th>
+                      <th
+                        pSortableColumn="carreraUniversitaria"
+                        pResizableColumn
+                      >
+                        Carrera Universitaria
+                      </th>
+
+                      <th pSortableColumn="fechaNacimiento" pResizableColumn>
+                        Email
+                      </th>
+
+                      <th pResizableColumn>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Seleccionar
+                        </div>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template
+                    pTemplate="body"
+                    let-listParticipantes
+                    style="text-align: center"
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr
+                      [pSelectableRow]="listParticipantes"
+                      class="p-selectable-row"
+                    >
+                      <td>
+                        {{ listParticipantes.nombre }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.apellido }}
+                      </td>
+
+                      <td>
+                        {{
+                          listParticipantes.fechaNacimiento | date: "yyyy-MM-dd"
+                        }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.pais }} -
+                        {{ listParticipantes.ciudad }} -
+                        {{ listParticipantes.direccion }}
+                      </td>
+                      <td>
+                        {{ listParticipantes.carreraUniversitaria }}
+                      </td>
+
+                      <td>
+                        {{ listParticipantes.email }}
+                      </td>
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-user-edit"
+                          (click)="
+                            seleccionarParticipante(
+                              listParticipantes.email,
+                              rowIndex
+                            )
+                          "
+                        ></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="8">No customers found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+            <div class="card">
+              <h5>Agregar Nueva Asignación</h5>
+              <div>
+                <div class="p-grid p-formgrid">
+                  <div class="p-col-12 p-mb-6 p-lg-4 p-mb-lg-0">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-info-circle"></i>
+                      <p-dropdown
+                        inputId="tipo"
+                        placeholder="seleccione el Ejercitario"
+                        [options]="ejercitarios"
+                        [(ngModel)]="selectedEjercitario"
+                        optionLabel="name"
+                      ></p-dropdown>
+                    </span>
+                  </div>
+
+                  <div class="p-col-12 p-mb-6 p-lg-4 p-mb-lg-0">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-envelope"></i>
+                      <input
+                        type="text"
+                        pInputText
+                        placeholder="Correo Electronico"
+                        id="email"
+                        name="email"
+                        required
+                        autofocus
+                        readonly
+                        value="{{ emailParticipanteSeleccion }}"
+                      />
+                    </span>
+                  </div>
+
+                  <div class="p-col-12 p-mb-6 p-lg-4 p-mb-lg-0">
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-user"></i>
+                      <p-calendar
+                        placeholder="1998-07-20 10:50:30"
+                        [(ngModel)]="fechaActividad"
+                        [showTime]="true"
+                        [showSeconds]="true"
+                        inputId="time"
+                        [disabledDates]="invalidDates"
+                        [readonlyInput]="true"
+                      ></p-calendar>
+                    </span>
+                  </div>
+                  <span *ngIf="isFormValid" style="margin-top: 3em; margin-bottom: 3em; color: rgb(89, 190, 89)"
+                    >* {{ informacion }}</span
+                  >
+                  <div
+                    class="p-col-12 p-lg-12 p-mb-3 p-mb-lg-3"
+                    style="margin-top: 0.5em"
+                  >
+                    <button
+                      pButton
+                      (click)="agregarActividad()"
+                      type="button"
+                      label="Agregar Actividad"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h5>Listado de Actividades</h5>
+              <div class="card" style="text-align: center">
+                <p-table
+                  #dt
+                  [value]="listParticipanteAsignaciones "
+                  [(selection)]="responsableSelect"
+                  dataKey="id"
+                  [rowHover]="true"
+                  [rows]="10"
+                  [paginator]="true"
+                  [filterDelay]="0"
+                  [globalFilterFields]="[
+                    'fechaAsignacion',
+                    'participante',
+                    'nombreDeEjercitario'
+                  ]"
+                  styleClass="p-datatable-gridlines"
+                  responsiveLayout="scroll"
+                  [resizableColumns]="true"
+                >
+                  <ng-template pTemplate="caption">
+                    <div
+                      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                    >
+                      <span style="width: 15%; margin-top: 0.3em"
+                        >Buscar por:
+                      </span>
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                          "
+                          placeholder="Global Search"
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="participante" pResizableColumn>
+                        Pariticipante
+                      </th>
+                      <th
+                        pSortableColumn="numeroDeEjercitario"
+                        pResizableColumn
+                      >
+                        Número de Ejercitario
+                      </th>
+
+                      <th pSortableColumn="fechaAsignacion" pResizableColumn>
+                        Fecha de Asignación
+                      </th>
+                      <th
+                        pSortableColumn="nombreDeEjercitario"
+                        pResizableColumn
+                      >
+                        Nombre de Ejercitario
+                      </th>
+
+                      <th pResizableColumn>
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Eliminar Actividad
+                        </div>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template
+                    pTemplate="body"
+                    let-listParticipanteAsignaciones 
+                    style="text-align: center"
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr
+                      [pSelectableRow]="listParticipanteAsignaciones"
+                      class="p-selectable-row"
+                    >
+                      <td>
+                        {{ listParticipanteAsignaciones.participante }}
+                      </td>
+                      <td>
+                        {{ listParticipanteAsignaciones.numeroDeEjercitario }}
+                      </td>
+
+                      <td>
+                        {{
+                          listParticipanteAsignaciones.fechaAsignacion
+                            | date: "yyyy-MM-dd HH:mm:ss"
+                        }}
+                      </td>
+
+                      <td>
+                        {{ listParticipanteAsignaciones.nombreDeEjercitario }}
+                      </td>
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-trash"
+                          (click)="
+                          eliminarActividad(
+                              listParticipanteAsignaciones.idAsignacion,
+                              rowIndex
+                            )
+                          "
+                        ></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="8">No customers found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
