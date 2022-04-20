@@ -1,20 +1,12 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { TermsComponent } from "./terms.component";
+import { TermsComponent } from './terms.component';
 
-const routes: Routes = [
-  {
-    path: "",
-    component: TermsComponent,
-    data: {
-      breadcrumb: null,
-    },
-  },
-];
+const routes: Routes = [{ path: '', component: TermsComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class TermsRoutingModule {}
+export class TermsRoutingModule { }

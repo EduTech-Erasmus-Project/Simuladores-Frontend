@@ -1,5 +1,289 @@
-<div class="main-content  animate__animated animate__fadeIn">
-
-    <h1>Terminos y condiciones</h1>
-
-</div>
+<body class="landing-body">
+    <div class="landing-nav-menu">
+      <div class="logo">
+        <a href="#">
+          <img
+            src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+            style="width: 5em"
+            alt="logo"
+          />
+          <span class="app-name">Simuladores Laborales</span>
+        </a>
+      </div>
+  
+      <div class="nav-menu-wrapper">
+        <ul class="nav-menu" id="landing-menu">
+          <li class="active-link">
+            <a [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
+          </li>
+          <li>
+            <a href="">Información</a>
+          </li>
+          <li>
+            <a href="">Simuladores</a>
+          </li>
+          <li>
+            <a href="">Acerca de</a>
+          </li>
+          <li>
+            <a [routerLink]="['/about-us']" routerLinkActive="active"
+              >¿Quiénes Somos?</a
+            >
+          </li>
+        </ul>
+      </div>
+  
+      <div class="buy-button">
+        <button type="button" class="p-button" routerLink="/login">
+          Iniciar Sesión
+        </button>
+        <br />
+        <button type="button" class="p-button" routerLink="/register">
+          Registrar
+        </button>
+      </div>
+  
+      <div class="menu-button">
+        <a href="#" class="landing-menu-button" id="landing-menu-button">
+          <div class="landing-menu-button-icon"></div>
+        </a>
+      </div>
+    </div>
+  
+    <div id="features" class="section">
+      <div class="section-title">
+        <h1>
+          TÉRMINOS DE USO Y CONDICIONES LEGALES DE LA PLATAFORMA DE SIMULADORES LABORALES
+        </h1>
+      </div>
+      <span style="margin-bottom: 2em; margin-top: 2em; font-size: 20px"
+        >Este proyecto ha sido financiado con la ayuda de Erasmus. Los contenidos
+        son responsabilidad de su actor y de ningun modo debe considerarse que
+        refleja la opinion oficial de Erasmus</span
+      >
+      <div class="features-content">
+        <div class="features-rows">
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature first"></div>
+            </div>
+            <div class="features-row-content">
+              <h3 style="margin-bottom: 2em;">OBJETIVO DEL PROYECTO</h3>
+              <span
+                >La Universidad Politécnica Salesiana de la ciudad de Cuenca con
+                dirección Calle Vieja 12-30 y Elia Liut conjunto con el grupo de
+                investigación de la Cátedra UNESCO EduTech ha desarrollado la
+                plataforma denominada SIMULADORES LABORALES, Como plataforma libre y sin fines
+                comerciales destinada a cualquier usuario y todo miembro de nivel
+                académico. Al acceder a la plataforma y/o hacer uso de esta, el
+                visitante acepta los siguientes términos expresados en este
+                documento.</span
+              >
+            </div>
+          </div>
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature second"></div>
+            </div>
+            <div class="features-row-content">
+              <h3>Condiciones de uso</h3>
+              <br />
+              <span
+                >Tanto como el usuario que navega anónimamente como los usuarios
+                registrados en el sitio están sujetos a aceptar las siguientes
+                condiciones de uso del servicio del sitio web:</span
+              >
+              <ul>
+                <li>
+                  La información proporcionada es de uso personal y única del
+                  usuario que se registra.
+                </li>
+                <li>
+                  La información que se proporciona al registrarse se debe
+                  mantener oculta y no compartirla con nadie.
+                </li>
+                <li>
+                  Todos los usuarios deben guardar moderación en comentarios del
+                  sitio.
+                </li>
+                <li>Mostrar respeto a los demás usuarios del sito.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature third"></div>
+            </div>
+            <div class="features-row-content">
+              <h3>Uso de cookies</h3>
+              <span
+                >El uso de las cookies para almacenar información
+                netamente de referencia de un registro, no se almacena información
+                personal o del usuario visitante, todos los valores almacenados
+                están debidamente encriptados.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="effect">
+        <img
+          src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg"
+          alt="mirage-layout"
+        />
+      </div>
+    </div>
+  
+    <div class="footer">
+      <div class="logo-text">
+        <img
+          src="https://pbs.twimg.com/profile_images/1407722978817753092/1c1uNlH7_400x400.jpg"
+          alt="mirage-layout"
+        />
+        <div class="text">
+          <h1>Simuladores Laborales</h1>
+          <span>ERASMUS + EDUTECH project</span>
+        </div>
+      </div>
+  
+      <div class="logo-text">
+        <i class="pi pi-map-marker" style="font-size: 2rem"></i>
+        <div class="text">
+          <h1 style="font-weight: bold">Ubicacion</h1>
+          <span
+            >Calle Vieja, El vecino <br />
+            Cuenca-Ecuador</span
+          >
+        </div>
+      </div>
+  
+      <div class="logo-text">
+        <img
+          src="https://cdn.pixabay.com/photo/2020/04/25/18/14/european-union-flag-5092020_960_720.png"
+          alt="mirage-layout"
+        />
+        <div class="text">
+          <h1 style="font-weight: bold">Cofinanciado por la UE</h1>
+          <span style="font-size: 0.8em">
+              &copy; 2022 Todos los derechos reservados | Developed By <a href="https://edutech-project.org/">EduTech</a>  <br>
+              <a [routerLink]="['/terms-and-conditions']"> Términos y condiciones</a>
+          </span>
+             
+        </div>
+      </div>
+  
+      <div class="logo-text">
+        <i class="pi pi-wifi" style="font-size: 2rem"></i>
+        <div class="text">
+          <h1 style="font-weight: bold">Redes Sociales</h1>
+  
+          <div class="icon icon-hastag">
+            <span>
+              <i class="pi pi-envelope" style="font-size: 1em"></i>
+              <a href="mailto:catedraunescoinclusion@ups.edu.ec">
+                catedraunescoinclusion@ups.edu.ec
+              </a></span
+            >
+          </div>
+  
+          <div class="icon icon-hastag">
+            <span>
+              <i class="pi pi-facebook" style="font-size: 1em"></i>
+              <a href=" https://www.facebook.com/inclusionups/">
+                https://www.facebook.com/inclusionups/
+              </a></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      MirageLanding = {
+        addClass: function (element, className) {
+          if (element.classList) element.classList.add(className);
+          else element.className += " " + className;
+        },
+  
+        removeClass: function (element, className) {
+          if (element.classList) element.classList.remove(className);
+          else
+            element.className = element.className.replace(
+              new RegExp(
+                "(^|\\b)" + className.split(" ").join("|") + "(\\b|$)",
+                "gi"
+              ),
+              " "
+            );
+        },
+  
+        hasClass: function (element, className) {
+          if (element.classList) return element.classList.contains(className);
+          else
+            return new RegExp("(^| )" + className + "( |$)", "gi").test(
+              element.className
+            );
+        },
+  
+        hideMenu: function () {
+          this.removeClass(
+            document.getElementById("landing-menu"),
+            "landing-menu-active"
+          );
+          this.removeClass(
+            document.getElementById("landing-menu-button"),
+            "landing-menu-active"
+          );
+          this.removeClass(
+            document.getElementById("landing-mask"),
+            "landing-menu-active"
+          );
+        },
+  
+        showMenu: function () {
+          this.addClass(
+            document.getElementById("landing-menu"),
+            "landing-menu-active"
+          );
+          this.addClass(
+            document.getElementById("landing-menu-button"),
+            "landing-menu-active"
+          );
+          this.addClass(
+            document.getElementById("landing-mask"),
+            "landing-menu-active"
+          );
+        },
+      };
+  
+      document
+        .getElementById("landing-menu-button")
+        .addEventListener("click", function (e) {
+          var menu = document.getElementById("landing-menu");
+  
+          if (MirageLanding.hasClass(menu, "landing-menu-active")) {
+            MirageLanding.hideMenu();
+          } else {
+            MirageLanding.showMenu();
+          }
+  
+          e.preventDefault();
+        });
+  
+      document
+        .getElementById("landing-mask")
+        .addEventListener("click", function (e) {
+          MirageLanding.hideMenu();
+  
+          e.preventDefault();
+        });
+  
+      var menuLinks = document.querySelectorAll("#landing-menu a");
+      for (i = 0; i < menuLinks.length; i++) {
+        menuLinks[i].addEventListener("click", function (e) {
+          MirageLanding.hideMenu();
+        });
+      }
+    </script>
+  </body>
+  

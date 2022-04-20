@@ -7,30 +7,33 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mirage",
+            "outputPath": "dist/SimuladoresLaborales",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/upload.php",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/animate.css/animate.min.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js",
+              "node_modules/prismjs/components/prism-typescript.js"
             ],
             "allowedCommonJsDependencies": [
               "@fullcalendar/daygrid",
@@ -52,10 +55,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -69,11 +72,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mirage:build",
+            "browserTarget": "mirage:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mirage:build:production"
+              "browserTarget": "mirage:build:production",
             }
           }
         },
@@ -131,11 +134,6 @@
   },
   "defaultProject": "mirage",
   "cli": {
-    "analytics": "f334591a-e154-4a27-ad27-306a6d39825b"
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "scss"
-    }
+    "analytics": false
   }
 }

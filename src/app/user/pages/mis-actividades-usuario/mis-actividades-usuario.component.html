@@ -1,0 +1,231 @@
+<div class="p-col-12">
+  <div class="card">
+    <h3 style="text-align: center; margin-left: 12.5%">
+      Mi información Personal
+    </h3>
+    <div class="p-grid">
+      <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
+        <div class="p-fluid">
+          <div class="p-field">
+            <div>
+              <div style="text-align: center; line-height: 2em">
+                <!--
+                                    Codigo para mostrar fotografia del usuario
+                                    <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
+                                -->
+                <h3>Perfil de Usuario</h3>
+                <img
+                  src="https://freesvg.org/img/abstract-user-flat-1.png"
+                  style="width: 100px"
+                  alt=""
+                />
+                <div class="product-list-detail">
+                  <h4>
+                    {{ participante.getNombre }} {{ participante.getApellido }}
+                  </h4>
+                  <span>
+                    Participante
+                    <i class="pi pi-map-marker product-category-icon"></i>
+                    {{ participante.getCiudad + " - " + participante.getPais }}
+
+                    <!--{{product.description}}--></span
+                  >
+                </div>
+
+                <span style="font-size: 15px; font-weight: bold">
+                  Puntuacion Global: 8.0
+                  <p-rating
+                    style="text-align: center"
+                    [ngModel]="4"
+                    readonly="true"
+                    stars="5"
+                    [cancel]="false"
+                  ></p-rating>
+                  <!--
+                                    Etiqueta de rating 
+                                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
+                                    -->
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Linea de division de componentes-->
+      <div class="p-col-1">
+        <p-divider layout="vertical"> </p-divider>
+      </div>
+
+      <div class="p-col-7 p-ai-center p-jc-center">
+        <div class="card">
+          <h5>Barra de Progreso:</h5>
+          <p-progressBar [value]="20"></p-progressBar>
+        </div>
+
+        <div class="p-grid p-fluid">
+          <div class="p-grid table-demo">
+            <div class="p-col-12">
+              <div class="card">
+                <h5>Actividades Realizadas</h5>
+
+                <p-table
+                  #dt
+                  [value]="listActividadesParticpante"
+                  [(selection)]="selectedCustomers1"
+                  dataKey="idActividad"
+                  styleClass="p-datatable-customers"
+                  [rowHover]="true"
+                  [rows]="10"
+                  [paginator]="true"
+                  [filterDelay]="0"
+                  [globalFilterFields]="['calificacionActividad', 'ejercitario', 'fechaDeActividad']"
+                >
+                  <ng-template pTemplate="caption">
+                    <div
+                      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                    >
+                      <span style="width: 15%; margin-top: 0.3em"
+                        >Buscar por:
+                      </span>
+                      <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="
+                            dt.filterGlobal($event.target.value, 'contains')
+                          "
+                          placeholder="Global Search"
+                        />
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width: 3rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                      <th pSortableColumn="ejercitario">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Simulador
+                          <p-columnFilter
+                            type="text"
+                            field="ejercitario"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+                      <th pSortableColumn="tiempoTotalResolucionEjercitario">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Tiempo
+                          <p-columnFilter
+                            type="text"
+                            field="tiempoTotalResolucionEjercitario"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pSortableColumn="fechaDeActividad">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Fecha
+                          <p-columnFilter
+                            type="date"
+                            field="fechaDeActividad"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+                      <th pSortableColumn="totalRespuestasCorrectasIngresadasParticipante">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Correctas
+                          <p-columnFilter
+                            type="numeric"
+                            field="totalRespuestasCorrectasIngresadasParticipante"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pSortableColumn="numeroTotalDePreguntasDelEjercitario">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Preguntas
+                          <p-columnFilter
+                            type="numeric"
+                            field="numeroTotalDePreguntasDelEjercitario"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th pSortableColumn="calificacionActividad">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                          Puntuación
+                          <p-columnFilter
+                            type="numeric"
+                            field="calificacionActividad"
+                            display="menu"
+                            class="p-ml-auto"
+                          ></p-columnFilter>
+                        </div>
+                      </th>
+
+                      <th style="width: 8rem"></th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-listActividadesParticpante>
+                    <tr class="p-selectable-row">
+                      <td>
+                        <p-tableCheckbox [value]="listActividadesParticpante.idActividad"></p-tableCheckbox>
+                      </td>
+                      <td>
+                        {{ listActividadesParticpante.ejercitario }}
+                      </td>
+                      <td>
+                        {{ listActividadesParticpante.tiempoTotalResolucionEjercitario }}
+                      </td>
+
+                      <td>
+                        {{ listActividadesParticpante.fechaDeActividad | date: "yyyy-MM-dd HH:MM:SS" }}
+                      </td>
+                      <td>
+                        {{ listActividadesParticpante.totalRespuestasCorrectasIngresadasParticipante }}
+                      </td>
+                      <td>
+                        {{ listActividadesParticpante.numeroTotalDePreguntasDelEjercitario }}
+                      </td>
+                      <td>
+                        {{ listActividadesParticpante.calificacionActividad }}
+                      </td>
+
+                      <td style="text-align: center">
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-primary"
+                          icon="pi pi-file-pdf"
+                        ></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="8">No customers found.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
