@@ -96,6 +96,13 @@ const routes: Routes = [
           breadcrumb: "Enlace enviado",
         },
       },
+      {
+        path: "information",
+        loadChildren: () =>
+          import("./pages/information/information.module").then(
+            (m) => m.InformationModule
+          ),
+      },
     ],
   },
 ];
