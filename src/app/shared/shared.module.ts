@@ -81,19 +81,19 @@ import { TooltipModule } from "primeng/tooltip";
 import { TreeModule } from "primeng/tree";
 import { TreeTableModule } from "primeng/treetable";
 import { VirtualScrollerModule } from "primeng/virtualscroller";
-import { HeaderPublicComponent } from "./header-public/header-public.component";
 import { FooterComponent } from "./footer/footer.component";
 import { MenuFooterPageComponent } from "./menu-footer-page/menu-footer-page.component";
 import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
 import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
-
+import { TranslateModule } from "@ngx-translate/core";
+import { MenuPublicComponent } from "./menu-public/menu-public.component";
 @NgModule({
   declarations: [
-    HeaderPublicComponent,
     FooterComponent,
     MenuFooterPageComponent,
     MenuLateralComponent,
     MenuTopBarComponent,
+    MenuPublicComponent,
   ],
   imports: [
     CommonModule,
@@ -176,6 +176,7 @@ import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
     TreeModule,
     TreeTableModule,
     VirtualScrollerModule,
+    TranslateModule
   ],
   exports: [
     AccordionModule,
@@ -260,6 +261,10 @@ import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
     MenuFooterPageComponent,
     MenuLateralComponent,
     MenuTopBarComponent,
+    TranslateModule,
+    FooterComponent,
+    MenuPublicComponent,
+
   ],
 })
 export class SharedModule {}

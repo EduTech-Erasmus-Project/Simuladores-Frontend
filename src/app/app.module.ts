@@ -22,6 +22,7 @@ import { PublicModule } from "./public/public.module";
 import { UserModule } from "./user/user.module";
 import { AdminModule } from "./admin/admin.module";
 import { QuicklinkModule } from "ngx-quicklink";
+import { TranslateModule } from "@ngx-translate/core";
 @NgModule({
   imports: [
     RouterModule,
@@ -35,6 +36,7 @@ import { QuicklinkModule } from "ngx-quicklink";
     UserModule,
     AdminModule,
     QuicklinkModule,
+    TranslateModule.forRoot()
   ],
   declarations: [AppComponent],
   providers: [

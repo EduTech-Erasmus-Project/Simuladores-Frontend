@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginaPrincipalExpertoComponent } from 'src/app/expert/pages/pagina-principal-experto/pagina-principal-experto.component';
 import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
-import { PaginaPrincipalExpertoComponent } from '../../pagina-principal-experto/pagina-principal-experto.component';
 
 @Component({
   selector: 'app-top-bar-page-experto',
