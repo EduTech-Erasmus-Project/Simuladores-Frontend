@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopBarPageExpertoComponent } from './top-bar-page-experto.component';
+import { PasswordResedComponent } from './password-resed.component';
 
-describe('TopBarPageExpertoComponent', () => {
-  let component: TopBarPageExpertoComponent;
-  let fixture: ComponentFixture<TopBarPageExpertoComponent>;
+describe('PasswordResedComponent', () => {
+  let component: PasswordResedComponent;
+  let fixture: ComponentFixture<PasswordResedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TopBarPageExpertoComponent ]
+      declarations: [ PasswordResedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopBarPageExpertoComponent);
+    fixture = TestBed.createComponent(PasswordResedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -15,11 +15,13 @@ export class HomeComponent implements OnInit {
   constructor(private informacion: InformacionParticipanteService) { }
 
   ngOnInit(): void {
-    this.informacion.obtenerInformacionLandingPage().then(res=> {
-      this.participantes = res.participanteCount
-      this.evaluadores = res.evaluadoresCount
-      this.simuladores = res.simuladoresCount
-    });
+    // this.informacion.obtenerInformacionLandingPage().then(res=> {
+    //   this.participantes = res.participanteCount
+    //   this.evaluadores = res.evaluadoresCount
+    //   this.simuladores = res.simuladoresCount
+    // }).catch(err=> {
+
+    // });
   }
 
 }
