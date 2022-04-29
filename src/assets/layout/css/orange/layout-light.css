@@ -8383,22 +8383,26 @@ a {
 }
 .landing-body .landing-header-wrapper .landing-header-content {
   height: 100%;
+  margin-left: 47%;
+  background-color: #826a6a;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   top: 0;
   position: absolute;
-  width: 100%;
+  width: 53%;
   z-index: 999;
 }
 .landing-body .landing-header-wrapper .landing-header-content h1 {
   color: #c3ccdd;
+  text-align: center;
 }
 .landing-body .landing-header-wrapper .landing-header-content p {
   font-size: 24px;
   color: #c3ccdd;
   margin: 1.5rem 0 1.5rem 0;
+  text-align: center;
 }
 .landing-body .landing-header-wrapper .landing-header-content .video-button button {
   -moz-border-radius: 4px;
