@@ -8394,6 +8394,7 @@ a {
   width: 53%;
   z-index: 999;
 }
+
 .landing-body .landing-header-wrapper .landing-header-content h1 {
   color: #c3ccdd;
   text-align: center;
@@ -8427,6 +8428,7 @@ a {
   justify-content: flex-start;
   align-items: flex-end;
   height: 100%;
+  
 }
 .landing-body .section .section-title {
   text-align: center;
@@ -8597,28 +8599,28 @@ a {
   color: #5a657c;
   font-size: 14px;
 }
-.landing-body .section#features .features-rows .features-row:hover {
+.landing-body .section#features .features-rows .features-row {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   box-shadow: 0 1px 30px 3px rgba(0, 0, 0, 0.07);
   background-color: #ffffff;
 }
-.landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature {
+.landing-body .section#features .features-rows .features-row .features-row-icon .feature {
   width: 70px;
   height: 70px;
 }
-.landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.first {
+.landing-body .section#features .features-rows .features-row .features-row-icon .feature.first {
   background: url("../../images/landing/icon-feature-1-hover.svg");
   background-repeat: no-repeat;
   background-size: 70px 70px;
 }
-.landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.second {
+.landing-body .section#features .features-rows .features-row .features-row-icon .feature.second {
   background: url("../../images/landing/icon-feature-2-hover.svg");
   background-repeat: no-repeat;
   background-size: 70px 70px;
 }
-.landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.third {
+.landing-body .section#features .features-rows .features-row .features-row-icon .feature.third {
   background: url("../../images/landing/icon-feature-3-hover.svg");
   background-repeat: no-repeat;
   background-size: 70px 70px;
@@ -8931,21 +8933,21 @@ a {
     background-repeat: no-repeat;
     background-size: 20px 20px;
   }
-  .landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature {
+  .landing-body .section#features .features-rows .features-row .features-row-icon .feature {
     width: 46px;
     height: 46px;
   }
-  .landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.first {
+  .landing-body .section#features .features-rows .features-row .features-row-icon .feature.first {
     background: url("../../images/landing/icon-feature-1-hover.svg");
     background-repeat: no-repeat;
     background-size: 46px 46px;
   }
-  .landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.second {
+  .landing-body .section#features .features-rows .features-row .features-row-icon .feature.second {
     background: url("../../images/landing/icon-feature-2-hover.svg");
     background-repeat: no-repeat;
     background-size: 46px 46px;
   }
-  .landing-body .section#features .features-rows .features-row:hover .features-row-icon .feature.third {
+  .landing-body .section#features .features-rows .features-row .features-row-icon .feature.third {
     background: url("../../images/landing/icon-feature-3-hover.svg");
     background-repeat: no-repeat;
     background-size: 46px 46px;
