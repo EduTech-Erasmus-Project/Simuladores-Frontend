@@ -5,7 +5,6 @@ import { ExpertRoutingModule } from "./expert-routing.module";
 import { ExpertComponent } from "./expert.component";
 import { AgregarActividadesParticipanteComponent } from "./pages/agregar-actividades-participante/agregar-actividades-participante.component";
 import { EscenarioComponent } from "./pages/escenario/escenario.component";
-import { PaginaPrincipalExpertoComponent } from "./pages/pagina-principal-experto/pagina-principal-experto.component";
 import { PresentacionInicioExpertoComponent } from "./pages/presentacion-inicio-experto/presentacion-inicio-experto.component";
 import { ParticipanteInfoComponent } from "./pages/participante-info/participante-info.component";
 import { AgregarAlumnoAExpertoComponent } from "./pages/agregar-alumno-a-experto/agregar-alumno-a-experto.component";
@@ -21,7 +20,6 @@ import { MenuFooterPageExpertoComponent } from "./pages/StructurePage-Experto/me
     AgregarAlumnoAExpertoComponent,
     DatosExpertoComponent,
     EscenarioComponent,
-    PaginaPrincipalExpertoComponent,
     ParticipanteInfoComponent,
     PresentacionInicioExpertoComponent,
     MenuLateralPageExpertoComponent,

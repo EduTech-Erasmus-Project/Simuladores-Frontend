@@ -17,7 +17,7 @@ export class ConsultasParaGraficasService {
     }
    
     recuperarListaDeGenero(correo: string): Observable<any>{
-       return this.http.post<any>(environment.WS_PATH+"obtenerTipoGeneroPorEvaluador",{"evaluador": correo} , this.config)
+       return this.http.get<any>(environment.WS_PATH+"obtenerTipoGeneroPorEvaluador")
     }
 
     recuperarListaDeEscenarios(){

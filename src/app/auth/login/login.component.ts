@@ -4,10 +4,11 @@ import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
-import { MessageService } from "primeng/api";
+import { Message, MessageService } from "primeng/api";
 import { LanguageService } from "src/app/service/language.service";
 import { LoginService } from "src/app/service/login.service";
 import { StorageService } from "src/app/service/storage.service";
+import { AuthService } from "src/app/service/auth.service";
 
 @Component({
   selector: "app-login",
@@ -21,13 +22,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   public msjError;
   private subscribes: Subscription[] = [];
   private msjModal: string;
-  public show: boolean= false;
+  public show: boolean = false;
+
+  public msgs: Message[];
 
   //public formSubmit: false;
 
   public loginForm = this.fb.group({
     email: [
-      this.storageService.getCookieItem("userEmail") || null,
+      this.storageService.getStorageItem("userEmail") || null,
       [
         Validators.required,
         Validators.pattern(
@@ -36,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       ],
     ],
     password: [null, [Validators.required]],
-    rememberMe: [!!this.storageService.getCookieItem("userEmail")],
+    rememberMe: [!!this.storageService.getStorageItem("userEmail")],
   });
 
   // dartActive(dart_active: boolean):boolean{
@@ -48,9 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private languageService: LanguageService,
-    private messageService: MessageService,
-    private loginService: LoginService,
+    private authService: AuthService,
     private storageService: StorageService
   ) {
     //this.dark = localStorage.getItem('dart_active')==='true'?true:false;
@@ -63,18 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.translate = this.languageService.translate;
-
-    this.translate.onLangChange.subscribe((translate: LangChangeEvent) => {
-      this.msjModal = translate.translations.login.modalMsj;
-      this.msjError = {
-        severity: "error",
-        summary: translate.translations.message.titleError,
-        detail: translate.translations.login.errorMesage,
-      };
-    });
-  }
+  ngOnInit(): void {}
 
   get errorEmailRequired(): boolean {
     //console.log(this.loginForm.get('email'))
@@ -97,10 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async onLogin() {
-    //optimize on translate implementation
-    this.loadTranslateText();
-
-    this.messageService.clear();
+    this.msgs = [];
 
     if (this.loginForm.valid) {
       Swal.fire({
@@ -115,36 +102,56 @@ export class LoginComponent implements OnInit, OnDestroy {
         password: this.loginForm.get("password").value,
       };
 
-      let loginSub = await this.loginService.signIn(formData).subscribe(
+      let loginSub = await this.authService.login(formData).subscribe(
         async (res: any) => {
-          if (res.detail) {
-            this.showMessageError();
-            Swal.close();
+          Swal.close();
+          console.log(res);
+          this.storageService.saveStorageItem("token", res.access);
+          this.storageService.saveStorageItem("refresh", res.refresh);
+          this.storageService.saveStorageItem("user", res.user);
+
+          this.authService.emailUser = res.user.email;
+          this.authService.typeUser = res.user.tipoUser;
+
+          if(res.user.tipoUser === 'evaluador'){
+            this.router.navigate(['/expert']);
             return;
           }
-          this.storageService.saveCookieItem("data_acc", res.access);
-          this.storageService.saveCookieItem("data_ref", res.refresh);
-          // await this.loginService
-          //   .validateUser(res.access)
-          //   .then(() => {
-          //     this.saveEmail();
-          //     Swal.close();
-          //   })
-          //   .catch((err) => {
-          //     let msjErrorServer = {
-          //       severity: "error",
-          //       summary: "Server Error",
-          //       detail: err,
-          //     };
-          //     this.messageService.add(msjErrorServer);
-
-          //     this.showMessageError();
-          //     Swal.close();
-          //   });
+          this.router.navigate(['/user']);
+          return;  
         },
         (error) => {
-          this.showMessageError();
           Swal.close();
+          if (error?.error.code == "unapprovedAccount") {
+            this.msgs = [
+              {
+                severity: "warn",
+
+                detail:
+                  "La cuenta aún está en revisión, espere la aprobación del administrador.",
+              },
+            ];
+            return;
+          }
+          if (error?.error.code == "incorrectCredentials") {
+            this.msgs = [
+              {
+                severity: "error",
+                summary: "Error",
+                detail: "Correo o contraseña incorrectos.",
+              },
+            ];
+            return;
+          }
+
+          this.msgs = [
+            {
+              severity: "error",
+              summary: "Error",
+              detail:
+                "Se ha producido un error al iniciar sesión, por favor intente nuevamente.",
+            },
+          ];
         }
       );
 
@@ -160,44 +167,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadTranslateText() {
-    let currentLng = this.translate.currentLang;
-    if (currentLng === "es") {
-      this.msjModal = this.translate.translations.es.login.modalMsj;
-      this.msjError = {
-        severity: "error",
-        summary: this.translate.translations.es.message.titleError,
-        detail: this.translate.translations.es.login.errorMesage,
-      };
-    } else if (currentLng == "en") {
-      this.msjModal = this.translate.translations.en.login.modalMsj;
-      this.msjError = {
-        severity: "error",
-        summary: this.translate.translations.en.message.titleError,
-        detail: this.translate.translations.en.login.errorMesage,
-      };
-    }
-  }
-
-  showMessageError() {
-    this.messageService.add(this.msjError);
-  }
-
   onSaveEmail(event) {
-    //console.log(event);
     if (event.checked) {
       this.saveEmail();
     } else {
-      this.storageService.removeCookieItem("userEmail");
+      this.storageService.removeStorageItem("userEmail");
     }
   }
 
-  saveEmail(){
+  saveEmail() {
     if (
       this.loginForm.get("email").value !== null &&
       this.loginForm.get("email").value !== ""
     ) {
-      this.storageService.saveCookieItem(
+      this.storageService.saveStorageItem(
         "userEmail",
         this.loginForm.get("email").value
       );

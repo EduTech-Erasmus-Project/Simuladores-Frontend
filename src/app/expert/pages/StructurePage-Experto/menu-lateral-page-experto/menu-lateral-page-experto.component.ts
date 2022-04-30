@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginaPrincipalExpertoComponent } from 'src/app/expert/pages/pagina-principal-experto/pagina-principal-experto.component';
 
 @Component({
   selector: 'app-menu-lateral-page-experto',
@@ -11,10 +10,10 @@ export class MenuLateralPageExpertoComponent implements OnInit {
   //sidebarActive: boolean;
   correoEvaluadorLateral: string = '';
 
-  constructor(public appMainUser :PaginaPrincipalExpertoComponent) { }
+  constructor() { }
 
   ngOnInit() {
-    this.correoEvaluadorLateral = this.appMainUser.getCorreo();
+    //this.correoEvaluadorLateral = this.appMainUser.getCorreo();
 
     this.modelItem = [
         {
@@ -24,6 +23,6 @@ export class MenuLateralPageExpertoComponent implements OnInit {
   }
 
   onMenuClick() {
-    this.appMainUser.menuClick = true;
+    //this.appMainUser.menuClick = true;
   }
 }

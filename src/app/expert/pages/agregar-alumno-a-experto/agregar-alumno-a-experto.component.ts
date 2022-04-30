@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/core/interfaces/User';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
-import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
-import { Responsable } from 'src/app/model/Responsable';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
 
 @Component({
@@ -18,13 +17,13 @@ export class AgregarAlumnoAExpertoComponent implements OnInit {
   statuses: any[];
   selectedCustomers1: Customer[];
   private correoEvaluadorActividades: string = '';
-  public responsable: Responsable;
-  public listParticipanteAceptacion: ParticipanteAceptacionTabla[];
-  public listParticipantes: ParticipanteAceptacionTabla[];
+  public responsable: User;
+  public listParticipanteAceptacion: User[];
+  public listParticipantes: User[];
   
   
   constructor(private _Activatedroute:ActivatedRoute, private responsableServiceInformacion: InformacionEvaluadorService,
-    private autentificacionUsuario: AutentificacionUsuarioService) { 
+    private autentificacionUsuario: AuthService) { 
       
   }
   ngOnInit(): void {
@@ -56,16 +55,14 @@ export class AgregarAlumnoAExpertoComponent implements OnInit {
   obtenerInformacionExperto(){
     this.responsableServiceInformacion.obtenerInformacionEvaluadorCorreo(this.correoEvaluadorActividades).then(
       responsable => {
-        this.responsable = new Responsable(responsable.id, responsable.email, responsable.nombre, 
-          responsable.apellido, responsable.telefono, responsable.pais, responsable.ciudad, 
-          responsable.direccion, responsable.estado, responsable.nivelDeFormacion);
+        this.responsable = responsable;
       }
     )
   }
 
   agregarParticipante(email: string, rowIndex: number){
    
-    var rowAgregar = this.listParticipanteAceptacion.splice(rowIndex,1)[0] as ParticipanteAceptacionTabla;
+    var rowAgregar = this.listParticipanteAceptacion.splice(rowIndex,1)[0] as User;
     this.listParticipantes.push(rowAgregar);
     this.responsableServiceInformacion.agregarParticipante(email);
   }

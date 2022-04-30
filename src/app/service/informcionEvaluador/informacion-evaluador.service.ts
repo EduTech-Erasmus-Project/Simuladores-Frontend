@@ -1,78 +1,109 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ParticipanteAceptacionTabla } from 'src/app/model/Participante';
-import { ExpertoInterface, Responsable } from 'src/app/model/Responsable';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { User } from "src/app/core/interfaces/User";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class InformacionEvaluadorService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public obtenerInformacionEvaluador(id: number): Observable<any>{
-    const config = { 
-                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
-                    };
-    return (this.http.get<any>(environment.WS_PATH+"getEvaluador/"+id, config))
-  }
-
-  public obtenerInformacionEvaluadorCorreo(correo: string): Promise<any>{
-    const config = { 
-                      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
-                    };
-    return (this.http.get<any>(environment.WS_PATH+"getEvaluador/"+correo, config)).toPromise().then(
-      res => res as Responsable).then(responsable => responsable);
-  }
-
-  public obtenerParticipantesPorAceptarEvaluadorCorreo(correo: string){
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public obtenerInformacionEvaluador(id: number): Observable<any> {
+    console.log("getEvaluador");
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return (this.http.get<any>(environment.WS_PATH+"getParticipantesEvaluadorAceptar/"+correo, config)).toPromise().then(res => res.participantesAceptacion as ParticipanteAceptacionTabla[])
-      .then(participantesAceptacion => participantesAceptacion);
+    return this.http.get<any>(
+      environment.WS_PATH + "getEvaluador/" + id,
+      config
+    );
   }
 
-  public obtenerParticipantesEvaluadorCorreo(correo: string){
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public obtenerInformacionEvaluadorCorreo(correo: string): Promise<any> {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return (this.http.get<any>(environment.WS_PATH+"getParticipantesEvaluadorAceptados/"+correo, config)).toPromise().then(res => res.participantes as ParticipanteAceptacionTabla[])
-      .then(participantes => participantes);
+    return this.http
+      .get<any>(environment.WS_PATH + "getEvaluador/" + correo, config)
+      .toPromise()
+      .then((res) => res as User)
+      .then((responsable) => responsable);
   }
 
-  
-
-  public agregarParticipante(email: string){
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public obtenerParticipantesPorAceptarEvaluadorCorreo(correo: string) {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return (this.http.get<any>(environment.WS_PATH+"agregarParticipanteEvaluador/"+email, config)).toPromise().then(res => console.log(res));
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "getParticipantesEvaluadorAceptar/" + correo,
+        config
+      )
+      .toPromise()
+      .then((res) => res.participantesAceptacion as User[])
+      .then((participantesAceptacion) => participantesAceptacion);
   }
 
-  public eliminarParticipante(email: string){
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public obtenerParticipantesEvaluadorCorreo(correo: string) {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return (this.http.get<any>(environment.WS_PATH+"eliminarParticipanteEvaluador/"+email, config)).toPromise().then(res => console.log(res));
-
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "getParticipantesEvaluadorAceptados/" + correo,
+        config
+      )
+      .toPromise()
+      .then((res) => res.participantes as User[])
+      .then((participantes) => participantes);
   }
 
-  public recuperarEvaluadoresParaRegistro(){
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public agregarParticipante(email: string) {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return (this.http.get<any>(environment.WS_PATH+"getEvaluadores/", config)).toPromise().then(res => res.evaluadores);
-
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "agregarParticipanteEvaluador/" + email,
+        config
+      )
+      .toPromise()
+      .then((res) => console.log(res));
   }
 
-  public registrarNuevoExperto(experto: ExpertoInterface): Observable<any>{
-    const config = { 
-      headers: new HttpHeaders({'Content-Type':  'application/json',}) 
+  public eliminarParticipante(email: string) {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
-    return this.http.post<any>(environment.WS_PATH+"registrarEvaluadores", experto, config);
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "eliminarParticipanteEvaluador/" + email,
+        config
+      )
+      .toPromise()
+      .then((res) => console.log(res));
   }
 
+  public recuperarEvaluadoresParaRegistro() {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    };
+    return this.http
+      .get<any>(environment.WS_PATH + "getEvaluadores/", config)
+      .toPromise()
+      .then((res) => res.evaluadores);
+  }
+
+  public registrarNuevoExperto(experto: User): Observable<any> {
+    const config = {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    };
+    return this.http.post<any>(
+      environment.WS_PATH + "registrarEvaluadores",
+      experto,
+      config
+    );
+  }
 }

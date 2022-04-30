@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Escenario, EscenarioInterface, informacionEjercitarioInterface } from 'src/app/model/Escenario';
+import { Asignacion } from 'src/app/core/interfaces/Asignacion';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PaginaInicioExpertoService {
 
-  private escenario :  Escenario;
+  private escenario :  Asignacion;
   
   private  config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
@@ -17,7 +17,7 @@ export class PaginaInicioExpertoService {
 
   recuperarInformacionDeEscenario(numeroEjercitario: number){
     return this.http.get<any>(environment.WS_PATH+"getEjercitarioNumeroDeEjercitario/"+numeroEjercitario, this.config).
-    toPromise().then(res =>  res as EscenarioInterface).then(escenario => escenario);
+    toPromise().then(res =>  res as Asignacion).then(escenario => escenario);
     
   }
 
@@ -25,12 +25,9 @@ export class PaginaInicioExpertoService {
     return this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo}, this.config);
   }
 
-  obtenerDiscapacidades(): Observable<any>{
-    return this.http.get<any>(environment.WS_PATH+"obtenerDiscapacidad", this.config);
-  }
-
+  
   obtenerEjercitarios(){
     return this.http.get<any>(environment.WS_PATH+"getEjercitarios/", this.config).
-    toPromise().then(res=> res as any[]).then(res =>  res as informacionEjercitarioInterface[]).then(escenario => escenario);;
+    toPromise().then(res=> res as any[]).then(res =>  res as Asignacion[]).then(escenario => escenario);;
   }
 }

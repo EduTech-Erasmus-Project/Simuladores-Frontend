@@ -11,7 +11,7 @@ const routes: Routes = [
     path: "",
     component: UserComponent,
     children: [
-      { path: "", component: PresentacionInicioUserComponent },
+      { path: "home", component: PresentacionInicioUserComponent },
       {
         path: "inicio/:correo",
         component: PresentacionInicioUserComponent,

@@ -23,6 +23,13 @@ import { UserModule } from "./user/user.module";
 import { AdminModule } from "./admin/admin.module";
 import { QuicklinkModule } from "ngx-quicklink";
 import { TranslateModule } from "@ngx-translate/core";
+import { CountryService } from "./demo/service/countryservice";
+import { CustomerService } from "./demo/service/customerservice";
+import { EventService } from "./demo/service/eventservice";
+import { IconService } from "./demo/service/iconservice";
+import { NodeService } from "./demo/service/nodeservice";
+import { PhotoService } from "./demo/service/photoservice";
+import { ProductService } from "./demo/service/productservice";
 @NgModule({
   imports: [
     RouterModule,
@@ -47,6 +54,13 @@ import { TranslateModule } from "@ngx-translate/core";
     ConfirmationService,
     MessageService,
     DatePipe,
+    CountryService,
+    CustomerService,
+    EventService,
+    IconService,
+    NodeService,
+    PhotoService,
+    ProductService,
   ],
   bootstrap: [AppComponent],
 })

@@ -3,70 +3,76 @@
         <div class="p-grid">
             <div class="p-col-6 p-d-flex p-ai-center p-jc-center">
                 <div class="p-col-12">
-                    <h2 class="p-col-12" style="margin-top: 2em; text-align: center; color: #71d5ea; font-weight: bold;" >Información General</h2>
+                    <h2 class="p-col-12"
+                        style="margin-top: 2em; text-align: center; color: #71d5ea; font-weight: bold;">Información
+                        General</h2>
                     <div>
                         <label style="font-size: 15px;" for="state">Tipos de Discapacidad vs </label>
-                        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Seleccione" optionLabel="name" (ngModelChange)="seleccionTipoGrafico()"></p-dropdown>
+                        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState"
+                            placeholder="Seleccione" optionLabel="name" (ngModelChange)="seleccionTipoGrafico()">
+                        </p-dropdown>
                     </div>
 
                     <div class="card">
-                        <h5 class="centerText" class="p-col-12" style="text-align: center;">Tipo de Discapacidad VS {{selectedState.name}} Globales</h5>
+                        <h5 class="centerText" class="p-col-12" style="text-align: center;">Tipo de Discapacidad VS
+                            {{selectedState.name}} Globales</h5>
                         <p-chart type="bar" [options]="options" [data]="barData"></p-chart>
                     </div>
                 </div>
             </div>
-  
-  
+
+
             <div class="p-col-1">
                 <p-divider layout="vertical">
-                    
+
                 </p-divider>
             </div>
-  
-           
+
+
             <div class="p-col-5  p-ai-center p-jc-center" style="margin-top: 4em;">
                 <div class="p-col-12">
-                    <h2 class="p-col-12" style="text-align: center; color: #71d5ea; font-weight: bold;" >Información de los Ejercitarios </h2>
+                    <h2 class="p-col-12" style="text-align: center; color: #71d5ea; font-weight: bold;">Información de
+                        los Ejercitarios </h2>
                     <div>
                         <label style="font-size: 15px;" for="state">Seleccione un Ejercitario: </label>
-                        <p-dropdown inputId="state" [options]="ejercitarios" [(ngModel)]="selectedEjercitario" placeholder="Seleccione" optionLabel="name" (ngModelChange)="seleccionEscenario()"></p-dropdown>
+                        <p-dropdown inputId="state" [options]="ejercitarios" [(ngModel)]="selectedEjercitario"
+                            placeholder="Seleccione" optionLabel="name" (ngModelChange)="seleccionEscenario()">
+                        </p-dropdown>
                     </div>
                 </div>
-                
+
                 <div class="card">
-                    <h5 class="centerText" class="p-col-12" style="text-align: center;">Información del Ejercitario: {{escenario.getNombreDeEjercitario}}</h5>
+                    <h5 class="centerText" class="p-col-12" style="text-align: center;">Información del Ejercitario:
+                        {{escenario?.nombreDeEjercitario}}</h5>
                     <p>
-                        <b>Tipo de Ejercitario:</b> {{escenario.getTipoDeEjercitario}} <br>
-                        <b>Nombre de Ejercitario:</b> {{escenario.getNombreDeEjercitario}} <br>
-                        <b> Principales Competencias medidas:</b>{{escenario.getPrincipalCompetenciasEjercitario}} <br>   
-                        <b> Duración de Ejercitario:</b> {{escenario.getDuracionEjercitarioPorMinutos}}<br>
-                        <b> Numero de Ejercitario: </b> {{escenario.getNumeroDeEjercitario }}<br>
-                        <b>Instrucción principal: </b> {{escenario.getInstruccionPrincipalDeEjercitario}}<br>
+                        <b>Tipo de Ejercitario:</b> {{escenario?.tipoDeEjercitario}} <br>
+                        <b>Nombre de Ejercitario:</b> {{escenario?.nombreDeEjercitario}} <br>
+                        <b> Principales Competencias medidas:</b>{{escenario?.principalCompetenciasEjercitario}} <br>
+                        <b> Duración de Ejercitario:</b> {{escenario?.duracionEjercitarioPorMinutos}}<br>
+                        <b> Numero de Ejercitario: </b> {{escenario?.numeroDeEjercitario }}<br>
+                        <b>Instrucción principal: </b> {{escenario?.instruccionPrincipalDeEjercitario}}<br>
                     </p>
-                                 
+
                     <div style="width: 100%; text-align: center; margin-top: 2em;">
-                        <a  [routerLink]="['/Pagina-Principal-Experto/escenarioInfo', correoResponsableDatos, escenario.getNumeroDeEjercitario]" routerLinkActive="active">
+                        <a [routerLink]="['/Pagina-Principal-Experto/escenarioInfo', correoResponsableDatos, escenario?.numeroDeEjercitario]"
+                            routerLinkActive="active">
                             <div class="buttons" style="margin-top: 1em">
-                                <button
-                                    pButton
-                                    type="button"
-                                    label="&nbsp; Abrir Reporte"
-                                >
-                                <i class="pi pi-fw pi-chart-line"></i>
+                                <button pButton type="button" label="&nbsp; Abrir Reporte">
+                                    <i class="pi pi-fw pi-chart-line"></i>
                                 </button>
                             </div>
                         </a>
-                        
-                    </div>
-                   
-                </div>
-                
 
-                
-                
-                
-              
+                    </div>
+
+                </div>
+
+
+
+
+
+
             </div>
         </div>
     </div>
-  </div>
+</div>
