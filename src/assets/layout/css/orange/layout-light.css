@@ -8543,15 +8543,15 @@ a {
   width: auto;
 }
 .landing-body .section#features .features-rows {
-  display: flex;
+  
   flex-flow: column;
-  z-index: 998;
+  z-index: 1998;
 }
 .landing-body .section#features .features-rows .features-row {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  z-index: 998;
+  z-index: 1998;
   padding: 24px;
 }
 .landing-body .section#features .features-rows .features-row .features-row-icon {
@@ -8603,8 +8603,8 @@ a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  box-shadow: 0 1px 30px 3px rgba(0, 0, 0, 0.07);
-  background-color: #ffffff;
+  
+  
 }
 .landing-body .section#features .features-rows .features-row .features-row-icon .feature {
   width: 70px;
