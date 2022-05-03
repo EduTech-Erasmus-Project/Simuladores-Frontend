@@ -8418,34 +8418,12 @@ a {
   width: 53%;
   z-index: 999;
 }
-.landing-body .landing-header-wrapper .landing-header-content1 {
-  height: 107%;
-  margin-left: 47%;
-  background-color: #826a6a;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  position: absolute;
-  width: 53%;
-  z-index: 999;
-}
+
 .landing-body .landing-header-wrapper .landing-header-content h1 {
   color: #c3ccdd;
   text-align: center;
 }
 .landing-body .landing-header-wrapper .landing-header-content p {
-  font-size: 24px;
-  color: #c3ccdd;
-  margin: 1.5rem 0 1.5rem 0;
-  text-align: center;
-}
-.landing-body .landing-header-wrapper .landing-header-content1 h1 {
-  color: #c3ccdd;
-  text-align: center;
-}
-.landing-body .landing-header-wrapper .landing-header-content1 p {
   font-size: 24px;
   color: #c3ccdd;
   margin: 1.5rem 0 1.5rem 0;
@@ -8463,24 +8441,6 @@ a {
   cursor: pointer;
 }
 .landing-body .landing-header-wrapper .landing-header-content .video-button button:hover {
-  background-color: #ea987c;
-  -moz-transition: background-color 0.15s;
-  -o-transition: background-color 0.15s;
-  -webkit-transition: background-color 0.15s;
-  transition: background-color 0.15s;
-}
-.landing-body .landing-header-wrapper .landing-header-content1 .video-button button {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #d08770;
-  padding: 15px 20px;
-  color: #ffffff;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-}
-.landing-body .landing-header-wrapper .landing-header-content1 .video-button button:hover {
   background-color: #ea987c;
   -moz-transition: background-color 0.15s;
   -o-transition: background-color 0.15s;
