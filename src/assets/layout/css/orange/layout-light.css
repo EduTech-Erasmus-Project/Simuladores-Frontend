@@ -37,6 +37,24 @@
 .p-toast.p-toast-top-right, .p-toast.p-toast-top-left, .p-toast.p-toast-top-center {
   top: 70px;
 }
+@media (max-width: 1450px) {
+  body{
+    overflow-x: hidden;
+ }
+  .p-col-1{
+    display: none;
+  }
+
+  .card {
+    height: 50%;
+    padding: 50%;
+    padding-top: 10%;
+    margin-bottom:-35rem;
+  
+  }
+  
+}
+
 
 @-webkit-keyframes fadeInDown {
   from {
@@ -8655,7 +8673,8 @@ a {
   background-color: #ffffff;
   padding: 40px 60px 23px;
   text-align: center;
-  min-height: 400px;
+  min-width: 500px;
+  min-height: 300px;
   margin-bottom: 36px;
 }
 .landing-body .section#pricing .pricing-cards .pricing-card .pricing-card-title h2 {
@@ -8815,6 +8834,13 @@ a {
 }
 
 @media (max-width: 991px) {
+  .landing-body .landing-header-wrapper .landing-header-content{
+    position: relative;
+   float: right;
+    background-color:  #826a6a;
+    width: 100%;
+    
+  }
   .landing-body .landing-nav-menu {
     z-index: 10001;
   }
@@ -8888,7 +8914,7 @@ a {
     display: block;
   }
   .landing-body .landing-header-wrapper .landing-header-content {
-    text-align: center;
+    text-align: center;  
   }
   .landing-body .landing-header-wrapper .sun {
     display: none;
