@@ -87,6 +87,7 @@ import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
 import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
+import { ContributorsComponent } from "./contributors/contributors.component";
 @NgModule({
   declarations: [
     FooterComponent,
@@ -94,6 +95,7 @@ import { MenuPublicComponent } from "./menu-public/menu-public.component";
     MenuLateralComponent,
     MenuTopBarComponent,
     MenuPublicComponent,
+    ContributorsComponent
   ],
   imports: [
     CommonModule,
@@ -264,6 +266,7 @@ import { MenuPublicComponent } from "./menu-public/menu-public.component";
     TranslateModule,
     FooterComponent,
     MenuPublicComponent,
+    ContributorsComponent
 
   ],
 })
