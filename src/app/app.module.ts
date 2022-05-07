@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -23,6 +23,14 @@ import { UserModule } from "./user/user.module";
 import { AdminModule } from "./admin/admin.module";
 import { QuicklinkModule } from "ngx-quicklink";
 import { TranslateModule } from "@ngx-translate/core";
+import { CountryService } from "./demo/service/countryservice";
+import { CustomerService } from "./demo/service/customerservice";
+import { EventService } from "./demo/service/eventservice";
+import { IconService } from "./demo/service/iconservice";
+import { NodeService } from "./demo/service/nodeservice";
+import { PhotoService } from "./demo/service/photoservice";
+import { ProductService } from "./demo/service/productservice";
+import { AuthInterceptor } from "./intercepotors/auth.interceptor";
 @NgModule({
   imports: [
     RouterModule,
@@ -40,6 +48,11 @@ import { TranslateModule } from "@ngx-translate/core";
   ],
   declarations: [AppComponent],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     //{provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     MenuService,
@@ -47,6 +60,13 @@ import { TranslateModule } from "@ngx-translate/core";
     ConfirmationService,
     MessageService,
     DatePipe,
+    CountryService,
+    CustomerService,
+    EventService,
+    IconService,
+    NodeService,
+    PhotoService,
+    ProductService,
   ],
   bootstrap: [AppComponent],
 })

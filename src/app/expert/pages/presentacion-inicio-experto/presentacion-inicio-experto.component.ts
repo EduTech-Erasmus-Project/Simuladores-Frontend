@@ -1,333 +1,280 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { promise } from 'protractor';
-import { Escenario, EscenarioInterface, informacionEjercitarioInterface } from 'src/app/model/Escenario';
-import { Usuario } from 'src/app/model/Usuario';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
-import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
-import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SelectItem } from "primeng/api";
+import { Subscription } from "rxjs";
+import { Asignacion } from "src/app/core/interfaces/Asignacion";
+import { Escenario } from "src/app/core/interfaces/Escenario";
+import { User } from "src/app/core/interfaces/User";
+import { AuthService } from "src/app/service/auth.service";
+import { ConsultasParaGraficasService } from "src/app/service/consultaGraficas/consultas-para-graficas.service";
+import { DiscapacidadesService } from "src/app/service/discapacidades.service";
+import { InfoExpertoPorEscenarioService } from "src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service";
+import { PaginaInicioExpertoService } from "src/app/service/paginaInicioExperto/pagina-inicio-experto.service";
 
 @Component({
-  selector: 'app-presentacion-inicio-experto',
-  templateUrl: './presentacion-inicio-experto.component.html',
-  styleUrls: ['./presentacion-inicio-experto.component.css', 
-  '../../../../assets/theme/blue/theme-light.css',
-  '../../../../assets/layout/css/blue/layout-light.css'
-  ]
+  selector: "app-presentacion-inicio-experto",
+  templateUrl: "./presentacion-inicio-experto.component.html",
+  styleUrls: ["./presentacion-inicio-experto.component.scss"],
 })
-export class PresentacionInicioExpertoComponent implements OnInit {
-
-
-  public  escenario :  Escenario = new Escenario();;
-  private listafiltroParaBuscar : ['tiempo', 'nota'];
-  private listaGenero: [];
-  private listaDiscapacidad: [];
-
-  barData: any;
-  options: any;
-
-  tipoEscenario: string = "";
-  nombreEscenario: string = "";
-  instruccionPrincipalEscenario: string = "";
-  principalesCompetenciasEscenario: string = ""; 
-  duracionEscenario: number = 0; 
-  linkEscenario: string = '';
-
-
-
-  selectedState: any = {name: 'Notas', value: 'Notas'};
-  selectedEjercitario: any = {name: 'Ejercitario 1', value: 'ejercitario1'};
-  public generos: Array<string>
-  public discapacidades: Array<any>
-  ejercitarios: informacionEjercitarioInterface[] = [];
-
-  states: any[] = [
-      {name: 'Notas', value: 'Notas'},
-      {name: 'Tiempo', value: 'Tiempo'}
+export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
+  private _subscriptions: Subscription[] = [];
+  public ejercitario: Escenario;
+  public loaderGrafica: boolean = false;
+  public totalParticipantes: number = 0;
+  public dropdownTipo: SelectItem[] = [
+    { label: "Discapacidad", value: "Discapacidad" },
+    { label: "Genero", value: "Genero" },
+    { label: "Ejercitarios", value: "Ejercitario" },
   ];
-  public datosParaGraficaInicialDiscapacidadVsNota = [] 
-  public mujerLista = [];
-  public hombreLista = [];
-  public lgbtLista = [];
-  public otrosLista = [];
-  public mujerListaTiempo = [];
-  public hombreListaTiempo = [];
-  public lgbtListaTiempo = [];
-  public otrosListaTiempo = [];
-  public correoResponsableDatos: string;
+  public pieData: any;
+  public ejercitarios: Asignacion[] = [];
 
-  constructor( public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
-               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService, 
-               private _Activatedroute:ActivatedRoute, private router: Router, 
-               private autentificacionUsuario: AutentificacionUsuarioService) {
+  public chartOptions = {
+    responsive: true,
+    legend: {
+      display: true,
+      position: "left",
+    },
+    title: {
+      display: true,
+      text: "Participantes por discapacidad",
+    },
+  };
 
+  public participantes: User[];
+
+  constructor(
+    public servicioSeleccionarEjercitario: PaginaInicioExpertoService,
+    public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
+    public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService
+  ) {}
+
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  
   async ngOnInit() {
-    this.servicioSeleccionarEjercitario.obtenerEjercitarios().then(ejercitariosRep => {
-      this.ejercitarios = ejercitariosRep
-      
-    });
-
-    this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(1).then(
-      escenario => {
-        escenario as EscenarioInterface
-        this.escenario = new Escenario();
-        this.escenario.setidEjercitario = escenario.idEjercitario;
-        this.escenario.setNumeroDeEjercitario = escenario.numeroDeEjercitario;
-        this.escenario.setTipoDeEjercitario = escenario.tipoDeEjercitario;
-        this.escenario.setNombreDeEjercitario = escenario.nombreDeEjercitario;
-        this.escenario.setInstruccionPrincipalEjercitario = escenario.instruccionPrincipalEjercitario;
-        this.escenario.setPrincipalCompetenciasEjercitario = escenario.principalCompetenciasEjercitario;
-        this.escenario.setDuracionEjercitarioPorMinutos = escenario.duracionEjercitarioPorMinutos;
-        this.escenario.setInstruccionesParticipantes = escenario.instruccionesParticipantes;
-        this.escenario.setUrlEjercitarios = escenario.urlEjercitarios;
-        
-      }
-    );
-
-    if(this._Activatedroute.snapshot.paramMap.get("correo") != null){
-      if(this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser){
-        this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo")
-      }else{
-        this.autentificacionUsuario.logout();
-      }
-    }else if(this.autentificacionUsuario.emailUser != null ){
-      this.correoResponsableDatos = this.autentificacionUsuario.emailUser;
-    }else{
-      this.correoResponsableDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
-    }
-
+    this.pieData = {
+      labels: ["A", "B", "C"],
+      datasets: [
+        {
+          data: [540, 325, 702, 421],
+          backgroundColor: [
+            "rgb(54, 162, 235)",
+            "rgb(255, 99, 132)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+          ],
+        },
+      ],
+    };
+    this.loadData();
     this.listarLabelsTipoDeDiscacidad();
-    await this.listarLabelsTipoDeGenero();
-    
-    await this.seleccionTipoGrafico();
-     
   }
 
-
-  seleccionTipoGrafico():void {
-    
-    console.log("change from the code"+this.selectedState.name);
-    if(this.selectedState.name == "Tiempo"){
-    
-      this.options = {
-        scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true,
-              }
-          }]
+  private async loadData() {
+    let sub = await this.servicioSeleccionarEjercitario
+      .obtenerEjercitarios()
+      .subscribe(
+        (res) => {
+          this.ejercitarios = res;
+        },
+        (err) => {
+          console.log(err);
         }
-      };
+      );
 
-      this.barData = {
-        labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'Otras'],
-        datasets: [
-            {
-                label: 'Mujeres',
-                backgroundColor: 'rgb(202, 106, 199)',
-                borderColor: 'rgb(149, 225, 102)',
-                data: this.mujerListaTiempo
-            },
-            {
-              label: 'Hombres',
-              backgroundColor: 'rgb(149, 225, 102)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.hombreListaTiempo
-            },
-            {
-              label: 'LGBT',
-              backgroundColor: 'rgb(66, 201, 225)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.lgbtListaTiempo
-            },
-            {
-              label: 'Otros',
-              backgroundColor: 'rgb(66, 201, 225)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.otrosListaTiempo
-            }
-        ]
-      }; 
-    }else{
-      this.barData = {
-        labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'Otros'],
-        datasets: [
-            {
-                label: 'Mujeres',
-                backgroundColor: 'rgb(202, 106, 199)',
-                borderColor: 'rgb(149, 225, 102)',
-                data: this.mujerLista
-            },
-            {
-              label: 'Hombres',
-              backgroundColor: 'rgb(149, 225, 102)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.hombreLista
-            },
-            {
-              label: 'LGBT',
-              backgroundColor: 'rgb(66, 201, 225)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.lgbtLista
-            },
-            {
-              label: 'Otros',
-              backgroundColor: 'rgb(66, 201, 225)',
-              borderColor: 'rgb(149, 225, 102)',
-              data: this.otrosLista
-            }
-        ]
-      }; 
+    let sub2 = await this.servicioConsultasLabelsGrafica
+      .totalParticipantesPorEvaluador()
+      .subscribe((res) => {
+        this.totalParticipantes = res.totalParticipantes;
+      });
+  }
+
+  async seleccionEscenario(evt) {
+    try {
+      this.ejercitario = await this.servicioSeleccionarEjercitario
+        .recuperarInformacionDeEscenario(evt.value.value)
+        .toPromise();
+
+        console.log("ejercitario", this.ejercitario);
+
+        // let res = await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(
+        //   evt.value.value
+        // ).toPromise();
+        // console.log("estudiantes", res);
+        // this.participantes = res.participantes;
+        await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(evt.value.value).toPromise()
+        .then(res =>{
+          console.log("res", res);
+          this.participantes = res.participantes;
+          this.participantes.forEach(async (participante:any) => {
+            console.log(this.ejercitario.idEjercitario, participante.email);
+            await this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(evt.value.value, participante.email)
+            .then(res => {
+              participante.calificacion = res.notas[0].calificacion
+              participante.tiempo = res.notas[0].tiempo
+    
+              console.log(this.participantes);
+              
+            });
+          });
+    
+        })
+      
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  
-  
-
-  seleccionEscenario(): void{
-    
-    this.servicioSeleccionarEjercitario.recuperarInformacionDeEscenario(this.selectedEjercitario.value).then(
-      escenario => {
-        escenario as EscenarioInterface
-        this.escenario = new Escenario();
-        this.escenario.setidEjercitario = escenario.idEjercitario;
-        this.escenario.setNumeroDeEjercitario = escenario.numeroDeEjercitario;
-        this.escenario.setTipoDeEjercitario = escenario.tipoDeEjercitario;
-        this.escenario.setNombreDeEjercitario = escenario.nombreDeEjercitario;
-        this.escenario.setInstruccionPrincipalEjercitario = escenario.instruccionPrincipalEjercitario;
-        this.escenario.setPrincipalCompetenciasEjercitario = escenario.principalCompetenciasEjercitario;
-        this.escenario.setDuracionEjercitarioPorMinutos = escenario.duracionEjercitarioPorMinutos;
-        this.escenario.setInstruccionesParticipantes = escenario.instruccionesParticipantes;
-        this.escenario.setUrlEjercitarios = escenario.urlEjercitarios;
-      }
-    );
-    
-    
-  }
-
-  
-  listarLabelsTipoDeDiscacidad(){
-    this.servicioSeleccionarEjercitario.obtenerDiscapacidades().subscribe(
-      dispapacidades => {
-          this.discapacidades = []
-          dispapacidades.discapacidades.forEach(discapacidad => {
-            this.discapacidades.push(discapacidad.tipoDiscapacidad)            
-          });
-      }
-    );
-  }
-
-  listarLabelsTipoDeGenero(){
-    
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero(this.correoResponsableDatos).subscribe(
-      genero => {
-        this.generos = genero.participanteGenero as Array<string>
-        this.crearGraficaInicioExperto()
-      }
-    );
-  }
-
-  crearGraficaInicioExperto(){
-    
-    var discapacidadFisica: number = 0;
-    var discapacidadIntelectual: number = 0;
-    var discapacidadVisual: number = 0;
-    var discapacidadAuditiva: number = 0;
-    var discapacidadOtros: number = 0;
-
-    var discapacidadFisicaTiempo: number = 0;
-    var discapacidadIntelectualTiempo: number = 0;
-    var discapacidadVisualTiempo: number = 0;
-    var discapacidadAuditivaTiempo: number = 0;
-    var discapacidadOtrosTiempo: number = 0;
-
-    
-    
-    var valoresJSON = []
-    this.generos.forEach(genero => {
-      this.servicioSeleccionarEjercitario.crearGraficaPaginaInicio(this.correoResponsableDatos).subscribe(
-        datosParaGrafica => { 
-
-          datosParaGrafica.participantes.forEach(informacionParticipante => {
-            if (genero == informacionParticipante.participanteGenero){
-              
-              if(('Fisica' == informacionParticipante.tipoDiscapacidad)){
-                
-                discapacidadFisica = discapacidadFisica + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadFisicaTiempo = discapacidadFisicaTiempo + informacionParticipante.calificaciones[0].tiempo;
-                console.log("discapacidadFisicaTiempo: "+discapacidadFisicaTiempo);
-              }
-
-              if(('Intelectual' == informacionParticipante.tipoDiscapacidad)){
-                discapacidadIntelectual = discapacidadIntelectual + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadIntelectualTiempo = discapacidadIntelectualTiempo + informacionParticipante.calificaciones[0].tiempo;
-              }
-              
-              if(('Visual' == informacionParticipante.tipoDiscapacidad)){
-                discapacidadVisual = discapacidadVisual + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadVisualTiempo = discapacidadVisualTiempo + informacionParticipante.calificaciones[0].tiempo;
-              }
-
-              if(('Auditiva' == informacionParticipante.tipoDiscapacidad)){
-                discapacidadAuditiva = discapacidadAuditiva + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadAuditivaTiempo = discapacidadAuditivaTiempo + informacionParticipante.calificaciones[0].tiempo;
-              }
-              if(('Otros' == informacionParticipante.tipoDiscapacidad)){
-                discapacidadOtros = discapacidadOtros + informacionParticipante.calificaciones[0].calificacion;
-                discapacidadOtrosTiempo = discapacidadOtrosTiempo + informacionParticipante.calificaciones[0].tiempo;
-              }                  
-            }  
-          });
-
-          if(genero == 'Mujeres'){
-            this.mujerLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
-            this.mujerListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
-          }
-
-          if(genero == 'Hombres'){
-            this.hombreLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
-            this.hombreListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
-          }
-          
-          if(genero == 'LGBT'){
-            this.lgbtLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]            
-            this.lgbtListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
-          }
-
-          if(genero == 'Otros'){
-            this.otrosLista = [discapacidadVisual, discapacidadIntelectual, discapacidadFisica, discapacidadAuditiva, discapacidadOtros]
-            this.otrosListaTiempo = [discapacidadVisualTiempo, discapacidadIntelectualTiempo, discapacidadFisicaTiempo, discapacidadAuditivaTiempo, discapacidadOtrosTiempo]
-          }
-
-          discapacidadFisica= 0;
-          discapacidadIntelectual= 0;
-          discapacidadVisual= 0;
-          discapacidadAuditiva= 0;
-          discapacidadOtros= 0;
-
-          
-
-          discapacidadFisicaTiempo= 0;
-          discapacidadIntelectualTiempo= 0;
-          discapacidadVisualTiempo= 0;
-          discapacidadAuditivaTiempo= 0;
-          discapacidadOtrosTiempo= 0;
-          
+  private async listarLabelsTipoDeDiscacidad() {
+    let sub = await this.servicioConsultasLabelsGrafica
+      .recuperarListaDiscapacidades()
+      .subscribe(
+        (discapacidad) => {
+          console.log(discapacidad);
+          this.pieData = {
+            labels: discapacidad.participanteDiscapacidad.map((dis) =>
+              Object.keys(dis)
+            ),
+            datasets: [
+              {
+                data: discapacidad.participanteDiscapacidad.map((dis) =>
+                  Object.values(dis)
+                ),
+                backgroundColor: [
+                  "rgb(54, 162, 235)",
+                  "rgb(255, 99, 132)",
+                  "rgb(255, 205, 86)",
+                  "rgb(75, 192, 192)",
+                ],
+              },
+            ],
+          };
+          this.loaderGrafica = false;
+        },
+        (err) => {
+          console.log(err);
+          this.loaderGrafica = false;
         }
-                
-      ); 
-    });  
-    
-    
+      );
+
+    this._subscriptions.push(sub);
   }
 
-
-  crearGraficaExpertoTiempoGlobal(){
-
+  async onChangeTipo(evt) {
+    this.loaderGrafica = true;
+    switch (evt.value) {
+      case "Discapacidad":
+        this.listarLabelsTipoDeDiscacidad();
+        this.chartOptions.title.text = "Participantes por discapacidad";
+        break;
+      case "Genero":
+        this.listarLabelsTipoDeGenero();
+        this.chartOptions.title.text = "Participantes por genero";
+        break;
+      case "Ejercitario":
+        this.listaEjercitariosPorParticipantes();
+        this.chartOptions.title.text = "Participantes por ejercitario";
+        break;
+    }
+    console.log(evt.value);
   }
 
-  
+  async listarLabelsTipoDeGenero() {
+    let sub = await this.servicioConsultasLabelsGrafica
+      .recuperarListaDeGenero()
+      .subscribe(
+        (genero) => {
+          console.log("generos", genero.participanteGenero);
+          console.log(
+            "generos",
+            genero.participanteGenero.map((gen) => Object.keys(gen))
+          );
+          this.pieData = {
+            labels: genero.participanteGenero.map((gen) => Object.keys(gen)),
+            datasets: [
+              {
+                data: genero.participanteGenero.map((gen) =>
+                  Object.values(gen)
+                ),
+                backgroundColor: [
+                  "rgb(54, 162, 235)",
+                  "rgb(255, 99, 132)",
+                  "rgb(255, 205, 86)",
+                  "rgb(75, 192, 192)",
+                ],
+              },
+            ],
+          };
+          this.loaderGrafica = false;
+        },
+        (err) => {
+          console.log(err);
+          this.loaderGrafica = false;
+        }
+      );
+    this._subscriptions.push(sub);
+  }
+
+  async listaEjercitariosPorParticipantes() {
+    console.log("ejercitario metdodo");
+    let sub = await this.servicioConsultasLabelsGrafica
+      .recuperarListaEjercitariosPorParticipantes()
+      .subscribe(
+        (ejercitarios) => {
+          console.log("ejercitarios", ejercitarios);
+          console.log("ejercitarios", ejercitarios.participanteEjercitario);
+          this.pieData = {
+            labels: ejercitarios.participanteEjercitario.map((eje) =>
+              Object.keys(eje)
+            ),
+            datasets: [
+              {
+                data: ejercitarios.participanteEjercitario.map((eje) =>
+                  Object.values(eje)
+                ),
+                backgroundColor: [
+                  "rgb(54, 162, 235)",
+                  "rgb(255, 99, 132)",
+                  "rgb(255, 205, 86)",
+                  "rgb(75, 192, 192)",
+                ],
+              },
+            ],
+          };
+          this.loaderGrafica = false;
+        },
+        (err) => {
+          console.log(err);
+          this.loaderGrafica = false;
+        }
+      );
+
+    this._subscriptions.push(sub);
+  }
+
+  private async tablaEstudiantes() {
+    ///// PARA LA TABLA
+
+    await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.ejercitario.idEjercitario).toPromise()
+    .then(res =>{
+      console.log("res", res);
+      this.participantes = res;
+      this.participantes.forEach(async (participante:any) => {
+        console.log(this.ejercitario.idEjercitario, participante.email);
+        await this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.ejercitario.idEjercitario, participante.email)
+        .then(res => {
+          participante.calificacion = res.notas[0].calificacion
+          participante.tiempo = res.notas[0].tiempo
+
+          console.log(this.participantes);
+          
+        });
+      });
+
+    })
+  }
+ 
+
 }

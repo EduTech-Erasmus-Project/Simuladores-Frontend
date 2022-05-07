@@ -11,7 +11,7 @@ export class StorageService {
 
   constructor() { }
 
-  saveCookieItem(key: string, value: string) {
+  saveStorageItem(key: string, value: any) {
     let data = CryptoJS.AES.encrypt(
       JSON.stringify(value),
       secretKey
@@ -21,7 +21,7 @@ export class StorageService {
     localStorage.setItem(key, data);
   }
 
-  getCookieItem(key: string): string {
+  getStorageItem(key: string): string {
     //let cookieValue = this.cookieService.get(key);
     let storageValue = localStorage.getItem(key);
 
@@ -34,7 +34,7 @@ export class StorageService {
     }
   }
 
-  removeCookieItem(key: string): void {
+  removeStorageItem(key: string): void {
     //this.cookieService.delete(key);
     localStorage.removeItem(key);
   }

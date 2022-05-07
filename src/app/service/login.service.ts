@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment.prod";
+import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
 import { Router, NavigationExtras } from "@angular/router";
 import { StorageService } from "./storage.service";
@@ -23,14 +23,14 @@ export class LoginService {
     private tokenService: TokenService
   ) {
     // this.currUser =
-    //   (storageService.getCookieItem("current_user") as CurrentUser) || null;
+    //   (storageService.getStorageItem("current_user") as CurrentUser) || null;
     //console.log("current currUser", this.currUser)
   }
 
   set currentUser(currUser: any) {
     //console.log("set current currUser", currUser);
     //this.currUser = currUser;
-    //this.storageService.saveCookieItem("current_user", this.currUser as any);
+    //this.storageService.saveStorageItem("current_user", this.currUser as any);
   }
   get user() {
     //return this.currUser;
@@ -38,14 +38,14 @@ export class LoginService {
   }
 
   signIn(formData: any) {
-    return this.http.post(baseUrl + "/login/", formData);
+    return this.http.post(baseUrl + "login", formData);
   }
 
   signOut(): void {
-    this.storageService.removeCookieItem("current_user");
-    //this.storageService.removeCookieItem('csrftoken');
-    this.storageService.removeCookieItem("data_ref");
-    this.storageService.removeCookieItem("data_acc");
+    this.storageService.removeStorageItem("current_user");
+    //this.storageService.removeStorageItem('csrftoken');
+    this.storageService.removeStorageItem("data_ref");
+    this.storageService.removeStorageItem("data_acc");
     //this.currUser = null;
     this.router.navigateByUrl("/");
     // this.router.navigate(["/"]).then(() => {
@@ -58,8 +58,8 @@ export class LoginService {
     //   await this.http.get(baseUrl + "/user/").subscribe(
     //     (res: any) => {
     //       //console.log('res', res);
-    //       this.storageService.saveCookieItem("current_user", res);
-    //       this.currUser = this.storageService.getCookieItem(
+    //       this.storageService.saveStorageItem("current_user", res);
+    //       this.currUser = this.storageService.getStorageItem(
     //         "current_user"
     //       ) as CurrentUser;
     //       //console.log("currUser saved", this.currUser);
@@ -99,8 +99,8 @@ export class LoginService {
 
   isLoged() {
     return new Promise(async (resolve, reject) => {
-      let tokenData = this.storageService.getCookieItem("data_ref");
-      let current_user: any = this.storageService.getCookieItem("current_user");
+      let tokenData = this.storageService.getStorageItem("data_ref");
+      let current_user: any = this.storageService.getStorageItem("current_user");
       if (tokenData && current_user) {
         this.tokenService.validateToken(tokenData).subscribe((res) => {
           if (res) {
@@ -129,10 +129,10 @@ export class LoginService {
   }
 
   signOutPass(): void {
-    this.storageService.removeCookieItem("current_user");
-    //this.storageService.removeCookieItem('csrftoken');
-    this.storageService.removeCookieItem("data_ref");
-    this.storageService.removeCookieItem("data_acc");
+    this.storageService.removeStorageItem("current_user");
+    //this.storageService.removeStorageItem('csrftoken');
+    this.storageService.removeStorageItem("data_ref");
+    this.storageService.removeStorageItem("data_acc");
     //this.currUser = null;
     this.router.navigateByUrl("/login");
     // this.router.navigate(["/"]).then(() => {

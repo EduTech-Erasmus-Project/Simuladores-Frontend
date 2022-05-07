@@ -32,14 +32,14 @@ export class TokenService {
   }
 
   refreshToken() {
-    const data_ref = this.storageService.getCookieItem("data_ref");
+    const data_ref = this.storageService.getStorageItem("data_ref");
     let body = {
       refresh: data_ref,
     };
     // return this.http.post(`${baseUrl}/token/refresh/`, body).pipe(
     //   tap((resp: any) => {
     //     //console.log("Token refresh in token servise", resp)
-    //     this.storageService.saveCookieItem("data_acc", resp.access);
+    //     this.storageService.saveStorageItem("data_acc", resp.access);
     //   }),
     //   map((resp) => true),
     //   catchError((error) => of(false))
@@ -47,7 +47,7 @@ export class TokenService {
 
     return this.http.post(`${baseUrl}/token/refresh/`, body).pipe(
       tap((token: any) => {
-        this.storageService.saveCookieItem("data_acc", token.access);
+        this.storageService.saveStorageItem("data_acc", token.access);
       })
     );
   }

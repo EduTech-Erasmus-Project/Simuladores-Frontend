@@ -1,8 +1,8 @@
-.login-content {
-  position: relative;
-}
-.login-panel {
-  padding: 15px;
+.methods,
+.range {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .role {
@@ -10,36 +10,16 @@
   justify-content: space-between;
 }
 
-.separador {
-  display: flex;
-  .p-field-radiobutton {
-    margin-right: 10px;
-  }
-}
-
-.terms {
-  display: flex;
-  align-items: center;
-  p-checkbox {
-    margin-right: 5px;
-  }
-}
-.login-panel-content {
-  padding: 0 !important;
-}
 
 .button-submit {
   text-align: right;
   width: 100%;
 }
 
-.login-panel {
-  height: 100% !important;
-  position: relative !important;
-  //cambios
-}
+
 .viewPass {
   position: relative;
+
   i {
     position: absolute;
     top: 8px;
@@ -49,16 +29,11 @@
   }
 }
 
-.p-field.p-fluid{
+.p-field.p-fluid {
   margin: 0;
 }
 
-.register{
-  padding: 50px 0;
-  height: 65vh;
-}
-
-.position-relative{
+.position-relative {
   z-index: 1;
   position: relative;
 }
