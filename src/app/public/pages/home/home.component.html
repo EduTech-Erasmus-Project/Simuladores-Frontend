@@ -1,7 +1,5 @@
-
 <div id="home" class="landing-header-wrapper">
-  
-  <div class="landing-header-content" >
+  <div class="landing-header-content">
     <h1 style="color: #ffffff">
       Simuladores laborales en 3D para favorecer la inserción laboral de
       estudiantes universitarios con discapacidad
@@ -16,7 +14,8 @@
     </div>
   </div>
   <div class="tree">
-    <img style="height: 100%;" src="https://cdn.pixabay.com/photo/2018/06/07/16/49/vr-3460451_960_720.jpg" alt="mirage-layout" />
+    <img style="height: 100%;" src="https://cdn.pixabay.com/photo/2018/06/07/16/49/vr-3460451_960_720.jpg"
+      alt="mirage-layout" />
   </div>
 </div>
 <div id="meet-mirage" class="section">
@@ -27,7 +26,7 @@
   <div class="feature-cards">
     <div class="feature-card">
       <div class="feature-card-img">
-        <img src="../../../../assets/layout/images/pages/landing/asset-responsivelayout.svg" alt="mirage-layout" />
+        <img src="assets/layout/images/pages/landing/asset-responsivelayout.svg" alt="mirage-layout" />
       </div>
       <div class="feature-card-title">{{ participantes }} Participantes</div>
       <div class="feature-card-content">
@@ -37,7 +36,7 @@
     </div>
     <div class="feature-card">
       <div class="feature-card-img">
-        <img src="../../../../assets/layout/images/pages/landing/asset-moderndesign.svg" alt="mirage-layout" />
+        <img src="assets/layout/images/pages/landing/asset-moderndesign.svg" alt="mirage-layout" />
       </div>
       <div class="feature-card-title">{{ simuladores }} Simuladores</div>
       <div class="feature-card-content">
@@ -47,7 +46,7 @@
     </div>
     <div class="feature-card">
       <div class="feature-card-img">
-        <img src="../../../../assets/layout/images/pages/landing/asset-welldocumented.svg" alt="mirage-layout" />
+        <img src="assets/layout/images/pages/landing/asset-welldocumented.svg" alt="mirage-layout" />
       </div>
       <div class="feature-card-title">{{ evaluadores }} Expertos</div>
       <div class="feature-card-content">
@@ -57,7 +56,7 @@
     </div>
     <div class="feature-card">
       <div class="feature-card-img">
-        <img src="../../../../assets/layout/images/pages/landing/asset-unlimited.svg" alt="mirage-layout" />
+        <img src="assets/layout/images/pages/landing/asset-unlimited.svg" alt="mirage-layout" />
       </div>
       <div class="feature-card-title">8 Colaboradores</div>
       <div class="feature-card-content">
@@ -125,7 +124,7 @@
   </div>
 
   <div class="effect">
-    
+
   </div>
 </div>
 
@@ -195,144 +194,14 @@
     </div>
   </div>
   <div class="effect">
-    <img src="../../../../assets/layout/images/pages/landing/effect-bottom-1.svg" alt="mirage-layout" />
+    <img src="assets/layout/images/pages/landing/effect-bottom-1.svg" alt="mirage-layout" />
   </div>
 </div>
-<div id="pricing" class="section">
-  <div class="section-title">
+
+<div class="contributors main-content" style="width: 100%;">
+  <div style="text-align: center;">
     <h1>Nuestros Colaboradores</h1>
     <p>Instituciones involucradas dentro del proyecto</p>
   </div>
-  <div class="pricing-cards">
-    <div class="pricing-card free">
-      <div class="pricing-card-title">
-        <h2>UNIVERSIDAD DEL AZUAY</h2>
-        <p>Cuenca-Ecuador</p>
-      </div>
-      <br />
-      <div class="feature-card-img">
-        <img src="https://emovies.oui-iohe.org/wp-content/uploads/2020/09/logo-32-300x300.png" style="width: 150px"
-          alt="mirage-layout" />
-      </div>
-      <div class="effect">
-        <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout" />
-      </div>
-    </div>
-    <div class="pricing-card free">
-      <div class="pricing-card-title">
-        <h2>UNIVERSIDAD POLITÉCNICA SALESIANA</h2>
-        <p>Cuenca-Ecuador</p>
-      </div>
-      <br />
-      <div class="feature-card-img">
-        <img src="https://pbs.twimg.com/profile_images/1233476898694615040/LW3RVGA0_400x400.jpg" style="width: 150px"
-          alt="mirage-layout" />
-      </div>
-      <div class="effect"></div>
-    </div>
-    <div class="pricing-card free">
-      <div class="pricing-card-title">
-        <h2>UNIVERSIDAD DE ALCALÁ</h2>
-        <p>Alcalá de Henares, Madrid, España</p>
-      </div>
-      <br />
-      <div class="feature-card-img">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmU1DI4oHDWLiJnr7M9biMk2n7HT2fdYxN-947w_s5LPT7bdOmJtYIz4EB3PR2rCZqxXI&usqp=CAU"
-          style="width: 150px" alt="mirage-layout" />
-      </div>
-      <div class="effect">
-        <img src="../../../../assets/layout/images/pages/landing/effect-bottom.svg" alt="mirage-layout"
-          style="transform: scaleX(-1)" />
-      </div>
-    </div>
-  </div>
+  <app-contributors></app-contributors>
 </div>
-
-<script>
-  MirageLanding = {
-    addClass: function (element, className) {
-      if (element.classList) element.classList.add(className);
-      else element.className += " " + className;
-    },
-
-    removeClass: function (element, className) {
-      if (element.classList) element.classList.remove(className);
-      else
-        element.className = element.className.replace(
-          new RegExp(
-            "(^|\\b)" + className.split(" ").join("|") + "(\\b|$)",
-            "gi"
-          ),
-          " "
-        );
-    },
-
-    hasClass: function (element, className) {
-      if (element.classList) return element.classList.contains(className);
-      else
-        return new RegExp("(^| )" + className + "( |$)", "gi").test(
-          element.className
-        );
-    },
-
-    hideMenu: function () {
-      this.removeClass(
-        document.getElementById("landing-menu"),
-        "landing-menu-active"
-      );
-      this.removeClass(
-        document.getElementById("landing-menu-button"),
-        "landing-menu-active"
-      );
-      this.removeClass(
-        document.getElementById("landing-mask"),
-        "landing-menu-active"
-      );
-    },
-
-    showMenu: function () {
-      this.addClass(
-        document.getElementById("landing-menu"),
-        "landing-menu-active"
-      );
-      this.addClass(
-        document.getElementById("landing-menu-button"),
-        "landing-menu-active"
-      );
-      this.addClass(
-        document.getElementById("landing-mask"),
-        "landing-menu-active"
-      );
-    },
-  };
-
-  document
-    .getElementById("landing-menu-button")
-    .addEventListener("click", function (e) {
-      var menu = document.getElementById("landing-menu");
-
-      if (MirageLanding.hasClass(menu, "landing-menu-active")) {
-        MirageLanding.hideMenu();
-      } else {
-        MirageLanding.showMenu();
-      }
-
-      e.preventDefault();
-    });
-
-  document
-    .getElementById("landing-mask")
-    .addEventListener("click", function (e) {
-      MirageLanding.hideMenu();
-
-      e.preventDefault();
-    });
-
-  var menuLinks = document.querySelectorAll("#landing-menu a");
-  for (i = 0; i < menuLinks.length; i++) {
-    menuLinks[i].addEventListener("click", function (e) {
-      MirageLanding.hideMenu();
-    });
-  }
-</script>

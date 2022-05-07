@@ -1,22 +1,24 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { PublicComponent } from "../../public/public.component";
 import { Router, NavigationExtras } from "@angular/router";
 import { LanguageService } from "src/app/service/language.service";
 import { LoginService } from "src/app/service/login.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-menu-public",
   templateUrl: "./menu-public.component.html",
   styleUrls: ["./menu-public.component.scss"],
 })
-export class MenuPublicComponent implements OnInit {
+export class MenuPublicComponent implements OnInit, OnDestroy{
   public translate: TranslateService;
   public tieredItems: any;
   public activeItem: number;
   public selectedCountry: string;
   public countries: any[];
   public loged: boolean;
+  private _subscriptions: Subscription[] = [];
   //private queryParams: QuerySearch = {};
 
   constructor(
@@ -35,6 +37,9 @@ export class MenuPublicComponent implements OnInit {
     // } catch (error) {
     //   console.log(error);
     // }
+  }
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   ngOnInit(): void {
