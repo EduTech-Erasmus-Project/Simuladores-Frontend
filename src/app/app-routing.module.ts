@@ -4,6 +4,10 @@ import { QuicklinkStrategy } from "ngx-quicklink";
 import { AppErrorComponent } from "./public/pages/error/app.error.component";
 import { AppNotfoundComponent } from "./public/pages/notfound/app.notfound.component";
 import { AppAccessdeniedComponent } from "./public/pages/accessdenied/app.accessdenied.component";
+import { AuthGuard } from "./guards/auth.guard";
+import { ExpertGuard } from "./guards/expert.guard";
+import { AdminGuard } from "./guards/admin.guard";
+import { UserGuard } from "./guards/user.guard";
 
 const routes: Routes = [
   { path: "error", component: AppErrorComponent },
@@ -19,16 +23,19 @@ const routes: Routes = [
   {
     path: "user",
     loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
+    canActivate: [AuthGuard, UserGuard]
   },
   {
     path: "expert",
     loadChildren: () =>
       import("./expert/expert.module").then((m) => m.ExpertModule),
+      canActivate: [AuthGuard, ExpertGuard]
   },
   {
     path: "admin",
     loadChildren: () =>
       import("./admin/admin.module").then((m) => m.AdminModule),
+      //canActivate: [AuthGuard, AdminGuard]
   },
   { path: "**", redirectTo: "notfound", pathMatch: "full" },
 ];

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
 import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-principal-usuario/pagina-principal-usuario.component';
 
 @Component({
@@ -10,15 +11,17 @@ export class MenuLateralComponent implements OnInit {
   modelItem: any[];
   correoParticipanteLateral: string = '';
 
-  constructor(public appMainUser: PaginaPrincipalUsuarioComponent) { }
+  //public appMainUser: PaginaPrincipalUsuarioComponent
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-      this.correoParticipanteLateral = this.appMainUser.getCorreo();
+      this.correoParticipanteLateral = this.authService.emailUser;
 
     }
 
     onMenuClick() {
-        this.appMainUser.menuClick = true;
+        //this.appMainUser.menuClick = true;
     }
 
 }

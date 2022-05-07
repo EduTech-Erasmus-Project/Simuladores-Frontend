@@ -21,12 +21,12 @@
                 />
                 <div class="product-list-detail">
                   <h4>
-                    {{ participante.getNombre }} {{ participante.getApellido }}
+                    {{ participante?.nombre }} {{ participante?.apellido }}
                   </h4>
                   <span>
                     Participante
                     <i class="pi pi-map-marker product-category-icon"></i>
-                    {{ participante.getCiudad + " - " + participante.getPais }}
+                    {{ participante?.ciudad + " - " + participante?.pais }}
 
                     <!--{{product.description}}--></span
                   >

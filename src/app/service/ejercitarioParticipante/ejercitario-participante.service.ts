@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Asignacion } from 'src/app/model/Asignacion';
-import { Escenario } from 'src/app/model/Escenario';
+import { Asignacion } from 'src/app/core/interfaces/Asignacion';
+import { Escenario } from 'src/app/core/interfaces/Escenario';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

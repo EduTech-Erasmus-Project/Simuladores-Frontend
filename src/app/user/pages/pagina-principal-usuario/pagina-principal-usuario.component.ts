@@ -1,9 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BreadcrumbService } from 'src/app/service/breadcrumb.service';
-import { PhotoService } from 'src/app/demo/service/photoservice';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-pagina-principal-usuario',
@@ -39,7 +37,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //varibales para paginas usuario
   private correo: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private autentificacionUsuario: AutentificacionUsuarioService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private autentificacionUsuario: AuthService) { 
    
   }
   

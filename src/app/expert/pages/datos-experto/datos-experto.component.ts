@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
-
+import { ConfirmationService, MessageService, SelectItemGroup } from 'primeng/api';
+import { User } from 'src/app/core/interfaces/User';
 import { CountryService } from 'src/app/demo/service/countryservice';
-import { Responsable } from 'src/app/model/Responsable';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { EditarInformacionExpertoService } from 'src/app/service/informcionEvaluador/editar-informacion-experto.service';
 import { InformacionEvaluadorService } from 'src/app/service/informcionEvaluador/informacion-evaluador.service';
-import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
 
 interface City {
@@ -80,7 +78,7 @@ export class DatosExpertoComponent implements OnInit {
     selectedCities4: any[];
 
     private correoResponsableDatos: string = '';
-    public responsable: Responsable;
+    public responsable: User;
     
     public password: string;
     public newPassword: string;
@@ -107,7 +105,7 @@ export class DatosExpertoComponent implements OnInit {
   constructor(private countryService: CountryService, 
     private _Activatedroute:ActivatedRoute, private editarresponsableService: EditarInformacionExpertoService,
     private responsableServiceInformacion: InformacionEvaluadorService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private router: Router, private autentificacionUsuario: AutentificacionUsuarioService) { 
+    private messageService: MessageService, private router: Router, private autentificacionUsuario: AuthService) { 
     
   }
 
@@ -131,17 +129,15 @@ export class DatosExpertoComponent implements OnInit {
   obtenerInformacionExperto(){
     this.responsableServiceInformacion.obtenerInformacionEvaluadorCorreo(this.correoResponsableDatos).then(
       responsable => {
-        this.responsable = new Responsable(responsable.id, responsable.email, responsable.nombre, 
-                            responsable.apellido, responsable.telefono, responsable.pais, responsable.ciudad, 
-                            responsable.direccion, responsable.estado, responsable.nivelDeFormacion);
+        this.responsable = responsable;
       
-        this.nombreResponsable = this.responsable.getNombre
-        this.direccionResponsable = this.responsable.getDireccion
-        this.nivelDeFormacionResponsable = this.responsable.getnivelDeFormacion
-        this.apellidoResponsable = this.responsable.getApellido
-        this.telefonoResponsable = this.responsable.getTelefono
-        this.paisResponsable = this.responsable.getPais
-        this.ciudadResponsable = this.responsable.getCiudad
+        this.nombreResponsable = this.responsable?.nombre
+        this.direccionResponsable = this.responsable.direccion
+        this.nivelDeFormacionResponsable = this.responsable.nivelDeFormacion
+        this.apellidoResponsable = this.responsable?.apellido
+        this.telefonoResponsable = this.responsable.telefono
+        this.paisResponsable = this.responsable?.pais
+        this.ciudadResponsable = this.responsable?.ciudad
 
       }
     )
@@ -200,7 +196,7 @@ export class DatosExpertoComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({key: 'eliminarTOAST', severity: 'success', summary: 'Cuenta Eliminada', detail: 'La cuenta a sido Eliminada de manera satisfactoria'});
-        this.editarresponsableService.eliminarCuenta(this.correoResponsableDatos, this.responsable.getPassword);
+        this.editarresponsableService.eliminarCuenta(this.correoResponsableDatos, this.responsable.password);
         this.router.navigate(['login']);
       },
       reject: () => {
@@ -217,13 +213,13 @@ export class DatosExpertoComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
 
-        this.responsable.setNombre = this.nombreResponsable;
-        this.responsable.setDireccion = this.direccionResponsable;
-        this.responsable.setNivelDeFormacion = this.nivelDeFormacionResponsable;
-        this.responsable.setApellido = this.apellidoResponsable;
-        this.responsable.setTelefono = this.telefonoResponsable;
-        this.responsable.setPais = this.paisResponsable;
-        this.responsable.setCiudad = this.ciudadResponsable;
+        this.responsable.nombre = this.nombreResponsable;
+        this.responsable.direccion = this.direccionResponsable;
+        this.responsable.nivelDeFormacion = this.nivelDeFormacionResponsable;
+        this.responsable.apellido = this.apellidoResponsable;
+        this.responsable.telefono = this.telefonoResponsable;
+        this.responsable.pais = this.paisResponsable;
+        this.responsable.ciudad = this.ciudadResponsable;
         this.editarresponsableService.editarCuenta(this.responsable);
         this.messageService.add({key: 'editarTOAST', severity: 'success', summary: 'Cuenta Actualizada', detail: 'La cuenta a sido actualizada de manera satisfactoria'});
         

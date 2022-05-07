@@ -4,14 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ScrollPanel } from 'primeng/scrollpanel';
 import { Table } from 'primeng/table';
+import { Actividad } from 'src/app/core/interfaces/actividad';
+import { User } from 'src/app/core/interfaces/User';
 import { Customer, Representative } from 'src/app/demo/domain/customer';
-import { CustomerService } from 'src/app/demo/service/customerservice';
-import { ActividadInterface } from 'src/app/model/Actividad';
-import { Comentario, ComentarioInterface } from 'src/app/model/Comentario';
-import { DiscapacidadParticipanteInterface } from 'src/app/model/DiscapacidadParticipante';
-import { ExperienciaLaboralInterface } from 'src/app/model/ExperienciaLaboral';
-import { Participante, ParticipanteAceptacionTabla } from 'src/app/model/Participante';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { Comentario } from 'src/app/core/interfaces/Comentario';
+import { DiscapacidadParticipanteInterface } from 'src/app/core/interfaces/DiscapacidadParticipante';
+import { ExperienciaLaboralInterface } from 'src/app/core/interfaces/ExperienciaLaboral';
+import { AuthService } from 'src/app/service/auth.service';
 import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
 
 @Component({
@@ -36,13 +35,13 @@ export class ParticipanteInfoComponent implements OnInit {
     public correoResponsableDatos: string;
     public ejercitario: number;
     public correoParticipante: string;
-    public participanteInformacion: ParticipanteAceptacionTabla;
+    public participanteInformacion: User;
     public experienciaParticipanteInformacion: ExperienciaLaboralInterface[];
     public discapacidadParticipanteInformacion: DiscapacidadParticipanteInterface[];
-    public actividadesParticipanteEjercitario: ActividadInterface[];
+    public actividadesParticipanteEjercitario: Actividad[];
     public newComentarioParticipanteEjercitario: string = "";
-    public actividadSeleccionada: ActividadInterface;
-    public listadoComentariosActividad: ComentarioInterface[];
+    public actividadSeleccionada: Actividad;
+    public listadoComentariosActividad: Comentario[];
     public comentarioPariticipanteHabilitar = false;
     public habilitarComentarioNuevo = false;
 
@@ -52,7 +51,7 @@ export class ParticipanteInfoComponent implements OnInit {
         private usuarioService: InformacionParticipanteService,
         private confirmationService: ConfirmationService,
         private messageService: MessageService,
-        private autentificacionUsuario: AutentificacionUsuarioService) {
+        private autentificacionUsuario: AuthService) {
 
     }
 
@@ -184,29 +183,7 @@ export class ParticipanteInfoComponent implements OnInit {
     }
 
     informacionUsuario() {
-        this.participanteInformacion = {
-            id: 0,
-            email: "",
-            password: "",
-            nombre: "",
-            apellido: "",
-            telefono: "",
-            pais: "",
-            ciudad: "",
-            direccion: "",
-            estado: "",
-            fechaNacimiento: "",
-            carreraUniversitaria: "",
-            genero: "",
-            numeroDeHijos: 0,
-            estadoCivil: "",
-            etnia: "",
-            estudiosPrevios: "",
-            codigoEstudiante: "",
-            nivelDeFormacion: "",
-            aceptacionPendianteResponsable: "",
-            responsable: null
-        };
+        
 
         this.actividadSeleccionada = {
             idActividad: 0,
@@ -228,8 +205,8 @@ export class ParticipanteInfoComponent implements OnInit {
 
         this.usuarioService.obtenerInformacionUsuarioResponsable(this.correoParticipante, this.correoResponsableDatos)
             .toPromise()
-            .then(usuario => usuario as ParticipanteAceptacionTabla)
-            .then(participante => this.participanteInformacion = participante)
+            .then(usuario => usuario as User)
+            .then((participante: any) => this.participanteInformacion = participante)
     }
 
     obtenerExperienciaLaboralParticipante() {
@@ -259,7 +236,7 @@ export class ParticipanteInfoComponent implements OnInit {
     }
 
     //Comentarios y feedBack
-    verActvidadPariticipante(actividad: ActividadInterface) {
+    verActvidadPariticipante(actividad: Actividad) {
         this.habilitarComentarioNuevo = true;
         this.actividadSeleccionada = actividad;
         this.usuarioService.obtenerComentariosActividadRealizada(actividad.idActividad)
@@ -273,8 +250,12 @@ export class ParticipanteInfoComponent implements OnInit {
 
     agregarComentario(scroll: ScrollPanel) {
         let date: Date = new Date();
-        var comentarioNuevo: Comentario = new Comentario(this.newComentarioParticipanteEjercitario, date, this.actividadSeleccionada);
-        console.log("aqiiiiiiiiii")
+        var comentarioNuevo: Comentario = {
+            comentario: this.newComentarioParticipanteEjercitario,
+            fechaComentario: date,
+            comentarioActividad: this.actividadSeleccionada,
+        } 
+        
         this.confirmationService.confirm({
             key: 'agregarComentario',
             message: 'Agregar nuevo Comentario',
@@ -286,7 +267,7 @@ export class ParticipanteInfoComponent implements OnInit {
                     {
                         idComentario: 0,
                         comentario: this.newComentarioParticipanteEjercitario,
-                        fechaComentario: date.toDateString(),
+                        fechaComentario: date,
                         comentarioActividad_id: 0
                     });
                 scroll.refresh()

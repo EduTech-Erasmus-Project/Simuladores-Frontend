@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
-import { Customer, Representative } from 'src/app/demo/domain/customer';
+import { User } from 'src/app/core/interfaces/User';
+import { Representative } from 'src/app/demo/domain/customer';
 import { CustomerService } from 'src/app/demo/service/customerservice';
-import { Participante, ParticipanteAceptacionTabla, ParticipanteAceptacionTablaEscenarioResponsable } from 'src/app/model/Participante';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { ConsultasParaGraficasService } from 'src/app/service/consultaGraficas/consultas-para-graficas.service';
+import { DiscapacidadesService } from 'src/app/service/discapacidades.service';
 import { InfoExpertoPorEscenarioService } from 'src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service';
 import { PaginaInicioExpertoService } from 'src/app/service/paginaInicioExperto/pagina-inicio-experto.service';
 
@@ -74,7 +75,7 @@ export class EscenarioComponent implements OnInit {
   ///////////////////
 
   //// PARA LA TABLA 
-  public listParticipantesEvaluadorEjercitario: ParticipanteAceptacionTablaEscenarioResponsable[];
+  public listParticipantesEvaluadorEjercitario: User[];
   //customers: Customer[];
 
     representatives: Representative[];
@@ -106,7 +107,8 @@ export class EscenarioComponent implements OnInit {
               public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
               public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService,
               public servicioSeleccionarEjercitario : PaginaInicioExpertoService,
-              private _Activatedroute:ActivatedRoute, private autentificacionUsuario: AutentificacionUsuarioService) { }
+              private discapacidadesService : DiscapacidadesService,
+              private _Activatedroute:ActivatedRoute, private autentificacionUsuario: AuthService) { }
 
 
 
@@ -135,7 +137,7 @@ export class EscenarioComponent implements OnInit {
     this.seleccionTipoGrafico();
     this.graficaSimplePuntos();
     this.graficaPastel();
-    this.tablaEstudiantes();
+    //this.tablaEstudiantes();
     }
 
   graficaPastel(){
@@ -289,25 +291,25 @@ export class EscenarioComponent implements OnInit {
   
 
 
-  tablaEstudiantes(): void {
-    ///// PARA LA TABLA 
+  // tablaEstudiantes(): void {
+  //   ///// PARA LA TABLA 
     
-    this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.correoResponsableDatos, this.ejercitario)
-    .then(res =>{
-      this.listParticipantesEvaluadorEjercitario = res;
-      this.listParticipantesEvaluadorEjercitario.forEach(participante => {
-        this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.correoResponsableDatos, this.ejercitario, participante.email)
-        .then(res => {
-          participante.calificacion = res.notas[0].calificacion
-          participante.tiempo = res.notas[0].tiempo
+  //   this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.ejercitario)
+  //   .then(res =>{
+  //     this.listParticipantesEvaluadorEjercitario = res;
+  //     this.listParticipantesEvaluadorEjercitario.forEach(participante => {
+  //       this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.correoResponsableDatos, this.ejercitario, participante.email)
+  //       .then((res:any) => {
+  //         participante.calificacion = res.notas[0].calificacion
+  //         participante.tiempo = res.notas[0].tiempo
           
-        });
-      });
+  //       });
+  //     });
       
-      this.loading = false;
+  //     this.loading = false;
       
-    });
-    }
+  //   });
+  //   }
 
   // METODO DE TABLA 
 
@@ -325,8 +327,8 @@ export class EscenarioComponent implements OnInit {
 
   ///llamadas a servicios
     
-  listarLabelsTipoDeDiscacidad(){
-    this.servicioSeleccionarEjercitario.obtenerDiscapacidades().subscribe(
+  async listarLabelsTipoDeDiscacidad(){
+    await this.discapacidadesService.obtenerDiscapacidades().subscribe(
       dispapacidades => {
           this.discapacidades = []
           dispapacidades.discapacidades.forEach(discapacidad => {
@@ -338,7 +340,7 @@ export class EscenarioComponent implements OnInit {
 
   listarLabelsTipoDeGenero(){
     
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero(this.correoResponsableDatos).subscribe(
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero().subscribe(
       genero => {
         this.generos = genero.participanteGenero as Array<string>
         this.crearGraficaInicioExperto()
@@ -446,7 +448,6 @@ export class EscenarioComponent implements OnInit {
           discapacidadVisualTiempo= 0;
           discapacidadAuditivaTiempo= 0;
           discapacidadOtrosTiempo= 0;
-          
         }
                 
       ); 

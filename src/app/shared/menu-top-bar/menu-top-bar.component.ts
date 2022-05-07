@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/autentificacion-usuario.service';
+import { AuthService } from 'src/app/service/auth.service';
 import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-principal-usuario/pagina-principal-usuario.component';
 
 @Component({
@@ -16,15 +16,21 @@ import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-princ
 					</a>
 				</div>
 
-				<a href="#" class="sidebar-menu-button" (click)="appMain.onMenuButtonClick($event)">
+				<!-- 
+(click)="appMain.onMenuButtonClick($event)"
+(click)="appMain.onMegaMenuMobileButtonClick($event)"
+(click)="appMain.onTopbarMobileMenuButtonClick($event)"
+				 -->
+
+				<a href="#" class="sidebar-menu-button" >
 					<i class="pi pi-bars"></i>
 				</a>
 
-				<a href="#" class="megamenu-mobile-button" (click)="appMain.onMegaMenuMobileButtonClick($event)">
+				<a href="#" class="megamenu-mobile-button" >
 					<i class="pi pi-align-right megamenu-icon"></i>
 				</a>
 
-				<a href="#" class="topbar-menu-mobile-button" (click)="appMain.onTopbarMobileMenuButtonClick($event)">
+				<a href="#" class="topbar-menu-mobile-button" >
 					<i class="pi pi-ellipsis-v"></i>
 				</a>
 
@@ -34,12 +40,16 @@ import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-princ
 
 			<div class="layout-topbar-right fadeInDown" style="margin-left: 2%; width: 100%;">
 				<ul class="layout-topbar-actions" style="width: 100%;">
-					<!--Codigo para generar caja de texto-->
-					<li #search style="width: 30%;"  class="search-item topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === search}">
-						<a href="#" class="topbar-search-mobile-button" (click)="appMain.onTopbarItemClick($event,search)">
+					<!--Codigo para generar caja de texto 
+					[ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === search}"
+					(click)="appMain.onTopbarItemClick($event,search)"
+					(click)="appMain.topbarItemClick = true"
+				-->
+					<li #search style="width: 30%;"  class="search-item topbar-item" >
+						<a href="#" class="topbar-search-mobile-button" >
 							<i class="topbar-icon pi pi-search"></i>
 						</a>
-						<ul  class="search-item-submenu fadeInDown" style="width: 100%;" (click)="appMain.topbarItemClick = true">
+						<ul  class="search-item-submenu fadeInDown" style="width: 100%;" >
 							<li>
 								<span class="md-inputfield search-input-wrapper" style="width: 100%;">
 									<input pInputText class="p-inputtext-lg"  style="width: 80%;" placeholder="Search..."/>
@@ -60,9 +70,12 @@ import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-princ
 						</span>
 					</li>
 					
-					<!--Codifo ngfor para mostrar todas las notificaciones-->
-					<li #notificacion class="topbar-item"  [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === notificacion}">
-						<a href="#" (click)="appMain.onTopbarItemClick($event,notificacion)">
+					<!--Codifo ngfor para mostrar todas las notificaciones 
+					[ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === notificacion}"
+					(click)="appMain.onTopbarItemClick($event,notificacion)"
+				-->
+					<li #notificacion class="topbar-item"  >
+						<a href="#" >
 							<i class="topbar-icon pi pi-bell"></i>
 						</a>
 						<ul class="fadeInDown">
@@ -81,9 +94,12 @@ import { PaginaPrincipalUsuarioComponent } from 'src/app/user/pages/pagina-princ
 						</ul>
 					</li>
 					
-					<!--Perfil de usuario presentacion menu-->
-					<li #profile class="topbar-item profile-item" style="width: 15%;" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}">
-						<a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
+					<!--Perfil de usuario presentacion menu 
+					(click)="appMain.onTopbarItemClick($event,profile)" 
+					[ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}"
+				-->
+					<li #profile class="topbar-item profile-item" style="width: 15%;" >
+						<a href="#" >
 						<span class="profile-info-wrapper">
 							<h3>{{getCorreo()}}</h3>
 							<span>Estudiante</span>
@@ -119,17 +135,17 @@ export class MenuTopBarComponent implements OnInit {
 	activeItem: number;
 	private correoParticipante: string = '';
 
-	constructor(public appMain: PaginaPrincipalUsuarioComponent, public autentificacionServices: AutentificacionUsuarioService) { }
+	constructor(public autentificacionServices: AuthService) { }
 	
 	ngOnInit(): void {
-		this.correoParticipante = this.appMain.getCorreo();
+		//this.correoParticipante = this.appMain.getCorreo();
 	}
 	
 	getCorreo():string{
 		return this.correoParticipante;
 	}
 	mobileMegaMenuItemClick(index) {
-	this.appMain.megaMenuMobileClick = true;
+	//this.appMain.megaMenuMobileClick = true;
 	this.activeItem = this.activeItem === index ? null : index;
 	}
 
