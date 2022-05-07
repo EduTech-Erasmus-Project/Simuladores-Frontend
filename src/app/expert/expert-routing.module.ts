@@ -15,25 +15,25 @@ const routes: Routes = [
     component: ExpertComponent,
     children: [
       { path: "", component: PresentacionInicioExpertoComponent },
+      // {
+      //   path: "inicio/:correo",
+      //   component: PresentacionInicioExpertoComponent,
+      // },
+      { path: "datosExperto", component: DatosExpertoComponent },
       {
-        path: "inicio/:correo",
-        component: PresentacionInicioExpertoComponent,
-      },
-      { path: "datosExperto/:correo", component: DatosExpertoComponent },
-      {
-        path: "agregarActividadParticipantes/:correo",
+        path: "agregarActividadParticipantes",
         component: AgregarActividadesParticipanteComponent,
       },
       {
-        path: "agregarAlumno/:correo",
+        path: "agregarAlumno",
         component: AgregarAlumnoAExpertoComponent,
       },
       {
-        path: "escenarioInfo/:correo/:idEjercitario",
+        path: "escenarioInfo/:idEjercitario",
         component: EscenarioComponent,
       },
       {
-        path: "participanteInfo/:correo/:idEjercitario/:correoEstudiante",
+        path: "participanteInfo/:idEjercitario/:correoEstudiante",
         component: ParticipanteInfoComponent,
       },
     ],

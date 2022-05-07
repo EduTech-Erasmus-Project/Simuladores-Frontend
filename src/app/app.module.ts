@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -30,6 +30,7 @@ import { IconService } from "./demo/service/iconservice";
 import { NodeService } from "./demo/service/nodeservice";
 import { PhotoService } from "./demo/service/photoservice";
 import { ProductService } from "./demo/service/productservice";
+import { AuthInterceptor } from "./intercepotors/auth.interceptor";
 @NgModule({
   imports: [
     RouterModule,
@@ -47,6 +48,11 @@ import { ProductService } from "./demo/service/productservice";
   ],
   declarations: [AppComponent],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     //{provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     MenuService,

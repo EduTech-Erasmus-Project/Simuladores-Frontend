@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { IdentityGuard } from "../guards/identity.guard";
 import { PublicComponent } from "./public.component";
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
         path: "login",
         loadChildren: () =>
           import("../auth/login/login.module").then((m) => m.LoginModule),
-        //canActivate: [CheckLoginGuard],
+        canActivate: [IdentityGuard],
         data: {
           breadcrumb: "Inicio de sesión",
         },
@@ -47,7 +48,7 @@ const routes: Routes = [
         path: "register",
         loadChildren: () =>
           import("../auth/sign-up/sign-up.module").then((m) => m.SignUpModule),
-        //canActivate: [CheckLoginGuard],
+        canActivate: [IdentityGuard],
         data: {
           breadcrumb: "Registro",
         },

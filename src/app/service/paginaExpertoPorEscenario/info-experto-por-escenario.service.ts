@@ -93,29 +93,13 @@ export class InfoExpertoPorEscenarioService {
       .then((participantes) => participantes);
   }
 
-  recuperarEstudiantesEjercitarioResponsable(
-    responsable: string,
-    escenario: number
-  ) {
-    return this.http
-      .get<any>(
-        environment.WS_PATH +
-          "getEstudiantesEjercitarioResponsable/" +
-          responsable +
-          "/" +
-          escenario,
-        this.config
-      )
-      .toPromise()
-      .then(
-        (res) =>
-          res.participantes as User[]
-      )
-      .then((participantes) => participantes);
+  recuperarEstudiantesEjercitarioResponsable(escenario: number) {
+    return this.http.get<any>(
+      environment.WS_PATH + "getEstudiantesEjercitarioResponsable/" + escenario
+    );
   }
 
   recuperarNotasPorEjercitario(
-    responsable: string,
     escenario: number,
     email: string
   ) {
@@ -123,8 +107,6 @@ export class InfoExpertoPorEscenarioService {
       .get<any>(
         environment.WS_PATH +
           "getNotasEstudianteEjercitarioResponsable/" +
-          responsable +
-          "/" +
           escenario +
           "/" +
           email,

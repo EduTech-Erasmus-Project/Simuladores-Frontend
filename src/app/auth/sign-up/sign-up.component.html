@@ -106,11 +106,11 @@
                           <label for="female">Mujer</label>
                         </div>
                         <div class="p-field-radiobutton">
-                          <p-radioButton formControlName="genero" name="genero" value="Otro" inputId="other" [ngClass]="{
+                          <p-radioButton formControlName="genero" name="genero" value="LGBT" inputId="LGBT" [ngClass]="{
                               'ng-dirty ng-invalid': getErrorRequired('genero')
                             }">
                           </p-radioButton>
-                          <label for="other">Otro</label>
+                          <label for="LGBT">LGBT</label>
                         </div>
                       </div>
                       <div *ngIf="form.get('genero').invalid">

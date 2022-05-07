@@ -137,7 +137,7 @@ export class EscenarioComponent implements OnInit {
     this.seleccionTipoGrafico();
     this.graficaSimplePuntos();
     this.graficaPastel();
-    this.tablaEstudiantes();
+    //this.tablaEstudiantes();
     }
 
   graficaPastel(){
@@ -291,25 +291,25 @@ export class EscenarioComponent implements OnInit {
   
 
 
-  tablaEstudiantes(): void {
-    ///// PARA LA TABLA 
+  // tablaEstudiantes(): void {
+  //   ///// PARA LA TABLA 
     
-    this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.correoResponsableDatos, this.ejercitario)
-    .then(res =>{
-      this.listParticipantesEvaluadorEjercitario = res;
-      this.listParticipantesEvaluadorEjercitario.forEach(participante => {
-        this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.correoResponsableDatos, this.ejercitario, participante.email)
-        .then((res:any) => {
-          participante.calificacion = res.notas[0].calificacion
-          participante.tiempo = res.notas[0].tiempo
+  //   this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.ejercitario)
+  //   .then(res =>{
+  //     this.listParticipantesEvaluadorEjercitario = res;
+  //     this.listParticipantesEvaluadorEjercitario.forEach(participante => {
+  //       this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.correoResponsableDatos, this.ejercitario, participante.email)
+  //       .then((res:any) => {
+  //         participante.calificacion = res.notas[0].calificacion
+  //         participante.tiempo = res.notas[0].tiempo
           
-        });
-      });
+  //       });
+  //     });
       
-      this.loading = false;
+  //     this.loading = false;
       
-    });
-    }
+  //   });
+  //   }
 
   // METODO DE TABLA 
 
@@ -340,7 +340,7 @@ export class EscenarioComponent implements OnInit {
 
   listarLabelsTipoDeGenero(){
     
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero(this.correoResponsableDatos).subscribe(
+    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero().subscribe(
       genero => {
         this.generos = genero.participanteGenero as Array<string>
         this.crearGraficaInicioExperto()

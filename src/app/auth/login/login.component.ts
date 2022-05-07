@@ -108,17 +108,19 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log(res);
           this.storageService.saveStorageItem("token", res.access);
           this.storageService.saveStorageItem("refresh", res.refresh);
-          this.storageService.saveStorageItem("user", res.user);
 
           this.authService.emailUser = res.user.email;
-          this.authService.typeUser = res.user.tipoUser;
+          this.authService.user = res.user;
 
-          if(res.user.tipoUser === 'evaluador'){
-            this.router.navigate(['/expert']);
+          if (res.user.tipoUser === "evaluador") {
+            this.router.navigate(["/expert"]);
+            return;
+          } else if (res.user.tipoUser === "admin") {
+            this.router.navigate(["/admin"]);
             return;
           }
-          this.router.navigate(['/user']);
-          return;  
+          this.router.navigate(["/user"]);
+          return;
         },
         (error) => {
           Swal.close();

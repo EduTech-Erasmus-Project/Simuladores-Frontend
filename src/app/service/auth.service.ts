@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
-import * as moment from "moment";
 import { Router } from "@angular/router";
 import { StorageService } from "./storage.service";
 import { User } from "../core/interfaces/User";
@@ -11,25 +10,19 @@ import { User } from "../core/interfaces/User";
   providedIn: "root",
 })
 export class AuthService {
-  // the actual JWT token
-  public token: string;
-  // the token expiration date
-  public token_expires: Date;
-  // the token created date
-  public token_created: Date;
-  // the email of the logged in user
   private _emailUser: string;
-  // the tipo of the logged in user
-  public typeUser: string;
-  // error messages received from the login attempt
-  public errors: any = [];
   private _url = environment.WS_PATH;
+  private _user: User;
+  public userEvt: Subject<User>;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private storageService: StorageService
-  ) {}
+  ) {
+    this.userEvt = new Subject();
+    //this.verifyToken();
+  }
 
   public login(data): Observable<any> {
     return this.http.post<any>(this._url + "login", data);
@@ -39,17 +32,12 @@ export class AuthService {
     return this.http.post<any>(this._url + "registro", data);
   }
 
-  // public logout(): Observable<any> {
-  //   return this.http.post<any>(this._url + 'logout', {});
-  // }
-
   public get emailUser(): string {
     if (this._emailUser) {
       return this._emailUser;
     } else {
       let user: any = this.storageService.getStorageItem("user");
       this._emailUser = user.email;
-      this.typeUser = user.tipoUser;
       return this._emailUser;
     }
   }
@@ -58,162 +46,81 @@ export class AuthService {
     this._emailUser = email;
   }
 
-  public checkEmail(correo: string): Observable<any> {
-    const config = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-    };
-    return this.http.post<any>(
-      environment.WS_PATH + "verficicarCorreo",
-      { correo: correo },
-      config
-    );
-  }
-
-  public checkCredencialesLogin(userData: User, tipoUsuario: string) {
-    const config = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-    };
-    return this.http
-      .post<any>(
-        environment.WS_PATH + "loginAcceso",
-        {
-          correo: userData.email,
-          password: userData.password,
-          tipoUsuario: tipoUsuario,
-        },
-        config
-      )
-      .subscribe(
-        (data) => {
-          this.updateData(data);
-        },
-        (err) => {
-          this.errors = err["error"];
-        }
-      );
-  }
-
   public logout() {
-    this.token = null;
-    this.token_expires = null;
     this._emailUser = null;
-    this.token_created = null;
-    localStorage.removeItem("token");
-    localStorage.removeItem("expires_at");
-    localStorage.removeItem("token_created");
+    this._user = null;
 
-    const config = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-    };
-    this.http
-      .post<any>(environment.WS_PATH + "logout", config)
-      .subscribe((res) => {
-        console.log("logout: " + res.message);
-        this.router.navigate([""]);
-      });
+    this.storageService.removeStorageItem("token");
+    this.storageService.removeStorageItem("user");
+
+    this.router.navigate(["/"]);
+    return;
+
+    // const config = {
+    //   headers: new HttpHeaders({
+    //     "Content-Type": "application/json",
+    //   }),
+    // };
+    // this.http
+    //   .post<any>(environment.WS_PATH + "logout", config)
+    //   .subscribe((res) => {
+    //     console.log("logout: " + res.message);
+    //     this.router.navigate(["/"]);
+    //   });
   }
 
-  private updateData(data: any) {
-    if (data.login == "true") {
-      this.token = data.jwt;
-      this.errors = [];
-      // decode the token to read the email and expiration timestamp
-      const token_parts = this.token.split(/\./);
-      const token_decoded = JSON.parse(window.atob(token_parts[1]));
-      this.token_expires = new Date(token_decoded.exp * 1000);
-      this.token_created = new Date(token_decoded.iat * 1000);
-      this._emailUser = token_decoded.email;
-      this.typeUser = token_decoded.tipoUser;
-      this.setSession();
 
-      if (this.typeUser == "evaluador") {
-        this.router.navigate(["Pagina-Principal-Experto/"]);
-        return;
-      }
-      this.router.navigate(["Pagina-Principal-Usuario/"]);
-      return;
-    } else {
-      return;
-    }
-  }
-
-  private setSession() {
-    localStorage.setItem("token", this.token);
-    localStorage.setItem(
-      "expires_at",
-      JSON.stringify(this.token_expires.valueOf())
-    );
-    localStorage.setItem(
-      "token_created",
-      JSON.stringify(this.token_created.valueOf())
-    );
-  }
-
-  get getToken(): string {
+  public get getToken(): string {
     return this.storageService.getStorageItem("token");
   }
 
-  getcorreoPorToken(token: string): string {
-    if (token != null) {
-      // const token_parts = token.split(/\./);
-      // const token_decoded = JSON.parse(window.atob(token_parts[1]));
-      // this.token_expires = new Date(token_decoded.exp * 1000);
-      // this.token_created = new Date(token_decoded.iat * 1000);
-      let user: any = this.storageService.getStorageItem("user");
+  public get user(): User | any {
+    if (!this._user) {
+      this._user = this.storageService.getStorageItem("user") as User;
+    }
+    return this._user;
+  }
 
+  public set user(user: User) {
+    this._user = user;
+    this.storageService.saveStorageItem("user", user);
+    this.userEvt.next(user);
+  }
+
+  public getcorreoPorToken(token: string): string {
+    if (token != null) {
+      let user: any = this.storageService.getStorageItem("user");
       this._emailUser = user.email;
-      this.typeUser = user.tipoUser;
       return this.emailUser;
     }
   }
 
-  getExpiration() {
-    var expiration: string = localStorage.getItem("expires_at");
-    const expiresAt = new Date(Number(expiration));
-    return expiresAt;
-  }
-
-  getCreatedToken() {
-    var token_created: string = localStorage.getItem("token_created");
-    const token_createdAt = new Date(Number(token_created));
-    return token_createdAt;
-  }
-
-  isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
-
-  isLoggedOut() {
-    return !this.isLoggedIn();
-  }
-
-  refreshToken() {
-    if (moment().isBetween(this.getCreatedToken(), this.getExpiration())) {
-      const config = {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-        }),
-      };
-      this.http
-        .post<any>(
-          environment.WS_PATH + "refreshToken",
-          { jwt: this.getToken },
-          config
-        )
-        .subscribe(
-          (data) => {
-            this.updateData(data);
-          },
-          (err) => {
-            this.errors = err["error"];
-          }
-        );
+  public checkRole(role: string) {
+    if (this.user) {
+      return this.user.tipoUser === role;
     }
+    return false;
+  }
+
+  public async verifyToken() {
+    if (!this.getToken) this.logout();
+
+    try {
+      let token = await this.http
+        .post<any>(environment.WS_PATH + "verifyToken", { jwt: this.getToken })
+        .toPromise();
+      if (token.login == "true") {
+        //return true;
+        this.user = token.user;
+      } else {
+        this.logout();
+      }
+    } catch (error) {
+      this.logout();
+    }
+  }
+
+  public get isLogged(): boolean {
+    return this.getToken && this.user;
   }
 }

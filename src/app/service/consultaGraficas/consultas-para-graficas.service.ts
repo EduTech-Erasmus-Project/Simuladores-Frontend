@@ -1,37 +1,70 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ConsultasParaGraficasService {
+  private config = {
+    headers: new HttpHeaders().set("Content-Type", "application/json"),
+  };
 
-  private  config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  
-  constructor(private http:HttpClient) { }
-  
-    recuperarListaDeDiscapacidades(){
-      return this.http.get<any>(environment.WS_PATH+"obtenerListaDiscapacidades",this.config).toPromise();
-    }
-   
-    recuperarListaDeGenero(correo: string): Observable<any>{
-       return this.http.get<any>(environment.WS_PATH+"obtenerTipoGeneroPorEvaluador")
-    }
+  constructor(private http: HttpClient) {}
 
-    recuperarListaDeEscenarios(){
-      return this.http.get<any>(environment.WS_PATH+"obtenerListaEscenarios", this.config).toPromise();
-    }
-    
-    recuperarListaDiscapacidadesEscenario(){
-      return this.http.get<any>(environment.WS_PATH+"obtenerListaDiscapacidadesEscenario", this.config).toPromise();
-    }
+  recuperarListaDeDiscapacidades() {
+    return this.http
+      .get<any>(environment.WS_PATH + "obtenerListaDiscapacidades", this.config)
+      .toPromise();
+  }
 
-    recuperarListaGeneroEscenario(){
-      return this.http.get<any>(environment.WS_PATH+"obtenerlistadoGeneroEscenario", this.config).toPromise();
-    }
+  recuperarListaDeGenero(): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerTipoGeneroPorEvaluador"
+    );
+  }
 
-    //recuperarL
+  recuperarListaDiscapacidades(): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerDiscapacidadesPorEvaluador"
+    );
+  }
+  recuperarListaEjercitariosPorParticipantes(): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerParticipantesEjercitarioPorEvaluador"
+    );
+  }
 
+  totalParticipantesPorEvaluador(): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "totalParticipantesPorEvaluador"
+    );
+  }
+
+  recuperarListaDeEscenarios() {
+    return this.http
+      .get<any>(environment.WS_PATH + "obtenerListaEscenarios", this.config)
+      .toPromise();
+  }
+
+  recuperarListaDiscapacidadesEscenario() {
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "obtenerListaDiscapacidadesEscenario",
+        this.config
+      )
+      .toPromise();
+  }
+
+  recuperarListaGeneroEscenario() {
+    return this.http
+      .get<any>(
+        environment.WS_PATH + "obtenerlistadoGeneroEscenario",
+        this.config
+      )
+      .toPromise();
+  }
+
+  //recuperarL
 }

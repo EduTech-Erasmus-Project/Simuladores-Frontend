@@ -11,7 +11,7 @@ export class StorageService {
 
   constructor() { }
 
-  saveStorageItem(key: string, value: string) {
+  saveStorageItem(key: string, value: any) {
     let data = CryptoJS.AES.encrypt(
       JSON.stringify(value),
       secretKey

@@ -1,33 +1,42 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Asignacion } from 'src/app/core/interfaces/Asignacion';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Asignacion } from "src/app/core/interfaces/Asignacion";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class PaginaInicioExpertoService {
+  private escenario: Asignacion;
 
-  private escenario :  Asignacion;
-  
-  private  config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  private config = {
+    headers: new HttpHeaders().set("Content-Type", "application/json"),
+  };
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  recuperarInformacionDeEscenario(numeroEjercitario: number){
-    return this.http.get<any>(environment.WS_PATH+"getEjercitarioNumeroDeEjercitario/"+numeroEjercitario, this.config).
-    toPromise().then(res =>  res as Asignacion).then(escenario => escenario);
-    
+  recuperarInformacionDeEscenario(numeroEjercitario: number) {
+    return this.http.get<any>(
+      environment.WS_PATH +
+        "getEjercitarioNumeroDeEjercitario/" +
+        numeroEjercitario,
+      this.config
+    );
   }
 
-  crearGraficaPaginaInicio(correo: string): Observable<any>{
-    return this.http.post<any>(environment.WS_PATH+"crearGraficaInicioExpertoTipoDiscapacidadVsNota", {"evaluador": correo}, this.config);
+  crearGraficaPaginaInicio(correo: string): Observable<any> {
+    return this.http.post<any>(
+      environment.WS_PATH + "crearGraficaInicioExpertoTipoDiscapacidadVsNota",
+      { evaluador: correo },
+      this.config
+    );
   }
 
-  
-  obtenerEjercitarios(){
-    return this.http.get<any>(environment.WS_PATH+"getEjercitarios/", this.config).
-    toPromise().then(res=> res as any[]).then(res =>  res as Asignacion[]).then(escenario => escenario);;
+  obtenerEjercitarios() {
+    return this.http.get<any>(
+      environment.WS_PATH + "getEjercitarios/",
+      this.config
+    );
   }
 }
