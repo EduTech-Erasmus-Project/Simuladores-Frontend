@@ -5,6 +5,7 @@ import { Router, NavigationExtras } from "@angular/router";
 import { StorageService } from "./storage.service";
 import { TokenService } from "./token.service";
 import { map } from "rxjs/operators";
+import { User } from "../core/interfaces/User";
 
 //import { CurrentUser } from "../core/interfaces/CurrentUser";
 
@@ -14,7 +15,7 @@ const baseUrl = environment.WS_PATH;
   providedIn: "root",
 })
 export class LoginService {
-  //private currUser: CurrentUser;
+  private currUser: User;
 
   constructor(
     private http: HttpClient,
@@ -22,19 +23,18 @@ export class LoginService {
     private storageService: StorageService,
     private tokenService: TokenService
   ) {
-    // this.currUser =
-    //   (storageService.getStorageItem("current_user") as CurrentUser) || null;
-    //console.log("current currUser", this.currUser)
+    this.currUser =
+      (storageService.getStorageItem("user") as User) || null;
+    console.log("current currUser", this.currUser)
   }
 
   set currentUser(currUser: any) {
-    //console.log("set current currUser", currUser);
-    //this.currUser = currUser;
-    //this.storageService.saveStorageItem("current_user", this.currUser as any);
+    console.log("set current currUser", currUser);
+    this.currUser = currUser;
+    this.storageService.saveStorageItem("current_user", this.currUser as any);
   }
   get user() {
-    //return this.currUser;
-    return true;
+    return this.currUser;
   }
 
   signIn(formData: any) {
@@ -42,11 +42,11 @@ export class LoginService {
   }
 
   signOut(): void {
-    this.storageService.removeStorageItem("current_user");
+    this.storageService.removeStorageItem("token");
     //this.storageService.removeStorageItem('csrftoken');
-    this.storageService.removeStorageItem("data_ref");
-    this.storageService.removeStorageItem("data_acc");
-    //this.currUser = null;
+    this.storageService.removeStorageItem("user");
+    //this.storageService.removeStorageItem("data_acc");
+    this.currUser = null;
     this.router.navigateByUrl("/");
     // this.router.navigate(["/"]).then(() => {
     //   window.location.reload();

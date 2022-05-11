@@ -6,8 +6,7 @@
             </a>
         </ng-template>
         <ng-template pTemplate="end">
-
-            <ng-container *ngIf="!loginService?.user; else loginTemplate">
+              <ng-container *ngIf="loginService?.user; else loginTemplate">
                 <div class="layout-topbar">
                     <div class="layout-topbar-wrapper">
                         <div class="layout-topbar-right fadeInDown">
@@ -18,11 +17,11 @@
                                         <span class="profile-image-wrapper">
                                             <img loading="lazy"
                                                 [src]="loginService.user.image || 'assets/img/noimage.png'"
-                                                [alt]="loginService.user.first_name" />
+                                                [alt]="loginService.user.nombre" />
                                         </span>
                                         <span class="profile-info-wrapper">
-                                            <h3 class="name-user">{{loginService.user.first_name+'
-                                                '+loginService.user.last_name}}</h3>
+                                            <h3 class="name-user">{{loginService.user.nombre+'
+                                                '+loginService.user.apellido}}</h3>
                                             <span>{{loginService.user.email}}</span>
                                         </span>
                                     </a>
@@ -34,66 +33,68 @@
                                             <div class="profile">
                                                 <img loading="lazy"
                                                     [src]="loginService.user.image || 'assets/img/noimage.png'"
-                                                    [alt]="loginService.user.first_name" width="40" />
-                                                <h1 class="name-user">{{loginService.user.first_name+'
-                                                    '+loginService.user.last_name}}</h1>
+                                                    [alt]="loginService.user.nombre" width="40" />
+                                                <h1 class="name-user">{{loginService.user.nombre+'
+                                                    '+loginService.user.apellido}}</h1>
                                                 <span>{{loginService.user.email}}</span>
                                             </div>
                                         </li>
 
                                         <li tabindex="0" (keyup.enter)="navigate('admin')"
-                                            *ngIf="loginService.user.administrator; else dashboardTemplate"
+                                            
                                             class="layout-submenu-item" (click)="navigate('admin')">
                                             <i class="pi pi-sliders-v icon icon-1"></i>
                                             <div class="menu-text">
-                                                <p>Dasboard</p>
+                                                <p>Panel de simuladores</p>
                                             </div>
                                             <i class="pi pi-angle-right"></i>
                                         </li>
 
 
-                                        <li tabindex="0" (keyup.enter)="navigateStudent()" (click)="navigateStudent()"
-                                            *ngIf="loginService.user?.roles.includes('student')"
+                                        <!-- <li tabindex="0" (keyup.enter)="navigateStudent()" (click)="navigateStudent()"
+                                           
                                             class="layout-submenu-item">
                                             <i class="pi pi-star-o icon icon-1"></i>
                                             <div class="menu-text">
                                                 <p>Recomendados para ti</p>
                                             </div>
                                             <i class="pi pi-angle-right"></i>
-                                        </li>
+                                        </li> -->
 
-                                        <li tabindex="0" (keyup.enter)="navigate('settings/my-views')"
+                                        <!-- <li tabindex="0" (keyup.enter)="navigate('settings/my-views')"
                                             (click)="navigate('settings/my-views')"
-                                            *ngIf="loginService.user?.roles.includes('student')"
+                                         
                                             class="layout-submenu-item">
                                             <i class="pi pi-eye icon icon-2"></i>
                                             <div class="menu-text">
                                                 <p>Vistos por mi </p>
                                             </div>
                                             <i class="pi pi-angle-right"></i>
-                                        </li>
+                                        </li> -->
 
-                                        <li tabindex="0" (keyup.enter)="navigateExpert('search')"
+                                        <!-- *ngIf="loginService.user?.tipoUser === 'participante'" -->
+
+                                        <!-- <li tabindex="0" (keyup.enter)="navigateExpert('search')"
                                             (click)="navigateExpert('search')"
-                                            *ngIf="loginService.user?.roles.includes('expert')"
+                                            
                                             class="layout-submenu-item">
                                             <i class="pi pi-pencil icon icon-2"></i>
                                             <div class="menu-text">
                                                 <p>Calificar OA</p>
                                             </div>
                                             <i class="pi pi-angle-right"></i>
-                                        </li>
+                                        </li> -->
 
-                                        <li tabindex="0" (keyup.enter)="navigate('settings/new-object')"
+                                        <!-- <li tabindex="0" (keyup.enter)="navigate('settings/new-object')"
                                             (click)="navigate('settings/new-object')"
-                                            *ngIf="loginService.user?.roles.includes('teacher')"
+                                          
                                             class="layout-submenu-item">
                                             <i class="pi pi-upload icon icon-3"></i>
                                             <div class="menu-text">
                                                 <p>Cargar OA</p>
                                             </div>
                                             <i class="pi pi-angle-right"></i>
-                                        </li>
+                                        </li> -->
 
                                         <li tabindex="0" (keyup.enter)="navigate('settings')"
                                             (click)="navigate('settings')" class="layout-submenu-item">
