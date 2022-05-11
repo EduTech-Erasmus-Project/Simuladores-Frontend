@@ -1,3 +1,4 @@
+/.angular/cache
 build
 dist
 node_modules
@@ -6,6 +7,9 @@ sassdoc
 
 /idea
 /.idea
+
+.angular
+/.angular
 
 package-lock.json
 
