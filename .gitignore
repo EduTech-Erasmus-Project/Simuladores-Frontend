@@ -8,5 +8,8 @@ sassdoc
 /idea
 /.idea
 
+.angular
+/.angular
+
 package-lock.json
 

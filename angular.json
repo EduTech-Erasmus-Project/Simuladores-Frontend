@@ -75,7 +75,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "mirage:build:production",
+              "browserTarget": "mirage:build:production"
             }
           }
         },
