@@ -106,3 +106,13 @@
     padding: 0 25px;
   }
 }
+.landing-header-content{
+  background-color: #826a6a;
+  margin-left: 64em;
+}
+
+@media (max-width: 1600px) {
+  .landing-header-content{
+    margin-left: 50rem;
+  }
+}
