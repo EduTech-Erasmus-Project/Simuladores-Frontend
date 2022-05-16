@@ -1,0 +1,224 @@
+<div class="p-grid layout-dashboard">
+
+
+    <div class="p-col-12 p-lg-12">
+        <div class="card orders-table" style="min-height: 33vh">
+            <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
+                    'name',
+                    'country.name',
+                    'representative.name',
+                    'status'
+                    ]">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row
+                            p-jc-md-between table-header">
+                        Participantes por aprobar
+                        <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($event.target.value,
+                                    'contains')"
+                                    placeholder="Buscar por nombre..." />
+                            </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nombre">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Nombre
+                                <!-- <p-sortIcon field="nombre"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="genero">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Genero
+                                <!-- <p-sortIcon field="genero"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="tiempo">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Direccion
+                                <!-- <p-sortIcon field="tiempo"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="calificacion">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Teléfono
+                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+                            </div>
+                        </th>
+                        <th pSortableColumn="calificacion">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Email
+                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th style="width: 8rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-participante>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <span class="p-column-title">{{
+                                    participante.usuario?.nombre }}
+                                    {{ participante.usuario?.apellido }}</span>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{
+                                    participante.usuario?.genero
+                                    }}</span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.pais}} - {{participante.usuario?.ciudad}} - {{participante.usuario?.direccion}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.telefono}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.email}}
+                            </span>
+                        </td>
+
+                        <td style="text-align: center">
+                            <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                            </a>
+                            <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
+                            </a>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No hay participantes por aprobar.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+        </div>
+    </div>
+
+
+    <div class="p-col-12 p-lg-12">
+        <div class="card orders-table" style="min-height: 33vh">
+
+            <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
+                    'name',
+                    'country.name',
+                    'representative.name',
+                    'status'
+                    ]">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row
+                            p-jc-md-between table-header">
+                        Mis participantes
+                        <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($event.target.value,
+                                    'contains')"
+                                    placeholder="Buscar por nombre..." />
+                            </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nombre">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Nombre
+                                <!-- <p-sortIcon field="nombre"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="genero">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Genero
+                                <!-- <p-sortIcon field="genero"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="tiempo">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Direccion
+                                <!-- <p-sortIcon field="tiempo"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="calificacion">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Teléfono
+                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+                            </div>
+                        </th>
+                        <th pSortableColumn="calificacion">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Email
+                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+                            </div>
+                        </th>
+
+                        <th style="width: 8rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-participante>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <span class="p-column-title">{{
+                                    participante.usuario?.nombre }}
+                                    {{ participante.usuario?.apellido }}</span>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{
+                                    participante.usuario?.genero
+                                    }}</span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.pais}} - {{participante.usuario?.ciudad}} - {{participante.usuario?.direccion}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.telefono}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">
+                                {{participante.usuario?.email}}
+                            </span>
+                        </td>
+
+                        <td style="text-align: center">
+                            <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                            </a>
+                            <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
+                            </a>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Sin datos para mostrar.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>

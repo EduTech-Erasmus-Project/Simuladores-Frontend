@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Actividad } from "src/app/core/interfaces/actividad";
+import { Actividad } from "src/app/core/interfaces/Actividad";
 import { User } from "src/app/core/interfaces/User";
 import { Comentario } from "src/app/core/interfaces/Comentario";
 import { DiscapacidadParticipanteInterface } from "src/app/core/interfaces/DiscapacidadParticipante";
@@ -15,14 +15,8 @@ import { Asignacion } from "src/app/core/interfaces/Asignacion";
 export class InformacionParticipanteService {
   constructor(private http: HttpClient) {}
 
-  public obtenerInformacionUsuario(correo: string): Observable<any> {
-    const config = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" }),
-    };
-    return this.http.get<any>(
-      environment.WS_PATH + "getParticipante/" + correo,
-      config
-    );
+  public obtenerInformacionUsuario(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
   }
 
   public obtenerInformacionUsuarioResponsable(
@@ -177,16 +171,14 @@ export class InformacionParticipanteService {
         {
           comentario: comentario.comentario,
           fecha: comentario.fecha,
-          actividad: comentario.comentarioActividad.idActividad,
+          //actividad: comentario.comentarioActividad.idActividad,
         },
         config
       )
       .toPromise();
   }
 
-  public registrarNuevoParticipante(
-    participante: User
-  ): Observable<any> {
+  public registrarNuevoParticipante(participante: User): Observable<any> {
     const config = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };

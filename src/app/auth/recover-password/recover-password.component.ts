@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { LoginService } from 'src/app/service/login.service';
+import { AuthService } from 'src/app/service/auth.service';
+
 
 
 
@@ -26,9 +27,9 @@ export class RecoverPasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
     private messageService: MessageService,
     private router: Router,
+    private authService: AuthService,
   ) {
     this.createForm();
   }
@@ -47,7 +48,7 @@ export class RecoverPasswordComponent implements OnInit {
   sentEmail() {
     this.email = this.angForm.get("email").value;
     if (this.angForm.valid) {
-      this.loginService.resetPass(this.email).subscribe(
+      this.authService.resetPass(this.email).subscribe(
         (res) => {
           // console.log("por", res)
           this.showSuccess("Enlace enviado con exito");

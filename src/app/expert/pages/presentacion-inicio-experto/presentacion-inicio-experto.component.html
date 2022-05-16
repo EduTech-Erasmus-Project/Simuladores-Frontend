@@ -8,7 +8,7 @@
                 <h5>Participantes</h5>
                 <span>Mis participantes</span>
             </div>
-            <div class="p-col-3 overview-box-status">{{totalParticipantes}}</div>
+            <div class="p-col-3 overview-box-status">{{ totalParticipantes }}</div>
         </div>
     </div>
     <div class="p-col-12 p-xl-6 p-md-6">
@@ -21,15 +21,15 @@
                 <span>Ejercitarios en la plataforma</span>
             </div>
             <div class="p-col-3 overview-box-status">
-                {{ ejercitarios.length || 0 }}
+                {{ totalEjercitarios }}
             </div>
         </div>
     </div>
 
-    <div class="p-col-12 p-lg-5">
+    <div class="p-col-12 p-xl-6 p-md-12">
         <div class="p-grid p-dir-col p-nogutter">
             <div class="p-col-12">
-                <div class="card widget-statistics" style="min-height:33vh">
+                <div class="card widget-statistics" style="min-height: 33vh">
                     <div class="p-grid">
                         <div class="p-col-6 p-md-8">
                             <h5>Información General</h5>
@@ -45,104 +45,92 @@
         </div>
     </div>
 
-    <div class="p-col-12 p-lg-7">
+    <div class="p-col-12 p-xl-6 p-md-12">
         <div class="p-grid p-dir-col p-nogutter">
             <div class="p-col-12">
-                <div class="card widget-statistics" style="min-height:33vh">
+                <div class="card widget-statistics" style="min-height: 33vh">
                     <div class="p-grid">
                         <div class="p-col-6 p-md-5">
-                            <h5>Información de los Ejercitarios</h5>
+                            <h5>Información de competencias</h5>
                         </div>
-                        <div class="p-col-6 p-md-7" style="display: flex; justify-content: flex-end">
-                            <p-dropdown [options]="ejercitarios"
-                                placeholder="Seleccione un ejercitario para ver el reporte" optionLabel="name"
-                                (onChange)="seleccionEscenario($event)">
+                        <div class="p-col-6 p-md-7" style="display: flex;
+                            justify-content: flex-end">
+                            <p-dropdown (onChange)="onChangeCompetencia($event)" [(ngModel)]="competencia" [options]="competencias" placeholder="Seleccione una competencia" optionLabel="titulo">
                             </p-dropdown>
                         </div>
                     </div>
-                    <ng-container *ngIf="ejercitario; else ejercitarioTemplateInfo">
-                        <h5 style="text-align: center">
-                            {{ ejercitario?.nombreDeEjercitario }}
-                        </h5>
-                        <div class="info">
-                            <p>
-                                <b>Tipo de Ejercitario:</b> {{ ejercitario?.tipoDeEjercitario }}
-                            </p>
-                            <p>
-                                <b>Nombre de Ejercitario:</b>
-                                {{ ejercitario?.nombreDeEjercitario }}
-                            </p>
-                            <p>
-                                <b> Principales Competencias medidas:</b>{{
-                                ejercitario?.principalCompetenciasEjercitario }}
-                            </p>
-                            <p>
-                                <b> Duración de Ejercitario:</b>
-                                {{ ejercitario?.duracionEjercitarioPorMinutos }}
-                            </p>
-                            <p>
-                                <b> Numero de Ejercitario: </b>
-                                {{ ejercitario?.numeroDeEjercitario }}
-                            </p>
-                            <p>
-                                <b>Instrucción principal: </b>
-                                {{ ejercitario?.instruccionPrincipalDeEjercitario }}
-                            </p>
-                            <p>
-                                <b>Competencia: </b>
-                                {{ ejercitario?.competencia?.titulo }}
-                            </p>
-                        </div>
-
-                        <div>
-                            <a pButton type="button" label="Abrir Reporte" [routerLink]="[
-                  'escenarioInfo',
-                  ejercitario?.numeroDeEjercitario
-                ]" routerLinkActive="active">
-                            </a>
-                        </div>
-                    </ng-container>
-                    <ng-template #ejercitarioTemplateInfo>
-                        <p>Seleccione un ejercitario par aver la información</p>
-                    </ng-template>
+                    <p-tabView *ngIf="competencia">
+                        <p-tabPanel [header]="nivel.name" *ngFor="let nivel of
+                            competencia.niveles">
+                            <ng-container *ngIf="nivel.ejercitarios.length> 0;
+                                else ejercotarioTemplate">
+                                <p-card [header]="ejercitario?.nombreDeEjercitario" [style]="{'margin-bottom': '1em'}" *ngFor="let ejercitario of
+                                    nivel.ejercitarios">
+                                    <div class="info">
+                                        <p>
+                                            <b>Tipo de Ejercitario:</b> {{ ejercitario?.tipoDeEjercitario }}
+                                        </p>
+                                        <p>
+                                            <b> Duración de Ejercitario:</b> {{ ejercitario?.duracion }}
+                                        </p>
+                                        <p>
+                                            <b>Instrucción principal: </b> {{ ejercitario?.instruccionPrincipalEjercitario }}
+                                        </p>
+                                        <p>
+                                            <b>Instrucción principal del
+                                                Participante: </b> {{ ejercitario?.instruccionesParticipantes }}
+                                        </p>
+                                    </div>
+                                    <!-- <p-button (onClick)="onBuscarParticipantes(ejercitario.id)" label="Listar participantes" styleClass="p-button-sm"></p-button> -->
+                                </p-card>
+                            </ng-container>
+                            <ng-template #ejercotarioTemplate>
+                                <p>No hay ejercitarios para en este nivel.</p>
+                            </ng-template>
+                        </p-tabPanel>
+                    </p-tabView>
+                    <p *ngIf="!competencia">Seleecione una competencia para ver los detalles.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="p-col-12 p-lg-12">
-        <div class="card orders-table" style="min-height:33vh">
-            <ng-container *ngIf="ejercitario; else elseTableTemplate">
+        <div class="card orders-table" style="min-height: 33vh">
+            <ng-container *ngIf="competencia; else elseTableTemplate">
                 <!-- <h5>Participantes del {{ ejercitario?.nombreDeEjercitario }}</h5> -->
-                <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10"
-                    [paginator]="true" [filterDelay]="0"
-                    [globalFilterFields]="['name','country.name','representative.name','status']">
+                <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
+                    'name',
+                    'country.name',
+                    'representative.name',
+                    'status'
+                    ]">
                     <ng-template pTemplate="caption">
-                        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                            Participantes del {{ ejercitario?.nombreDeEjercitario }}
+                        <div class="p-d-flex p-flex-column p-flex-md-row
+                            p-jc-md-between table-header">
+                            Participantes de la competencia - {{ competencia.titulo }}
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"></i>
-                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($event.target.value,
+                                    'contains')"
                                     placeholder="Buscar por nombre..." />
                             </span>
                         </div>
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-
                             <th pSortableColumn="nombre">
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Nombre
                                     <p-sortIcon field="nombre"></p-sortIcon>
-
                                 </div>
                             </th>
-                            
+
                             <th pSortableColumn="genero">
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Genero
                                     <p-sortIcon field="genero"></p-sortIcon>
-
                                 </div>
                             </th>
 
@@ -150,7 +138,6 @@
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Tiempo global
                                     <p-sortIcon field="tiempo"></p-sortIcon>
-
                                 </div>
                             </th>
 
@@ -158,7 +145,6 @@
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Calificación global
                                     <p-sortIcon field="calificacion"></p-sortIcon>
-
                                 </div>
                             </th>
 
@@ -167,26 +153,32 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-participante>
                         <tr class="p-selectable-row">
-
                             <td>
-                                <span class="p-column-title">{{participante.nombre}} {{participante.apellido}}</span>
+                                <span class="p-column-title">{{
+                                    participante.usuario.nombre }}
+                                    {{ participante.usuario.apellido }}</span>
                             </td>
                             <td>
-                                <span class="p-column-title">{{participante.genero}}</span>
+                                <span class="p-column-title">{{
+                                    participante.usuario.genero
+                                    }}</span>
                             </td>
 
                             <td>
-                                <span class="p-column-title">{{participante.tiempo}} min</span>
+                                <span class="p-column-title">{{
+                                    participante.tiempo || 0}} min</span>
                             </td>
 
                             <td>
-                                <p-progressBar [value]="participante?.calificacion || 0"
-                                    [showValue]="true">
+                                <p-progressBar [value]="participante?.calificacion || 0" [showValue]="true">
                                 </p-progressBar>
                             </td>
 
                             <td style="text-align: center">
-                                <button pButton type="button" class="p-button-primary" icon="pi pi-search"></button>
+                                <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                                </a>
+                                <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
+                                </a>
                             </td>
                         </tr>
                     </ng-template>
@@ -202,6 +194,8 @@
             </ng-template>
         </div>
     </div>
-
-
 </div>
+
+<p-dialog header="Información del Participante" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [id]="idParticipante"></app-perfil>
+</p-dialog>

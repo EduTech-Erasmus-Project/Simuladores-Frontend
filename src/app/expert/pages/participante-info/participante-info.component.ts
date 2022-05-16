@@ -1,295 +1,226 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ScrollPanel } from 'primeng/scrollpanel';
-import { Table } from 'primeng/table';
-import { Actividad } from 'src/app/core/interfaces/actividad';
-import { User } from 'src/app/core/interfaces/User';
-import { Customer, Representative } from 'src/app/demo/domain/customer';
-import { Comentario } from 'src/app/core/interfaces/Comentario';
-import { DiscapacidadParticipanteInterface } from 'src/app/core/interfaces/DiscapacidadParticipante';
-import { ExperienciaLaboralInterface } from 'src/app/core/interfaces/ExperienciaLaboral';
-import { AuthService } from 'src/app/service/auth.service';
-import { InformacionParticipanteService } from 'src/app/service/informcionParticpante/informacion-participante.service';
+import { DatePipe } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { ScrollPanel } from "primeng/scrollpanel";
+import { Table } from "primeng/table";
+import { Actividad } from "src/app/core/interfaces/Actividad";
+import { User } from "src/app/core/interfaces/User";
+import { Customer, Representative } from "src/app/demo/domain/customer";
+import { Comentario } from "src/app/core/interfaces/Comentario";
+import { DiscapacidadParticipanteInterface } from "src/app/core/interfaces/DiscapacidadParticipante";
+import { ExperienciaLaboralInterface } from "src/app/core/interfaces/ExperienciaLaboral";
+import { AuthService } from "src/app/service/auth.service";
+import { InformacionParticipanteService } from "src/app/service/informcionParticpante/informacion-participante.service";
+import { DiscapacidadesService } from "src/app/service/discapacidades.service";
+import { forkJoin } from "rxjs";
+import { map } from "rxjs/operators";
+import { ActividadService } from "src/app/service/actividad.service";
+import * as moment from "moment";
+import { CompetenciaService } from "src/app/service/competencia.service";
+import { Ejercitario } from "src/app/core/interfaces/Ejercitario";
+import { UsuarioService } from "src/app/service/usuario.service";
+import { Competencia } from "src/app/core/interfaces/Competencia";
 
 @Component({
-    selector: 'app-participante-info',
-    templateUrl: './participante-info.component.html',
-    styleUrls: ['./participante-info.component.css']
+  selector: "app-participante-info",
+  templateUrl: "./participante-info.component.html",
+  styleUrls: ["./participante-info.component.scss"],
 })
 export class ParticipanteInfoComponent implements OnInit {
+  public idParticipante: number;
+  private idCompetencia: number;
+  public modalPerfil: boolean;
+  public modalComentarios: boolean;
+  public modalPreguntas: boolean;
+  public niveles: any[];
+  public nivel = "Nivel1";
+  public ejercitarios: Ejercitario[];
+  public ejercitario: number;
+  public loading: boolean = true;
+  public actividades: Actividad[];
+  public competencia: Competencia;
 
-    // PARA LA GRAFICA
-    lineData: any;
-    barData: any;
-    pieData: any;
-    radarData: any;
-    // PARA LA TABLA 
-    customers: Customer[];
-    representatives: Representative[];
-    statuses: any[];
-    loading: boolean = true;
-    activityValues: number[] = [0, 100];
-    //Parametros de URL 
-    public correoResponsableDatos: string;
-    public ejercitario: number;
-    public correoParticipante: string;
-    public participanteInformacion: User;
-    public experienciaParticipanteInformacion: ExperienciaLaboralInterface[];
-    public discapacidadParticipanteInformacion: DiscapacidadParticipanteInterface[];
-    public actividadesParticipanteEjercitario: Actividad[];
-    public newComentarioParticipanteEjercitario: string = "";
-    public actividadSeleccionada: Actividad;
-    public listadoComentariosActividad: Comentario[];
-    public comentarioPariticipanteHabilitar = false;
-    public habilitarComentarioNuevo = false;
+  charBarData: any;
+  charBarOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: "#495057",
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#495057",
+        },
+        grid: {
+          color: "#ebedef",
+        },
+      },
+      y: {
+        ticks: {
+          color: "#495057",
+        },
+        grid: {
+          color: "#ebedef",
+        },
+      },
+    },
+  };
 
+  
 
+  constructor(
+    private _Activatedroute: ActivatedRoute,
+    private usuarioService: UsuarioService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private actividadService: ActividadService,
+    private competenciaService: CompetenciaService,
+    private router: Router
+  ) {
+    console.log(this._Activatedroute.snapshot.params);
 
-    constructor(private _Activatedroute: ActivatedRoute,
-        private usuarioService: InformacionParticipanteService,
-        private confirmationService: ConfirmationService,
-        private messageService: MessageService,
-        private autentificacionUsuario: AuthService) {
-
+    if (
+      isNaN(+this._Activatedroute.snapshot.params?.idCompetencia) ||
+      isNaN(+this._Activatedroute.snapshot.params?.idEstudiante)
+    ) {
+      this.router.navigate(["/expert"]);
     }
+    this.idCompetencia = +this._Activatedroute.snapshot.params.idCompetencia;
+    this.idParticipante = +this._Activatedroute.snapshot.params.idEstudiante;
 
-    ngOnInit(): void {
-        this.informacionUsuario();
-        //Recuperacion valores por URL 
+    console.log(this.idCompetencia);
+    console.log(this.idParticipante);
+  }
 
-        if (this._Activatedroute.snapshot.paramMap.get("correo") != null) {
-            if (this._Activatedroute.snapshot.paramMap.get("correo") == this.autentificacionUsuario.emailUser) {
-                this.correoResponsableDatos = this._Activatedroute.snapshot.paramMap.get("correo")
-            } else {
-                this.autentificacionUsuario.logout();
-            }
-        } else if (this.autentificacionUsuario.emailUser != null) {
-            this.correoResponsableDatos = this.autentificacionUsuario.emailUser;
-        } else {
-            this.correoResponsableDatos = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
-        }
+  ngOnInit(): void {
+    this.loadData();
+  }
 
-        this.ejercitario = Number(this._Activatedroute.snapshot.paramMap.get("idEjercitario"));
-        this.correoParticipante = this._Activatedroute.snapshot.paramMap.get("correoEstudiante");
-        //Informacion del participante para el formulario
-        this.obtenerInformacionParticipante();
-        this.obtenerExperienciaLaboralParticipante();
-        this.obtenerDiscapacidadesDelParticipante();
-        //Para la tabla de intentos
-        this.tablaEstudiantesIntentos();
-        // PARA LA GRAFICA 
-        this.graficaVSnotaVStimepo();
-        this.graficaRadarSpiderman();
-    }
+  private async loadData() {
+    this.loading = true;
 
-    graficaVSnotaVStimepo() {
-        //ATRIBUTOS PARA LA GRAFICA
-        var labelsIntentosNotasTiempo = [];
-        var valuesIntentosNotas = [];
-        var valuesIntentosTiempo = [];
+    let compSub = await this.competenciaService
+      .obtenerCompetencia(this.idCompetencia)
+      .subscribe((res) => {
+        this.competencia = res;
+        this.niveles = this.competencia.niveles;
+        this.ejercitario = this.competencia.niveles[0].ejercitarios[0].id;
+        this.ejercitarios = this.competencia.niveles[0].ejercitarios;
+        this.onChangeEjercitario();
+        this.loading = false;
+      });
 
-        this.usuarioService.recuperarParticipantesIntentosEjercitario(this.correoParticipante, this.ejercitario)
-            .then(actividades => {
-                actividades.forEach(actividadLabel => {
-                    const datepipe: DatePipe = new DatePipe('en-US')
-                    let formattedDate = datepipe.transform(actividadLabel.fechaDeActividad, 'YYYY-MM-dd')
-                    labelsIntentosNotasTiempo.push(formattedDate)
-                    valuesIntentosNotas.push(actividadLabel.calificacionActividad)
-                    valuesIntentosTiempo.push(actividadLabel.tiempoTotalResolucionEjercitario)
-                });
+    // let sub = this.actividadService
+    //   .recuperarActividadesDeParticipante(this.idCompetencia, this.idParticipante)
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //     this.actividades = res;
+    //     this.loadGrafica();
+    //     this.loading = false;
+    //   });
+  }
 
+  loadGrafica() {
+    this.charBarData = {
+      labels: this.actividades.map((act) =>
+        moment(act.fecha).format("DD/MM/YYYY")
+      ),
+      datasets: [
+        {
+          label: "Nota",
+          backgroundColor: "#42A5F5",
+          data: this.actividades.map((act) => act.calificacion),
+        },
+        {
+          label: "Tiempo",
+          backgroundColor: "#FFA726",
+          data: this.actividades.map((act) => act.tiempoTotal),
+        },
+      ],
+    };
+  }
 
-                if (this.selGrafica1.value == "Tiempo") {
+  agregarComentario(scroll: ScrollPanel) {
+    let date: Date = new Date();
+    var comentarioNuevo: Comentario = {
+      //comentario: this.newComentarioParticipanteEjercitario,
+      fechaComentario: date,
+      //comentarioActividad: this.actividadSeleccionada,
+    };
 
-                    this.lineData = {
-                        labels: labelsIntentosNotasTiempo,
-                        datasets: [
-                            {
-                                label: 'Tiempo',
-                                data: valuesIntentosTiempo,
-                                fill: false,
-                                backgroundColor: 'rgb(66, 201, 225)',
-                                borderColor: 'rgb(149, 225, 102)'
-                            }
-
-                        ]
-                    };
-                } else {
-                    this.lineData = {
-                        labels: labelsIntentosNotasTiempo,
-                        datasets: [
-                            {
-                                label: 'Nota',
-                                data: valuesIntentosNotas,
-                                fill: false,
-                                backgroundColor: 'rgb(66, 201, 225)',
-                                borderColor: 'rgb(149, 225, 102)'
-                            }
-
-                        ]
-                    };
-                }
-
-            });
-
-
-
-    }
-
-    graficaRadarSpiderman() {
-        var discapacidadesParticipante = []
-        var gradodiscapacidadesParticipante = [0, 0, 0, 0, 0]
-        this.usuarioService.obtenerDiscapacidadesDelParticipante(this.correoParticipante)
-            .then(discapacidades => {
-
-                discapacidades.forEach(discapacidad => {
-                    discapacidadesParticipante.push(discapacidad.tipoDiscapacidad);
-                    if (discapacidad.tipoDiscapacidad == 'Visual') {
-                        gradodiscapacidadesParticipante[0] = discapacidad.gradoDeDiscapacidad
-                    } else if (discapacidad.tipoDiscapacidad == 'Intelectual') {
-                        gradodiscapacidadesParticipante[1] = discapacidad.gradoDeDiscapacidad
-                    } else if (discapacidad.tipoDiscapacidad == 'Fisica') {
-                        gradodiscapacidadesParticipante[2] = discapacidad.gradoDeDiscapacidad
-                    } else if (discapacidad.tipoDiscapacidad == 'Auditiva') {
-                        gradodiscapacidadesParticipante[3] = discapacidad.gradoDeDiscapacidad
-                    } else if (discapacidad.tipoDiscapacidad == 'Otros') {
-                        gradodiscapacidadesParticipante[4] = discapacidad.gradoDeDiscapacidad
-                    }
-                });
-
-                this.radarData = {
-                    labels: ['Visual', 'Intelectual', 'Física', 'Auditiva', 'Otros'],
-                    datasets: [
-                        {
-                            label: discapacidadesParticipante,
-                            backgroundColor: 'rgba(202, 106, 199,0.8)',
-                            borderColor: 'rgba(66, 201, 225)',
-                            pointBackgroundColor: 'rgb(149, 225, 10)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgb(149, 225, 102)',
-                            data: gradodiscapacidadesParticipante
-                        },
-
-                    ]
-
-
-                };
-            });
-
-
-    }
-
-    informacionUsuario() {
-        
-
-        this.actividadSeleccionada = {
-            idActividad: 0,
-            comentario: "",
-            tiempoInicio: "",
-            tiempoFin: "",
-            tiempoTotalResolucionEjercitario: 0,
-            fechaDeActividad: "",
-            totalRespuestasCorrectasIngresadasParticipante: 0,
-            numeroTotalDeRespuestasContestadasPorElParticipante: 0,
-            numeroTotalDePreguntasDelEjercitario: 0,
-            calificacionActividad: 0,
-            ActividadPorEjercitario_id: 0,
-            ActividadDeParticipante_id: 0,
-        }
-    }
-
-    obtenerInformacionParticipante() {
-
-        this.usuarioService.obtenerInformacionUsuarioResponsable(this.correoParticipante, this.correoResponsableDatos)
-            .toPromise()
-            .then(usuario => usuario as User)
-            .then((participante: any) => this.participanteInformacion = participante)
-    }
-
-    obtenerExperienciaLaboralParticipante() {
-        this.usuarioService.obtenerExperienciaLaboralUsuario(this.correoParticipante)
-            .then(experiencia => this.experienciaParticipanteInformacion = experiencia);
-
-    }
-
-    obtenerDiscapacidadesDelParticipante() {
-        this.usuarioService.obtenerDiscapacidadesDelParticipante(this.correoParticipante)
-            .then(discapacidad => this.discapacidadParticipanteInformacion = discapacidad);
-
-    }
-
-    // METODO DE TABLA 
-    tablaEstudiantesIntentos(): void {
-        ///// PARA LA TABLA 
-        this.usuarioService.recuperarParticipantesIntentosEjercitario(this.correoParticipante, this.ejercitario)
-            .then(actividades => {
-                this.actividadesParticipanteEjercitario = actividades;
-                this.loading = false;
-            });
-    }
-
-    clear(table: Table) {
-        table.clear();
-    }
-
-    //Comentarios y feedBack
-    verActvidadPariticipante(actividad: Actividad) {
-        this.habilitarComentarioNuevo = true;
-        this.actividadSeleccionada = actividad;
-        this.usuarioService.obtenerComentariosActividadRealizada(actividad.idActividad)
-            .then(comentarios => this.listadoComentariosActividad = comentarios);
-        if (actividad.comentario != null) {
-            this.comentarioPariticipanteHabilitar = true;
-        } else {
-            this.comentarioPariticipanteHabilitar = false;
-        }
-    }
-
-    agregarComentario(scroll: ScrollPanel) {
-        let date: Date = new Date();
-        var comentarioNuevo: Comentario = {
-            comentario: this.newComentarioParticipanteEjercitario,
-            fechaComentario: date,
-            comentarioActividad: this.actividadSeleccionada,
-        } 
-        
-        this.confirmationService.confirm({
-            key: 'agregarComentario',
-            message: 'Agregar nuevo Comentario',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-
-                this.usuarioService.agregarNuevoComentarioActividadParticipante(comentarioNuevo)
-                this.listadoComentariosActividad.unshift(
-                    {
-                        idComentario: 0,
-                        comentario: this.newComentarioParticipanteEjercitario,
-                        fechaComentario: date,
-                        comentarioActividad_id: 0
-                    });
-                scroll.refresh()
-                this.messageService.add({ key: 'addComentTOAST', severity: 'success', summary: 'Comentario agregado', detail: 'El comentario a sido agregado correctamente' });
-
-            },
-            reject: () => {
-                this.messageService.add({ key: 'addComentTOAST', severity: 'error', summary: 'Acción Cancelada', detail: 'La acción no se llevo a cabo' });
-            }
+    this.confirmationService.confirm({
+      key: "agregarComentario",
+      message: "Agregar nuevo Comentario",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        // this.usuarioService.agregarNuevoComentarioActividadParticipante(
+        //   comentarioNuevo
+        // );
+        // this.listadoComentariosActividad.unshift({
+        //   idComentario: 0,
+        //   //comentario: this.newComentarioParticipanteEjercitario,
+        //   fechaComentario: date,
+        //   comentarioActividad_id: 0,
+        // });
+        scroll.refresh();
+        this.messageService.add({
+          key: "addComentTOAST",
+          severity: "success",
+          summary: "Comentario agregado",
+          detail: "El comentario a sido agregado correctamente",
         });
+      },
+      reject: () => {
+        this.messageService.add({
+          key: "addComentTOAST",
+          severity: "error",
+          summary: "Acción Cancelada",
+          detail: "La acción no se llevo a cabo",
+        });
+      },
+    });
+  }
 
+  // PARA SELECT DE GRAFICA tIPO DE DISCAPACIDAD GENERAL
+  selGrafica1: any = { name: "Notas", value: "Notas" };
+
+  opciones: any[] = [
+    { name: "Notas", value: "Notas" },
+    { name: "Tiempo", value: "Tiempo" },
+  ];
+
+
+  calificacionPorcentaje(actividad: Actividad): number {
+    return Number(((actividad.calificacion * 100) / actividad.totalPreguntas).toFixed(2));
+  }
+
+  public showModal() {
+    this.modalPerfil = true;
+  }
+
+  onChangeNivel() {
+    this.ejercitarios = this.competencia.niveles.find(
+      (nivel) => nivel.value == this.nivel
+    ).ejercitarios;
+    this.ejercitario = this.ejercitarios[0].id;
+    this.onChangeEjercitario();
+  }
+
+  async onChangeEjercitario() {
+    try {
+      let actividades = await this.actividadService
+        .recuperarActividadesDeParticipante(
+          Number(this.ejercitario),
+          this.idParticipante
+        )
+        .toPromise();
+      this.actividades = actividades;
+    } catch (error) {
+      console.log(error);
     }
-
-    // PARA SELECT DE GRAFICA tIPO DE DISCAPACIDAD GENERAL 
-    selGrafica1: any = { name: 'Notas', value: 'Notas' };
-
-    opciones: any[] = [
-        { name: 'Notas', value: 'Notas' },
-        { name: 'Tiempo', value: 'Tiempo' }
-    ];
-
-    ////////
-
-
+  }
 }

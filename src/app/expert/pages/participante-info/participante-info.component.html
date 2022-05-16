@@ -1,700 +1,243 @@
-<div
-  class="p-col-12"
-  style="width: 100%; align-items: center; justify-content: space-between"
->
-  <div class="card">
-    <h3 style="width: 100%; align-items: center; text-align: center">
-      Información Personal
-    </h3>
-    <div class="p-grid">
-      <div class="p-col-12 p-ai-center p-jc-center">
-        <div class="p-grid p-fluid">
-          <div class="p-col-12 p-md-6">
-            <div class="card">
-              <h6>Nombres:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Nombre"
-                    id="nombre"
-                    name="nombre"
-                    value="{{ participanteInformacion.nombre }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Email:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-envelope"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    placeholder="Correo Electronico"
-                    readonly="true"
-                    value="{{ correoParticipante }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Pais:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-envelope"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    placeholder="Pais del Participante"
-                    id="pais"
-                    name="pais"
-                    readonly="true"
-                    value="{{ participanteInformacion.pais }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Ciudad:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-envelope"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    placeholder="Ciudad del Participante"
-                    id="ciudad"
-                    name="ciudad"
-                    readonly="true"
-                    value="{{ participanteInformacion.ciudad }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Dirección de Vivienda:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-envelope"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    placeholder="Dirección del Participante"
-                    id="direccion"
-                    name="direccion"
-                    readonly="true"
-                    value="{{ participanteInformacion.direccion }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Carrera Universitaria:</h6>
-              <div class="p-grid p-formgrid">
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Carrera Universitaria del Participante"
-                  readonly="true"
-                  id="carrera"
-                  name="carrera"
-                  value="{{ participanteInformacion.carreraUniversitaria }}"
-                />
-              </div>
-
-              <h6>Estado Civil:</h6>
-              <div class="p-grid p-formgrid">
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Estado Civil del Participante"
-                  readonly="true"
-                  id="estadoCivil:"
-                  name="estadoCivil"
-                  value="{{ participanteInformacion.estadoCivil }}"
-                />
-              </div>
-
-              <h6>Etnia:</h6>
-              <div class="p-grid p-formgrid">
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Etnia del Participante"
-                  readonly="true"
-                  id="etnia"
-                  name="etnia"
-                  value="{{ participanteInformacion.etnia }}"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-6">
-            <div class="card">
-              <h6>Apellidos:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Apellido del Participante"
-                    id="apellidos"
-                    name="apellidos"
-                    value="{{ participanteInformacion.apellido }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Teléfono:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-phone"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Teléfono del Participante"
-                    id="telefono"
-                    name="telefono"
-                    value="{{ participanteInformacion.telefono }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Fecha de Nacimiento:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Fecha de Nacimiento del Participante"
-                    id="fechaNacimiento"
-                    name="fechaNacimiento"
-                    value="{{ participanteInformacion.fechaNacimiento }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Código Universitario:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Código Universitario del Participante"
-                    id="codigoEstudiante"
-                    name="codigoEstudiante"
-                    value="{{ participanteInformacion.codigoEstudiante }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Número de Hijos:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Número de Hijos del Participante"
-                    id="numeroHijos"
-                    name="numeroHijos"
-                    value="{{ participanteInformacion.numeroDeHijos }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Identidad:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input
-                    type="text"
-                    pInputText
-                    readonly="true"
-                    placeholder="Identidad del Participante"
-                    id="identidad"
-                    name="identidad"
-                    value="{{ participanteInformacion.genero }}"
-                  />
-                </span>
-              </div>
-
-              <h6>Estudios Previos:</h6>
-              <div class="p-grid p-formgrid">
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="Estudios Previos del Participante"
-                  readonly="true"
-                  id="estudiosPrevios"
-                  name="estudiosPrevios"
-                  value="{{ participanteInformacion.estudiosPrevios }}"
-                />
-              </div>
-
-              <h6>Nivel de Formación:</h6>
-              <div class="p-grid p-formgrid">
-                <input
-                  type="text"
-                  pInputText
-                  readonly="true"
-                  placeholder="Nivel de Formación del Participante"
-                  id="nivelFormacion"
-                  name="nivelFormacion"
-                  value="{{ participanteInformacion.nivelDeFormacion }}"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-12">
-            <div class="card">
-              <h6>Experiencia Laboral</h6>
-              <div
-                class="p-grid p-formgrid"
-                style="margin-top: 0.5em"
-                *ngFor="let experiencia of experienciaParticipanteInformacion"
-              >
-                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                  <span class="p-input-icon-left">
-                    <i class="pi pi-user"></i>
-                    <input
-                      type="text"
-                      pInputText
-                      readonly="true"
-                      placeholder="Area Laboral del Participante"
-                      id="areaLaboral"
-                      name="areaLaboral"
-                      value="Área Laboral: {{ experiencia.areaLaboral }}"
-                    />
-                  </span>
-                </div>
-                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                  <span class="p-input-icon-right">
-                    <input
-                      type="text"
-                      pInputText
-                      readonly="true"
-                      placeholder="Años de Experiencia del Participante"
-                      id="aniosDeExperiencia"
-                      name="aniosDeExperiencia"
-                      value="Años de experiencia: {{
-                        experiencia.aniosDeExperiencia
-                      }}"
-                    />
-                    <i class="pi pi-search"></i>
-                  </span>
-                </div>
-                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                  <span class="p-input-icon-left p-input-icon-right">
-                    <i class="pi pi-user"></i>
-                    <input
-                      type="text"
-                      pInputText
-                      readonly="true"
-                      placeholder="Sector Economico"
-                      id="sectorEconomico"
-                      name="sectorEconomico"
-                      value="Sector Económico: {{
-                        experiencia.sectorEconomico
-                      }}"
-                    />
-                    <i class="pi pi-search"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-12">
-            <div class="card">
-              <h6>Información Sobre Discapacidad</h6>
-              <div
-                class="p-grid p-formgrid"
-                style="margin-top: 0.5em"
-                *ngFor="let discapacidad of discapacidadParticipanteInformacion"
-              >
-                <div class="p-col-12 p-mb-2 p-lg-6 p-mb-lg-0">
-                  <span class="p-input-icon-left">
-                    <i class="pi pi-user"></i>
-                    <input
-                      type="text"
-                      pInputText
-                      readonly="true"
-                      placeholder="Tipo de Discapacidad"
-                      id="tipoDiscapacidad"
-                      name="tipoDiscapacidad"
-                      value="Tipo: {{ discapacidad.tipoDiscapacidad }}"
-                    />
-                  </span>
-                </div>
-                <div class="p-col-12 p-mb-2 p-lg-6 p-mb-lg-0">
-                  <span class="p-input-icon-right">
-                    <input
-                      type="text"
-                      pInputText
-                      readonly="true"
-                      placeholder="Grado De Discapacidad"
-                      id="gradoDeDiscapacidad"
-                      name="gradoDeDiscapacidad"
-                      value="Grado: {{ discapacidad.gradoDeDiscapacidad }}"
-                    />
-                    <i class="pi pi-search"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ESTO ES PARA LAAS GRAFICAS -->
-
-<div class="card">
-  <h5>Información y Gráficas</h5>
-  <div class="p-grid p-fluid">
-    <div class="p-col-12 p-lg-6">
-      <div class="card">
-        <h5 class="centerText">Datos del Estudiante</h5>
-        <p>
-          Esta gráfica representa, los intentos que tuvo un estudiante sobre un
-          escenario especificado, que se puede comprar con dos opciones nota y
-          tiempo.
-        </p>
-      </div>
-
+<div class="p-grid layout-dashboard" *ngIf="competencia">
+  <div class="p-col-12 p-xl-12 p-md-12">
+    <div class="p-grid card">
       <div class="p-col-12">
-        <div class="card">
-          <div class="" style="align-items: center">
-            <label for="state"> <h5>Intento Vs</h5> </label>
-            <span class="p-field p-col-12 p-md-3">
-              <p-dropdown
-                inputId="state"
-                [options]="opciones"
-                [(ngModel)]="selGrafica1"
-                (ngModelChange)="graficaVSnotaVStimepo()"
-                placeholder="Select"
-                optionLabel="name"
-              ></p-dropdown>
-            </span>
-          </div>
-
-          <p-chart type="line" [data]="lineData"></p-chart>
-        </div>
+        <h5>Competencia - {{competencia?.titulo}}</h5>
+      </div>
+      <div class="p-col-2">
+        <p-dropdown [options]="niveles" (onChange)="onChangeNivel()"
+          [(ngModel)]="nivel" optionLabel="name"
+          optionValue="value"></p-dropdown>
+      </div>
+      <div class="p-col-3">
+        <p-dropdown [options]="ejercitarios" (onChange)="onChangeEjercitario()"
+          [(ngModel)]="ejercitario"
+          optionLabel="nombreDeEjercitario" optionValue="id"></p-dropdown>
+      </div>
+      <div class="p-col-3" style="display: flex; justify-content: flex-end;">
+        <p-button (click)="showModal()" label="Información del participante"
+          icon="pi pi-info-circle"></p-button>
+      </div>
+      <div class="p-col-2" style="display: flex; justify-content: flex-end;">
+        <!-- [loading]="loading[0]" (onClick)="load(0)" -->
+        <p-button label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
+      </div>
+      <div class="p-col-2" style="display: flex; justify-content: flex-end;">
+        <!-- [loading]="loading[0]" (onClick)="load(0)" -->
+        <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button>
       </div>
     </div>
+  </div>
 
-    <div class="p-col-12 p-lg-6">
-      <div class="card">
-        <div class="p-grid p-fluid">
-          <h5 class="centerText">Datos del Estudiante</h5>
-          <p>
-            Esta grafica representa los porcentajes de discapacidad que presenta
-            el estudiante especificado (Visual, Física, Auditiva, Física y
-            Autismo).
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card">
-          <h5 class="centerText">Porcentaje de Discapacidad</h5>
-          <p-chart type="radar" [data]="radarData"></p-chart>
+  <div class="p-col-12 p-xl-6 p-md-6">
+    <div class="p-grid p-dir-col p-nogutter">
+      <div class="p-col-12">
+        <div class="card widget-statistics" style="min-height: 33vh">
+          <div class="p-grid">
+            <div class="p-col-6 p-md-8">
+              <h5>Información General</h5>
+            </div>
+            <div class="p-col-6 p-md-4 dropdown">
+              <!-- <p-dropdown [options]="dropdownTipo"
+                              (onChange)="onChangeTipo($event)"></p-dropdown> -->
+            </div>
+          </div>
+          <!-- <p-chart id="dashboard-chart" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart> -->
+          <p-chart id="dashboard-chart" type="pie" [options]="chartOptions"
+            [data]="pieData"></p-chart>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ESTO ES PARA LAAS TABLA DE LISTAR ESTUDIANTE -->
-
-<div class="card">
-  <h5>Listado de intentos</h5>
-  <p>Escenario 1</p>
-  <p-table
-    #dt1
-    [value]="actividadesParticipanteEjercitario"
-    dataKey="idActividad"
-    [rows]="5"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10, 25, 50]"
-    [loading]="loading"
-    styleClass="p-datatable-gridlines"
-    [paginator]="true"
-    currentPageReportTemplate="Mostrar {first} hasta {last} de {totalRecords} registros"
-    [globalFilterFields]="[
-      'calificacionActividad',
-      'numeroTotalDePreguntasDelEjercitario',
-      'fechaDeActividad',
-      'totalRespuestasCorrectasIngresadasParticipante'
-    ]"
-  >
-    <ng-template pTemplate="caption">
-      <div class="p-d-flex">
-        <button
-          pButton
-          label="Limpiar"
-          class="p-button-outlined"
-          icon="pi pi-filter-slash"
-          (click)="clear(dt1)"
-        ></button>
-        <span class="p-input-icon-left p-ml-auto">
-          <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            (input)="dt1.filterGlobal($event.target.value, 'contains')"
-            placeholder="Buscar"
-          />
-        </span>
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="header">
-      <tr>
-        <th>
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Actividad
-            <p-columnFilter
-              type="text"
-              field="id"
-              display="menu"
-              class="p-ml-auto"
-            ></p-columnFilter>
+  <div class="p-col-12 p-xl-6 p-md-6">
+    <div class="p-grid p-dir-col p-nogutter">
+      <div class="p-col-12">
+        <div class="card widget-statistics" style="min-height: 33vh">
+          <div class="p-grid">
+            <div class="p-col-6 p-md-8">
+              <h5>Información General</h5>
+            </div>
+            <div class="p-col-6 p-md-4 dropdown">
+              <!-- <p-dropdown [options]="dropdownTipo"
+                            (onChange)="onChangeTipo($event)"></p-dropdown> -->
+            </div>
           </div>
-        </th>
-        <th pSortableColumn="numeroTotalDePreguntasDelEjercitario">
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Total de Preguntas
-            <p-columnFilter
-              type="text"
-              field="numeroTotalDePreguntasDelEjercitario"
-              display="menu"
-            ></p-columnFilter>
-          </div>
-        </th>
-        <th
-          pSortableColumn="numeroTotalDeRespuestasContestadasPorElParticipante"
-        >
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Preguntas Contestadas
-            <p-columnFilter
-              field="numeroTotalDeRespuestasContestadasPorElParticipante"
-              type="text"
-              display="menu"
-            >
-            </p-columnFilter>
-          </div>
-        </th>
-
-        <th pSortableColumn="totalRespuestasCorrectasIngresadasParticipante">
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Respuestas Correctas
-            <p-columnFilter
-              type="text"
-              field="totalRespuestasCorrectasIngresadasParticipante"
-              display="menu"
-            ></p-columnFilter>
-          </div>
-        </th>
-        <th pSortableColumn="fechaDeActividad">
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Fecha de Creación
-            <p-columnFilter
-              type="date"
-              field="fechaDeActividad"
-              display="menu"
-            ></p-columnFilter>
-          </div>
-        </th>
-
-        <th pSortableColumn="tiempoTotalResolucionEjercitario">
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Tiempo de Resolución
-            <p-columnFilter
-              field="tiempoTotalResolucionEjercitario"
-              type="text"
-              display="menu"
-            >
-            </p-columnFilter>
-          </div>
-        </th>
-        <th pSortableColumn="calificacionActividad">
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Nota
-            <p-columnFilter
-              field="calificacionActividad"
-              type="text"
-              display="menu"
-            >
-            </p-columnFilter>
-          </div>
-        </th>
-        <th>
-          <div class="p-d-flex p-jc-between p-ai-center">Seleccionar</div>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template
-      pTemplate="body"
-      let-actividadesParticipanteEjercitario
-      let-rowIndex="rowIndex"
-    >
-      <tr>
-        <td>
-          {{ actividadesParticipanteEjercitario.idActividad }}
-        </td>
-        <td>
-          <span class="image-text">{{
-            actividadesParticipanteEjercitario.numeroTotalDePreguntasDelEjercitario
-          }}</span>
-        </td>
-        <td>
-          <span class="image-text">{{
-            actividadesParticipanteEjercitario.numeroTotalDeRespuestasContestadasPorElParticipante
-          }}</span>
-        </td>
-        <td>
-          <span class="image-text">{{
-            actividadesParticipanteEjercitario.totalRespuestasCorrectasIngresadasParticipante
-          }}</span>
-        </td>
-        <td>
-          {{
-            actividadesParticipanteEjercitario.fechaDeActividad
-              | date: "yyyy/MM/dd"
-          }}
-        </td>
-
-        <td>
-          <span>{{
-            actividadesParticipanteEjercitario.tiempoTotalResolucionEjercitario
-          }}</span>
-        </td>
-
-        <td>
-          <p-progressBar
-            [value]="actividadesParticipanteEjercitario.calificacionActividad"
-            [showValue]="true"
-          ></p-progressBar>
-        </td>
-
-        <td style="text-align: center">
-          <button
-            pButton
-            type="button"
-            class="p-button-primary"
-            icon="pi pi-user-plus"
-            (click)="
-              verActvidadPariticipante(actividadesParticipanteEjercitario)
-            "
-          ></button>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="7">No customers found.</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
-<!--Comentarios y feedback para el usuario-->
-<div class="p-col-12" *ngIf="habilitarComentarioNuevo == true">
-  <div class="card">
-    <h5>
-      FeedBack para el Participante:
-      {{ participanteInformacion.nombre }}
-      {{ participanteInformacion.apellido }}
-    </h5>
-    <div class="p-grid">
-      <div class="p-col-5 p-d-flex p-ai-center p-jc-center">
-        <div class="p-fluid">
-          <textarea
-            rows="25"
-            cols="35"
-            placeholder="Crear nuevo  Comentario:     
-                      Saludo: 
-                      Observaciones:
-                      Conclusiones: "
-            pInputTextarea
-            [(ngModel)]="newComentarioParticipanteEjercitario"
-          ></textarea>
-          <p-toast key="addComentTOAST"></p-toast>
-          <p-confirmDialog
-            header="Agregar Comentario"
-            key="agregarComentario"
-            icon="pi pi-exclamation-triangle"
-            message="Agregar nuevo Comentario"
-            [style]="{ width: '425px' }"
-            acceptButtonStyleClass="p-button-text"
-            rejectButtonStyleClass="p-button-text"
-          >
-          </p-confirmDialog>
-          <p-button
-            label="Agregar Comentario"
-            icon="pi pi-bookmark"
-            class="p-mr-2 p-mb-2"
-            (onClick)="agregarComentario(scroll1)"
-          ></p-button>
+          <!-- <p-chart id="dashboard-chart" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart> -->
+          <p-chart id="dashboard-chart" type="pie" [options]="chartOptions"
+            [data]="pieData"></p-chart>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="p-col-1"></div>
+  <div class="p-col-12 p-xl-6 p-md-12">
+    <div class="p-grid p-dir-col p-nogutter">
+      <div class="p-col-12">
 
-      <div class="p-col-5 p-ai-center p-jc-center">
-        <p-scrollPanel #scroll1 [style]="{ width: '100%', height: '400px' }">
-          <h5>Listado de Comentarios del Responsable</h5>
-          <div *ngFor="let comentario of listadoComentariosActividad">
-            <p-divider layout="horizontal" align="center">
-              <span class="p-tag">
-                {{ comentario.fechaComentario | date: "yyyy/MM/dd HH:mm:ss" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="p-col-12 p-lg-12">
+    <div class="card orders-table" style="min-height: 33vh">
+      <ng-container *ngIf="competencia; else elseTableTemplate">
+        <p-table #dt1 [value]="actividades" dataKey="idActividad" [rows]="5"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading"
+          styleClass="p-datatable-gridlines" [paginator]="true"
+          currentPageReportTemplate="Mostrar {first} hasta {last} de
+          {totalRecords}
+          registros" [globalFilterFields]="[
+          'calificacionActividad',
+          'numeroTotalDePreguntasDelEjercitario',
+          'fechaDeActividad',
+          'totalRespuestasCorrectasIngresadasParticipante'
+          ]">
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+              Lista de Intentos
+              <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text"
+                  (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Buscar" />
               </span>
-            </p-divider>
+            </div>
+          </ng-template>
 
-            <p>
-              Participante: {{ participanteInformacion.nombre }}
-              {{ participanteInformacion.apellido }} <br />
-              Comentario: <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;{{ comentario.comentario }}<br />
-            </p>
-          </div>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  N° de intento
 
-          <p-scrollTop
-            target="parent"
-            styleClass="custom-scrolltop"
-            [threshold]="100"
-            icon="pi pi-arrow-up"
-          ></p-scrollTop>
-        </p-scrollPanel>
+                </div>
+              </th>
+              <th
+                pSortableColumn="numeroTotalDeRespuestasContestadasPorElParticipante">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  Preguntas Contestadas
 
-        <h5>Listado de Comentarios del Particpante</h5>
-        <div *ngIf="comentarioPariticipanteHabilitar == true">
-          <p-divider layout="horizontal" align="center">
-            <span class="p-tag">
-              {{ actividadSeleccionada.fechaDeActividad | date: "yyyy/MM/dd" }}
-            </span>
-          </p-divider>
+                </div>
+              </th>
 
-          <p>
-            Participante: {{ participanteInformacion.nombre }}
-            {{ participanteInformacion.apellido }} <br />
-            Comentario: <br />
-            &nbsp; &nbsp; &nbsp; &nbsp;{{ actividadSeleccionada.comentario
-            }}<br />
-          </p>
-        </div>
-      </div>
+              <th
+                pSortableColumn="totalRespuestasCorrectasIngresadasParticipante">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  Respuestas Correctas
+
+                </div>
+              </th>
+              <th pSortableColumn="fechaDeActividad">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  Fecha
+                </div>
+              </th>
+
+              <th pSortableColumn="tiempoTotalResolucionEjercitario">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  Tiempo de Resolución
+
+                </div>
+              </th>
+              <th pSortableColumn="calificacionActividad">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  Nota
+                </div>
+              </th>
+              <th>
+
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-actividad let-rowIndex="rowIndex">
+            <tr>
+              <td>
+                {{ rowIndex+1 }}
+              </td>
+              <td>
+                <span class="image-text">
+                  {{actividad.preguntasContestadas}}/{{actividad.totalPreguntas}}
+                </span>
+              </td>
+
+              <td>
+                <span class="image-text">{{
+                  actividad.preguntasCorrectas
+                  }}/{{
+                  actividad.totalPreguntas
+                  }}</span>
+              </td>
+              <td>
+                {{
+                actividad.fecha
+                | date: "yyyy/MM/dd"
+                }}
+              </td>
+
+              <td>
+                <span>{{
+                  actividad.tiempoTotal
+                  }}</span>
+              </td>
+
+              <td>
+                <p-progressBar [value]="calificacionPorcentaje(actividad)"
+                  [showValue]="true">
+                </p-progressBar>
+              </td>
+
+              <td style="text-align: center">
+                <button (click)="modalComentarios= true" pButton type="button"
+                  class="p-button-primary"
+                  icon="pi pi-comments"></button>
+                <button (click)="modalPreguntas= true" pButton type="button"
+                  class="p-button-primary"
+                  style="margin-left: 1em;" icon="pi pi-check-circle"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No se encontro actividades en este ejercitario.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </ng-container>
+      <ng-template #elseTableTemplate>
+        <p>Seleccione un ejercitario par aver la información</p>
+      </ng-template>
     </div>
   </div>
 </div>
+
+
+
+<p-dialog header="Información del Participante" [(visible)]="modalPerfil"
+  [modal]="true" [style]="{ width: '75vw' }"
+  [maximizable]="true" [draggable]="false" [resizable]="false">
+  <app-perfil *ngIf="modalPerfil" [id]="idParticipante"></app-perfil>
+</p-dialog>
+
+<p-dialog header="Comentarios" [(visible)]="modalComentarios" [modal]="true"
+  [style]="{width: '50vw'}"
+  [maximizable]="true" [draggable]="false" [resizable]="false">
+  <app-comentarios></app-comentarios>
+
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="modalComentarios=false" label="Ok"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Respuestas" [(visible)]="modalPreguntas" [modal]="true"
+  [style]="{width: '50vw'}" [maximizable]="true"
+  [draggable]="false" [resizable]="false">
+  <app-respuestas></app-respuestas>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="modalPreguntas=false" label="Ok"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

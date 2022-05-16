@@ -19,28 +19,12 @@ export class ConsultasParaGraficasService {
       .toPromise();
   }
 
-  recuperarListaDeGenero(): Observable<any> {
-    return this.http.get<any>(
-      environment.WS_PATH + "obtenerTipoGeneroPorEvaluador"
-    );
-  }
+  
 
-  recuperarListaDiscapacidades(): Observable<any> {
-    return this.http.get<any>(
-      environment.WS_PATH + "obtenerDiscapacidadesPorEvaluador"
-    );
-  }
-  recuperarListaEjercitariosPorParticipantes(): Observable<any> {
-    return this.http.get<any>(
-      environment.WS_PATH + "obtenerParticipantesEjercitarioPorEvaluador"
-    );
-  }
+  
+  
 
-  totalParticipantesPorEvaluador(): Observable<any> {
-    return this.http.get<any>(
-      environment.WS_PATH + "totalParticipantesPorEvaluador"
-    );
-  }
+ 
 
   recuperarListaDeEscenarios() {
     return this.http
@@ -65,6 +49,8 @@ export class ConsultasParaGraficasService {
       )
       .toPromise();
   }
+
+  
 
   //recuperarL
 }

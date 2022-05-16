@@ -1,4 +1,4 @@
-import { Actividad } from "./actividad";
+import { Actividad } from "./Actividad";
 
 export interface Comentario {
   comentario?: string;

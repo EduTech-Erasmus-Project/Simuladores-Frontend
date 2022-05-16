@@ -1,0 +1,28 @@
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    h6, h5{
+        margin: 0;
+    }
+}
+.profile{
+    .img{
+        width: 100%;
+        text-align: center;
+        img{
+            width: 100px !important;
+            height: 100px !important;
+            border-radius: 50%;
+        }
+
+    }
+    p{
+        margin: 0;
+    }
+    span{
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}

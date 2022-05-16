@@ -1,15 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
 import { SelectItem } from "primeng/api";
-import { Subscription } from "rxjs";
-import { Asignacion } from "src/app/core/interfaces/Asignacion";
-import { Escenario } from "src/app/core/interfaces/Escenario";
-import { User } from "src/app/core/interfaces/User";
-import { AuthService } from "src/app/service/auth.service";
-import { ConsultasParaGraficasService } from "src/app/service/consultaGraficas/consultas-para-graficas.service";
-import { DiscapacidadesService } from "src/app/service/discapacidades.service";
-import { InfoExpertoPorEscenarioService } from "src/app/service/paginaExpertoPorEscenario/info-experto-por-escenario.service";
-import { PaginaInicioExpertoService } from "src/app/service/paginaInicioExperto/pagina-inicio-experto.service";
+import { forkJoin, Subscription } from "rxjs";
+import { Competencia } from "src/app/core/interfaces/Competencia";
+import { Participante } from "src/app/core/interfaces/participantes";
+import { CompetenciaService } from "src/app/service/competencia.service";
+import { EjercitarioService } from "src/app/service/ejercitario.service";
+import { UsuarioService } from "src/app/service/usuario.service";
 
 @Component({
   selector: "app-presentacion-inicio-experto",
@@ -18,16 +14,18 @@ import { PaginaInicioExpertoService } from "src/app/service/paginaInicioExperto/
 })
 export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
-  public ejercitario: Escenario;
+  public competencia: Competencia;
+  public competencias: Competencia[]= [];
   public loaderGrafica: boolean = false;
   public totalParticipantes: number = 0;
+  public totalEjercitarios: number = 0;
   public dropdownTipo: SelectItem[] = [
     { label: "Discapacidad", value: "Discapacidad" },
     { label: "Genero", value: "Genero" },
-    { label: "Ejercitarios", value: "Ejercitario" },
+    { label: "Competencias", value: "Competencias" },
   ];
   public pieData: any;
-  public ejercitarios: Asignacion[] = [];
+  //public ejercitarios: Asignacion[] = [];
 
   public chartOptions = {
     responsive: true,
@@ -41,12 +39,14 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
     },
   };
 
-  public participantes: User[];
+  public participantes: Participante[];
+  public displayMaximizable: boolean;
+  public idParticipante: number;
 
   constructor(
-    public servicioSeleccionarEjercitario: PaginaInicioExpertoService,
-    public servicioConsultasLabelsGrafica: ConsultasParaGraficasService,
-    public servicioGraficaPorEscenario: InfoExpertoPorEscenarioService
+    private competenciaService:CompetenciaService,
+    private usuarioService:UsuarioService,
+    private ejercitarioService: EjercitarioService
   ) {}
 
   ngOnDestroy(): void {
@@ -54,85 +54,39 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.pieData = {
-      labels: ["A", "B", "C"],
-      datasets: [
-        {
-          data: [540, 325, 702, 421],
-          backgroundColor: [
-            "rgb(54, 162, 235)",
-            "rgb(255, 99, 132)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-          ],
-        },
-      ],
-    };
     this.loadData();
     this.listarLabelsTipoDeDiscacidad();
   }
 
   private async loadData() {
-    let sub = await this.servicioSeleccionarEjercitario
-      .obtenerEjercitarios()
-      .subscribe(
-        (res) => {
-          this.ejercitarios = res;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-
-    let sub2 = await this.servicioConsultasLabelsGrafica
+    let sub = await forkJoin([
+      this.ejercitarioService
+      .obtenerTotalEjercitarios(),
+      this.competenciaService
+      .obtenerCompetencias(),
+      this.usuarioService
       .totalParticipantesPorEvaluador()
-      .subscribe((res) => {
-        this.totalParticipantes = res.totalParticipantes;
-      });
-  }
 
-  async seleccionEscenario(evt) {
-    try {
-      this.ejercitario = await this.servicioSeleccionarEjercitario
-        .recuperarInformacionDeEscenario(evt.value.value)
-        .toPromise();
-
-        console.log("ejercitario", this.ejercitario);
-
-        // let res = await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(
-        //   evt.value.value
-        // ).toPromise();
-        // console.log("estudiantes", res);
-        // this.participantes = res.participantes;
-        await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(evt.value.value).toPromise()
-        .then(res =>{
-          console.log("res", res);
-          this.participantes = res.participantes;
-          this.participantes.forEach(async (participante:any) => {
-            console.log(this.ejercitario.idEjercitario, participante.email);
-            await this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(evt.value.value, participante.email)
-            .then(res => {
-              participante.calificacion = res.notas[0].calificacion
-              participante.tiempo = res.notas[0].tiempo
-    
-              console.log(this.participantes);
-              
-            });
-          });
-    
-        })
-      
-    } catch (error) {
-      console.log(error);
-    }
+    ]).subscribe(
+      (data) => {
+        this.totalEjercitarios =data[0].total;
+        this.competencias = data[1];
+        this.totalParticipantes = data[2].totalParticipantes;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this._subscriptions.push(sub);
+    this.listarLabelsTipoDeDiscacidad();
   }
 
   private async listarLabelsTipoDeDiscacidad() {
-    let sub = await this.servicioConsultasLabelsGrafica
+    let sub = await this.usuarioService
       .recuperarListaDiscapacidades()
       .subscribe(
         (discapacidad) => {
-          console.log(discapacidad);
+          //console.log("discapacidad", discapacidad);
           this.pieData = {
             labels: discapacidad.participanteDiscapacidad.map((dis) =>
               Object.keys(dis)
@@ -173,16 +127,16 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
         this.listarLabelsTipoDeGenero();
         this.chartOptions.title.text = "Participantes por genero";
         break;
-      case "Ejercitario":
+      case "Competencias":
         this.listaEjercitariosPorParticipantes();
-        this.chartOptions.title.text = "Participantes por ejercitario";
+        this.chartOptions.title.text = "Participantes por competencias";
         break;
     }
-    console.log(evt.value);
+    //console.log(evt.value);
   }
 
   async listarLabelsTipoDeGenero() {
-    let sub = await this.servicioConsultasLabelsGrafica
+    let sub = await this.usuarioService
       .recuperarListaDeGenero()
       .subscribe(
         (genero) => {
@@ -219,7 +173,7 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
 
   async listaEjercitariosPorParticipantes() {
     console.log("ejercitario metdodo");
-    let sub = await this.servicioConsultasLabelsGrafica
+    let sub = await this.usuarioService
       .recuperarListaEjercitariosPorParticipantes()
       .subscribe(
         (ejercitarios) => {
@@ -254,27 +208,28 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
     this._subscriptions.push(sub);
   }
 
-  private async tablaEstudiantes() {
-    ///// PARA LA TABLA
-
-    await this.servicioGraficaPorEscenario.recuperarEstudiantesEjercitarioResponsable(this.ejercitario.idEjercitario).toPromise()
-    .then(res =>{
-      console.log("res", res);
-      this.participantes = res;
-      this.participantes.forEach(async (participante:any) => {
-        console.log(this.ejercitario.idEjercitario, participante.email);
-        await this.servicioGraficaPorEscenario.recuperarNotasPorEjercitario(this.ejercitario.idEjercitario, participante.email)
-        .then(res => {
-          participante.calificacion = res.notas[0].calificacion
-          participante.tiempo = res.notas[0].tiempo
-
-          console.log(this.participantes);
-          
-        });
-      });
-
-    })
+  public showModal(id){
+    console.log(id);
+    this.idParticipante = id;
+    this.displayMaximizable = true;
   }
+
+  // onBuscarParticipantes(idEjercitario:number){
+  //   console.log(idEjercitario);
+  // }
+
+  async onChangeCompetencia(evt) {
+    console.log(evt.value);
+    try {
+      let participantes = await this.usuarioService.obtenerParticipantesCompetencia(evt.value.id).toPromise();
+      console.log("participantes", participantes);
+      this.participantes = participantes;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  
  
 
 }

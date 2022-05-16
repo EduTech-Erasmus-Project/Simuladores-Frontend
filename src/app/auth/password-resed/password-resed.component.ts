@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/service/login.service';
+import { AuthService } from 'src/app/service/auth.service';
 import Swal from "sweetalert2";
 
 @Component({
@@ -29,7 +29,7 @@ export class PasswordResedComponent implements OnInit {
     private fb: FormBuilder,
     private rutaActiva: ActivatedRoute,
     private messageService: MessageService,
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
   ) {
     this.createForm();
@@ -116,7 +116,7 @@ export class PasswordResedComponent implements OnInit {
             "token": this.Credencial.token,
             "uidb64":this.Credencial.uidb64
           }
-          let sendResPass = await this.loginService.resetPassToken(this.answersToken).subscribe(
+          let sendResPass = await this.authService.resetPassToken(this.answersToken).subscribe(
             res => {
                 this.showSuccess("Contraseña cambiada con exito");
                 this.angForm.reset();

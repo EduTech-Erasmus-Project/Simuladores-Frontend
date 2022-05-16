@@ -13,7 +13,7 @@ import { InformacionParticipanteService } from "src/app/service/informcionPartic
 import { InformacionEvaluadorService } from "src/app/service/informcionEvaluador/informacion-evaluador.service";
 import { AuthService } from "src/app/service/auth.service";
 import { User } from "src/app/core/interfaces/User";
-import { Actividad } from "src/app/core/interfaces/actividad";
+import { Actividad } from "src/app/core/interfaces/Actividad";
 
 @Component({
   selector: "app-mis-actividades-usuario",
@@ -91,7 +91,7 @@ export class MisActividadesUsuarioComponent implements OnInit {
 
   obtenerInformacionUsuario() {
     this.usuarioService
-      .obtenerInformacionUsuario(this.correoParticanteActividades)
+      .obtenerInformacionUsuario(1)
       .subscribe((usuario) => {
         this.getInformacionUsuario(usuario);
       });

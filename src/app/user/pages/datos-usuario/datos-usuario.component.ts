@@ -130,7 +130,7 @@ export class DatosUsuarioComponent implements OnInit {
 
   obtenerInformacionUsuario() {
     this.usuarioService
-      .obtenerInformacionUsuario(this.correoParticanteDatos)
+      .obtenerInformacionUsuario(1)
       .subscribe((usuario: any) => {
         console.log(usuario);
         this.participante = usuario;
