@@ -60,19 +60,19 @@ export class PublicComponent implements OnInit {
   onLayoutClick() {
     if (!this.topbarItemClick) {
       this.activeTopbarItem = null;
-      this.topbarMenuActive = false;
+      this.topbarMenuActive = true;
     }
 
     if (!this.rightPanelClick) {
-      this.rightPanelActive = false;
+      this.rightPanelActive = true;
     }
 
     if (!this.megaMenuClick) {
-      this.megaMenuActive = false;
+      this.megaMenuActive = true;
     }
 
     if (!this.megaMenuMobileClick) {
-      this.megaMenuMobileActive = false;
+      this.megaMenuMobileActive = true;
     }
 
     if (!this.menuClick) {

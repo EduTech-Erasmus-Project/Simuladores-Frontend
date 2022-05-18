@@ -87,7 +87,10 @@ import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
 import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
+import {AppMenuitemComponent } from "./menu-horizontal/menu-horizontalitems.component"
 import { ContributorsComponent } from "./contributors/contributors.component";
+import { MenuHorizontalComponent } from './menu-horizontal/menu-horizontal.component';
+import { HeroComponent } from './hero/hero.component';
 @NgModule({
   declarations: [
     FooterComponent,
@@ -95,7 +98,11 @@ import { ContributorsComponent } from "./contributors/contributors.component";
     MenuLateralComponent,
     MenuTopBarComponent,
     MenuPublicComponent,
-    ContributorsComponent
+    ContributorsComponent,
+    MenuHorizontalComponent,
+    AppMenuitemComponent,
+    HeroComponent 
+
   ],
   imports: [
     CommonModule,
@@ -266,7 +273,8 @@ import { ContributorsComponent } from "./contributors/contributors.component";
     TranslateModule,
     FooterComponent,
     MenuPublicComponent,
-    ContributorsComponent
+    ContributorsComponent,
+    MenuHorizontalComponent
 
   ],
 })
