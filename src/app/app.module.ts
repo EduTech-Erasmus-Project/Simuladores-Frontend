@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
+  CommonModule,
   DatePipe,
   LocationStrategy,
   PathLocationStrategy,
@@ -44,7 +45,9 @@ import { AuthInterceptor } from "./intercepotors/auth.interceptor";
     UserModule,
     AdminModule,
     QuicklinkModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    CommonModule ,
+   // RouterModule.forRoot(appRoutes),
   ],
   declarations: [AppComponent],
   providers: [

@@ -270,4 +270,6 @@ import { ContributorsComponent } from "./contributors/contributors.component";
 
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+  
+}
