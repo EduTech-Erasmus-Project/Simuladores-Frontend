@@ -195,7 +195,6 @@
         </div>
     </div>
 </div>
-
-<p-dialog header="Información del Participante" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
-    <app-perfil *ngIf="displayMaximizable" [id]="idParticipante"></app-perfil>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario.usuario" [discapacidadesData]="usuario.DiscapacidadParticipante"></app-perfil>
 </p-dialog>

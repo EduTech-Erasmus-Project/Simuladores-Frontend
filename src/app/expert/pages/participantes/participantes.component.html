@@ -3,11 +3,11 @@
 
     <div class="p-col-12 p-lg-12">
         <div class="card orders-table" style="min-height: 33vh">
-            <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
-                    'name',
-                    'country.name',
-                    'representative.name',
-                    'status'
+            <p-table [value]="participantesPendientes" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
+                    'usuario.nombre',
+                    'usuario.apellido',
+                    'usuario.email',
+                    'codigoEstudiante',
                     ]">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row
@@ -18,12 +18,18 @@
                                 <input pInputText type="text"
                                     (input)="dt.filterGlobal($event.target.value,
                                     'contains')"
-                                    placeholder="Buscar por nombre..." />
+                                    placeholder="Buscar..." />
                             </span>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
+
+                        <th pSortableColumn="codigoEstudiante">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Codigo
+                            </div>
+                        </th>
                         <th pSortableColumn="nombre">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Nombre
@@ -45,13 +51,13 @@
                             </div>
                         </th>
 
-                        <th pSortableColumn="calificacion">
+                        <th pSortableColumn="telefono">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Teléfono
                                 <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
                             </div>
                         </th>
-                        <th pSortableColumn="calificacion">
+                        <th pSortableColumn="email">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Email
                                 <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
@@ -63,6 +69,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-participante>
                     <tr class="p-selectable-row">
+                        <td>
+                            <span class="p-column-title">{{participante?.codigoEstudiante }}</span>
+                        </td>
                         <td>
                             <span class="p-column-title">{{
                                     participante.usuario?.nombre }}
@@ -92,11 +101,18 @@
                             </span>
                         </td>
 
-                        <td style="text-align: center">
-                            <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
-                            </a>
-                            <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
-                            </a>
+                        <td style="width: 30%">
+                            <!-- <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                            </a> -->
+                            <div class="buttons" style="display: flex; width: 100%;">
+                                <a pTooltip="Aprobar" (click)="approved(participante?.id)" pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
+                                </a>
+                                <a pTooltip="Rechazar" (click)="notApproved(participante?.id)" pButton type="button" style="margin-left: 2px" class="p-button-danger" icon="pi pi-times">
+                                </a>
+
+                                <a pTooltip="Perfil" (click)="showModal(participante?.id)" pButton type="button" style="margin-left: 2px" class="p-button-primary" icon="pi pi-user">
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 </ng-template>
@@ -115,11 +131,11 @@
     <div class="p-col-12 p-lg-12">
         <div class="card orders-table" style="min-height: 33vh">
 
-            <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
-                    'name',
-                    'country.name',
-                    'representative.name',
-                    'status'
+            <p-table [value]="participantes" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" [globalFilterFields]="[
+            'usuario.nombre',
+            'usuario.apellido',
+            'usuario.email',
+            'codigoEstudiante',
                     ]">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row
@@ -136,37 +152,43 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
+                        <th pSortableColumn="codigo">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                Codigo
+
+                            </div>
+                        </th>
                         <th pSortableColumn="nombre">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Nombre
-                                <!-- <p-sortIcon field="nombre"></p-sortIcon> -->
+
                             </div>
                         </th>
 
                         <th pSortableColumn="genero">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Genero
-                                <!-- <p-sortIcon field="genero"></p-sortIcon> -->
+
                             </div>
                         </th>
 
                         <th pSortableColumn="tiempo">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Direccion
-                                <!-- <p-sortIcon field="tiempo"></p-sortIcon> -->
+
                             </div>
                         </th>
 
                         <th pSortableColumn="calificacion">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Teléfono
-                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+
                             </div>
                         </th>
                         <th pSortableColumn="calificacion">
                             <div class="p-d-flex p-jc-between p-ai-center">
                                 Email
-                                <!-- <p-sortIcon field="calificacion"></p-sortIcon> -->
+
                             </div>
                         </th>
 
@@ -175,6 +197,11 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-participante>
                     <tr class="p-selectable-row">
+                        <td>
+                            <span class="p-column-title">{{
+                                    participante.codigoEstudiante
+                                    }}</span>
+                        </td>
                         <td>
                             <span class="p-column-title">{{
                                     participante.usuario?.nombre }}
@@ -205,9 +232,9 @@
                         </td>
 
                         <td style="text-align: center">
-                            <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
-                            </a>
-                            <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
+                            <!-- <a [routerLink]="['participanteInfo',competencia.id, participante.id]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                            </a> -->
+                            <a (click)="showModal(participante?.id)" pButton type="button" style="margin-left: 1rem" class="p-button-primary ml-1" icon="pi pi-user">
                             </a>
                         </td>
                     </tr>
@@ -222,3 +249,7 @@
         </div>
     </div>
 </div>
+
+<p-dialog header="Información del Participante" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [id]="idParticipante"></app-perfil>
+</p-dialog>

@@ -41,8 +41,12 @@ export class ParticipanteInfoComponent implements OnInit {
   public actividades: Actividad[];
   public competencia: Competencia;
 
-  charBarData: any;
-  charBarOptions = {
+  public idActividad : number;
+
+  public charLineNotaData = {};
+  public charLineTiempoaData = {};
+
+  public charLineOptions = {
     plugins: {
       legend: {
         labels: {
@@ -70,12 +74,8 @@ export class ParticipanteInfoComponent implements OnInit {
     },
   };
 
-  
-
   constructor(
     private _Activatedroute: ActivatedRoute,
-    private usuarioService: UsuarioService,
-    private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private actividadService: ActividadService,
     private competenciaService: CompetenciaService,
@@ -113,89 +113,99 @@ export class ParticipanteInfoComponent implements OnInit {
         this.onChangeEjercitario();
         this.loading = false;
       });
-
-    // let sub = this.actividadService
-    //   .recuperarActividadesDeParticipante(this.idCompetencia, this.idParticipante)
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //     this.actividades = res;
-    //     this.loadGrafica();
-    //     this.loading = false;
-    //   });
   }
 
-  loadGrafica() {
-    this.charBarData = {
+  private loadGrafica() {
+    this.charLineNotaData = {
       labels: this.actividades.map((act) =>
         moment(act.fecha).format("DD/MM/YYYY")
-      ),
+      ).reverse(),
       datasets: [
         {
           label: "Nota",
-          backgroundColor: "#42A5F5",
-          data: this.actividades.map((act) => act.calificacion),
+          data: this.actividades.map((act) => act.calificacion).reverse(),
+          fill: true,
+          borderColor: "#05C6FF",
+          tension: 0.4,
+          backgroundColor: "rgba(5,198,255,0.2)",
         },
+      ],
+    };
+    this.charLineTiempoaData = {
+      labels: this.actividades.map((act) =>
+        moment(act.fecha).format("DD/MM/YYYY")
+      ).reverse(),
+      datasets: [
         {
           label: "Tiempo",
-          backgroundColor: "#FFA726",
-          data: this.actividades.map((act) => act.tiempoTotal),
+          data: this.actividades.map((act) => act.tiempoTotal).reverse(),
+          fill: true,
+          borderColor: "#C014FF",
+          tension: 0.4,
+          backgroundColor: "rgba(192,20,255,0.2)",
         },
       ],
     };
   }
 
-  agregarComentario(scroll: ScrollPanel) {
-    let date: Date = new Date();
-    var comentarioNuevo: Comentario = {
-      //comentario: this.newComentarioParticipanteEjercitario,
-      fechaComentario: date,
-      //comentarioActividad: this.actividadSeleccionada,
-    };
-
-    this.confirmationService.confirm({
-      key: "agregarComentario",
-      message: "Agregar nuevo Comentario",
-      icon: "pi pi-exclamation-triangle",
-      accept: () => {
-        // this.usuarioService.agregarNuevoComentarioActividadParticipante(
-        //   comentarioNuevo
-        // );
-        // this.listadoComentariosActividad.unshift({
-        //   idComentario: 0,
-        //   //comentario: this.newComentarioParticipanteEjercitario,
-        //   fechaComentario: date,
-        //   comentarioActividad_id: 0,
-        // });
-        scroll.refresh();
-        this.messageService.add({
-          key: "addComentTOAST",
-          severity: "success",
-          summary: "Comentario agregado",
-          detail: "El comentario a sido agregado correctamente",
-        });
-      },
-      reject: () => {
-        this.messageService.add({
-          key: "addComentTOAST",
-          severity: "error",
-          summary: "Acción Cancelada",
-          detail: "La acción no se llevo a cabo",
-        });
-      },
-    });
+  showModalComentarios(idActividad: number) {
+    this.idActividad = idActividad;
+    this.modalComentarios = true;
   }
 
+  // agregarComentario(scroll: ScrollPanel) {
+  //   let date: Date = new Date();
+  //   var comentarioNuevo: Comentario = {
+  //     //comentario: this.newComentarioParticipanteEjercitario,
+  //     fechaComentario: date,
+  //     //comentarioActividad: this.actividadSeleccionada,
+  //   };
+
+  //   this.confirmationService.confirm({
+  //     key: "agregarComentario",
+  //     message: "Agregar nuevo Comentario",
+  //     icon: "pi pi-exclamation-triangle",
+  //     accept: () => {
+  //       // this.usuarioService.agregarNuevoComentarioActividadParticipante(
+  //       //   comentarioNuevo
+  //       // );
+  //       // this.listadoComentariosActividad.unshift({
+  //       //   idComentario: 0,
+  //       //   //comentario: this.newComentarioParticipanteEjercitario,
+  //       //   fechaComentario: date,
+  //       //   comentarioActividad_id: 0,
+  //       // });
+  //       scroll.refresh();
+  //       this.messageService.add({
+  //         key: "addComentTOAST",
+  //         severity: "success",
+  //         summary: "Comentario agregado",
+  //         detail: "El comentario a sido agregado correctamente",
+  //       });
+  //     },
+  //     reject: () => {
+  //       this.messageService.add({
+  //         key: "addComentTOAST",
+  //         severity: "error",
+  //         summary: "Acción Cancelada",
+  //         detail: "La acción no se llevo a cabo",
+  //       });
+  //     },
+  //   });
+  // }
+
   // PARA SELECT DE GRAFICA tIPO DE DISCAPACIDAD GENERAL
-  selGrafica1: any = { name: "Notas", value: "Notas" };
+  // selGrafica1: any = { name: "Notas", value: "Notas" };
 
-  opciones: any[] = [
-    { name: "Notas", value: "Notas" },
-    { name: "Tiempo", value: "Tiempo" },
-  ];
-
+  // opciones: any[] = [
+  //   { name: "Notas", value: "Notas" },
+  //   { name: "Tiempo", value: "Tiempo" },
+  // ];
 
   calificacionPorcentaje(actividad: Actividad): number {
-    return Number(((actividad.calificacion * 100) / actividad.totalPreguntas).toFixed(2));
+    return Number(
+      ((actividad.calificacion * 100) / actividad.totalPreguntas).toFixed(2)
+    );
   }
 
   public showModal() {
@@ -219,6 +229,7 @@ export class ParticipanteInfoComponent implements OnInit {
         )
         .toPromise();
       this.actividades = actividades;
+      this.loadGrafica();
     } catch (error) {
       console.log(error);
     }

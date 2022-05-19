@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   logout() {}
+  
   get emailUser() {
     return null;
   }

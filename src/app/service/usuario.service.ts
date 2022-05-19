@@ -43,4 +43,35 @@ export class UsuarioService {
       environment.WS_PATH + "obtenerParticipantesCompetencia/"+idCompetencia
     );
   }
+
+  //validar eliminacion de metodo
+  obtenerParticipantes(){
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerParticipantes/"
+    );
+  }
+
+  obtenerParticipantesPendientes(){
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerParticipantesPendientes/"
+    );
+  }
+
+  aprobarParticipantes(data): Observable<any> {
+    return this.http.post<any>(
+      environment.WS_PATH + "aprobarParticipante/", data
+    );
+  }
+
+  getEvaluador(id:number): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "getEvaluador/" + id
+    );
+  }
+
+  public obtenerInformacionParticipante(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
+  }
+
+
 }

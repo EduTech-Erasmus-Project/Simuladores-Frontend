@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async onLogin() {
     this.msgs = [];
+    this.markTouchForm();
 
     if (this.loginForm.valid) {
       Swal.fire({
@@ -124,7 +125,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         (error) => {
           Swal.close();
-          console.log(error);
+          console.log("error--", error);
           if (error?.error?.code == "user_inactive") {
             this.msgs = [
               {
@@ -179,8 +180,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       );
 
       this.subscribes.push(loginSub);
-    } else {
-      this.markTouchForm();
     }
   }
 

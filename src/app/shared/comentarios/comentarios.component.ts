@@ -1,17 +1,18 @@
-import { Component, Input, OnInit } from "@angular/core";
-import * as moment from "moment";
-import { Comentario } from "src/app/core/interfaces/Comentario";
-import { User } from "src/app/core/interfaces/User";
-import { AuthService } from "src/app/service/auth.service";
-import { ComentarioService } from "src/app/service/comentario.service";
+import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import { Comentario } from 'src/app/core/interfaces/Comentario';
+import { User } from 'src/app/core/interfaces/User';
+import { AuthService } from 'src/app/service/auth.service';
+import { ComentarioService } from 'src/app/service/comentario.service';
 
 @Component({
-  selector: "app-comentarios",
-  templateUrl: "./comentarios.component.html",
-  styleUrls: ["./comentarios.component.scss"],
+  selector: 'app-comentarios',
+  templateUrl: './comentarios.component.html',
+  styleUrls: ['./comentarios.component.scss']
 })
 export class ComentariosComponent implements OnInit {
   @Input() idActividad?: number;
+  @Input() evaluador?:boolean = true;
 
   public comentario: string = "";
   public loadingPublicar: boolean = false;
@@ -64,4 +65,5 @@ export class ComentariosComponent implements OnInit {
       this.loadingPublicar = true;
     });
   }
+
 }

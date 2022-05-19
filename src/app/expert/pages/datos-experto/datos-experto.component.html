@@ -19,14 +19,16 @@
                 <div class="control" style="margin-top: 1em; width: 100%;">
                     <input style="width: 100%;" formControlName="oldPassword" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('oldPassword')}" type="password" pInputText placeholder="Contraseña actual" />
                     <div *ngIf="formPassword.get('oldPassword').invalid">
-                        <small class="p-error" *ngIf="getErrorRequiredPass('oldPassword')">Este campo es obligatorio.</small>
+                        <small class="p-error" *ngIf="getErrorRequiredPass('oldPassword')">Este campo es
+                            obligatorio.</small>
                     </div>
                 </div>
 
                 <div class="control" style="margin-top: 0.5em; width: 100%;">
                     <input style="width: 100%;" formControlName="newPassword" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('newPassword')}" type="password" placeholder="Nueva contraseña" pPassword />
                     <div *ngIf="formPassword.get('newPassword').invalid">
-                        <small class="p-error" *ngIf="getErrorRequiredPass('newPassword')">Este campo es obligatorio.</small>
+                        <small class="p-error" *ngIf="getErrorRequiredPass('newPassword')">Este campo es
+                            obligatorio.</small>
                     </div>
                 </div>
 
@@ -34,7 +36,7 @@
                     <input style="width: 100%;" formControlName="passwordConfirm" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('passwordConfirm')}" type="password" pInputText placeholder="Repita su nueva contraseña" />
                     <div *ngIf="formPassword.get('passwordConfirm').invalid">
                         <small class="p-error" *ngIf="getErrorRequiredPass('passwordConfirm')">Este campo es
-              obligatorio.</small>
+                            obligatorio.</small>
                     </div>
                 </div>
                 <div class="buttons" style="margin-top: 1em; width: 100%;">
@@ -87,7 +89,8 @@
           }">
                 </p-calendar>
                 <div *ngIf="form.get('fechaNacimiento').invalid">
-                    <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es obligatorio.</small>
+                    <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es
+                        obligatorio.</small>
                 </div>
             </div>
 
@@ -138,7 +141,8 @@
                 <input formControlName="nivelDeFormacion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nivelDeFormacion')}" type="text" pInputText placeholder="Nivel de formación" id="nivelDeFormacion" name="nivelDeFormacion" />
 
                 <div *ngIf="form.get('nivelDeFormacion').invalid">
-                    <small class="p-error" *ngIf="getErrorRequired('nivelDeFormacion')">Este campo es obligatorio.</small>
+                    <small class="p-error" *ngIf="getErrorRequired('nivelDeFormacion')">Este campo es
+                        obligatorio.</small>
                 </div>
             </div>
 

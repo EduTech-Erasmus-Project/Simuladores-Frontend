@@ -13,4 +13,13 @@ export class ActividadService {
   recuperarActividadesDeParticipante(idEjercitario:number, idParticipante:number): Observable<any> {
     return this.http.get<any>(`${environment.WS_PATH}getActividadesParticipante/${idEjercitario}/${idParticipante}`);
   }
+
+
+  getParticipanteActividades(idEjercitario:number){
+    return this.http.get<any>(`${environment.WS_PATH}getActividades/${idEjercitario}`);
+  }
+
+  getActividad(idActividad:number){
+    return this.http.get<any>(`${environment.WS_PATH}getActividad/${idActividad}`);
+  }
 }

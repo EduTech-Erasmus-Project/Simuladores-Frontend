@@ -1,3 +1,6 @@
+import { Evaluador } from "./Evaluador";
+import { Participante } from "./Participante";
+
 export interface User {
   id?: number;
   email?: string;
@@ -21,4 +24,7 @@ export interface User {
   responsable?: any;
   password?: string;
   tipoUser?: string;
+  participante?: Participante;
+  evaluador?: Evaluador;
+  codigo?: string;
 }

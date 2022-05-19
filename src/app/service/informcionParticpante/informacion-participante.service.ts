@@ -15,9 +15,7 @@ import { Asignacion } from "src/app/core/interfaces/Asignacion";
 export class InformacionParticipanteService {
   constructor(private http: HttpClient) {}
 
-  public obtenerInformacionUsuario(id: number): Observable<any> {
-    return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
-  }
+  
 
   public obtenerInformacionUsuarioResponsable(
     correo: string,
@@ -170,7 +168,7 @@ export class InformacionParticipanteService {
         environment.WS_PATH + "agregarNuevoComentarioActividadParticipante",
         {
           comentario: comentario.comentario,
-          fecha: comentario.fecha,
+          //fecha: comentario.fecha,
           //actividad: comentario.comentarioActividad.idActividad,
         },
         config

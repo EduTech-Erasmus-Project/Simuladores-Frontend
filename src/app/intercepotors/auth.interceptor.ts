@@ -34,12 +34,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error: any) => {
+
+        //console.log("error interceptor", error);
         
         if (
           (error instanceof HttpErrorResponse &&
             error.error?.messages &&
-            error?.error?.messages[0]?.token_type === "access") ||
-          error.statusText === "Unknown Error"
+            error?.error?.messages[0]?.token_type === "access")
         ) {
           //console.log("error interceptor", error)
           return this.errorUnauthorized(request, next);

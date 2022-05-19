@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { SelectItem } from "primeng/api";
 import { forkJoin, Subscription } from "rxjs";
 import { Competencia } from "src/app/core/interfaces/Competencia";
-import { Participante } from "src/app/core/interfaces/participantes";
+import { Participante } from "src/app/core/interfaces/Participante";
 import { CompetenciaService } from "src/app/service/competencia.service";
 import { EjercitarioService } from "src/app/service/ejercitario.service";
 import { UsuarioService } from "src/app/service/usuario.service";
@@ -15,7 +15,7 @@ import { UsuarioService } from "src/app/service/usuario.service";
 export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
   public competencia: Competencia;
-  public competencias: Competencia[]= [];
+  public competencias: Competencia[] = [];
   public loaderGrafica: boolean = false;
   public totalParticipantes: number = 0;
   public totalEjercitarios: number = 0;
@@ -26,6 +26,7 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   ];
   public pieData: any;
   //public ejercitarios: Asignacion[] = [];
+  public usuario:any
 
   public chartOptions = {
     responsive: true,
@@ -44,8 +45,8 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   public idParticipante: number;
 
   constructor(
-    private competenciaService:CompetenciaService,
-    private usuarioService:UsuarioService,
+    private competenciaService: CompetenciaService,
+    private usuarioService: UsuarioService,
     private ejercitarioService: EjercitarioService
   ) {}
 
@@ -60,16 +61,12 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
 
   private async loadData() {
     let sub = await forkJoin([
-      this.ejercitarioService
-      .obtenerTotalEjercitarios(),
-      this.competenciaService
-      .obtenerCompetencias(),
-      this.usuarioService
-      .totalParticipantesPorEvaluador()
-
+      this.ejercitarioService.obtenerTotalEjercitarios(),
+      this.competenciaService.obtenerCompetencias(),
+      this.usuarioService.totalParticipantesPorEvaluador(),
     ]).subscribe(
       (data) => {
-        this.totalEjercitarios =data[0].total;
+        this.totalEjercitarios = data[0].total;
         this.competencias = data[1];
         this.totalParticipantes = data[2].totalParticipantes;
       },
@@ -136,38 +133,34 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   }
 
   async listarLabelsTipoDeGenero() {
-    let sub = await this.usuarioService
-      .recuperarListaDeGenero()
-      .subscribe(
-        (genero) => {
-          console.log("generos", genero.participanteGenero);
-          console.log(
-            "generos",
-            genero.participanteGenero.map((gen) => Object.keys(gen))
-          );
-          this.pieData = {
-            labels: genero.participanteGenero.map((gen) => Object.keys(gen)),
-            datasets: [
-              {
-                data: genero.participanteGenero.map((gen) =>
-                  Object.values(gen)
-                ),
-                backgroundColor: [
-                  "rgb(54, 162, 235)",
-                  "rgb(255, 99, 132)",
-                  "rgb(255, 205, 86)",
-                  "rgb(75, 192, 192)",
-                ],
-              },
-            ],
-          };
-          this.loaderGrafica = false;
-        },
-        (err) => {
-          console.log(err);
-          this.loaderGrafica = false;
-        }
-      );
+    let sub = await this.usuarioService.recuperarListaDeGenero().subscribe(
+      (genero) => {
+        console.log("generos", genero.participanteGenero);
+        console.log(
+          "generos",
+          genero.participanteGenero.map((gen) => Object.keys(gen))
+        );
+        this.pieData = {
+          labels: genero.participanteGenero.map((gen) => Object.keys(gen)),
+          datasets: [
+            {
+              data: genero.participanteGenero.map((gen) => Object.values(gen)),
+              backgroundColor: [
+                "rgb(54, 162, 235)",
+                "rgb(255, 99, 132)",
+                "rgb(255, 205, 86)",
+                "rgb(75, 192, 192)",
+              ],
+            },
+          ],
+        };
+        this.loaderGrafica = false;
+      },
+      (err) => {
+        console.log(err);
+        this.loaderGrafica = false;
+      }
+    );
     this._subscriptions.push(sub);
   }
 
@@ -208,28 +201,28 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
     this._subscriptions.push(sub);
   }
 
-  public showModal(id){
-    console.log(id);
-    this.idParticipante = id;
-    this.displayMaximizable = true;
+  public async showModal(id) {
+    try {
+      let user = await this.usuarioService
+        .obtenerInformacionParticipante(id)
+        .toPromise();
+      this.usuario = user;
+      this.displayMaximizable = true;
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  // onBuscarParticipantes(idEjercitario:number){
-  //   console.log(idEjercitario);
-  // }
 
   async onChangeCompetencia(evt) {
     console.log(evt.value);
     try {
-      let participantes = await this.usuarioService.obtenerParticipantesCompetencia(evt.value.id).toPromise();
+      let participantes = await this.usuarioService
+        .obtenerParticipantesCompetencia(evt.value.id)
+        .toPromise();
       console.log("participantes", participantes);
       this.participantes = participantes;
     } catch (error) {
       console.log("error", error);
     }
   }
-
-  
- 
-
 }

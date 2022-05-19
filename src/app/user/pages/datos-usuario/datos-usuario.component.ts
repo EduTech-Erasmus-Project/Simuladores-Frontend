@@ -129,27 +129,27 @@ export class DatosUsuarioComponent implements OnInit {
   }
 
   obtenerInformacionUsuario() {
-    this.usuarioService
-      .obtenerInformacionUsuario(1)
-      .subscribe((usuario: any) => {
-        console.log(usuario);
-        this.participante = usuario;
-        //this.getInformacionUsuario(usuario);
-        var evaluador: User;
+    // this.usuarioService
+    //   .obtenerInformacionUsuario(1)
+    //   .subscribe((usuario: any) => {
+    //     console.log(usuario);
+    //     this.participante = usuario;
+    //     this.getInformacionUsuario(usuario);
+    //     var evaluador: User;
 
        
 
-        this.nombreParticipante = usuario?.getNombre;
-        this.direccionParticipante = usuario.getDireccion;
-        this.carreraParticipante = usuario.getCarreraUniversitaria;
-        this.estudiosParticipante = usuario.getEstudiosPrevios;
-        this.apellidoParticipante = usuario?.getApellido;
-        this.telefonoParticipante = usuario.getTelefono;
-        this.codigoParticipante = usuario.getCodigoEstudiante;
-        this.estadoCivilParticipante = usuario.getEstadoCivil;
-        this.paisParticipante = usuario?.getPais;
-        this.ciudadParticipante = usuario?.getCiudad;
-      });
+    //     this.nombreParticipante = usuario?.getNombre;
+    //     this.direccionParticipante = usuario.getDireccion;
+    //     this.carreraParticipante = usuario.getCarreraUniversitaria;
+    //     this.estudiosParticipante = usuario.getEstudiosPrevios;
+    //     this.apellidoParticipante = usuario?.getApellido;
+    //     this.telefonoParticipante = usuario.getTelefono;
+    //     this.codigoParticipante = usuario.getCodigoEstudiante;
+    //     this.estadoCivilParticipante = usuario.getEstadoCivil;
+    //     this.paisParticipante = usuario?.getPais;
+    //     this.ciudadParticipante = usuario?.getCiudad;
+    //   });
   }
 
   getInformacionUsuario(usuario: any) {
