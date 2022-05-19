@@ -13,20 +13,11 @@ const routes: Routes = [
     component: ExpertComponent,
     children: [
       { path: "", component: PresentacionInicioExpertoComponent },
-
       { path: "mi-cuenta", component: DatosExpertoComponent },
-      // {
-      //   path: "agregarActividadParticipantes",
-      //   component: AgregarActividadesParticipanteComponent,
-      // },
       {
         path: "participantes",
         component: ParticipantesComponent,
       },
-      // {
-      //   path: "escenarioInfo/:idEjercitario",
-      //   component: EscenarioComponent,
-      // },
       {
         path: "participanteInfo/:idCompetencia/:idEstudiante",
         component: ParticipanteInfoComponent,

@@ -29,7 +29,8 @@ export class ActividadComponent implements OnInit {
     private router: Router
   ) {
     if (isNaN(+this.route.snapshot.params.id)) {
-      router.navigate(["/user"]);
+      //router.navigate(["/user"]);
+      console.log(this.route.snapshot.params);
     }
 
     this.idActividad = this.route.snapshot.params.id;
@@ -53,8 +54,8 @@ export class ActividadComponent implements OnInit {
         this.actividad = actividad;
       },
       (err) => {
-        console.log(err);
-        this.router.navigate(["/user"]);
+        console.log("err", err);
+        //this.router.navigate(["/user"]);
       }
     );
     // let sub = await this.comentarioService

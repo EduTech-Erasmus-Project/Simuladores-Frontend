@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -9,79 +10,19 @@ import { AuthService } from '../service/auth.service';
 })
 export class ExpertComponent implements OnInit {
 
-  menuClick: boolean;
-  sidebarActive: boolean;
-  staticMenuActive: boolean;
-  topbarMenuActive: boolean;
-  megaMenuMobileClick: boolean;
-  megaMenuMobileActive: boolean;
-  topbarMobileMenuClick: boolean;
-  topbarMobileMenuActive: boolean;
-  menuMobileActive: boolean;
-  activeTopbarItem: any;
-  topbarItemClick: boolean;
-  private correo: string;
+  public menu:any[];
 
-  constructor(private route: ActivatedRoute, private autentificacionUsuario: AuthService) { }
+  constructor(public app: AppComponent) { }
 
   ngOnInit(): void {
-    if(this.autentificacionUsuario.emailUser != null ){
-      this.correo = this.autentificacionUsuario.emailUser;
-    }else{
-      this.correo = this.autentificacionUsuario.getcorreoPorToken(this.autentificacionUsuario.getToken);
-    }
+    this.menu = [
+      {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/expert']},
+      {label: 'Participantes', icon: 'pi pi-fw pi-users', routerLink: ['participantes']},
+      {label: 'Mi Cuenta', icon: 'pi pi-fw pi-users', routerLink: ['mi-cuenta']},
+    ];
+   
   }
 
-  getCorreo():string{
-    return this.correo;
-  }
-
-  onSidebarClick(event: Event) {
-    this.menuClick = true;
-  }
-
-  onToggleMenuClick(event: Event) {
-    this.staticMenuActive = !this.staticMenuActive;
-    event.preventDefault();
-  }
-
-  onMenuButtonClick(event) {
-    this.menuClick = true;
-    this.topbarMenuActive = false;
-
-    if (this.isMobile()) {
-        this.menuMobileActive = !this.menuMobileActive;
-    }
-
-    event.preventDefault();
-  }
-
-  onMegaMenuMobileButtonClick(event) {
-    this.megaMenuMobileClick = true;
-    this.megaMenuMobileActive = !this.megaMenuMobileActive;
-
-    event.preventDefault();
-  }
-
-  onTopbarMobileMenuButtonClick(event) {
-    this.topbarMobileMenuClick = true;
-    this.topbarMobileMenuActive = !this.topbarMobileMenuActive;
-
-    event.preventDefault();
-  }
-
-  onTopbarItemClick(event, item) {
-    this.topbarItemClick = true;
-
-    if (this.activeTopbarItem === item) {
-        this.activeTopbarItem = null; } else {
-        this.activeTopbarItem = item; }
-
-    event.preventDefault();
-  }
-
-  isMobile() {
-    return window.innerWidth <= 991;
-  }
+  
 
 }

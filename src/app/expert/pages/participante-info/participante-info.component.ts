@@ -31,8 +31,6 @@ export class ParticipanteInfoComponent implements OnInit {
   public idParticipante: number;
   private idCompetencia: number;
   public modalPerfil: boolean;
-  public modalComentarios: boolean;
-  public modalPreguntas: boolean;
   public niveles: any[];
   public nivel = "Nivel1";
   public ejercitarios: Ejercitario[];
