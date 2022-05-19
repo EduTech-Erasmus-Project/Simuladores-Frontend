@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import { AppMainComponent } from './app.main.component';
-//import {AppMainComponent} from './app.main.component';
+import {AppMainComponent} from './app.main.component';
 
 @Component({
     selector: 'app-topbar',
@@ -15,23 +14,31 @@ import { AppMainComponent } from './app.main.component';
 						</a>
 					</div>
 
+
 					<a href="#" class="topbar-menu-mobile-button" (click)="appMain.onTopbarMobileMenuButtonClick($event)">
 						<i class="pi pi-ellipsis-v"></i>
-					</a>
-
-					
+					</a>				
                 </div>
                 <div class="layout-topbar-right fadeInDown">
 					<ul class="layout-topbar-actions">
-						
-						
-
 						<li #message class="topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === message}">
 							<a href="#" (click)="appMain.onTopbarItemClick($event,message)">
 								<i class="topbar-icon pi pi-bell"></i>
 							</a>
 							<ul class="fadeInDown">
+								<li class="layout-submenu-header">
+									<h1>Notificaciones</h1>
+									<span>Hoy, tienes 2 notificaciones</span>
+								</li>
 								
+								<li class="layout-submenu-item">
+									<img src="assets/layout/images/topbar/avatar-gaspar.png" alt="mirage-layout" width="35" />
+									<div class="menu-text">
+										<p>User generated content</p>
+										<span>Gaspar Antunes</span>
+									</div>
+									<i class="pi pi-angle-right"></i>
+								</li>
 								<li class="layout-submenu-item">
 									<img src="assets/layout/images/topbar/avatar-tatiana.png" alt="mirage-layout" width="35" />
 									<div class="menu-text">
@@ -44,6 +51,7 @@ import { AppMainComponent } from './app.main.component';
 						</li>
 
 						
+
 						<li #profile class="topbar-item profile-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === profile}">
 							<a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
                             <span class="profile-image-wrapper">
@@ -97,11 +105,7 @@ import { AppMainComponent } from './app.main.component';
 								</li>
 							</ul>
 						</li>
-						<li>
-							<a href="#" class="layout-rightpanel-button" (click)="appMain.onRightPanelButtonClick($event)">
-								<i class="pi pi-arrow-left"></i>
-							</a>
-						</li>
+						
                     </ul>
 
 					<ul class="profile-mobile-wrapper">
@@ -166,7 +170,6 @@ import { AppMainComponent } from './app.main.component';
 export class AppTopBarComponent {
 
     activeItem: number;
-
     constructor(public appMain: AppMainComponent) {}
 
     mobileMegaMenuItemClick(index) {
