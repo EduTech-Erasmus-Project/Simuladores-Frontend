@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { ActividadComponent } from "./pages/actividad/actividad.component";
 import { DatosUsuarioComponent } from "./pages/datos-usuario/datos-usuario.component";
-import { MisActividadesUsuarioComponent } from "./pages/mis-actividades-usuario/mis-actividades-usuario.component";
 import { PresentacionInicioUserComponent } from "./pages/presentacion-inicio-user/presentacion-inicio-user.component";
 
 import { UserComponent } from "./user.component";
@@ -11,14 +11,11 @@ const routes: Routes = [
     path: "",
     component: UserComponent,
     children: [
-      { path: "home", component: PresentacionInicioUserComponent },
+      { path: "", component: PresentacionInicioUserComponent },
+      
       {
-        path: "inicio/:correo",
-        component: PresentacionInicioUserComponent,
-      },
-      {
-        path: "Mis-Actividades-Usuario/:correo",
-        component: MisActividadesUsuarioComponent,
+        path: "actividad/:id",
+        component: ActividadComponent,
       },
       { path: "datosUsuario/:correo", component: DatosUsuarioComponent },
     ],

@@ -32,7 +32,7 @@
                             <label for="password">Contraseña</label>
                             <div class="viewPass">
                                 <input [ngClass]="{'ng-dirty': errorPasswordRequired}" aria-describedby="pass-help"
-                                [type]="show?'text':'password'" id="password" name="password" formControlName="password"
+                                [type]="show?'text':'password'" id="password" name="password" autocomplete="on" formControlName="password"
                                     placeholder="Ingresa su contraseña" pPassword [feedback]="false" />
                                 <i tabindex="0" [ngClass]="{'pi-eye':!show,'pi-eye-slash':show}" class="pi" (click)="show=!show" (keyup.enter)="show=!show"></i>
                             </div>

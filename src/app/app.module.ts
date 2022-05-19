@@ -31,6 +31,7 @@ import { NodeService } from "./demo/service/nodeservice";
 import { PhotoService } from "./demo/service/photoservice";
 import { ProductService } from "./demo/service/productservice";
 import { AuthInterceptor } from "./intercepotors/auth.interceptor";
+import { NgCircleProgressModule } from "ng-circle-progress";
 @NgModule({
   imports: [
     RouterModule,
@@ -44,7 +45,16 @@ import { AuthInterceptor } from "./intercepotors/auth.interceptor";
     UserModule,
     AdminModule,
     QuicklinkModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    })
   ],
   declarations: [AppComponent],
   providers: [

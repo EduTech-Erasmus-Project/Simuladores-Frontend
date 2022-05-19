@@ -340,12 +340,12 @@ export class EscenarioComponent implements OnInit {
 
   listarLabelsTipoDeGenero(){
     
-    this.servicioConsultasLabelsGrafica.recuperarListaDeGenero().subscribe(
-      genero => {
-        this.generos = genero.participanteGenero as Array<string>
-        this.crearGraficaInicioExperto()
-      }
-    );
+    // this.servicioConsultasLabelsGrafica.recuperarListaDeGenero().subscribe(
+    //   genero => {
+    //     this.generos = genero.participanteGenero as Array<string>
+    //     this.crearGraficaInicioExperto()
+    //   }
+    // );
   }
 
 
