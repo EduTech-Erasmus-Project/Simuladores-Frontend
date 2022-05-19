@@ -82,7 +82,6 @@ import { TreeModule } from "primeng/tree";
 import { TreeTableModule } from "primeng/treetable";
 import { VirtualScrollerModule } from "primeng/virtualscroller";
 import { FooterComponent } from "./footer/footer.component";
-import { MenuFooterPageComponent } from "./menu-footer-page/menu-footer-page.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
 import { ContributorsComponent } from "./contributors/contributors.component";
@@ -96,7 +95,6 @@ import { MenuitemComponent } from './menuitem/menuitem.component';
 @NgModule({
   declarations: [
     FooterComponent,
-    MenuFooterPageComponent,
     MenuPublicComponent,
     ContributorsComponent,
     HeroComponent,
@@ -270,7 +268,6 @@ import { MenuitemComponent } from './menuitem/menuitem.component';
     TreeModule,
     TreeTableModule,
     VirtualScrollerModule,
-    MenuFooterPageComponent,
     TranslateModule,
     FooterComponent,
     MenuPublicComponent,

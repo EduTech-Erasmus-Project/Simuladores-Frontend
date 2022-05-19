@@ -15,9 +15,8 @@ export class UserComponent implements OnInit {
     public app: AppComponent
   ) {
     this.menu = [
-      {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/expert']},
-      {label: 'Participantes', icon: 'pi pi-fw pi-users', routerLink: ['participantes']},
-      {label: 'Mi Cuenta', icon: 'pi pi-fw pi-users', routerLink: ['mi-cuenta']},
+      {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/user']},
+      {label: 'Mi Cuenta', icon: 'pi pi-fw pi-user', routerLink: ['mi-cuenta']},
     ];
   }
   ngOnInit(): void {

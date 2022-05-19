@@ -18,7 +18,7 @@ export class ExpertComponent implements OnInit {
     this.menu = [
       {label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/expert']},
       {label: 'Participantes', icon: 'pi pi-fw pi-users', routerLink: ['participantes']},
-      {label: 'Mi Cuenta', icon: 'pi pi-fw pi-users', routerLink: ['mi-cuenta']},
+      {label: 'Mi Cuenta', icon: 'pi pi-fw pi-user', routerLink: ['mi-cuenta']},
     ];
    
   }
