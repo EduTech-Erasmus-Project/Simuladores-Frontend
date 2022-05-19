@@ -87,11 +87,10 @@ import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
 import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
-
 import { ContributorsComponent } from "./contributors/contributors.component";
-
 import { HeroComponent } from './hero/hero.component';
-
+import { PerfilComponent } from "./perfil/perfil.component";
+import { ComentariosComponent } from './comentarios/comentarios.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +101,9 @@ import { HeroComponent } from './hero/hero.component';
     MenuPublicComponent,
     ContributorsComponent,
     HeroComponent,
+    PerfilComponent,
+    ComentariosComponent,
+    ComentariosComponent
 
   ],
   imports: [
@@ -276,6 +278,8 @@ import { HeroComponent } from './hero/hero.component';
     MenuPublicComponent,
     ContributorsComponent,
     HeroComponent,
+    PerfilComponent,
+    ComentariosComponent
 
   ],
 })

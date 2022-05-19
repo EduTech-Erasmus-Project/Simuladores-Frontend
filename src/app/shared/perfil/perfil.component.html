@@ -1,0 +1,79 @@
+<div class="p-grid layout-dashboard">
+    <div [ngClass]="{'p-xl-6 p-md-6': discapacidadesData, 'p-xl-12 p-md-12': !discapacidadesData}" class="p-col-12  p-nogutter">
+        <div class="card widget-statistics" style="min-height:33vh">
+            <h6>Codigo: {{usuario?.codigo}}</h6>
+            <div class="profile">
+                <div class="img">
+                    <img src="assets/img/profile.png" style="width: 100px" alt="" />
+                    <h4>
+                        {{usuario?.nombre}} {{usuario?.apellido}}
+                    </h4>
+                    <p>
+                        <i class="pi pi-map-marker"></i> {{usuario?.pais}} - {{usuario?.ciudad}} - {{usuario?.direccion}}
+                    </p>
+                    <p>
+                        <i class="pi pi-envelope"></i> {{usuario?.email}}
+                    </p>
+                    <p *ngIf="usuario?.telefono">
+                        <i class="pi pi-phone"></i> {{usuario?.telefono}}
+                    </p>
+                </div>
+                <p-divider layout="horizontal" align="center"></p-divider>
+
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6">
+                        <p>
+                            <span>Fecha de nacimiento:</span> {{usuario?.fechaNacimiento}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                        <p>
+                            <span>Genero:</span> {{usuario?.genero}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6" *ngIf="usuario?.carreraUniversitaria">
+                        <p>
+                            <span>Carrera Universitaria:</span> {{usuario?.carreraUniversitaria}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6">
+                        <p>
+                            <span>Hijos:</span> {{usuario?.numeroDeHijos}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6" *ngIf="usuario?.estadoCivil">
+                        <p>
+                            <span>Estado civil:</span> {{usuario?.estadoCivil}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6" *ngIf="usuario?.etnia">
+                        <p>
+                            <span>Etnia:</span> {{usuario?.etnia}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6" *ngIf="usuario?.estudiosPrevios">
+                        <p>
+                            <span>Estudios previos:</span> {{usuario?.estudiosPrevios}}
+                        </p>
+                    </div>
+                    <div class="p-col-12 p-md-6" *ngIf="usuario?.nivelDeFormacion">
+                        <p>
+                            <span>Nivel de formacion:</span> {{usuario?.nivelDeFormacion}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-12 p-xl-6 p-md-6" *ngIf="discapacidadesData">
+        <div class="p-grid p-dir-col p-nogutter">
+            <div class="p-col-12">
+                <div class="card widget-statistics" style="min-height:33vh">
+                    <h5>Información de Discapacidad</h5>
+                    <p-chart type="radar" [data]="radarData"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

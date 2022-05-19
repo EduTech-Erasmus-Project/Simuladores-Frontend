@@ -1,207 +1,195 @@
-<div class="p-col-12">
-  <div class="card">
-    <h3 style="text-align: center; margin-left: 12.5%">
-      Mi información Personal
-    </h3>
+<div class="card">
     <div class="p-grid">
-      <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
-        <div class="p-fluid">
-          <div class="p-field">
-            <div>
-              <div style="text-align: center; line-height: 2em">
-                <!--
-                                    Codigo para mostrar fotografia del usuario
-                                    <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
-                                -->
-                <h3>Perfil de Usuario</h3>
-                <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px" alt="" />
+        <div class="p-col-12 p-xl-3 p-md-3">
+
+            <div class="profile" style="text-align: center; line-height: 2em">
+                <h5>Mis Datos</h5>
+                <img src="assets/img/profile.png" style="width: 100px" alt="" />
                 <div class="product-list-detail">
-                  <h4>
-                    {{ responsable?.nombre }} {{ responsable?.apellido }}
-                  </h4>
-                  <span>
-                    Responsable
-                    <i class="pi pi-map-marker product-category-icon"></i>
-                    {{ responsable?.ciudad + " - " + responsable?.pais }}
+                    <h4>Claudio Maldonado</h4>
+                    <p><i class="pi pi-fw pi-envelope"></i> claudio@email.com</p>
+                </div>
+            </div>
 
-                    <!--{{product.description}}-->
-                  </span>
+            <p-divider layout="horizontal" align="center"></p-divider>
+
+
+            <h6>Cambio de Contraseña</h6>
+            <form [formGroup]="formPassword" class="form-password">
+                <div class="control" style="margin-top: 1em; width: 100%;">
+                    <input style="width: 100%;" formControlName="oldPassword" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('oldPassword')}" type="password" pInputText placeholder="Contraseña actual" />
+                    <div *ngIf="formPassword.get('oldPassword').invalid">
+                        <small class="p-error" *ngIf="getErrorRequiredPass('oldPassword')">Este campo es
+                            obligatorio.</small>
+                    </div>
                 </div>
 
-                <p-divider layout="horizontal" align="center"></p-divider>
-
-                <div style="text-align: center">
-                  <h4>Cambio de Contraseña</h4>
-                  <form class="forms" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
-                    <div class="login-input-wrapper" style="margin-top: 1em">
-                      <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" pPassword
-                        required [(ngModel)]="password" [feedback]="false" appPassword style="width: 70%" />
-                      <button pButton type="button" id="buttonMostrar" (click)="mostrarPassword()" label="Mostrar"
-                        style="width: 30%"></button>
+                <div class="control" style="margin-top: 0.5em; width: 100%;">
+                    <input style="width: 100%;" formControlName="newPassword" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('newPassword')}" type="password" placeholder="Nueva contraseña" pPassword />
+                    <div *ngIf="formPassword.get('newPassword').invalid">
+                        <small class="p-error" *ngIf="getErrorRequiredPass('newPassword')">Este campo es
+                            obligatorio.</small>
                     </div>
-
-                    <div class="login-input-wrapper" style="margin-top: 0.5em">
-                      <input type="password" id="newPassword" name="newPassword"
-                        placeholder="Ingrese su nueva contraseña" pPassword required [(ngModel)]="newPassword"
-                        (keyup)="validarPassword()" style="width: 70%" [feedback]="false" appPassword />
-                      <button pButton type="button" id="buttonMostrarNuevo" (click)="mostrarPasswordNUeva()"
-                        label="Mostrar" style="width: 30%"></button>
-                      <div class="alert alert-danger" role="alert">
-                        <p id="tipoPassword"></p>
-                      </div>
-                    </div>
-
-                    <div class="login-input-wrapper" style="margin-top: 0.5em">
-                      <input type="password" id="repPassword" name="repPassword"
-                        placeholder="Repita su nueva contraseña" pPassword required [(ngModel)]="repPassword"
-                        [feedback]="false" appPassword (keyup)="verificacionSimilaridadPassword()"
-                        (click)="verificacionSimilaridadPassword()" style="width: 70%" />
-
-                      <button pButton type="button" id="buttonMostrarRep" (click)="mostrarPasswordRepeticion()"
-                        label="Mostrar" style="width: 30%"></button>
-
-                      <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
-                        *ngIf="passwordIncorrect == true">
-                        Contraseñas no coinciden
-                      </div>
-                      <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #5fe6b2"
-                        *ngIf="passwordIncorrect == false">
-                        Contraseñas coinciden
-                      </div>
-                    </div>
-
-                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
-                      *ngIf="isFormValid">
-                      Por favor ingrese todos los campos.
-                    </div>
-
-                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
-                      *ngIf="areCredentialsInvalid">
-                      Las contraseñas no coinciden
-                    </div>
-
-                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
-                      *ngIf="passwordIncorrect">
-                      Contraseña anterior incorrecta
-                    </div>
-
-                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
-                      *ngIf="passwordRepetida">
-                      Contraseña anterior no puede ser igual a la actual
-                    </div>
-
-                    <div class="buttons" style="margin-top: 1em">
-                      <button pButton type="submit" label="Cambiar Contraseña"></button>
-                    </div>
-                  </form>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!--Linea de division de componentes-->
-      <div class="p-col-1">
-        <p-divider layout="vertical"> </p-divider>
-      </div>
-
-      <div class="p-col-7 p-ai-center p-jc-center">
-        <div class="p-grid p-fluid">
-          <div class="p-col-12 p-md-6">
-            <div class="card">
-              <h6>Nombres:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input type="text" pInputText placeholder="Nombre" id="nombre" name="nombre"
-                    [(ngModel)]="nombreResponsable" />
-                </span>
-              </div>
-
-              <h6>Email:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-envelope"></i>
-                  <input type="text" pInputText placeholder="Correo Electronico" readonly="true"
-                    value="{{ responsable?.email }}" />
-                </span>
-              </div>
-
-              <h6>Pais:</h6>
-              <div class="p-grid p-formgrid">
-                <input type="text" pInputText placeholder="Pais del Participante" id="pais" name="pais"
-                  [(ngModel)]="paisResponsable" />
-              </div>
-
-              <h6>Ciudad:</h6>
-              <div class="p-grid p-formgrid">
-                <input type="text" pInputText placeholder="Ciudad del Participante" id="ciudad" name="ciudad"
-                  [(ngModel)]="ciudadResponsable" />
-              </div>
-              <h6>Dirección de Vivienda:</h6>
-              <div class="p-grid p-formgrid">
-                <input type="text" pInputText placeholder="Dirección del Participante" id="direccion" name="direccion"
-                  [(ngModel)]="direccionResponsable" />
-              </div>
-            </div>
-          </div>
-          <div class="p-col-12 p-md-6">
-            <div class="card">
-              <h6>Apellidos:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input type="text" pInputText placeholder="Apellido" id="apellido" name="apellido"
-                    [(ngModel)]="apellidoResponsable" />
-                </span>
-              </div>
-
-              <h6>Teléfono:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-phone"></i>
-                  <input type="text" pInputText placeholder="Número de teléfono" id="telefono" name="telefono"
-                    [(ngModel)]="telefonoResponsable" />
-                </span>
-              </div>
-
-              <h6>Nivel de Formación:</h6>
-              <div class="p-grid p-formgrid">
-                <input type="text" pInputText placeholder="Nivel de Formación del Responsable" id="formacion"
-                  name="formacion" [(ngModel)]="nivelDeFormacionResponsable" />
-              </div>
-
-              <h6>Rol:</h6>
-              <div class="p-grid p-formgrid">
-                <span class="p-input-icon-left">
-                  <i class="pi pi-user"></i>
-                  <input type="text" disabled pInputText value="Responsable" />
-                </span>
-              </div>
-            </div>
-          </div>
+                <div class="control" style="margin-top: 0.5em; width: 100%;">
+                    <input style="width: 100%;" formControlName="passwordConfirm" [ngClass]="{'ng-dirty ng-invalid':getErrorRequiredPass('passwordConfirm')}" type="password" pInputText placeholder="Repita su nueva contraseña" />
+                    <div *ngIf="formPassword.get('passwordConfirm').invalid">
+                        <small class="p-error" *ngIf="getErrorRequiredPass('passwordConfirm')">Este campo es
+                            obligatorio.</small>
+                    </div>
+                </div>
+                <div class="buttons" style="margin-top: 1em; width: 100%;">
+                    <button style="width: 100%;" (click)="onSubmitPassword()" pButton type="submit" label="Cambiar Contraseña"></button>
+                </div>
+            </form>
         </div>
 
-        <p-divider layout="horizontal" align="center">
-          <div class="buttons">
-            <p-toast key="editarTOAST"></p-toast>
-            <p-confirmDialog header="Editar Cuenta" key="editarCuenta" icon="pi pi-exclamation-triangle"
-              message="¿Esta seguro de editar tu cuenta?" [style]="{ width: '425px' }"
-              acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
-            </p-confirmDialog>
-            <button pButton (click)="editarCuenta()" label="Editar Perfil" style="margin-right: 2em"></button>
+        <!--Linea de division de componentes-->
+        <div class="p-col-0 p-xl-1 p-md-1">
+            <p-divider layout="vertical"> </p-divider>
+        </div>
 
-            <p-toast key="eliminarTOAST"></p-toast>
-            <p-confirmDialog header="Eliminar Cuenta" key="eliminarCuenta" icon="pi pi-exclamation-triangle"
-              message="¿Esta seguro de eliminar tu cuenta?" [style]="{ width: '425px' }"
-              acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
-            </p-confirmDialog>
-            <button type="text" (click)="eliminarCuenta()" pButton icon="pi pi-trash" label="Eliminar"
-              class="p-button-danger" style="width: auto"></button>
-          </div>
-        </p-divider>
-      </div>
+        <form [formGroup]="form" class="p-col-12 p-xl-8 p-md-8 p-grid">
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Nombres *:</h6>
+                <input [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nombre')}" formControlName="nombre" type="text" pInputText placeholder="Nombres" id="nombre" name="nombre" />
+
+                <div *ngIf="form.get('nombre').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Apellidos *:</h6>
+
+
+                <input formControlName="apellido" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('apellido')}" type="text" pInputText placeholder="Apellidos" id="apellido" name="apellido" />
+
+                <div *ngIf="form.get('apellido').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('apellido')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Teléfono *:</h6>
+
+
+                <input formControlName="telefono" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('telefono')}" type="text" pInputText placeholder="Teléfono" id="telefono" name="telefono" />
+
+                <div *ngIf="form.get('telefono').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('telefono')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Fecha de nacimiento *:</h6>
+                <p-calendar formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="years" dateFormat="yy-mm-dd" [ngClass]="{
+            'ng-dirty ng-invalid': getErrorRequired('fechaNacimiento')
+          }">
+                </p-calendar>
+                <div *ngIf="form.get('fechaNacimiento').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es
+                        obligatorio.</small>
+                </div>
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>País *:</h6>
+
+
+                <input formControlName="pais" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('pais')}" type="text" pInputText placeholder="País" id="pais" name="pais" />
+
+                <div *ngIf="form.get('pais').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('pais')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Ciudad *:</h6>
+
+
+                <input formControlName="ciudad" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('ciudad')}" type="text" pInputText placeholder="Ciudad" id="ciudad" name="ciudad" />
+
+                <div *ngIf="form.get('ciudad').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('ciudad')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Dirección *:</h6>
+
+
+                <input formControlName="direccion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('direccion')}" type="text" pInputText placeholder="Dirección" id="direccion" name="direccion" />
+
+                <div *ngIf="form.get('ciudad').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('direccion')">Este campo es obligatorio.</small>
+                </div>
+            </div>
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Genero *:</h6>
+                <p-dropdown formControlName="genero" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('genero')}" [options]="generos" placeholder="genero" optionLabel="name" optionValue="value" [showClear]="true">
+                </p-dropdown>
+                <div *ngIf="form.get('genero').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('genero')">Este campo es obligatorio.</small>
+                </div>
+
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Nivel de formación *:</h6>
+
+
+                <input formControlName="nivelDeFormacion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nivelDeFormacion')}" type="text" pInputText placeholder="Nivel de formación" id="nivelDeFormacion" name="nivelDeFormacion" />
+
+                <div *ngIf="form.get('nivelDeFormacion').invalid">
+                    <small class="p-error" *ngIf="getErrorRequired('nivelDeFormacion')">Este campo es
+                        obligatorio.</small>
+                </div>
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Carrera Universitaria:</h6>
+
+
+                <input formControlName="carreraUniversitaria" type="text" pInputText placeholder="Carrera Universitaria" id="carreraUniversitaria" name="carreraUniversitaria" />
+
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Estudios previos:</h6>
+
+
+                <input formControlName="estudiosPrevios" type="text" pInputText placeholder="Estudios previos" id="estudiosPrevios" name="estudiosPrevios" />
+
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Hijos:</h6>
+
+
+                <input formControlName="numeroDeHijos" type="number" min="0" pInputText placeholder="Hijos" id="numeroDeHijos" name="numeroDeHijos" />
+
+            </div>
+
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Estado civil:</h6>
+
+
+                <p-dropdown formControlName="estadoCivil" [options]="estadoCivil" placeholder="Estado civil" optionLabel="name" optionValue="value" [showClear]="true"></p-dropdown>
+
+            </div>
+            <div class="control p-col-12 p-xl-4 p-md-6">
+                <h6>Etnia:</h6>
+
+
+                <input formControlName="etnia" type="text" pInputText placeholder="Etnia" id="etnia" name="etnia" />
+
+            </div>
+            <div class="control p-col-12 p-xl-12 p-md-12">
+                <p-button (click)="onSubmit()" label="Guardar" icon="pi pi-check" loading="true"></p-button>
+            </div>
+        </form>
+
+
+
     </div>
-  </div>
 </div>

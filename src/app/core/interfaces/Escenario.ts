@@ -1,7 +1,7 @@
 import { variable } from "@angular/compiler/src/output/output_ast";
 
 export interface Escenario {
-  idEjercitario?: number;
+  id?: number;
   numeroDeEjercitario?: number;
   tipoDeEjercitario?: string;
   nombreDeEjercitario?: string;

@@ -3,8 +3,8 @@ import { TranslateService } from "@ngx-translate/core";
 import { PublicComponent } from "../../public/public.component";
 import { Router, NavigationExtras } from "@angular/router";
 import { LanguageService } from "src/app/service/language.service";
-import { LoginService } from "src/app/service/login.service";
 import { Subscription } from "rxjs";
+import { AuthService } from "src/app/service/auth.service";
 
 @Component({
   selector: "app-menu-public",
@@ -24,8 +24,8 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
   constructor(
     public appMain: PublicComponent,
     private languageService: LanguageService,
-    public loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {
     // try {
     //   if (
@@ -114,30 +114,43 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
     ];
   }
 
+  get user(){
+    return this.authService.user;
+  }
+
   mobileMegaMenuItemClick(index) {
     //this.appMain.megaMenuMobileClick = true;
     this.activeItem = this.activeItem === index ? null : index;
   }
 
   logOut() {
-    //console.log("saliendo")
-    this.loginService.signOut();
+    this.authService.signOut();
   }
 
-  navigate(route: string) {
-    this.router.navigate([route]);
+  navigate() {
+    console.log(this.user);
+    if(this.user.tipoUser === "admin"){
+      this.router.navigate(["/admin"]);
+    }
+    if(this.user.tipoUser === "participante"){
+      this.router.navigate(["/user"]);
+    }
+    if(this.user.tipoUser === "evaluador"){
+      this.router.navigate(["/expert"]);
+    }
+    
   }
 
-  navigateExpert(route: string) {
-    let extras: NavigationExtras = {
-      queryParams: {
-        is_evaluated: "False",
-      },
-    };
-    this.router.navigate([route], extras);
+  navigateMiCuenta() {
+    if(this.user.tipoUser === "admin"){
+      this.router.navigate(["/admin/mi-cuenta"]);
+    }
+    if(this.user.tipoUser === "participante"){
+      this.router.navigate(["/user/mi-cuenta"]);
+    }
+    if(this.user.tipoUser === "evaluador"){
+      this.router.navigate(["/expert/mi-cuenta"]);
+    }
   }
-
-  navigateStudent() {
-    this.router.navigate(["recommended"]);
-  }
+  
 }
