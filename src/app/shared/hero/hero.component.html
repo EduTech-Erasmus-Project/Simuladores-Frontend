@@ -1,1 +1,18 @@
-<p>hero works!</p>
+<div id="home" class="landing-header-wrapper">
+  <div class="landing-header-content" style="text-align: center">
+    <div class="contenedor">
+      <h1 style="color: #ffffff; text-align: center">
+        {{ titulo }}
+      </h1>
+      <p style="text-align: center">
+        {{ descripcion }}
+      </p>
+      <div class="video-button">
+        <button routerLink="/login">{{ btnText }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="tree">
+    <img style="height: 100%" [src]="btnLink" alt="mirage-layout" />
+  </div>
+</div>
