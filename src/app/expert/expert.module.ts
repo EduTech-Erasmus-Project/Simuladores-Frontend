@@ -14,6 +14,7 @@ import { MenuFooterPageExpertoComponent } from "./pages/StructurePage-Experto/me
 import { ComponentsModule } from "./components/components.module";
 import { ParticipantesComponent } from "./pages/participantes/participantes.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActividadComponent } from './pages/actividad/actividad.component';
 @NgModule({
   declarations: [
     ExpertComponent,
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     TopBarPageExpertoComponent,
     MenuFooterPageExpertoComponent,
     ParticipantesComponent,
+    ActividadComponent,
   ],
   imports: [
     CommonModule,

@@ -6,7 +6,7 @@ import { AutentificacionUsuarioService } from 'src/app/service/autentificacion/a
 @Component({
   selector: 'app-pagina-principal-experto',
   templateUrl: './pagina-principal-experto.component.html',
-  styleUrls: ['./pagina-principal-experto.component.css'], 
+  styleUrls: ['./pagina-principal-experto.component.scss'], 
   animations: [
     trigger('mask-anim', [
         state('void', style({

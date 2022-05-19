@@ -26,7 +26,7 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   ];
   public pieData: any;
   //public ejercitarios: Asignacion[] = [];
-  public usuario:any
+  public usuario: any;
 
   public chartOptions = {
     responsive: true,
