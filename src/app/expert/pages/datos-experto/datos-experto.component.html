@@ -1,0 +1,207 @@
+<div class="p-col-12">
+  <div class="card">
+    <h3 style="text-align: center; margin-left: 12.5%">
+      Mi información Personal
+    </h3>
+    <div class="p-grid">
+      <div class="p-col-3 p-d-flex p-ai-center p-jc-center">
+        <div class="p-fluid">
+          <div class="p-field">
+            <div>
+              <div style="text-align: center; line-height: 2em">
+                <!--
+                                    Codigo para mostrar fotografia del usuario
+                                    <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name"/>
+                                -->
+                <h3>Perfil de Usuario</h3>
+                <img src="https://freesvg.org/img/abstract-user-flat-1.png" style="width: 100px" alt="" />
+                <div class="product-list-detail">
+                  <h4>
+                    {{ responsable?.nombre }} {{ responsable?.apellido }}
+                  </h4>
+                  <span>
+                    Responsable
+                    <i class="pi pi-map-marker product-category-icon"></i>
+                    {{ responsable?.ciudad + " - " + responsable?.pais }}
+
+                    <!--{{product.description}}-->
+                  </span>
+                </div>
+
+                <p-divider layout="horizontal" align="center"></p-divider>
+
+                <div style="text-align: center">
+                  <h4>Cambio de Contraseña</h4>
+                  <form class="forms" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
+                    <div class="login-input-wrapper" style="margin-top: 1em">
+                      <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" pPassword
+                        required [(ngModel)]="password" [feedback]="false" appPassword style="width: 70%" />
+                      <button pButton type="button" id="buttonMostrar" (click)="mostrarPassword()" label="Mostrar"
+                        style="width: 30%"></button>
+                    </div>
+
+                    <div class="login-input-wrapper" style="margin-top: 0.5em">
+                      <input type="password" id="newPassword" name="newPassword"
+                        placeholder="Ingrese su nueva contraseña" pPassword required [(ngModel)]="newPassword"
+                        (keyup)="validarPassword()" style="width: 70%" [feedback]="false" appPassword />
+                      <button pButton type="button" id="buttonMostrarNuevo" (click)="mostrarPasswordNUeva()"
+                        label="Mostrar" style="width: 30%"></button>
+                      <div class="alert alert-danger" role="alert">
+                        <p id="tipoPassword"></p>
+                      </div>
+                    </div>
+
+                    <div class="login-input-wrapper" style="margin-top: 0.5em">
+                      <input type="password" id="repPassword" name="repPassword"
+                        placeholder="Repita su nueva contraseña" pPassword required [(ngModel)]="repPassword"
+                        [feedback]="false" appPassword (keyup)="verificacionSimilaridadPassword()"
+                        (click)="verificacionSimilaridadPassword()" style="width: 70%" />
+
+                      <button pButton type="button" id="buttonMostrarRep" (click)="mostrarPasswordRepeticion()"
+                        label="Mostrar" style="width: 30%"></button>
+
+                      <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
+                        *ngIf="passwordIncorrect == true">
+                        Contraseñas no coinciden
+                      </div>
+                      <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #5fe6b2"
+                        *ngIf="passwordIncorrect == false">
+                        Contraseñas coinciden
+                      </div>
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="isFormValid">
+                      Por favor ingrese todos los campos.
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="areCredentialsInvalid">
+                      Las contraseñas no coinciden
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="passwordIncorrect">
+                      Contraseña anterior incorrecta
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" style="margin-bottom: 1em; color: #ce7483"
+                      *ngIf="passwordRepetida">
+                      Contraseña anterior no puede ser igual a la actual
+                    </div>
+
+                    <div class="buttons" style="margin-top: 1em">
+                      <button pButton type="submit" label="Cambiar Contraseña"></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Linea de division de componentes-->
+      <div class="p-col-1">
+        <p-divider layout="vertical"> </p-divider>
+      </div>
+
+      <div class="p-col-7 p-ai-center p-jc-center">
+        <div class="p-grid p-fluid">
+          <div class="p-col-12 p-md-6">
+            <div class="card">
+              <h6>Nombres:</h6>
+              <div class="p-grid p-formgrid">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-user"></i>
+                  <input type="text" pInputText placeholder="Nombre" id="nombre" name="nombre"
+                    [(ngModel)]="nombreResponsable" />
+                </span>
+              </div>
+
+              <h6>Email:</h6>
+              <div class="p-grid p-formgrid">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-envelope"></i>
+                  <input type="text" pInputText placeholder="Correo Electronico" readonly="true"
+                    value="{{ responsable?.email }}" />
+                </span>
+              </div>
+
+              <h6>Pais:</h6>
+              <div class="p-grid p-formgrid">
+                <input type="text" pInputText placeholder="Pais del Participante" id="pais" name="pais"
+                  [(ngModel)]="paisResponsable" />
+              </div>
+
+              <h6>Ciudad:</h6>
+              <div class="p-grid p-formgrid">
+                <input type="text" pInputText placeholder="Ciudad del Participante" id="ciudad" name="ciudad"
+                  [(ngModel)]="ciudadResponsable" />
+              </div>
+              <h6>Dirección de Vivienda:</h6>
+              <div class="p-grid p-formgrid">
+                <input type="text" pInputText placeholder="Dirección del Participante" id="direccion" name="direccion"
+                  [(ngModel)]="direccionResponsable" />
+              </div>
+            </div>
+          </div>
+          <div class="p-col-12 p-md-6">
+            <div class="card">
+              <h6>Apellidos:</h6>
+              <div class="p-grid p-formgrid">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-user"></i>
+                  <input type="text" pInputText placeholder="Apellido" id="apellido" name="apellido"
+                    [(ngModel)]="apellidoResponsable" />
+                </span>
+              </div>
+
+              <h6>Teléfono:</h6>
+              <div class="p-grid p-formgrid">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-phone"></i>
+                  <input type="text" pInputText placeholder="Número de teléfono" id="telefono" name="telefono"
+                    [(ngModel)]="telefonoResponsable" />
+                </span>
+              </div>
+
+              <h6>Nivel de Formación:</h6>
+              <div class="p-grid p-formgrid">
+                <input type="text" pInputText placeholder="Nivel de Formación del Responsable" id="formacion"
+                  name="formacion" [(ngModel)]="nivelDeFormacionResponsable" />
+              </div>
+
+              <h6>Rol:</h6>
+              <div class="p-grid p-formgrid">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-user"></i>
+                  <input type="text" disabled pInputText value="Responsable" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p-divider layout="horizontal" align="center">
+          <div class="buttons">
+            <p-toast key="editarTOAST"></p-toast>
+            <p-confirmDialog header="Editar Cuenta" key="editarCuenta" icon="pi pi-exclamation-triangle"
+              message="¿Esta seguro de editar tu cuenta?" [style]="{ width: '425px' }"
+              acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
+            </p-confirmDialog>
+            <button pButton (click)="editarCuenta()" label="Editar Perfil" style="margin-right: 2em"></button>
+
+            <p-toast key="eliminarTOAST"></p-toast>
+            <p-confirmDialog header="Eliminar Cuenta" key="eliminarCuenta" icon="pi pi-exclamation-triangle"
+              message="¿Esta seguro de eliminar tu cuenta?" [style]="{ width: '425px' }"
+              acceptButtonStyleClass="p-button-text" rejectButtonStyleClass="p-button-text">
+            </p-confirmDialog>
+            <button type="text" (click)="eliminarCuenta()" pButton icon="pi pi-trash" label="Eliminar"
+              class="p-button-danger" style="width: auto"></button>
+          </div>
+        </p-divider>
+      </div>
+    </div>
+  </div>
+</div>

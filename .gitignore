@@ -1,7 +1,15 @@
+/.angular/cache
 build
 dist
 node_modules
 .DS_Store
 sassdoc
 
+/idea
+/.idea
+
+.angular
+/.angular
+
+package-lock.json
 

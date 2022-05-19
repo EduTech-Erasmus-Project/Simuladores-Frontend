@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Responsable } from 'src/app/model/Responsable';
+import { User } from 'src/app/core/interfaces/User';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,11 +25,11 @@ export class EditarInformacionExpertoService {
     return this.http.put<any>(environment.WS_PATH+"eliminarCuentaResponsable", {"correo":correo, "password":password}, config).subscribe(res => console.log(res))
   }
 
-  public editarCuenta(responsable: Responsable){
-    console.log("correo " + responsable.getEmail + " responsable " +responsable.getCiudad)
+  public editarCuenta(responsable: User){
+    console.log("correo " + responsable?.email + " responsable " +responsable?.ciudad)
     const config = { headers: new HttpHeaders({
       'Content-Type':  'application/json',}) 
     };
-    return this.http.put<any>(environment.WS_PATH+"editarCuentaResponsable", {"correo":responsable.getEmail, "responsable":responsable}, config).subscribe(res => console.log(res))
+    return this.http.put<any>(environment.WS_PATH+"editarCuentaResponsable", {"correo":responsable?.email, "responsable":responsable}, config).subscribe(res => console.log(res))
   }
 }

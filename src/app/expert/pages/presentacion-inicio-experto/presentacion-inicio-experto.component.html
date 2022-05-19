@@ -1,0 +1,207 @@
+<div class="p-grid layout-dashboard">
+    <div class="p-col-12 p-xl-6 p-md-6">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-3">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-filessynced.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Participantes</h5>
+                <span>Mis participantes</span>
+            </div>
+            <div class="p-col-3 overview-box-status">{{totalParticipantes}}</div>
+        </div>
+    </div>
+    <div class="p-col-12 p-xl-6 p-md-6">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-4">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-usersonline.png" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Ejercitarios</h5>
+                <span>Ejercitarios en la plataforma</span>
+            </div>
+            <div class="p-col-3 overview-box-status">
+                {{ ejercitarios.length || 0 }}
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-12 p-lg-5">
+        <div class="p-grid p-dir-col p-nogutter">
+            <div class="p-col-12">
+                <div class="card widget-statistics" style="min-height:33vh">
+                    <div class="p-grid">
+                        <div class="p-col-6 p-md-8">
+                            <h5>Información General</h5>
+                        </div>
+                        <div class="p-col-6 p-md-4 dropdown">
+                            <p-dropdown [options]="dropdownTipo" (onChange)="onChangeTipo($event)"></p-dropdown>
+                        </div>
+                    </div>
+                    <!-- <p-chart id="dashboard-chart" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart> -->
+                    <p-chart id="dashboard-chart" type="pie" [options]="chartOptions" [data]="pieData"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-12 p-lg-7">
+        <div class="p-grid p-dir-col p-nogutter">
+            <div class="p-col-12">
+                <div class="card widget-statistics" style="min-height:33vh">
+                    <div class="p-grid">
+                        <div class="p-col-6 p-md-5">
+                            <h5>Información de los Ejercitarios</h5>
+                        </div>
+                        <div class="p-col-6 p-md-7" style="display: flex; justify-content: flex-end">
+                            <p-dropdown [options]="ejercitarios"
+                                placeholder="Seleccione un ejercitario para ver el reporte" optionLabel="name"
+                                (onChange)="seleccionEscenario($event)">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="ejercitario; else ejercitarioTemplateInfo">
+                        <h5 style="text-align: center">
+                            {{ ejercitario?.nombreDeEjercitario }}
+                        </h5>
+                        <div class="info">
+                            <p>
+                                <b>Tipo de Ejercitario:</b> {{ ejercitario?.tipoDeEjercitario }}
+                            </p>
+                            <p>
+                                <b>Nombre de Ejercitario:</b>
+                                {{ ejercitario?.nombreDeEjercitario }}
+                            </p>
+                            <p>
+                                <b> Principales Competencias medidas:</b>{{
+                                ejercitario?.principalCompetenciasEjercitario }}
+                            </p>
+                            <p>
+                                <b> Duración de Ejercitario:</b>
+                                {{ ejercitario?.duracionEjercitarioPorMinutos }}
+                            </p>
+                            <p>
+                                <b> Numero de Ejercitario: </b>
+                                {{ ejercitario?.numeroDeEjercitario }}
+                            </p>
+                            <p>
+                                <b>Instrucción principal: </b>
+                                {{ ejercitario?.instruccionPrincipalDeEjercitario }}
+                            </p>
+                            <p>
+                                <b>Competencia: </b>
+                                {{ ejercitario?.competencia?.titulo }}
+                            </p>
+                        </div>
+
+                        <div>
+                            <a pButton type="button" label="Abrir Reporte" [routerLink]="[
+                  'escenarioInfo',
+                  ejercitario?.numeroDeEjercitario
+                ]" routerLinkActive="active">
+                            </a>
+                        </div>
+                    </ng-container>
+                    <ng-template #ejercitarioTemplateInfo>
+                        <p>Seleccione un ejercitario par aver la información</p>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-12 p-lg-12">
+        <div class="card orders-table" style="min-height:33vh">
+            <ng-container *ngIf="ejercitario; else elseTableTemplate">
+                <!-- <h5>Participantes del {{ ejercitario?.nombreDeEjercitario }}</h5> -->
+                <p-table #dt [value]="participantes" dataKey="id" styleClass="p-datatable-customers" [rows]="10"
+                    [paginator]="true" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                            Participantes del {{ ejercitario?.nombreDeEjercitario }}
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="Buscar por nombre..." />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th pSortableColumn="nombre">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Nombre
+                                    <p-sortIcon field="nombre"></p-sortIcon>
+
+                                </div>
+                            </th>
+                            
+                            <th pSortableColumn="genero">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Genero
+                                    <p-sortIcon field="genero"></p-sortIcon>
+
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="tiempo">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Tiempo global
+                                    <p-sortIcon field="tiempo"></p-sortIcon>
+
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="calificacion">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Calificación global
+                                    <p-sortIcon field="calificacion"></p-sortIcon>
+
+                                </div>
+                            </th>
+
+                            <th style="width: 8rem"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-participante>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                <span class="p-column-title">{{participante.nombre}} {{participante.apellido}}</span>
+                            </td>
+                            <td>
+                                <span class="p-column-title">{{participante.genero}}</span>
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">{{participante.tiempo}} min</span>
+                            </td>
+
+                            <td>
+                                <p-progressBar [value]="participante?.calificacion || 0"
+                                    [showValue]="true">
+                                </p-progressBar>
+                            </td>
+
+                            <td style="text-align: center">
+                                <button pButton type="button" class="p-button-primary" icon="pi pi-search"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">Sin datos para mostrar.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </ng-container>
+            <ng-template #elseTableTemplate>
+                <p>Seleccione un ejercitario par aver la información</p>
+            </ng-template>
+        </div>
+    </div>
+
+
+</div>

@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DatePipe, HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 // PrimeNG Components for demos
 import {AccordionModule} from 'primeng/accordion';
@@ -87,10 +87,10 @@ import {TreeTableModule} from 'primeng/treetable';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 
 // Application Components
-import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app-routing.module';
-import {AppMainComponent} from './app.main.component';
-import {AppNotfoundComponent} from './pages/app.notfound.component';
+//import {AppComponent} from './app.component';
+//import {AppRoutingModule} from '../../app-routing.module';
+//import {AppMainComponent} from './app.main.component';
+/*import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
 import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
 import {AppLoginComponent} from './pages/app.login.component';
@@ -103,37 +103,8 @@ import {AppBreadcrumbComponent} from './app.breadcrumb.component';
 import {AppConfigComponent} from './app.config.component';
 import {AppRightPanelComponent} from './app.rightpanel.component';
 import {AppTopBarComponent} from './app.topbar.component';
-import {AppFooterComponent} from './app.footer.component';
+import {AppFooterComponent} from './app.footer.component';*/
 
-// Demo pages
-import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
-import {FormLayoutDemoComponent} from './demo/view/formlayoutdemo.component';
-import {FloatLabelDemoComponent} from './demo/view/floatlabeldemo.component';
-import {InvalidStateDemoComponent} from './demo/view/invalidstatedemo.component';
-import {InputDemoComponent} from './demo/view/inputdemo.component';
-import {ButtonDemoComponent} from './demo/view/buttondemo.component';
-import {TableDemoComponent} from './demo/view/tabledemo.component';
-import {ListDemoComponent} from './demo/view/listdemo.component';
-import {TreeDemoComponent} from './demo/view/treedemo.component';
-import {PanelsDemoComponent} from './demo/view/panelsdemo.component';
-import {OverlaysDemoComponent} from './demo/view/overlaysdemo.component';
-import {MediaDemoComponent} from './demo/view/mediademo.component';
-import {MenusDemoComponent} from './demo/view/menusdemo.component';
-import {MessagesDemoComponent} from './demo/view/messagesdemo.component';
-import {MiscDemoComponent} from './demo/view/miscdemo.component';
-import {EmptyDemoComponent} from './demo/view/emptydemo.component';
-import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
-import {FileDemoComponent} from './demo/view/filedemo.component';
-import {DocumentationComponent} from './demo/view/documentation.component';
-import {DisplayComponent} from './utilities/display.component';
-import {ElevationComponent} from './utilities/elevation.component';
-import {FlexboxComponent} from './utilities/flexbox.component';
-import {GridComponent} from './utilities/grid.component';
-import {IconsComponent} from './utilities/icons.component';
-import {SpacingComponent} from './utilities/spacing.component';
-import {TypographyComponent} from './utilities/typography.component';
-import {TextComponent} from './utilities/text.component';
-import {WidgetsComponent} from './utilities/widgets.component';
 
 // Demo services
 import {CountryService} from './demo/service/countryservice';
@@ -145,43 +116,16 @@ import {ProductService} from './demo/service/productservice';
 import {IconService} from './demo/service/iconservice';
 
 // Application services
-import {BreadcrumbService} from './breadcrumb.service';
-import {MenuService} from './app.menu.service';
-import {AppCodeModule} from './app.code.component';
-import { LoginUserComponent } from './pages/login-user/login-user.component';
-import { RegistrarUserComponent } from './pages/registrar-user/registrar-user.component';
-import { MisActividadesUsuarioComponent } from './pages/User/mis-actividades-usuario/mis-actividades-usuario.component';
-import { PaginaPrincipalUsuarioComponent } from './pages/User/pagina-principal-usuario/pagina-principal-usuario.component';
-import { MenuLateralComponent } from './pages/Structure/menu-lateral/menu-lateral.component';
-import { MenuTopBarComponent } from './pages/Structure/menu-top-bar/menu-top-bar.component';
-import { MenuFooterPageComponent } from './pages/Structure/menu-footer-page/menu-footer-page.component';
-import { DatosUsuarioComponent } from './Pages/User/datos-usuario/datos-usuario.component';
-import { PresentacionInicioUserComponent } from './Pages/User/presentacion-inicio-user/presentacion-inicio-user.component';
-import { LandingComponent } from './pages/inicio/landing/landing.component';
-import { MenuLandingComponent } from './pages/inicio/menu-landing/menu-landing.component';
-import { FooterLandingComponent } from './pages/inicio/footer-landing/footer-landing.component';
-import { PaginaPrincipalExpertoComponent } from './pages/Experto/pagina-principal-experto/pagina-principal-experto.component';
-import { DatosExpertoComponent } from './pages/Experto/datos-experto/datos-experto.component';
-import { AgregarAlumnoAExpertoComponent } from './pages/Experto/agregar-alumno-a-experto/agregar-alumno-a-experto.component';
-import { EscenarioComponent } from './pages/Experto/escenario/escenario.component';
-import { ParticipanteInfoComponent } from './pages/Experto/participante-info/participante-info.component';
-import { MenuFooterPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-footer-page-experto/menu-footer-page-experto.component';
-import { MenuLateralPageExpertoComponent } from './pages/Experto/StructurePage-Experto/menu-lateral-page-experto/menu-lateral-page-experto.component';
-import { TopBarPageExpertoComponent } from './pages/Experto/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
-import { PresentacionInicioExpertoComponent } from './pages/Experto/presentacion-inicio-experto/presentacion-inicio-experto.component';
-import { RouterModule } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { AgregarActividadesParticipanteComponent } from './pages/Experto/agregar-actividades-participante/agregar-actividades-participante.component';
-import { AboutUsComponent } from './pages/about-us/about-us.component';
-import { TerminosCondicionesComponent } from './pages/terminos-condiciones/terminos-condiciones.component';
-import { RegisterExpertoComponent } from './pages/register-experto/register-experto.component';
+//import {BreadcrumbService} from './breadcrumb.service';
+import {MenuService} from './shared/menu-componets/app.menu.service';
+//import {AppCodeModule} from './app.code.component';
+
 @NgModule({
     imports: [
-        RouterModule,
         BrowserModule,
         FormsModule,
-        AppRoutingModule,
-        AppCodeModule,
+      //  AppRoutingModule,
+       // AppCodeModule,
         HttpClientModule,
         BrowserAnimationsModule,
         AccordionModule,
@@ -265,9 +209,9 @@ import { RegisterExpertoComponent } from './pages/register-experto/register-expe
         VirtualScrollerModule,
     ],
     declarations: [
-        AppComponent,
-        AppMainComponent,
-        AppMenuComponent,
+       // AppComponent,
+     //   AppMainComponent,
+       /* AppMenuComponent,
         AppMenuitemComponent,
         AppTopBarComponent,
         AppFooterComponent,
@@ -309,39 +253,14 @@ import { RegisterExpertoComponent } from './pages/register-experto/register-expe
         SpacingComponent,
         TypographyComponent,
         TextComponent,
-        WidgetsComponent,
-        LoginUserComponent,
-        RegistrarUserComponent,
-        MisActividadesUsuarioComponent,
-        PaginaPrincipalUsuarioComponent,
-        MenuLateralComponent,
-        MenuTopBarComponent,
-        MenuFooterPageComponent,
-        DatosUsuarioComponent,
-        PresentacionInicioUserComponent,
-        LandingComponent,
-        MenuLandingComponent,
-        FooterLandingComponent,
-        PaginaPrincipalExpertoComponent,
-        DatosExpertoComponent,
-        AgregarAlumnoAExpertoComponent,
-        EscenarioComponent,
-        ParticipanteInfoComponent,
-        MenuFooterPageExpertoComponent,
-        MenuLateralPageExpertoComponent,
-        TopBarPageExpertoComponent,
-        PresentacionInicioExpertoComponent,
-        AgregarActividadesParticipanteComponent,
-        AboutUsComponent,
-        TerminosCondicionesComponent,
-        RegisterExpertoComponent,
+        WidgetsComponent,*/
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService,ConfirmationService,MessageService, DatePipe
+        PhotoService, ProductService, MenuService, //BreadcrumbService
     ],
-    bootstrap: [AppComponent]
+   // bootstrap: [//AppComponent]
 })
 export class AppModule {
 }
