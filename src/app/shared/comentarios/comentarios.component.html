@@ -1,7 +1,6 @@
-<p-scrollPanel [style]="{width: '100%', height: '50vh'}">
-    <p-card [style]="{'width': '100%', 'margin-bottom': '1em'}" *ngFor="let comentario of comentarios">
-        <div class="user">
-            <!-- <ng-container *ngIf="comentario.participante; else elseTemplate">
+<p-card [style]="{ width: '100%', 'margin-bottom': '1em' }" *ngFor="let comentario of comentarios">
+    <div class="user">
+        <!-- <ng-container *ngIf="comentario.participante; else elseTemplate">
                 <h6>{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</h6>
             </ng-container>
             <ng-template #elseTemplate>
@@ -15,15 +14,16 @@
                 <h6>Yo</h6>
             </ng-template> -->
 
-            <app-test1></app-test1>
+        <app-test1></app-test1>
 
-            <span>{{date(comentario.fechaComentario)}}</span>
-        </div>
-        <p>{{comentario.comentario}}</p>
-    </p-card>
-</p-scrollPanel>
+        <span>{{ date(comentario.fechaComentario) }}</span>
+    </div>
+    <p>{{ comentario.comentario }}</p>
+</p-card>
 
-
+<p *ngIf="comentarios.length === 0">
+    <span>No hay comentarios</span>
+</p>
 
 <div class="input-comentario" style="padding-top: 2em">
     <span class="p-float-label">

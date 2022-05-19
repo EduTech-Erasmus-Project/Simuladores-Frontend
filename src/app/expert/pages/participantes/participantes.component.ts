@@ -16,6 +16,7 @@ export class ParticipantesComponent implements OnInit {
   public loadingPendientes = false;
   public idParticipante: number;
   public displayMaximizable = false;
+  public usuario:any;
 
 
   constructor(private usuarioService: UsuarioService, private confirmationService: ConfirmationService) {}
@@ -42,21 +43,13 @@ export class ParticipantesComponent implements OnInit {
   private async loadPendientes() {
     this.loadingPendientes = true;
     try {
-      const participantes = await this.usuarioService
-        .obtenerParticipantesPendientes()
-        .toPromise();
+      const participantes = await this.usuarioService.obtenerParticipantesPendientes().toPromise();
       console.log("participantes pendientes", participantes);
       this.participantesPendientes = participantes;
       this.loadingPendientes = false;
     } catch (error) {
       console.log(error);
     }
-  }
-
-  public showModal(id){
-    console.log(id);
-    this.idParticipante = id;
-    this.displayMaximizable = true;
   }
   
   async approved(id){
@@ -137,5 +130,17 @@ export class ParticipantesComponent implements OnInit {
         })
       }
     })
+  }
+
+  public async showModal(id) {
+    try {
+      let user = await this.usuarioService
+        .obtenerInformacionParticipante(id)
+        .toPromise();
+      this.usuario = user;
+      this.displayMaximizable = true;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

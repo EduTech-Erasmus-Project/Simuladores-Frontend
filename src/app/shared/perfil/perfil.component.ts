@@ -24,6 +24,7 @@ export class PerfilComponent implements OnInit {
     if(this.discapacidadesData){
       this.loadData()
     }
+    console.log(this.discapacidadesData);
   }
 
   private async loadData() {

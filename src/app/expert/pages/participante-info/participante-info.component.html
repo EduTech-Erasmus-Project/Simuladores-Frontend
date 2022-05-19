@@ -164,8 +164,9 @@
                             </td>
 
                             <td style="text-align: center">
-                                <button (click)="showModalComentarios(actividad.id)" pButton type="button" class="p-button-primary" icon="pi pi-comments"></button>
-                                <button (click)="modalPreguntas= true" pButton type="button" class="p-button-primary" style="margin-left: 1em;" icon="pi pi-check-circle"></button>
+                                <!-- <button (click)="showModalComentarios(actividad.id)" pButton type="button" class="p-button-primary" icon="pi pi-comments"></button>
+                                <button (click)="modalPreguntas= true" pButton type="button" class="p-button-primary" style="margin-left: 1em;" icon="pi pi-check-circle"></button> -->
+                                <a [routerLink]="[ '/expert/actividad', actividad.id ]" pButton type="button" title="Resumen de la actividad" class="p-button-primary" style="margin-left: 1em" icon="pi pi-bookmark"></a>
                             </td>
                         </tr>
                     </ng-template>
@@ -185,12 +186,11 @@
 </div>
 
 
-
-<p-dialog header="Información del Participante" [(visible)]="modalPerfil" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
-    <app-perfil *ngIf="modalPerfil" [id]="idParticipante"></app-perfil>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario.usuario" [discapacidadesData]="usuario.DiscapacidadParticipante"></app-perfil>
 </p-dialog>
 
-<p-dialog header="Comentarios" [(visible)]="modalComentarios" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
+<!-- <p-dialog header="Comentarios" [(visible)]="modalComentarios" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">
     <app-comentarios *ngIf="modalComentarios" [idActividad]="idActividad"></app-comentarios>
 
     <ng-template pTemplate="footer">
@@ -203,4 +203,4 @@
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="modalPreguntas=false" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
-</p-dialog>
+</p-dialog> -->

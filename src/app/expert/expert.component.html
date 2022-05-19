@@ -1,14 +1,21 @@
-<div class="layout-wrapper">
-    
-    <app-menu-lateral-page-experto></app-menu-lateral-page-experto>
-    
+<div class="layout-wrapper" (click)="app.onLayoutClick()" [ngClass]="{'layout-horizontal': app.horizontalMenu,
+                'layout-wrapper-static': app.staticMenuActive,
+                'layout-rightpanel-active': app.rightPanelActive,
+                'layout-topbar-mobile-active': app.topbarMobileMenuActive,
+                'layout-megamenu-mobile-active': app.megaMenuMobileActive,
+                'layout-sidebar-mobile-active': app.menuMobileActive,
+                'p-input-filled': app.inputStyle === 'filled',
+                'p-ripple-disabled': !app.ripple}" [class]="app.menuColor">
+
+    <app-private-menu [menu]="menu"></app-private-menu>
+
     <div class="layout-main">
-        <app-top-bar-page-experto></app-top-bar-page-experto>
-        
-        <div class="layout-content"> 
+        <app-top-bar></app-top-bar>
+        <!-- <app-breadcrumb></app-breadcrumb> -->
+        <div class="layout-content">
             <router-outlet></router-outlet>
         </div>
-        <app-footer></app-footer> 
+        <app-footer></app-footer>
         <div class="layout-main-mask"></div>
-    </div>  
+    </div>
 </div>
