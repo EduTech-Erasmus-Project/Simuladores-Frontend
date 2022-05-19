@@ -40,8 +40,10 @@ export class ParticipanteInfoComponent implements OnInit {
   public loading: boolean = true;
   public actividades: Actividad[];
   public competencia: Competencia;
+  public usuario:any;
 
   public idActividad : number;
+  public displayMaximizable: boolean = false;
 
   public charLineNotaData = {};
   public charLineTiempoaData = {};
@@ -79,7 +81,8 @@ export class ParticipanteInfoComponent implements OnInit {
     private messageService: MessageService,
     private actividadService: ActividadService,
     private competenciaService: CompetenciaService,
-    private router: Router
+    private router: Router, 
+    private usuarioService: UsuarioService
   ) {
     console.log(this._Activatedroute.snapshot.params);
 
@@ -148,11 +151,6 @@ export class ParticipanteInfoComponent implements OnInit {
     };
   }
 
-  showModalComentarios(idActividad: number) {
-    this.idActividad = idActividad;
-    this.modalComentarios = true;
-  }
-
   // agregarComentario(scroll: ScrollPanel) {
   //   let date: Date = new Date();
   //   var comentarioNuevo: Comentario = {
@@ -208,10 +206,6 @@ export class ParticipanteInfoComponent implements OnInit {
     );
   }
 
-  public showModal() {
-    this.modalPerfil = true;
-  }
-
   onChangeNivel() {
     this.ejercitarios = this.competencia.niveles.find(
       (nivel) => nivel.value == this.nivel
@@ -230,6 +224,19 @@ export class ParticipanteInfoComponent implements OnInit {
         .toPromise();
       this.actividades = actividades;
       this.loadGrafica();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async showModal() {
+    try {
+      let user = await this.usuarioService
+        .obtenerInformacionParticipante(this.idParticipante)
+        .toPromise();
+      this.usuario = user;
+      console.log(this.usuario);
+      this.displayMaximizable = true;
     } catch (error) {
       console.log(error);
     }
