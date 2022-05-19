@@ -88,8 +88,10 @@ import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
 import { ContributorsComponent } from "./contributors/contributors.component";
+import { HeroComponent } from './hero/hero.component';
 import { PerfilComponent } from "./perfil/perfil.component";
 import { ComentariosComponent } from './comentarios/comentarios.component';
+
 @NgModule({
   declarations: [
     FooterComponent,
@@ -98,15 +100,18 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
     MenuTopBarComponent,
     MenuPublicComponent,
     ContributorsComponent,
+    HeroComponent,
     PerfilComponent,
     ComentariosComponent,
     ComentariosComponent
+
   ],
   imports: [
     CommonModule,
     AccordionModule,
     AutoCompleteModule,
     AvatarModule,
+    
     AvatarGroupModule,
     BadgeModule,
     BreadcrumbModule,
@@ -272,6 +277,7 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
     FooterComponent,
     MenuPublicComponent,
     ContributorsComponent,
+    HeroComponent,
     PerfilComponent,
     ComentariosComponent
 
