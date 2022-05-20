@@ -1,20 +1,13 @@
 <p-card [style]="{ width: '100%', 'margin-bottom': '1em' }" *ngFor="let comentario of comentarios">
     <div class="user">
-        <!-- <ng-container *ngIf="comentario.participante; else elseTemplate">
-                <h6>{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</h6>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <h6>Yo</h6>
-            </ng-template>
 
-            <ng-container *ngIf="comentario.participante; else elseTemplate">
-                <h6>{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</h6>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <h6>Yo</h6>
-            </ng-template> -->
-
-        <app-test1></app-test1>
+        <ng-container *ngIf="(!evaluador && comentario.evaluador) || (evaluador && comentario.participante); else elseTemplate">
+            <h6 *ngIf="!evaluador && comentario.evaluador">{{comentario.evaluador.usuario.nombre}} {{comentario.evaluador.usuario.apellido}}</h6>
+            <h6 *ngIf="evaluador && comentario.participante">{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</h6>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <h6>Yo</h6>
+        </ng-template>
 
         <span>{{ date(comentario.fechaComentario) }}</span>
     </div>
