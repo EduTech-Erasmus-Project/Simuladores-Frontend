@@ -1,16 +1,14 @@
 export interface Actividad {
-    idActividad: number;
-    comentario: string;
-    tiempoInicio: string;
-    tiempoFin: string;
-    tiempoTotalResolucionEjercitario: number;
-    fechaDeActividad: string;
-    totalRespuestasCorrectasIngresadasParticipante: number;
-    numeroTotalDeRespuestasContestadasPorElParticipante: number;
-    numeroTotalDePreguntasDelEjercitario: number;
-    calificacionActividad: number;
-    ActividadPorEjercitario_id: number;
-    ActividadDeParticipante_id: number;
-    ejercitario?: string;
+  id?: number;
+  tiempoInicio?: string;
+  tiempoFin?: string;
+  tiempoTotal?: number;
+  fecha?: Date;
+  preguntasCorrectas?: number;
+  PreguntasContestadas?: number;
+  totalPreguntas?: number;
+  calificacion?: number;
+  ejercitario_id?: number;
+  participante_id?: number;
+  calificacionPorcentaje?: number;
 }
-

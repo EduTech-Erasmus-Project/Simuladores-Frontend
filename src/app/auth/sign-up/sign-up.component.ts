@@ -59,7 +59,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.discapacidadesArray = results.discapacidades.map((results) => {
           return {
             name: results.tipoDiscapacidad,
-            code: results.idDiscapacidad,
+            code: results.id,
           };
         });
         console.log(this.discapacidades);
@@ -175,10 +175,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.registred = true;
         },
         (err) => {
-          //console.log("err", err);
+          console.log("err", err);
           if (err.error?.email &&
             err.error?.email[0]?.includes(
-              "participante with this email already exists."
+              "usuario with this email already exists."
             )
           ) {
             this.msgs = [
