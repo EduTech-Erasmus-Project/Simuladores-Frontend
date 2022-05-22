@@ -9,13 +9,15 @@ import { ExpertosComponent } from './pages/expertos/expertos.component';
 import { SimuladoresComponent } from './pages/simuladores/simuladores.component'
 
 
+
 @NgModule({
   declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+
   ]
 })
 export class AdminModule { }
