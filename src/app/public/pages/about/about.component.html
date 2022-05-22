@@ -1,31 +1,11 @@
 <body class="landing-body">
-    <div id="home" class="landing-header-wrapper">
-      <div class="tree">
-        <img style="width:64.3em;"
-          src="https://cdn.pixabay.com/photo/2016/11/21/13/51/woman-1845517_960_720.jpg"
-          alt="oculos-img"
-        />
-      </div>
-      <div class="landing-header-content1" style="text-align: center">
-        <h3 style="color: #ffffff">
-          Con el Objetivo de Brindar una mejora de la calidad Educatica
-        </h3>
-        <p>
-          El proyecto “Asistencia tecnológica a la accesibilidad en la Educación
-          Superior Virtual (EduTech)” trabaja en cooperación para la innovación y
-          el intercambio de buenas prácticas. La acción está destinada a respaldar
-          la modernización, accesibilidad e internacionalización de la educación
-          superior en los países asociados contribuyendo a su desarrollo y
-          crecimiento socioeconómico sostenible e integrador.
-        </p>
-        <div class="video-button">
-          <button routerLink="/registrarExperto">Se parte de Nosotros</button>
-        </div>
-  
-      </div>
-    </div>
-  
-    <div id="features1" class="section">
+    <app-hero
+      [titulo]="titulo"
+      [descripcion]="descripcion"
+      [btnText]="btnText"
+      [btnLink]="btnLink"
+    ></app-hero>
+    <div id="features" class="section">
       <div class="section-title">
         <h1>Acerca de nosotros</h1>
       </div>
@@ -35,13 +15,13 @@
         desarrollo tecnológico, con habilidades excepcionales dispuestos ha ayudar
         con herramientas tecnológicas sin animo de lucro.</span
       >
-      <div class="features-content1">
-        <div class="features-rows1">
-          <div class="features-row1">
-            <div class="features-row-icon1">
-              <div class="feature first1"></div>
+      <div class="features-content">
+        <div class="features-rows">
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature first"></div>
             </div>
-            <div class="features-row-content1">
+            <div class="features-row-content">
               <h3>OBJETIVO DEL PROYECTO</h3>
               <span
                 >Ayudar a las Instituciones de Educación Superior (IES) de América
@@ -52,11 +32,11 @@
               >
             </div>
           </div>
-          <div class="features-row1">
-            <div class="features-row-icon1">
-              <div class="feature second1"></div>
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature second"></div>
             </div>
-            <div class="features-row-content1">
+            <div class="features-row-content">
               <h3>MISIÓN DEL PROYECTO</h3>
               <br />
               <span
@@ -67,11 +47,11 @@
               <br />
           </div>
           <div class="contenedorV">
-          <div class="features-row1">
-            <div class="features-row-icon1">
-              <div class="feature third1"></div>
+          <div class="features-row">
+            <div class="features-row-icon">
+              <div class="feature third"></div>
             </div>
-            <div class="features-row-content1">
+            <div class="features-row-content">
               <h3 style="margin-top: 2em">VISIÓN DEL PROYECTO</h3>
               <br />
               <span

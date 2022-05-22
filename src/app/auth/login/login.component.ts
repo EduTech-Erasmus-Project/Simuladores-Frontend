@@ -6,7 +6,7 @@ import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 import { Message, MessageService } from "primeng/api";
 import { LanguageService } from "src/app/service/language.service";
-import { LoginService } from "src/app/service/login.service";
+
 import { StorageService } from "src/app/service/storage.service";
 import { AuthService } from "src/app/service/auth.service";
 
@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async onLogin() {
     this.msgs = [];
+    this.markTouchForm();
 
     if (this.loginForm.valid) {
       Swal.fire({
@@ -106,10 +107,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         async (res: any) => {
           Swal.close();
           console.log(res);
-          this.storageService.saveStorageItem("token", res.access);
-          this.storageService.saveStorageItem("refresh", res.refresh);
+          this.storageService.saveStorageItem("token", res.token_access);
+          this.storageService.saveStorageItem("refresh", res.token_refresh);
 
-          this.authService.emailUser = res.user.email;
+          //this.authService.emailUser = res.user.email;
           this.authService.user = res.user;
 
           if (res.user.tipoUser === "evaluador") {
@@ -124,7 +125,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         (error) => {
           Swal.close();
-          if (error?.error.code == "unapprovedAccount") {
+          console.log("error--", error);
+          if (error?.error?.code == "user_inactive") {
+            this.msgs = [
+              {
+                severity: "error",
+                summary: "Error",
+                detail: "Tu cuenta esta desactivada por favor contactate con un administrador.",
+              },
+            ];
+            return;
+          }
+          if (error?.error?.code == "user_unapproved") {
             this.msgs = [
               {
                 severity: "warn",
@@ -135,7 +147,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             ];
             return;
           }
-          if (error?.error.code == "incorrectCredentials") {
+          if (error?.error?.code == "user_rejected") {
+            this.msgs = [
+              {
+                severity: "warn",
+                summary: "Cuenta desactivada",
+                detail: error?.error.razon,
+              },
+            ];
+            return;
+          }
+          if (error?.error?.code == "user_invalid") {
             this.msgs = [
               {
                 severity: "error",
@@ -158,8 +180,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       );
 
       this.subscribes.push(loginSub);
-    } else {
-      this.markTouchForm();
     }
   }
 

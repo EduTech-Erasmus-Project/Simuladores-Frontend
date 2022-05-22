@@ -17,7 +17,7 @@ export class EjercitarioParticipanteService {
     const config = { headers: new HttpHeaders({
                       'Content-Type':  'application/json',}) 
                     };
-    return (this.http.post<any>(environment.WS_PATH+"obtenerAsignacionesEjercitariosDeParticipante", {"correo":correo}, config))
+    return (this.http.post<any>(environment.WS_PATH+"obtenerDiscapacidadesPorEvaluador", {"correo":correo}, config))
   }
 
   public obtenerEjercitario(id: number): Observable<any>{
@@ -26,4 +26,8 @@ export class EjercitarioParticipanteService {
                     };
     return (this.http.get<any>(environment.WS_PATH+"getEjercitario/"+id, config))
   }
+
+  
+
+  
 }

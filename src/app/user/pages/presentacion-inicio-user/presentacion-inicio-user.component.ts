@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BreadcrumbService } from "src/app/service/breadcrumb.service";
 import { PhotoService } from "src/app/demo/service/photoservice";
@@ -6,95 +6,113 @@ import { Asignacion } from "src/app/core/interfaces/Asignacion";
 import { Escenario } from "src/app/core/interfaces/Escenario";
 import { EjercitarioParticipanteService } from "src/app/service/ejercitarioParticipante/ejercitario-participante.service";
 import { AuthService } from "src/app/service/auth.service";
+import { EjercitarioService } from "src/app/service/ejercitario.service";
+import { CompetenciaService } from "src/app/service/competencia.service";
+import { forkJoin, Subscription } from "rxjs";
+import { Competencia } from "src/app/core/interfaces/Competencia";
+import { ActividadService } from "src/app/service/actividad.service";
+import { Actividad } from "src/app/core/interfaces/Actividad";
+import { User } from "src/app/core/interfaces/User";
+import { UsuarioService } from "src/app/service/usuario.service";
+import { Evaluador } from "src/app/core/interfaces/Evaluador";
 
 @Component({
   selector: "app-presentacion-inicio-user",
   templateUrl: "./presentacion-inicio-user.component.html",
-  styles: [],
+  styleUrls: ["./presentacion-inicio-user.component.scss"]
 })
-export class PresentacionInicioUserComponent implements OnInit {
+export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   public correoParticanteInicio: string = "";
-  public images: any[];
-  public listadoAsignaciones: Array<Asignacion> = [];
-  public listadoEjercitarios: Array<any>;
+  public competencia: Competencia;
+  public competencias: Competencia[]= [];
+  private _subscriptions: Subscription[] = [];
+  public download = false;
+  public actividades: Actividad[] = [];
+  public loading = false;
+  public displayMaximizable: boolean = false;
+  //public usuario:User;
+  public evaluador: Evaluador;
 
   constructor(
-    private autentificacionUsuario: AuthService,
+    private authService: AuthService,
     private router: Router,
-    private ejercitarioService: EjercitarioParticipanteService,
+    private ejercitarioService: EjercitarioService,
     private _Activatedroute: ActivatedRoute,
     private route: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private competenciaService:CompetenciaService,
+    private actividadService:ActividadService,
+    private usuarioService:UsuarioService
+
   ) {}
 
+  ngOnDestroy(): void {
+    this._subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   ngOnInit(): void {
-    if (this._Activatedroute.snapshot.paramMap.get("correo") != null) {
-      if (
-        this._Activatedroute.snapshot.paramMap.get("correo") ==
-        this.autentificacionUsuario.emailUser
-      ) {
-        this.correoParticanteInicio =
-          this._Activatedroute.snapshot.paramMap.get("correo");
-      } else {
-        this.autentificacionUsuario.logout();
+    this.loadData();
+  }
+
+  private get user(){
+    return this.authService.user;
+  }
+
+  private async loadData() {
+    let sub = await forkJoin([
+      this.competenciaService
+      .obtenerCompetencias(),
+      
+    ]).subscribe(
+      (data) => {
+        this.competencias = data[0];
+        this.competencia = this.competencias[0];
+        console.log(this.competencia);
+      },
+      (err) => {
+        console.log(err);
       }
-    } else if (this.autentificacionUsuario.emailUser != null) {
-      this.correoParticanteInicio = this.autentificacionUsuario.emailUser;
-    } else {
-      this.correoParticanteInicio =
-        this.autentificacionUsuario.getcorreoPorToken(
-          this.autentificacionUsuario.getToken
-        );
-    }
-
-    this.obtenercionAsignacionesEjercitario();
-  }
-
-  obtenercionAsignacionesEjercitario() {
-    this.ejercitarioService
-      .obtenerAsignacionesEjercitario(this.correoParticanteInicio)
-      .subscribe((asignaciones) => {
-        this.setListadoAsignaciones(asignaciones.asignaciones);
-      });
-  }
-
-  setListadoAsignaciones(asignaciones: Array<any>) {
-    var asignacionesLista: Array<Asignacion> = [];
-    var asiganacionAUX: Asignacion;
-    var escenario: Escenario;
-
-    asignaciones.forEach((asignacion) => {
-      this.ejercitarioService
-        .obtenerEjercitario(asignacion.ejercitario_id)
-        .subscribe((ejercitario) => {
-          let escenario = ejercitario;
-          let asignacion = ejercitario;
-          asignacion.escenario = escenario;
-          asignacionesLista.push(asignacion);
-        });
-    });
-
-    this.listadoAsignaciones = asignacionesLista;
-  }
-
-  realizarEjercitario(urlEjercitario: string, numeroDeEjercitario: number) {
-    console.log(
-      "abir ejercitario: " +
-        numeroDeEjercitario +
-        " al participante: " +
-        this.correoParticanteInicio +
-        " url: " +
-        urlEjercitario
     );
-    //this.router.navigate([urlEjercitario], { queryParams: { 'correo': this.correoParticanteInicio , 'ejercitario':idEjercitario}});
+    this._subscriptions.push(sub);
+  }
+
+  
+  realizarEjercitario(urlEjercitario: string, numeroDeEjercitario: number) {
     window.open(
       urlEjercitario +
         "?correo=" +
-        this.correoParticanteInicio +
+        this.user.participante.ref +
         "&ejercitario=" +
         numeroDeEjercitario
     );
-    //Colocar en esta seccion el direccionamiento hacia los ejercitarios
   }
+
+  async downloadCertificado(){
+    //console.log(idCompetencia);
+    this.download = true;
+  }
+
+  async listarProgreso(idEjercitario:number) {
+    console.log(idEjercitario);
+    try {
+      let actividades = await this.actividadService.getParticipanteActividades(idEjercitario).toPromise();
+      console.log(actividades);
+      this.actividades = actividades;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async showModalUser(){
+    try {
+      this.evaluador = await this.usuarioService.getEvaluador(this.user.participante.evaluador).toPromise();
+      this.displayMaximizable = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
+  
 }

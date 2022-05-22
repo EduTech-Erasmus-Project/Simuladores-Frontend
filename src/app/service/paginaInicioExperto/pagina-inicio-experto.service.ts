@@ -33,10 +33,7 @@ export class PaginaInicioExpertoService {
     );
   }
 
-  obtenerEjercitarios() {
-    return this.http.get<any>(
-      environment.WS_PATH + "getEjercitarios/",
-      this.config
-    );
-  }
+  
+
+  
 }
