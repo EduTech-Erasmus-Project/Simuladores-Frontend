@@ -32,7 +32,7 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
     //     this.loginService.user?.administrator ||
     //     this.loginService.validateRole("superuser")
     //   ) {
-    //     this.router.navigateByUrl("/admin");
+    //     this.router.navigateByUrl("/dashboard");
     //   }
     // } catch (error) {
     //   console.log(error);
@@ -89,13 +89,13 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
           exact: true,
         },
       },
-      {
-        label: "Acerca de", //translate.translations.menu.aboutUs,
-        routerLink: "about",
-        routerLinkActiveOptions: {
-          exact: true,
-        },
-      },
+      // {
+      //   label: "Acerca de", //translate.translations.menu.aboutUs,
+      //   routerLink: "about",
+      //   routerLinkActiveOptions: {
+      //     exact: true,
+      //   },
+      // },
       {
         label: "¿Quiénes Somos?", //translate.translations.menu.aboutUs,
         routerLink: "about-us",
@@ -103,14 +103,14 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
           exact: true,
         },
       },
-      {
-        label: "Contacto", //translate.translations.menu.contact,
-        routerLink: "contact",
-        routerLinkActiveOptions: {
-          exact: true,
-          //styleClass: "active",
-        },
-      },
+      // {
+      //   label: "Contacto", //translate.translations.menu.contact,
+      //   routerLink: "contact",
+      //   routerLinkActiveOptions: {
+      //     exact: true,
+      //     //styleClass: "active",
+      //   },
+      // },
     ];
   }
 
@@ -130,7 +130,7 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
   navigate() {
     console.log(this.user);
     if(this.user.tipoUser === "admin"){
-      this.router.navigate(["/admin"]);
+      this.router.navigate(["/dashboard"]);
     }
     if(this.user.tipoUser === "participante"){
       this.router.navigate(["/user"]);
@@ -143,7 +143,7 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
 
   navigateMiCuenta() {
     if(this.user.tipoUser === "admin"){
-      this.router.navigate(["/admin/mi-cuenta"]);
+      this.router.navigate(["/dashboard/mi-cuenta"]);
     }
     if(this.user.tipoUser === "participante"){
       this.router.navigate(["/user/mi-cuenta"]);

@@ -35,12 +35,12 @@
             <div class="p-col-12">
                 <div class="card widget-statistics" style="min-height: 33vh">
                     <div class="p-grid">
-                        <div class="p-col-6 p-md-5">
-                            <h4>Simuladores laborales</h4>
-                        </div>
-                        <div class="p-col-6 p-md-7" style="display: flex; justify-content: flex-end">
+                        <div class="p-col-6 p-md-5" style="display: flex;">
+                            <h4 style="margin-right: 0.5em; margin: 0;">Competencias:</h4>
                             <p-dropdown [(ngModel)]="competencia" [options]="competencias" placeholder="Seleccione una competencia" optionLabel="titulo">
                             </p-dropdown>
+                        </div>
+                        <div class="p-col-6 p-md-7" style="display: flex; justify-content: flex-end">
                             <p-button (click)="downloadCertificado()" [ngStyle]="{'margin-left': '0.5em'}" label="Descargar Certificado" [disabled]="download" [icon]="download ? 'pi pi-spin pi-spinner' : 'pi pi-download'"></p-button>
                             <p-button (click)="showModalUser()" [ngStyle]="{'margin-left': '0.5em'}" label="Ver Perfil del docente" icon="pi pi-user"></p-button>
                         </div>
@@ -166,7 +166,7 @@
                             {{ actividad.fecha | date: "yyyy/MM/dd" }}
                         </td>
                         <td>
-                            <span>{{ actividad.tiempoTotal }}</span>
+                            <span>{{ actividad.tiempoTotal }} Minutos</span>
                         </td>
                         <td>
                             <p-progressBar [value]="actividad.calificacionPorcentaje || 0" [showValue]="true">

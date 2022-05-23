@@ -7,12 +7,15 @@
       <p style="text-align: center">
         {{ descripcion }}
       </p>
-      <div class="video-button">
-        <button routerLink="/login">{{ btnText }}</button>
+      <div  class="video-button">
+        <button *ngIf="!user" routerLink="/login">{{ btnText }}</button>
+        <button *ngIf="user?.tipoUser === 'participante'" routerLink="/user">Mi Cuenta</button>
+        <button *ngIf="user?.tipoUser === 'evaluador'" routerLink="/expert">Mi Cuenta</button>
+        <button *ngIf="user?.tipoUser === 'admin'" routerLink="/dashboard">Mi Cuenta</button>
       </div>
     </div>
   </div>
-  <div class="tree">
-    <img style="height: 100%" [src]="btnLink" alt="mirage-layout" />
+  <div class="tree" style="background-image: url({{imgLink}})">
+    <!-- <img style="height: 100%" [src]="imgLink" alt="mirage-layout" /> -->
   </div>
 </div>

@@ -85,12 +85,15 @@ import { FooterComponent } from "./footer/footer.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
 import { ContributorsComponent } from "./contributors/contributors.component";
-import { HeroComponent } from './hero/hero.component';
+import { HeroComponent } from "./hero/hero.component";
 import { PerfilComponent } from "./perfil/perfil.component";
-import { ComentariosComponent } from './comentarios/comentarios.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { PrivateMenuComponent } from './private-menu/private-menu.component';
-import { MenuitemComponent } from './menuitem/menuitem.component';
+import { ComentariosComponent } from "./comentarios/comentarios.component";
+import { TopBarComponent } from "./top-bar/top-bar.component";
+import { PrivateMenuComponent } from "./private-menu/private-menu.component";
+import { MenuitemComponent } from "./menuitem/menuitem.component";
+import { UserPasswordComponent } from "./user-password/user-password.component";
+import { UserFormComponent } from "./user-form/user-form.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -103,7 +106,9 @@ import { MenuitemComponent } from './menuitem/menuitem.component';
     ComentariosComponent,
     TopBarComponent,
     PrivateMenuComponent,
-    MenuitemComponent
+    MenuitemComponent,
+    UserPasswordComponent,
+    UserFormComponent,
   ],
   imports: [
     CommonModule,
@@ -187,6 +192,7 @@ import { MenuitemComponent } from './menuitem/menuitem.component';
     TreeTableModule,
     VirtualScrollerModule,
     TranslateModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AccordionModule,
@@ -277,8 +283,9 @@ import { MenuitemComponent } from './menuitem/menuitem.component';
     ComentariosComponent,
     TopBarComponent,
     PrivateMenuComponent,
-    MenuitemComponent
-
+    MenuitemComponent,
+    UserPasswordComponent,
+    UserFormComponent,
   ],
 })
 export class SharedModule {}

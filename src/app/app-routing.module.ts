@@ -32,7 +32,7 @@ const routes: Routes = [
       canActivate: [AuthGuard, ExpertGuard]
   },
   {
-    path: "admin",
+    path: "dashboard",
     loadChildren: () =>
       import("./admin/admin.module").then((m) => m.AdminModule),
       //canActivate: [AuthGuard, AdminGuard]

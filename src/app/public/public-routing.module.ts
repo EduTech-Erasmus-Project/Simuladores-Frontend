@@ -31,11 +31,6 @@ const routes: Routes = [
       //     ),
       // },
       {
-        path: "terms-and-conditions",
-        loadChildren: () =>
-          import("./pages/terms/terms.module").then((m) => m.TermsModule),
-      },
-      {
         path: "login",
         loadChildren: () =>
           import("../auth/login/login.module").then((m) => m.LoginModule),
