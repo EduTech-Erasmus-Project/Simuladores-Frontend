@@ -28,9 +28,7 @@ export class AuthService {
 
   logout() {}
   
-  get emailUser() {
-    return null;
-  }
+
   get getToken(): string {
     return this.storageService.getStorageItem("token");
   }

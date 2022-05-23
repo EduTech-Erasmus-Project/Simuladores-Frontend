@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 
 import { ExpertRoutingModule } from "./expert-routing.module";
 import { ExpertComponent } from "./expert.component";
-import { EscenarioComponent } from "./pages/escenario/escenario.component";
 import { PresentacionInicioExpertoComponent } from "./pages/presentacion-inicio-experto/presentacion-inicio-experto.component";
 import { ParticipanteInfoComponent } from "./pages/participante-info/participante-info.component";
 import { DatosExpertoComponent } from "./pages/datos-experto/datos-experto.component";
@@ -16,7 +15,6 @@ import { ActividadComponent } from './pages/actividad/actividad.component';
   declarations: [
     ExpertComponent,
     DatosExpertoComponent,
-    EscenarioComponent,
     ParticipanteInfoComponent,
     PresentacionInicioExpertoComponent,
     ParticipantesComponent,
