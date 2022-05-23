@@ -15,6 +15,7 @@ import { Actividad } from "src/app/core/interfaces/Actividad";
 import { User } from "src/app/core/interfaces/User";
 import { UsuarioService } from "src/app/service/usuario.service";
 import { Evaluador } from "src/app/core/interfaces/Evaluador";
+import * as moment from "moment";
 
 @Component({
   selector: "app-presentacion-inicio-user",
@@ -112,7 +113,5 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
       console.log(error);
     }
   }
-
-  
   
 }

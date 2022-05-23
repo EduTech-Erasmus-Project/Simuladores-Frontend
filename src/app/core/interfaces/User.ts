@@ -27,4 +27,5 @@ export interface User {
   participante?: Participante;
   evaluador?: Evaluador;
   codigo?: string;
+  discapacidades?: any[];
 }

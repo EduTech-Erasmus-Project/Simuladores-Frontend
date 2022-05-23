@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   }
 
   onLayoutClick() {
-    console.log("onLayoutClick");
+    //console.log("onLayoutClick");
 
     if (!this.topbarItemClick) {
       this.activeTopbarItem = null;

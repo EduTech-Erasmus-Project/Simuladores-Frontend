@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   titulo = "Simuladores laborales en 3D para favorecer la inserción laboral de estudiantes universitarios con discapacidad"
   descripcion = "La construcción y traducción de una pedagogía acorde a la variabilidad en el aprendizaje para fortalecer el desarrollo de competencias profesionales."
   btnText = "Comenzar"
-  btnLink = "https://cdn.pixabay.com/photo/2018/06/07/16/49/vr-3460451_960_720.jpg"
+  imgLink = "assets/img/jeshoots-com-xGtHjC_QNJM-unsplash.jpg"
 
   constructor(private informacion: InformacionParticipanteService) { }
 

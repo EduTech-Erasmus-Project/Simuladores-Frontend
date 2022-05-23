@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
 
@@ -7,6 +7,8 @@ import { environment } from "src/environments/environment";
   providedIn: 'root'
 })
 export class UsuarioService {
+
+  private evt$:EventEmitter<boolean> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -57,6 +59,12 @@ export class UsuarioService {
     );
   }
 
+  obtenerParticipantesRechazados(): Observable<any>{
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerParticipantesRechazados/"
+    );
+  }
+
   aprobarParticipantes(data): Observable<any> {
     return this.http.post<any>(
       environment.WS_PATH + "aprobarParticipante/", data
@@ -69,8 +77,29 @@ export class UsuarioService {
     );
   }
 
+  actualizarPassword(data:any){
+    return this.http.post<any>(
+      environment.WS_PATH + "actualizarPassword/", data
+    );
+  }
+
   public obtenerInformacionParticipante(id: number): Observable<any> {
     return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
+  }
+
+
+  get event(){
+    return this.evt$;
+  }
+
+  public emitEvent(data: boolean){
+    this.evt$.emit(data);
+  }
+
+  getPerfil(){
+    return this.http.get<any>(
+      environment.WS_PATH + "getPerfil/"
+    );
   }
 
 

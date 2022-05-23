@@ -117,7 +117,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.router.navigate(["/expert"]);
             return;
           } else if (res.user.tipoUser === "admin") {
-            this.router.navigate(["/admin"]);
+            this.router.navigate(["/dashboard"]);
             return;
           }
           this.router.navigate(["/user"]);
@@ -140,9 +140,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.msgs = [
               {
                 severity: "warn",
-
-                detail:
-                  "La cuenta aún está en revisión, espere la aprobación del administrador.",
+                detail:error?.error?.razon,
               },
             ];
             return;

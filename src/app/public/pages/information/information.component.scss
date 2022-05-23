@@ -1,0 +1,13 @@
+.video{
+    height: 250px;
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .divider{
+        display: none;
+    }
+    .video{
+        height: 350px;
+    }
+}
