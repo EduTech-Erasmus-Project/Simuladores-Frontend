@@ -14,4 +14,10 @@ export class EjercitarioService {
       environment.WS_PATH + "getTotalEjercitarios/"
     );
   }
+
+  informacionCount(){
+    return this.http.get<any>(
+      environment.WS_PATH + "informacionCount/"
+    );
+  }
 }
