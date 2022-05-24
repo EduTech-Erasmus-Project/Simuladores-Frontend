@@ -2,7 +2,7 @@
     <div class="layout-topbar-wrapper">
         <div class="layout-topbar-left">
             <div class="layout-topbar-logo-wrapper">
-                <a href="/" class="layout-topbar-logo">
+                <a [routerLink]="[ '/', ]"  class="layout-topbar-logo">
                     <img src="assets/img/image2vector.svg" alt="mirage-layout" />
                     <span class="app-name">Simuladores Laborales</span>
                 </a>
@@ -69,8 +69,8 @@
                     <a>
                         <span class="profile-image-wrapper">
                             <img loading="lazy"
-                            [src]="user.image || 'assets/img/noimage.png'"
-                            [alt]="user.nombre" style="border-radius: 50%;" width="40" height="40"/>
+                            [src]="user?.image || 'assets/img/noimage.png'"
+                            [alt]="user?.nombre" style="border-radius: 50%;" width="40" height="40"/>
                         </span>
                         <span class="profile-info-wrapper">
                             <h3>{{user?.nombre}} {{user?.apellido}}</h3>
@@ -128,8 +128,8 @@
                     <a>
                         <span class="profile-image-wrapper">
                             <img loading="lazy"
-                            [src]="user.image || 'assets/img/noimage.png'"
-                            [alt]="user.nombre" style="border-radius: 50%;" width="40" height="40"/>
+                            [src]="user?.image || 'assets/img/noimage.png'"
+                            [alt]="user?.nombre" style="border-radius: 50%;" width="40" height="40"/>
                         </span>
                         <span class="profile-info-wrapper">
                             <h3>{{user?.nombre}} {{user?.apellido}}</h3>

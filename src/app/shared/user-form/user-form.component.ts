@@ -1,8 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
+import { Message } from "primeng/api";
 import { forkJoin, Subscription } from "rxjs";
 import { User } from "src/app/core/interfaces/User";
+import { AuthService } from "src/app/service/auth.service";
 import { DiscapacidadesService } from "src/app/service/discapacidades.service";
 import { UsuarioService } from "src/app/service/usuario.service";
 
@@ -15,6 +17,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
   public user?: User;
   public form?: FormGroup;
   private _subscriptions: Subscription[] = [];
+  public loader = false;
+  public msg: Message[];
   public discapacidadesArray: any[];
   public estadoCivil: any[] = [
     {
@@ -53,7 +57,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private discapacidadesService: DiscapacidadesService
+    private discapacidadesService: DiscapacidadesService,
+    private authService: AuthService
   ) {
     this.createForm();
   }
@@ -152,7 +157,39 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.markTouchForm();
     this.markAsTouchFormArray();
     if (this.form.valid) {
-      console.log("Form submit", this.form.value);
+      this.loader = true;
+      this.msg = [];
+      let data = this.form.value;
+      data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
+      let sub = this.usuarioService.editarPerfil(data).subscribe(
+        (res: any) => {
+          console.log("res", res);
+          this.authService.user = {
+            ...this.authService.user,
+            ...res,
+          }
+          this.msg = [
+            {
+              severity: "success",
+              detail: "Perfil actualizado correctamente",
+            },
+          ];
+          this.loader = false;
+        },
+        (error) => {
+          this.msg = [
+            {
+              severity: "error",
+              detail:
+                "Error al actualizar el perfil intente de nuevo mas tarde",
+            },
+          ];
+          console.log("error", error);
+          this.loader = false;
+        }
+      );
+
+      this._subscriptions.push(sub);
     }
   }
 

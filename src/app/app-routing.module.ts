@@ -35,7 +35,7 @@ const routes: Routes = [
     path: "dashboard",
     loadChildren: () =>
       import("./admin/admin.module").then((m) => m.AdminModule),
-      //canActivate: [AuthGuard, AdminGuard]
+      canActivate: [AuthGuard, AdminGuard]
   },
   { path: "**", redirectTo: "notfound", pathMatch: "full" },
 ];
