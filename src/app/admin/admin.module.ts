@@ -7,12 +7,13 @@ import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ExpertosComponent } from './pages/expertos/expertos.component';
 import { SimuladoresComponent } from './pages/simuladores/simuladores.component';
-import { DatosAdminComponent } from './pages/datos-admin/datos-admin.component'
+import { DatosAdminComponent } from './pages/datos-admin/datos-admin.component';
+import { EjercitarioComponent } from './pages/ejercitario/ejercitario.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent],
+  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent, EjercitarioComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

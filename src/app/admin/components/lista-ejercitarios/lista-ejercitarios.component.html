@@ -1,0 +1,81 @@
+<p-table >
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+            Listado de ejercitarios
+            <p-dialog class="dialogo" header="Agregar nuevo Ejercitario" [(visible)]="display1" modal="modal" [closable]="false" [style]="{width: '400px'}">
+                <div style="line-height: 1.5">
+                    <p>no ahi elemntos aun</p>
+                    
+                </div>
+                <p-footer>
+                    <button type="button" pButton icon="pi pi-check" (click)="display1=false" label="Guardar" class="p-button-text"></button>
+                    <button type="button" pButton icon="pi pi-times" (click)="display1=false" label="Cerrar" class="p-button-text"></button>
+                </p-footer>
+            </p-dialog>
+            <a pButton pRipple type="button" icon="pi pi-external-link"  label="Agregar nuevo ejercitario" class="p-button-text"
+                    routerLink="/nuevo"></a>
+            
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Nombre
+                <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="">Competencia
+                <p-sortIcon field=""></p-sortIcon>
+            </th>
+            <th pSortableColumn="">Tipo de ejercitario
+                <p-sortIcon field="representative.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="duracion">Duracion
+                <p-sortIcon field="duracion"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nivel">Nivel
+                <p-sortIcon field="nivel"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">
+                
+            </th>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" >
+        <tr >
+            <td>
+                <!-- nombre -->
+            </td>
+            <td>
+                <!-- Competencia -->
+            </td>
+            <td>
+                <!-- Tipo de ejercitario -->
+            </td>
+            <td>
+            <td>
+                    <!-- Duracion -->
+            </td>
+            
+            <td>
+
+                <button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
+                    <span class="p-button-label">Ver</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
+                <button pbutton="" pripple="" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+                    <span class="p-button-label">Editar</span><span class="p-ink"></span></button>
+                    <button pbutton="" pripple="" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+                        <span class="p-button-label">Preguntas</span><span class="p-ink"></span></button>
+            </td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

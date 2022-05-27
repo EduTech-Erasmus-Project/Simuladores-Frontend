@@ -7,6 +7,8 @@ import { ExpertosComponent } from "./pages/expertos/expertos.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { SimuladoresComponent } from "./pages/simuladores/simuladores.component";
 
+import { EjercitarioComponent } from "./pages/ejercitario/ejercitario.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -15,10 +17,14 @@ const routes: Routes = [
       { path: "", component: HomeComponent },
       { path: "expertos", component: ExpertosComponent },
       { path: "simuladores", component: SimuladoresComponent },
-      { path: "mi-cuenta", component: DatosAdminComponent },
+      { path: "mi-cuenta", component: DatosAdminComponent }
+     
     ],
   },
+  
+  
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
