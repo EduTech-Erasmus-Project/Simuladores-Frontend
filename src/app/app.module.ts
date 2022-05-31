@@ -32,6 +32,8 @@ import { PhotoService } from "./demo/service/photoservice";
 import { ProductService } from "./demo/service/productservice";
 import { AuthInterceptor } from "./intercepotors/auth.interceptor";
 import { NgCircleProgressModule } from "ng-circle-progress";
+
+
 @NgModule({
   imports: [
     RouterModule,

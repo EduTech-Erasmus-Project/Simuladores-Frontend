@@ -23,14 +23,17 @@ export class SimuladoresComponent implements OnInit {
   display:boolean;
   display1:boolean;
 
+
   @ViewChild('dt') table: Table;
   private customerService: CustomerService; private productService: ProductService;
-
-
+  
+  
 
   constructor() { }
 
   ngOnInit(): void {
+ 
+   
   }
 
 }

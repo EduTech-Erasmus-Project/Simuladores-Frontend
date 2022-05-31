@@ -8,16 +8,27 @@ import { HomeComponent } from './pages/home/home.component';
 import { ExpertosComponent } from './pages/expertos/expertos.component';
 import { SimuladoresComponent } from './pages/simuladores/simuladores.component';
 import { DatosAdminComponent } from './pages/datos-admin/datos-admin.component'
-
+import { NuevoEjercitarioComponent } from './pages/nuevo-ejercitario/nuevo-ejercitario.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent],
+  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent,NuevoEjercitarioComponent, DatosAdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
     ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    FileUploadModule,
+    NgxDropzoneModule,
+    InputTextareaModule,
 
   ]
 })

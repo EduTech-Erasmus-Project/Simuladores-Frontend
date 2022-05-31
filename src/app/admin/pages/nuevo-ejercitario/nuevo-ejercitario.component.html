@@ -1,0 +1,120 @@
+<p-messages [(value)]="msg" [enableService]="false"></p-messages>
+<form [formGroup]="form" class="">
+   
+    <div class="control p-col-12 p-xl-12 p-md-12">
+        
+      <h1> <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
+          Agregar Nuevo Ejercitario</h1>
+          <div class="contenedor">
+         <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+            <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453"> 
+         <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Selecciona Archivo</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+         </ngx-dropzone> 
+          </div> 
+          
+          </div>
+
+              <h6>Nombre del Ejercitario</h6>
+        <input [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nombre')}" formControlName="nombre" type="text"
+            pInputText placeholder="Nombre de Ejercitario" id="nombre" name="nombre" />
+        <div *ngIf="form.get('nombre').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es obligatorio.</small>
+        </div>
+   
+     
+        <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+            <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <!-- <div class="control p-col-12 p-xl-4 p-md-12"> -->
+        <h6>Numero de Ejercitario</h6>
+        <input formControlName="numeroejercitario" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('numeroejercitario')}" type="text"
+            pInputText placeholder="Numero de Ejercitario" id="numeroejercitario" name="numeroejercitario" />
+        <div *ngIf="form.get('numeroejercitario').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('numeroejercitario')">Este campo es obligatorio.</small>
+        </div>
+        </div> 
+    
+
+    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
+        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <h6>Tipo de Ejercitario</h6>
+        <input formControlName="tipoejercitario" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('tipoejercitario')}" type="text"
+            pInputText placeholder="Tipo de Ejercitario" id="tipoejercitario" name="tipoejercitario" />
+        <div *ngIf="form.get('tipoejercitario').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('tipoejercitario')">Este campo es obligatorio.</small>
+        </div>
+    </div>
+
+        <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
+            <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <h6>Duracion</h6>
+        <input formControlName="duracion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('duracion')}" type="text"
+            pInputText placeholder="Duracion" id="duracion" name="duracion" />
+        <div *ngIf="form.get('duracion').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('duracion')">Este campo es obligatorio.</small>
+        </div>
+    </div>
+        </div>
+    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
+        <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <h6>Principal Competencia</h6>
+        <input formControlName="principalcompetencia" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('principalcompetencia')}" type="text"
+            pInputText placeholder="Tipo de Ejercitario" id="principalcompetencia" name="principalcompetencia" />
+        <div *ngIf="form.get('principalcompetencia').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('principalcompetencia')">Este campo es obligatorio.</small>
+        </div>
+    </div>
+    
+    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
+        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <h6>Nivel</h6>
+        <p-dropdown formControlName="nivel" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nivel')}"
+          [options]="nivels" placeholder="nivel" optionLabel="name" optionValue="value" [showClear]="true">
+    </p-dropdown>
+        <div *ngIf="form.get('nivel').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('nivel')">Este campo es obligatorio.</small>
+        </div>
+   </div>
+
+    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
+        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
+        <h6>Competencia</h6>
+        <p-dropdown formControlName="competencia" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('competencia')}"
+          [options]="competencias" placeholder="competencia" optionLabel="name" optionValue="value" [showClear]="true">
+        </p-dropdown>
+        
+        <div *ngIf="form.get('competencia').invalid">
+            <small class="p-error" *ngIf="getErrorRequired('competencia')">Este campo es obligatorio.</small>
+        </div>
+    </div>
+</div>
+
+
+<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+    <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453">
+   
+			<textarea rows="5" cols="30" placeholder="Instrucion Principal" pInputTextarea>
+
+            </textarea>
+       
+        
+       
+			<textarea rows="5" cols="30" placeholder="Instruciones de Ejercitario" pInputTextarea>
+
+            </textarea>
+        </div>
+          </div>
+
+</div>
+        
+         <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save " class=""></p-button>
+       
+
+     		</div>
+
+    </div>
+</form>
