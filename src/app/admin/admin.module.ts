@@ -8,12 +8,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { ExpertosComponent } from './pages/expertos/expertos.component';
 import { SimuladoresComponent } from './pages/simuladores/simuladores.component';
 import { DatosAdminComponent } from './pages/datos-admin/datos-admin.component';
-import { EjercitarioComponent } from './pages/ejercitario/ejercitario.component';
+
 
 
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent, EjercitarioComponent],
+  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

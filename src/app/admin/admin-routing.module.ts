@@ -7,7 +7,6 @@ import { ExpertosComponent } from "./pages/expertos/expertos.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { SimuladoresComponent } from "./pages/simuladores/simuladores.component";
 
-import { EjercitarioComponent } from "./pages/ejercitario/ejercitario.component";
 
 const routes: Routes = [
   {

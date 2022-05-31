@@ -12,23 +12,21 @@ import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitar
 
 @NgModule({
   declarations: [
+   
+    ListaCompetenciasComponent,
+    ListaEjercitariosComponent,
     ListaExpertoPorAprobarComponent,
     ListaExpertosRechazadosComponent,
-    ListaExpertosRegistradosPlaformaComponent,
-    ListaCompetenciasComponent,
-    ListaEjercitariosComponent
+    ListaExpertosRegistradosPlaformaComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-    
-  ],
+  imports: [ CommonModule, SharedModule ],
   exports: [
+    
+    ListaCompetenciasComponent,
+    ListaEjercitariosComponent,
     ListaExpertoPorAprobarComponent ,
     ListaExpertosRechazadosComponent,
-    ListaExpertosRegistradosPlaformaComponent,
-    ListaCompetenciasComponent,
-    ListaEjercitariosComponent
+    ListaExpertosRegistradosPlaformaComponent
   ],
 })
 export class ComponentsModule { }
