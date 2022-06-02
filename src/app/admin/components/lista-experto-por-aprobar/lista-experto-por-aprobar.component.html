@@ -1,4 +1,4 @@
-<p-table >
+<p-table [value]="expertoPen" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
 	<ng-template pTemplate="caption">
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
 			Expertos por aprobar
@@ -29,26 +29,26 @@
 			
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" >
+	<ng-template pTemplate="body" let-expertoPen>
 		<tr>
 			<td>
-				<!-- Nombre -->
+				<span class="p-column-title">{{expertoPen.usuario?.nombre}}</span>
 			</td>
 			<td>
-				<!-- fechas de registro -->
+				
 			</td>
 			<td>
-				<!-- Profecion -->
+				<span class="p-column-title">{{expertoPen.usuario?.carreraUniversitaria}}</span>
 			</td>
 			<td>
-				<!-- Direccion -->
+				<span class="p-column-title">{{expertoPen.usuario?.direccion}}</span>
 			</td>
 			<td>
 				<span class="p-column-title"></span>
-				<button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
-					<span class="p-button-label">Si</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
-				<button pbutton="" pripple="" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
-					<span class="p-button-label">No</span><span class="p-ink"></span></button>
+				<a pTooltip="Aprobar" (click)="validarAprobacion(expertoPen.usuario?.id)"  pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
+					<span class="p-button-label"> Si</span><span class="p-ink"></span></a>
+				<a pTooltip="Rechazar" pButton type="button" style="margin-left: 2px" class="p-button-danger" icon="pi pi-times">
+                </a>
 			</td>
 			
 		</tr>

@@ -1,4 +1,4 @@
-<p-table >
+<p-table [value]="expertoApro" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
 	<ng-template pTemplate="caption">
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
 			Lista de expertos registrados en la plataforma
@@ -29,19 +29,19 @@
 			
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" >
+	<ng-template pTemplate="body" let-expertoApro>
 		<tr >
 			<td>
-				<!-- nombre -->
+				<span class="p-column-title">{{expertoApro.usuario?.nombre}}</span>
 			</td>
 			<td>
-				<!-- Fechas de registro-->
+				
 			</td>
 			<td>
-				<!-- Profecion -->
+				<span class="p-column-title">{{expertoApro.usuario?.carreraUniversitaria}}</span>
 			</td>
 			<td>
-				<!-- Direccion -->
+				<span class="p-column-title">{{expertoApro.usuario?.direccion}}</span>
 			</td>
 			<td>
 				<button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
