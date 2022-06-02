@@ -22,4 +22,8 @@ export class ActividadService {
   getActividad(idActividad:number){
     return this.http.get<any>(`${environment.WS_PATH}getActividad/${idActividad}`);
   }
+
+  getCorreccionPreguntas(idActividad:number){
+    return this.http.get<any>(`${environment.WS_PATH}correccionPreguntas/${idActividad}`);
+  }
 }

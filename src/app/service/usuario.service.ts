@@ -99,4 +99,14 @@ export class UsuarioService {
   editarPerfil(data) {
     return this.http.post<any>(environment.WS_PATH + "perfil/", data);
   }
+
+  updateImage(fileImage: File) {
+    const formData = new FormData();
+    formData.append("file", fileImage);
+    return this.http.put<any>(environment.WS_PATH + "actualizarImagenPerfil/", formData);
+  }
+
+  getReporte(idEjercitario:number, idParticipante:number){
+    return this.http.get<any>(environment.WS_PATH + "reporte/" + idEjercitario + "/" + idParticipante);
+  }
 }

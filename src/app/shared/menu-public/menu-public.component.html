@@ -16,7 +16,7 @@
                                     <a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
                                         <span class="profile-image-wrapper">
                                             <img loading="lazy"
-                                                [src]="user.image || 'assets/img/noimage.png'"
+                                                [src]="user?.img | image"
                                                 [alt]="user.nombre" />
                                         </span>
                                         <span class="profile-info-wrapper">
@@ -32,7 +32,7 @@
                                             </div>
                                             <div class="profile">
                                                 <img loading="lazy"
-                                                    [src]="user.image || 'assets/img/noimage.png'"
+                                                    [src]="user?.img | image"
                                                     [alt]="user.nombre" width="40" />
                                                 <h1 class="name-user">{{user.nombre+'
                                                     '+user.apellido}}</h1>

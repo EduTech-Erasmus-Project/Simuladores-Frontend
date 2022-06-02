@@ -8,4 +8,6 @@ export interface Participante {
   razon?: string;
   evaluador?: number;
   ref?: string;
+  nivel?: number;
+  progreso?: number;
 }
