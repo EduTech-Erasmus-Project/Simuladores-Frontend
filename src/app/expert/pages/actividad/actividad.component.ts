@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { Pregunta } from 'src/app/core/interfaces/Pregunta';
 import { User } from 'src/app/core/interfaces/User';
 import { Actividad } from 'src/app/model/Actividad';
 import { ActividadService } from 'src/app/service/actividad.service';
@@ -19,7 +20,8 @@ export class ActividadComponent implements OnInit {
   public loader: boolean = false;
   public idActividad: number;
 
-  public actividad:Actividad;
+  public actividad:any;
+  public preguntas:Pregunta[];
 
   constructor(
     private actividadService: ActividadService,
@@ -48,14 +50,18 @@ export class ActividadComponent implements OnInit {
   private async loadData() {
     let sub = forkJoin([
       this.actividadService.getActividad(this.idActividad),
+      this.actividadService.getCorreccionPreguntas(this.idActividad)
     ]).subscribe(
-      ([ actividad]) => {
-        console.log("actividad", actividad);
+      ([ actividad, preguntas]) => {
+        //console.log("actividad", actividad);
         this.actividad = actividad;
+        console.log(actividad);
+        this.preguntas = preguntas;
+        console.log("preguntas", preguntas);
       },
       (err) => {
         console.log("err", err);
-        //this.router.navigate(["/user"]);
+        this.router.navigate(["/expert"]);
       }
     );
     // let sub = await this.comentarioService

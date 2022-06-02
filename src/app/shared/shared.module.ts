@@ -94,6 +94,7 @@ import { MenuitemComponent } from "./menuitem/menuitem.component";
 import { UserPasswordComponent } from "./user-password/user-password.component";
 import { UserFormComponent } from "./user-form/user-form.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ImagePipe } from "../pipes/image.pipe";
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     MenuitemComponent,
     UserPasswordComponent,
     UserFormComponent,
+    ImagePipe
   ],
   imports: [
     CommonModule,
@@ -286,6 +288,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     MenuitemComponent,
     UserPasswordComponent,
     UserFormComponent,
+    ImagePipe
   ],
 })
 export class SharedModule {}

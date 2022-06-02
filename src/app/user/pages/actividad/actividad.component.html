@@ -4,14 +4,36 @@
             <div class="p-col-12">
                 <div class="card widget-statistics" style="min-height: 33vh">
                     <div class="header">
-                        <p><span>Fecha: </span>{{actividad.fecha | date: "yyyy/MM/dd HH:mm"}}</p>
-                        <p><span>Calificación: </span>{{actividad.calificacion}}/{{actividad.totalPreguntas}}</p>
-                        <p><span>Preguntas: </span>{{actividad.totalPreguntas}}</p>
-                        <p><span>Tiempo: </span>{{actividad.tiempoTotal}}min</p>
+                        <p><span>Fecha: </span>{{actividad.actividad.fecha | date: "yyyy/MM/dd HH:mm"}}</p>
+                        <p><span>Correctas: </span>{{actividad.actividad.calificacion}}/{{actividad.actividad.totalPreguntas}}</p>
+                        <p><span>Preguntas: </span>{{actividad.actividad.totalPreguntas}}</p>
+                        <p><span>Tiempo: </span>{{actividad.actividad.tiempoTotal}}min</p>
                     </div>
                     <p-divider></p-divider>
                     <div class="questions">
-                        <div class="question ">
+                        <h4>Retroalimentación</h4>
+                        <h5>Calificación</h5>
+                        <p-progressBar [value]="actividad.actividad.calificacion"></p-progressBar>
+                        <h5>Indicador de desempeño</h5>
+                        <p>{{actividad.rubrica.indicador}}</p>
+
+                        <h5>Preguntas</h5>
+
+                        <div class="question" *ngFor="let pregunta of preguntas">
+                            <h6><span>{{pregunta.respuesta_correcta.numeroPregunta}}.</span> {{pregunta.respuesta_correcta.contenido}}
+                            
+                                <ng-container *ngIf="pregunta.respuesta.correcto; else elseTemplate">
+                                <i class="pi pi-check icon"></i>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <i class="pi pi-times icon invalid"></i>
+                            </ng-template>
+                            
+                            </h6>
+                         
+                        </div>
+                        
+                        <!-- <div class="question ">
                             <h6><span>1.</span> Que s etiene que hacer en caso de emergencia.</h6>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam. <i class="pi pi-check icon"></i></p>
                         </div>
@@ -42,7 +64,8 @@
                         <div class="question ">
                             <h6><span>1.</span> Que s etiene que hacer en caso de emergencia.</h6>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam. <i class="pi pi-times icon invalid"></i></p>
-                        </div>
+                        </div> -->
+
                     </div>
                 </div>
             </div>
