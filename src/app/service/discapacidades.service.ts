@@ -13,4 +13,7 @@ export class DiscapacidadesService {
   obtenerDiscapacidades(): Observable<any>{
     return this.http.get<any>(environment.WS_PATH+"obtenerDiscapacidad");
   }
+  obtenerListaDiscapacidades(){
+    return this. http.get<any>(environment.WS_PATH + "getParticipantesIntentosEjercitario/");
+  }
 }

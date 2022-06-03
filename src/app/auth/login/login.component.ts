@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public translate: TranslateService;
   public msjError;
   private subscribes: Subscription[] = [];
-  private msjModal: string;
+  private msj: string;
   public show: boolean = false;
 
   public msgs: Message[];
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       Swal.fire({
         allowOutsideClick: false,
         icon: "info",
-        text: this.msjModal,
+        text: this.msj,
       });
       Swal.showLoading();
 

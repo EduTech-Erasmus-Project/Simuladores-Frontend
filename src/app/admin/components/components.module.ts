@@ -6,6 +6,8 @@ import { ListaExpertosRechazadosComponent } from './lista-expertos-rechazados/li
 import { ListaExpertosRegistradosPlaformaComponent } from './lista-expertos-registrados-plaforma/lista-expertos-registrados-plaforma.component';
 import { ListaCompetenciasComponent } from './lista-competencias/lista-competencias.component';
 import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitarios.component';
+import { PrincipalesDiscapacidadesComponent } from './principales-discapacidades/principales-discapacidades.component';
+import { ListaUsuariosRegPlatComponent } from './lista-usuarios-reg-plat/lista-usuarios-reg-plat.component';
 
 
 
@@ -17,7 +19,9 @@ import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitar
     ListaEjercitariosComponent,
     ListaExpertoPorAprobarComponent,
     ListaExpertosRechazadosComponent,
-    ListaExpertosRegistradosPlaformaComponent
+    ListaExpertosRegistradosPlaformaComponent,
+    PrincipalesDiscapacidadesComponent,
+    ListaUsuariosRegPlatComponent
   ],
   imports: [ CommonModule, SharedModule ],
   exports: [
@@ -26,7 +30,9 @@ import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitar
     ListaEjercitariosComponent,
     ListaExpertoPorAprobarComponent ,
     ListaExpertosRechazadosComponent,
-    ListaExpertosRegistradosPlaformaComponent
+    ListaExpertosRegistradosPlaformaComponent,
+    PrincipalesDiscapacidadesComponent,
+    ListaUsuariosRegPlatComponent
   ],
 })
 export class ComponentsModule { }
