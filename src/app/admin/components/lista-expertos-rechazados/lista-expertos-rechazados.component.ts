@@ -20,7 +20,7 @@ export class ListaExpertosRechazadosComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadParticipantes()
-    this.expertoService.event.subscribe(result =>{console.log("hola",result)})
+    this.expertoService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
   }
 
   private async loadParticipantes() {
@@ -31,7 +31,7 @@ export class ListaExpertosRechazadosComponent implements OnInit {
       this.expertoRech = expertoRechazado;
       this.loadingExpertosRechazados = false;
       this._subscriptions.push( expertoRechazado);
-      this.expertoService.emitEvent(true);
+     
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ export class ListaExpertosRechazadosComponent implements OnInit {
     }
     await this.expertoService.aprobarEvaluador(data).subscribe(result => { this.expertoService.emitEvent(true);
       Swal.fire({ icon: 'success', title: 'Se ah aprovado al Experto', showConfirmButton: true, })
-      this.loadParticipantes()
+      
     }, error => {
       console.log(error);
       Swal.showValidationMessage( `Request failed: Error inesperado`)

@@ -20,7 +20,7 @@ export class ListaExpertosRegistradosPlaformaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadParticipantes()
-    this.expertoService.event.subscribe(result =>{console.log("hola",result)})
+    this.expertoService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
   }
 
   private async loadParticipantes() {
@@ -32,7 +32,7 @@ export class ListaExpertosRegistradosPlaformaComponent implements OnInit {
       this.expertoApro = expertoAprobado;
       this.loadingExpertosAprobado = false;
       this._subscriptions.push(expertoAprobado);
-      this.expertoService.emitEvent(true);
+      
     } catch (error) {
       console.log(error);
     }
