@@ -1,0 +1,60 @@
+<p-table >
+	<ng-template pTemplate="caption">
+		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+			Expertos rechazados
+			<span class="p-input-icon-left">
+				<i class="pi pi-search"></i>
+				<input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+					placeholder="Global Search" />
+			</span>
+		</div>
+	</ng-template>
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="name">Nombre
+				<p-sortIcon field="name"></p-sortIcon>
+			</th>
+			<th pSortableColumn="">Fecha de Registro
+				<p-sortIcon field=""></p-sortIcon>
+			</th>
+			<th pSortableColumn="">Profecion
+				<p-sortIcon field=""></p-sortIcon>
+			</th>
+			<th pSortableColumn="">Direccion
+				<p-sortIcon field=""></p-sortIcon>
+			</th>
+			<th pSortableColumn="boton ">
+				
+			</th>
+			
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" >
+		<tr >
+			<td>
+				<!-- Nombre -->
+			</td>
+			<td>
+				<!-- fechas de registro -->
+			</td>
+			<td>
+				<!-- Profecion -->
+			</td>
+			<td>
+				<!-- Direccion -->
+			</td>
+			<td>
+				<span class="p-column-title"></span>
+				<button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
+					<span class="p-button-label">Si</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
+				
+			</td>
+			
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage">
+		<tr>
+			<td colspan="8">No customers found.</td>
+		</tr>
+	</ng-template>
+</p-table>

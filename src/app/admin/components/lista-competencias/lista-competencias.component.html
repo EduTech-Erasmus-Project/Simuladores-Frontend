@@ -1,0 +1,69 @@
+<p-table [value]="competencia" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+            Listado de competencias
+            <p-dialog class="dialogo" header="Agregar Competencia" [(visible)]="display" modal="modal" [closable]="false" [style]="{width: '400px'}">
+                <div style="line-height: 1.5">
+                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <input type="text" pInputText placeholder="Titulo">
+                    </div>
+                    <textarea rows="5" cols="30" placeholder="Descripcion de la competencia" pInputTextarea></textarea>
+                    
+                </div>
+                <p-footer>
+                    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Guardar" class="p-button-text"></button>
+                    <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cerrar" class="p-button-text"></button>
+
+                    <!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
+
+                </p-footer>
+            </p-dialog>
+
+            <button type="text" (click)="display=true" pButton icon="pi pi-external-link" label="Agregar nueva competencia" style="width: auto"></button>
+
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+
+                <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Nombre
+                <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="country.name">Descripcion
+                <p-sortIcon field="country.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="boton.name">
+                <p-sortIcon field="boton.name"></p-sortIcon>
+            </th>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-competencia>
+        <tr >
+            <td>
+                <span class="p-column-title">{{competencia.titulo}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">{{competencia.descripcion}}</span>
+                
+            </td>
+            
+            <td>
+                <span class="p-column-title"></span>
+                <button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
+                    <span class="p-button-label">Si</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
+            </td>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
