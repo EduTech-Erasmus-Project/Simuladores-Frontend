@@ -45,9 +45,9 @@
 			</td>
 			<td>
 				<span class="p-column-title"></span>
-				<a pTooltip="Aprobar" (click)="validarAprobacion(expertoPen.usuario?.id)"  pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
-					<span class="p-button-label"> Si</span><span class="p-ink"></span></a>
-				<a pTooltip="Rechazar" pButton type="button" style="margin-left: 2px" class="p-button-danger" icon="pi pi-times">
+				<a pTooltip="Aprobar" (click)="approved(expertoPen?.id,expertoPen.usuario?.id)"  pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
+				</a>
+				<a pTooltip="Rechazar" (click)="notApproved(expertoPen?.id,expertoPen.usuario?.id)" pButton type="button" style="margin-left: 2px" class="p-button-danger" icon="pi pi-times">
                 </a>
 			</td>
 			

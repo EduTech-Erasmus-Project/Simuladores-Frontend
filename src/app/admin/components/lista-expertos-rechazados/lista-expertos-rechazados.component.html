@@ -45,9 +45,8 @@
 			</td>
 			<td>
 				<span class="p-column-title"></span>
-				<button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
-					<span class="p-button-label">Si</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
-				
+				<a pTooltip="Aprobar" (click)="approved(expertoRech?.id,expertoRech.usuario?.id)"  pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
+				</a>
 			</td>
 			
 		</tr>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ExpertoService } from 'src/app/service/experto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-expertos-rechazados',
@@ -18,7 +19,8 @@ export class ListaExpertosRechazadosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadParticipantes() 
+    this.loadParticipantes()
+    this.expertoService.event.subscribe(result =>{console.log("hola",result)})
   }
 
   private async loadParticipantes() {
@@ -29,9 +31,28 @@ export class ListaExpertosRechazadosComponent implements OnInit {
       this.expertoRech = expertoRechazado;
       this.loadingExpertosRechazados = false;
       this._subscriptions.push( expertoRechazado);
+      this.expertoService.emitEvent(true);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async approved(id,idU){
+    console.log(id,idU);
+    let data = {
+      idU:idU,
+      idE: id,
+      estado: true,
+      razon: null
+    }
+    await this.expertoService.aprobarEvaluador(data).subscribe(result => { this.expertoService.emitEvent(true);
+      Swal.fire({ icon: 'success', title: 'Se ah aprovado al Experto', showConfirmButton: true, })
+      this.loadParticipantes()
+    }, error => {
+      console.log(error);
+      Swal.showValidationMessage( `Request failed: Error inesperado`)
+    })
+    
   }
 
 }
