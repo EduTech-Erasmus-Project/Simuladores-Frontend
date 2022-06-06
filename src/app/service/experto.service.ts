@@ -32,6 +32,10 @@ export class ExpertoService {
     return this.http.get<any>(environment.WS_PATH + "getUsuarioEvaluador/" + id);
   }
 
+  public bloqueoCuentaEvaluador(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "bloqueoCuenta/"+ id);
+  }
+
   public emitEvent(data: boolean) {
     this.evt$.emit(data);
   }

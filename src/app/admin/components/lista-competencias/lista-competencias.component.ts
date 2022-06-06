@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompetenciaService } from "src/app/service/competencia.service";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -12,12 +13,18 @@ export class ListaCompetenciasComponent implements OnInit {
   private _subscriptions: Subscription[] = [];
   public loadingCompetencia = false;
   public competencia : any;
+  private titulo!: string;
+  private descripcion!: string;
+  public display = false;
 
   constructor(private competenciaService : CompetenciaService) { }
+
+  
 
   ngOnInit(): void {
     
    this.loadParticipantes();
+   this.competenciaService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
     
   }
 
@@ -32,6 +39,25 @@ export class ListaCompetenciasComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async approved(){
+    
+    let data = {
+     titulo:this.titulo,
+     descripcion:this.descripcion
+    }
+     await this.competenciaService.registrarCompetencia(data).subscribe(result => { this.competenciaService.emitEvent(true);
+      this.display=false;
+      this.titulo="";
+      this.descripcion="";
+     Swal.fire({ icon: 'success', title: 'Se ah registrado correctamente', showConfirmButton: true, })
+      
+    }, error => {
+     console.log(error);
+     Swal.showValidationMessage( `Request failed: Error inesperado`)
+     })
+    
   }
 
 }

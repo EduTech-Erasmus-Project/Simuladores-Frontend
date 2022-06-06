@@ -5,16 +5,16 @@
             <p-dialog class="dialogo" header="Agregar Competencia" [(visible)]="display" modal="modal" [closable]="false" [style]="{width: '400px'}">
                 <div style="line-height: 1.5">
                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                        <input type="text" pInputText placeholder="Titulo">
+                        <input type="text" pInputText placeholder="Titulo" [(ngModel)]='titulo'>
                     </div>
-                    <textarea rows="5" cols="30" placeholder="Descripcion de la competencia" pInputTextarea></textarea>
+                    <textarea rows="5" cols="30"  [(ngModel)]='descripcion' placeholder="Descripcion de la competencia" pInputTextarea></textarea>
                     
                 </div>
                 <p-footer>
-                    <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Guardar" class="p-button-text"></button>
+                    <button type="button" pButton icon="pi pi-check" (click)="approved()"  label="Guardar" class="p-button-text"></button>
                     <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cerrar" class="p-button-text"></button>
-
-                    <!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
+<!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
+                    
 
                 </p-footer>
             </p-dialog>
@@ -37,9 +37,7 @@
             <th pSortableColumn="country.name">Descripcion
                 <p-sortIcon field="country.name"></p-sortIcon>
             </th>
-            <th pSortableColumn="boton.name">
-                <p-sortIcon field="boton.name"></p-sortIcon>
-            </th>
+            
             
         </tr>
     </ng-template>
@@ -53,12 +51,7 @@
                 
             </td>
             
-            <td>
-                <span class="p-column-title"></span>
-                <button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
-                    <span class="p-button-label">Si</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
-            </td>
-            
+          
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
