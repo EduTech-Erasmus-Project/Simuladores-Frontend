@@ -31,11 +31,6 @@ const routes: Routes = [
       //     ),
       // },
       {
-        path: "terms-and-conditions",
-        loadChildren: () =>
-          import("./pages/terms/terms.module").then((m) => m.TermsModule),
-      },
-      {
         path: "login",
         loadChildren: () =>
           import("../auth/login/login.module").then((m) => m.LoginModule),
@@ -97,6 +92,19 @@ const routes: Routes = [
           import("./pages/information/information.module").then(
             (m) => m.InformationModule
           ),
+      },
+      {
+        path: "campus-virtual",
+        loadChildren: () => 
+          new Promise(() => {
+            // console.log("campus-virtual");
+            // window.open(
+            //   'https://campusvirtual.uazuay.edu.ec/v212/',
+            //   '_blank' // <- This is what makes it open in a new window.
+            // );
+            window.location.href =
+                "https://campusvirtual.uazuay.edu.ec/v212/";
+          }),
       },
     ],
   },

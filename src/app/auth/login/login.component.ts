@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       let loginSub = await this.authService.login(formData).subscribe(
         async (res: any) => {
           Swal.close();
-          console.log(res);
+          //console.log(res);
           this.storageService.saveStorageItem("token", res.token_access);
           this.storageService.saveStorageItem("refresh", res.token_refresh);
 
@@ -117,7 +117,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.router.navigate(["/expert"]);
             return;
           } else if (res.user.tipoUser === "admin") {
-            this.router.navigate(["/admin"]);
+            this.router.navigate(["/dashboard"]);
             return;
           }
           this.router.navigate(["/user"]);
@@ -125,7 +125,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         (error) => {
           Swal.close();
-          console.log("error--", error);
+          console.log(error);
           if (error?.error?.code == "user_inactive") {
             this.msgs = [
               {
@@ -140,9 +140,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.msgs = [
               {
                 severity: "warn",
-
-                detail:
-                  "La cuenta aún está en revisión, espere la aprobación del administrador.",
+                detail:error?.error?.razon,
               },
             ];
             return;

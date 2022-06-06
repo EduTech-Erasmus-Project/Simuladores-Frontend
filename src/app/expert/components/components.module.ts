@@ -1,12 +1,24 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
-import { ComentariosComponent } from './comentarios/comentarios.component';
-import { RespuestasComponent } from './respuestas/respuestas.component';
+import { RespuestasComponent } from "./respuestas/respuestas.component";
+import { ListaPendientesComponent } from "./lista-pendientes/lista-pendientes.component";
+import { ListaParticipantesComponent } from "./lista-participantes/lista-participantes.component";
+import { ListaRechazadosComponent } from "./lista-rechazados/lista-rechazados.component";
 
 @NgModule({
-  declarations: [ComentariosComponent, RespuestasComponent],
+  declarations: [
+    RespuestasComponent,
+    ListaPendientesComponent,
+    ListaParticipantesComponent,
+    ListaRechazadosComponent,
+  ],
   imports: [CommonModule, SharedModule],
-  exports: [ComentariosComponent, RespuestasComponent],
+  exports: [
+    RespuestasComponent,
+    ListaPendientesComponent,
+    ListaParticipantesComponent,
+    ListaRechazadosComponent,
+  ],
 })
 export class ComponentsModule {}

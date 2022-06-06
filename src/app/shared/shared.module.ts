@@ -82,36 +82,41 @@ import { TreeModule } from "primeng/tree";
 import { TreeTableModule } from "primeng/treetable";
 import { VirtualScrollerModule } from "primeng/virtualscroller";
 import { FooterComponent } from "./footer/footer.component";
-import { MenuFooterPageComponent } from "./menu-footer-page/menu-footer-page.component";
-import { MenuLateralComponent } from "./menu-lateral/menu-lateral.component";
-import { MenuTopBarComponent } from "./menu-top-bar/menu-top-bar.component";
 import { TranslateModule } from "@ngx-translate/core";
 import { MenuPublicComponent } from "./menu-public/menu-public.component";
 import { ContributorsComponent } from "./contributors/contributors.component";
-import { HeroComponent } from './hero/hero.component';
+import { HeroComponent } from "./hero/hero.component";
 import { PerfilComponent } from "./perfil/perfil.component";
-import { ComentariosComponent } from './comentarios/comentarios.component';
+import { ComentariosComponent } from "./comentarios/comentarios.component";
+import { TopBarComponent } from "./top-bar/top-bar.component";
+import { PrivateMenuComponent } from "./private-menu/private-menu.component";
+import { MenuitemComponent } from "./menuitem/menuitem.component";
+import { UserPasswordComponent } from "./user-password/user-password.component";
+import { UserFormComponent } from "./user-form/user-form.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ImagePipe } from "../pipes/image.pipe";
 
 @NgModule({
   declarations: [
     FooterComponent,
-    MenuFooterPageComponent,
-    MenuLateralComponent,
-    MenuTopBarComponent,
     MenuPublicComponent,
     ContributorsComponent,
     HeroComponent,
     PerfilComponent,
     ComentariosComponent,
-    ComentariosComponent
-
+    ComentariosComponent,
+    TopBarComponent,
+    PrivateMenuComponent,
+    MenuitemComponent,
+    UserPasswordComponent,
+    UserFormComponent,
+    ImagePipe
   ],
   imports: [
     CommonModule,
     AccordionModule,
     AutoCompleteModule,
     AvatarModule,
-    
     AvatarGroupModule,
     BadgeModule,
     BreadcrumbModule,
@@ -188,7 +193,8 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
     TreeModule,
     TreeTableModule,
     VirtualScrollerModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AccordionModule,
@@ -270,17 +276,19 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
     TreeModule,
     TreeTableModule,
     VirtualScrollerModule,
-    MenuFooterPageComponent,
-    MenuLateralComponent,
-    MenuTopBarComponent,
     TranslateModule,
     FooterComponent,
     MenuPublicComponent,
     ContributorsComponent,
     HeroComponent,
     PerfilComponent,
-    ComentariosComponent
-
+    ComentariosComponent,
+    TopBarComponent,
+    PrivateMenuComponent,
+    MenuitemComponent,
+    UserPasswordComponent,
+    UserFormComponent,
+    ImagePipe
   ],
 })
 export class SharedModule {

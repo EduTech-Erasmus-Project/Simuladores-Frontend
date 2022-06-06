@@ -1,14 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UsuarioService {
+  private evt$: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   totalParticipantesPorEvaluador(): Observable<any> {
     return this.http.get<any>(
@@ -38,34 +39,44 @@ export class UsuarioService {
   //   return this.http.get<any>(  environment.WS_PATH + "obtenerParticipante/" + idParticipante);
   // }
 
-  obtenerParticipantesCompetencia(idCompetencia:number): Observable<any> {
+  obtenerParticipantesCompetencia(idCompetencia: number): Observable<any> {
     return this.http.get<any>(
-      environment.WS_PATH + "obtenerParticipantesCompetencia/"+idCompetencia
+      environment.WS_PATH + "obtenerParticipantesCompetencia/" + idCompetencia
     );
   }
 
   //validar eliminacion de metodo
-  obtenerParticipantes(){
-    return this.http.get<any>(
-      environment.WS_PATH + "obtenerParticipantes/"
-    );
+  obtenerParticipantes() {
+    return this.http.get<any>(environment.WS_PATH + "obtenerParticipantes/");
   }
 
-  obtenerParticipantesPendientes(){
+  obtenerParticipantesPendientes(): Observable<any> {
     return this.http.get<any>(
       environment.WS_PATH + "obtenerParticipantesPendientes/"
     );
   }
 
-  aprobarParticipantes(data): Observable<any> {
-    return this.http.post<any>(
-      environment.WS_PATH + "aprobarParticipante/", data
+  obtenerParticipantesRechazados(): Observable<any> {
+    return this.http.get<any>(
+      environment.WS_PATH + "obtenerParticipantesRechazados/"
     );
   }
 
-  getEvaluador(id:number): Observable<any> {
-    return this.http.get<any>(
-      environment.WS_PATH + "getEvaluador/" + id
+  aprobarParticipantes(data): Observable<any> {
+    return this.http.post<any>(
+      environment.WS_PATH + "aprobarParticipante/",
+      data
+    );
+  }
+
+  getEvaluador(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "getEvaluador/" + id);
+  }
+
+  actualizarPassword(data: any) {
+    return this.http.post<any>(
+      environment.WS_PATH + "actualizarPassword/",
+      data
     );
   }
 
@@ -73,5 +84,34 @@ export class UsuarioService {
     return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
   }
 
+  get event() {
+    return this.evt$;
+  }
 
+  public emitEvent(data: boolean) {
+    this.evt$.emit(data);
+  }
+
+  getPerfil() {
+    return this.http.get<any>(environment.WS_PATH + "perfil/");
+  }
+
+  editarPerfil(data) {
+    return this.http.post<any>(environment.WS_PATH + "perfil/", data);
+  }
+
+  updateImage(fileImage: File) {
+    const formData = new FormData();
+    formData.append("file", fileImage);
+    return this.http.put<any>(environment.WS_PATH + "actualizarImagenPerfil/", formData);
+  }
+
+  getReporte(idEjercitario:number, idParticipante:number){
+    return this.http.get<any>(environment.WS_PATH + "reporte/" + idEjercitario + "/" + idParticipante);
+  }
+
+  downloadCertificado(idCompetencia, idParticipante){
+    //console.log(idCompetencia, idParticipante);
+    return this.http.get(environment.WS_PATH + "descargarCertificado/" + idCompetencia + "/" + idParticipante);
+  }
 }

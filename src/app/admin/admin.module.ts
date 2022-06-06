@@ -6,7 +6,9 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ExpertosComponent } from './pages/expertos/expertos.component';
-import { SimuladoresComponent } from './pages/simuladores/simuladores.component'
+import { SimuladoresComponent } from './pages/simuladores/simuladores.component';
+import { DatosAdminComponent } from './pages/datos-admin/datos-admin.component'
+
 
 import { RouterModule } from '@angular/router';
 import { TopBarPageExpertoComponent } from '../expert/pages/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
@@ -14,12 +16,13 @@ import { TopBarPageExpertoComponent } from '../expert/pages/StructurePage-Expert
 
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent],
+  declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, DatosAdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+
   ]
 })
 export class AdminModule { }

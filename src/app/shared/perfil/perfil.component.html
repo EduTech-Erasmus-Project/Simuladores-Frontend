@@ -4,7 +4,7 @@
             <h6>Codigo: {{usuario?.codigo}}</h6>
             <div class="profile">
                 <div class="img">
-                    <img src="assets/img/profile.png" style="width: 100px" alt="" />
+                    <img [src]="usuario?.img | image" style="width: 100px" alt="Foto de perfil" />
                     <h4>
                         {{usuario?.nombre}} {{usuario?.apellido}}
                     </h4>

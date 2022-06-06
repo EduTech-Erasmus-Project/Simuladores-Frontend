@@ -26,7 +26,7 @@ export class ComentariosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("idActividad", this.idActividad);
+    //console.log("idActividad", this.idActividad);
     this.loadData();
   }
 
@@ -40,7 +40,7 @@ export class ComentariosComponent implements OnInit {
       .subscribe((result) => {
         this.comentarios = result;
         //sub.unsubscribe();
-        console.log("comentarios", result);
+        //console.log("comentarios", result);
       });
   }
 

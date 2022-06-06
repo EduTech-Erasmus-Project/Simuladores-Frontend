@@ -1,3 +1,31 @@
+.flc-prefsEditor-separatedPanel{
+    z-index: 999 !important;
+    position: relative !important;
+}
+body{
+    overflow-x: hidden;
+}
+
+.fl-prefsEditor-buttons {
+    z-index: 50000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 25px !important;
+    border: none !important;
+    background-color: var(--primary-color) !important;
+    box-shadow: none !important;
+    button {
+        background-color: var(--primary-color) !important;
+        color: #FFF !important;
+    }
+}
+
+.landing-header-content {
+    z-index: 0 !important;
+}
+
+
 .login-panel-content {
   padding: 0 !important;
 }
@@ -93,4 +121,12 @@
     .main-content {
       padding: 0 25px;
     }
-  }
+}
+
+.features-row:hover{
+    box-shadow: none !important; 
+}
+.features-row{
+    pointer-events: none;
+}
+

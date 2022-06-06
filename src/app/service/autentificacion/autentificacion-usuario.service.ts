@@ -65,7 +65,7 @@ export class AutentificacionUsuarioService {
       'Content-Type':  'application/json',}) 
     };
     this.http.post<any>(environment.WS_PATH+"logout", config).subscribe(res=>{
-      console.log("logout: "+res.message)
+      //console.log("logout: "+res.message)
       this.router.navigate(['']);
     });
     

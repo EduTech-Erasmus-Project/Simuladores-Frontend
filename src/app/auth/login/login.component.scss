@@ -1,24 +1,28 @@
-
-.login-content{
+.login-content {
     //position: relative;
     //background-color: red;
     height: 80vh;
-    .desert{
+    .desert {
         position: relative;
         bottom: 0;
     }
-    .login-panel{
+    .login-panel {
         height: 100%;
     }
 }
 
-.viewPass{
+.viewPass {
     position: relative;
-    i{
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      padding: 5px;
-      cursor: pointer;
+    i {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        padding: 5px;
+        cursor: pointer;
     }
-  }
+}
+
+.login-panel {
+    min-height: 74.5vh;
+    height: auto;
+}

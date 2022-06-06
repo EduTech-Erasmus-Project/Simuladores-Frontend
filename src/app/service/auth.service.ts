@@ -28,9 +28,7 @@ export class AuthService {
 
   logout() {}
   
-  get emailUser() {
-    return null;
-  }
+
   get getToken(): string {
     return this.storageService.getStorageItem("token");
   }
@@ -39,7 +37,7 @@ export class AuthService {
   }
 
   public login(data): Observable<any> {
-    console.log("data", data);
+    //console.log("data", data);
     return this.http.post<any>(this._url + "login", data);
   }
 

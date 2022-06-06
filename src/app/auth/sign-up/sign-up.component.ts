@@ -25,20 +25,23 @@ import { Discapacidad } from "src/core/interfaces/discapacidad";
 export class SignUpComponent implements OnInit, OnDestroy {
   private subscribes: Subscription[] = [];
   public registred: boolean = false;
-  private typeRegister: string;
+  public code: string;
   public form: FormGroup;
   public show: boolean = false;
   public msgs: Message[];
   public discapacidadesArray: any[];
+  public validateCode:boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private discapacidadesService: DiscapacidadesService
+    private discapacidadesService: DiscapacidadesService,
+    
   ) {
     this.route.queryParams.subscribe((params) => {
-      this.typeRegister = params.register;
+      //console.log(params);
+      this.code = params.code;
     });
   }
   ngOnDestroy(): void {
@@ -62,7 +65,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
             code: results.id,
           };
         });
-        console.log(this.discapacidades);
+        //console.log(this.discapacidades);
       });
     this.subscribes.push(sub);
   }
@@ -101,6 +104,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       fechaNacimiento: [null, [Validators.required]],
       genero: [null, [Validators.required]],
       discapacidades: this.fb.array([]),
+      codigo:[{value:this.code, disabled:this.code }, [Validators.required, Validators.maxLength(6), Validators.minLength(6)]],
     });
   }
 
@@ -154,7 +158,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   removeDiscapacidad(index) {
-    console.log(this.discapacidades.length);
+    //console.log(this.discapacidades.length);
     if (this.discapacidades.length <= 1) {
       this.form.get("disability").setValue(false);
     }
@@ -163,11 +167,24 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   async onSave() {
     this.msgs = [];
+    if(
+    this.getErrorMaxLength('codigo') ||
+    this.getErrorMinLength('codigo') ||  
+    this.validateCode){
+      this.msgs = [
+        {
+          severity: "error",
+          summary: "Error",
+          detail: "Necesita ingresar un código de docente valido.",
+        },
+      ];
+    }
     this.markAsTouchFormArray();
     this.markTouchForm();
     if (this.form.valid) {
-      console.log("Form valid");
+      //console.log("Form valid");
       let data = this.form.value;
+      data.codigo = this.form.get("codigo").value;
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
       let sub = await this.authService.register(data).subscribe(
         (results) => {
@@ -190,6 +207,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
             ];
             return;
           }
+          
 
           this.msgs = [
             {
@@ -225,10 +243,32 @@ export class SignUpComponent implements OnInit, OnDestroy {
     );
   }
 
+  getErrorMaxLength(field:string){
+    return (
+      this.form.get(field).hasError("maxlength") && this.form.get(field).touched
+    );
+  }
+
+  getErrorMinLength(field:string){
+    return (
+      this.form.get(field).hasError("minlength") && this.form.get(field).touched
+    );
+  }
+
   public getArrayErrorRequired(idx: number, field: string) {
     return (
       this.discapacidades.at(idx).get(field)?.hasError("required") &&
       this.discapacidades.at(idx).get(field)?.touched
     );
+  }
+
+  onChangeRole() {
+    if (this.code) return;
+    if(this.form.get("role").value === "expert"){
+      this.form.controls['codigo'].disable();
+      this.form.controls['codigo'].setValue(null);
+    }else{
+      this.form.controls['codigo'].enable();
+    }
   }
 }

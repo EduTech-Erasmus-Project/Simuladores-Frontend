@@ -12,12 +12,12 @@ const routes: Routes = [
     component: UserComponent,
     children: [
       { path: "", component: PresentacionInicioUserComponent },
-      
+
       {
         path: "actividad/:id",
         component: ActividadComponent,
       },
-      { path: "datosUsuario/:correo", component: DatosUsuarioComponent },
+      { path: "mi-cuenta", component: DatosUsuarioComponent },
     ],
   },
 ];

@@ -1,7 +1,13 @@
-.features-row:hover{
-    box-shadow: none !important;
+.video{
+    height: 250px;
+    width: 100%;
 }
 
-.contributors{
-    padding: 25px 0;
+@media (max-width: 1000px) {
+    .divider{
+        display: none;
+    }
+    .video{
+        height: 350px;
+    }
 }
