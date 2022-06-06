@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     
   ) {
     this.route.queryParams.subscribe((params) => {
-      console.log(params);
+      //console.log(params);
       this.code = params.code;
     });
   }
@@ -65,7 +65,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
             code: results.id,
           };
         });
-        console.log(this.discapacidades);
+        //console.log(this.discapacidades);
       });
     this.subscribes.push(sub);
   }
@@ -158,7 +158,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   removeDiscapacidad(index) {
-    console.log(this.discapacidades.length);
+    //console.log(this.discapacidades.length);
     if (this.discapacidades.length <= 1) {
       this.form.get("disability").setValue(false);
     }
@@ -182,7 +182,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.markAsTouchFormArray();
     this.markTouchForm();
     if (this.form.valid) {
-      console.log("Form valid");
+      //console.log("Form valid");
       let data = this.form.value;
       data.codigo = this.form.get("codigo").value;
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");

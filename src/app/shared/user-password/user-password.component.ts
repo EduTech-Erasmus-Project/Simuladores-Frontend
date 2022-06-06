@@ -196,7 +196,7 @@ export class UserPasswordComponent implements OnInit, OnDestroy {
         this.user = res.user;
         //this.loginService.currentUser = this.user;
 
-        console.log(this.user);
+        //console.log(this.user);
 
         this.imageSatusErr = false;
         this.imageUpload = false;

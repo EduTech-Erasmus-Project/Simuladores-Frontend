@@ -14,16 +14,17 @@
                 <p-button (click)="showModal()" label="Información del participante" icon="pi pi-info-circle">
                 </p-button>
             </div>
-            <div class="p-col-2" style="display: flex; justify-content: flex-end;">
+            <div class="p-col-4" style="display: flex; justify-content: flex-end;">
                 <!-- [loading]="loading[0]" (onClick)="load(0)" -->
-                <p-button [disabled]="download" (click)="downloadCertificado()" label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
+                <p-button [disabled]="download" (click)="imprimirReporte()" label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
             </div>
-            <div class="p-col-2" style="display: flex; justify-content: flex-end;">
-                <!-- [loading]="loading[0]" (onClick)="load(0)" -->
+            <!-- [loading]="loading[0]" (onClick)="load(0)" -->
                 <!-- <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button> -->
+
+            <!-- <div class="p-col-2" style="display: flex; justify-content: flex-end;">
                 <p-splitButton label="Certificado" [model]="items"
                     styleClass="p-button-raised p-button-plain p-button-text"></p-splitButton>
-            </div>
+            </div> -->
         </div>
     </div>
 

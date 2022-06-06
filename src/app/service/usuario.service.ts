@@ -109,4 +109,9 @@ export class UsuarioService {
   getReporte(idEjercitario:number, idParticipante:number){
     return this.http.get<any>(environment.WS_PATH + "reporte/" + idEjercitario + "/" + idParticipante);
   }
+
+  downloadCertificado(idCompetencia, idParticipante){
+    //console.log(idCompetencia, idParticipante);
+    return this.http.get(environment.WS_PATH + "descargarCertificado/" + idCompetencia + "/" + idParticipante);
+  }
 }

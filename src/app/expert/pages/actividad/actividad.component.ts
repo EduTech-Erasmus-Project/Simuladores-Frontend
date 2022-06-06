@@ -32,14 +32,14 @@ export class ActividadComponent implements OnInit {
   ) {
     if (isNaN(+this.route.snapshot.params.id)) {
       //router.navigate(["/user"]);
-      console.log(this.route.snapshot.params);
+      //console.log(this.route.snapshot.params);
     }
 
     this.idActividad = this.route.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    console.log("idActividad", this.idActividad);
+    //console.log("idActividad", this.idActividad);
     this.loadData();
   }
 
@@ -55,12 +55,12 @@ export class ActividadComponent implements OnInit {
       ([ actividad, preguntas]) => {
         //console.log("actividad", actividad);
         this.actividad = actividad;
-        console.log(actividad);
+        //console.log(actividad);
         this.preguntas = preguntas;
-        console.log("preguntas", preguntas);
+        //console.log("preguntas", preguntas);
       },
       (err) => {
-        console.log("err", err);
+        console.log(err);
         this.router.navigate(["/expert"]);
       }
     );
