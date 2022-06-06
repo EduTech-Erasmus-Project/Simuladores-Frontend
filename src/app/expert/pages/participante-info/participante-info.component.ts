@@ -76,7 +76,7 @@ export class ParticipanteInfoComponent implements OnInit {
     private router: Router, 
     private usuarioService: UsuarioService
   ) {
-    console.log(this._Activatedroute.snapshot.params);
+    //console.log(this._Activatedroute.snapshot.params);
 
     if (
       isNaN(+this._Activatedroute.snapshot.params?.idCompetencia) ||
@@ -87,8 +87,8 @@ export class ParticipanteInfoComponent implements OnInit {
     this.idCompetencia = +this._Activatedroute.snapshot.params.idCompetencia;
     this.idParticipante = +this._Activatedroute.snapshot.params.idEstudiante;
 
-    console.log(this.idCompetencia);
-    console.log(this.idParticipante);
+    //console.log(this.idCompetencia);
+    //console.log(this.idParticipante);
   }
 
   ngOnInit(): void {
@@ -111,7 +111,14 @@ export class ParticipanteInfoComponent implements OnInit {
     this.loadData();
   }
 
-  downloadCert(){
+  async downloadCert(){
+    //console.log()this.download = true;
+   try {
+     let certificado = await this.usuarioService.downloadCertificado(this.idCompetencia, this.idParticipante).toPromise();
+     //console.log(certificado);
+   } catch (error) {
+      console.log(error);
+   }
 
   }
 
@@ -164,7 +171,7 @@ export class ParticipanteInfoComponent implements OnInit {
     };
   }
 
-  async downloadCertificado() {
+  async imprimirReporte() {
     try {
       let reporteData = await this.usuarioService
         .getReporte(this.idCompetencia, this.idParticipante)
@@ -203,7 +210,7 @@ export class ParticipanteInfoComponent implements OnInit {
         )
         .toPromise();
 
-        console.log("res", actividades);
+        //console.log("res", actividades);
       this.actividades = actividades;
       this.loadGrafica();
     } catch (error) {
@@ -217,7 +224,7 @@ export class ParticipanteInfoComponent implements OnInit {
         .obtenerInformacionParticipante(this.idParticipante)
         .toPromise();
       this.usuario = user;
-      console.log(this.usuario);
+      //console.log(this.usuario);
       this.displayMaximizable = true;
     } catch (error) {
       console.log(error);

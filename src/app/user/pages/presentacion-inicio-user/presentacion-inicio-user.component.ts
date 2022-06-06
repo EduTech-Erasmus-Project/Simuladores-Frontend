@@ -97,7 +97,7 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
       let actividades = await this.actividadService
         .getParticipanteActividades(idEjercitario)
         .toPromise();
-      console.log(actividades);
+      //console.log(actividades);
       this.actividades = actividades;
     } catch (error) {
       console.log(error);
@@ -116,7 +116,7 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   }
 
   onChangePanel(event) {
-    console.log(event);
+    //console.log(event);
     this.listarProgreso(
       this.competencia.niveles[event.index].ejercitarios[0].id
     );

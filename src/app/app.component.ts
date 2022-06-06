@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
 
     event.preventDefault();
 
-    console.log("tap click baner");
+    //console.log("tap click baner");
   }
 
   onRightPanelButtonClick(event) {

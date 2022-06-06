@@ -39,7 +39,7 @@ export class ActividadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("idActividad", this.idActividad);
+    //console.log("idActividad", this.idActividad);
     this.loadData();
   }
 
