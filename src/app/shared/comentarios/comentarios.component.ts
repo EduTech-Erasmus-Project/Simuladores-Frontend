@@ -56,7 +56,7 @@ export class ComentariosComponent implements OnInit {
       actividad: this.idActividad,
     };
     this.comentarioService.comentar(comentarioObj).subscribe((result) => {
-      console.log(result);
+      //console.log(result);
       this.loadData();
       this.loadingPublicar = true;
       this.comentario = "";
