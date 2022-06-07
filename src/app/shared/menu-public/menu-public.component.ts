@@ -111,6 +111,14 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
       //     //styleClass: "active",
       //   },
       // },
+      {
+        label: "Campus Virtual UDA", //translate.translations.menu.contact,
+        routerLink: "campus-virtual",
+        routerLinkActiveOptions: {
+          exact: true,
+          //styleClass: "active",
+        },
+      },
     ];
   }
 
@@ -128,7 +136,7 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
   }
 
   navigate() {
-    console.log(this.user);
+    //console.log(this.user);
     if(this.user.tipoUser === "admin"){
       this.router.navigate(["/dashboard"]);
     }

@@ -1,16 +1,15 @@
 import { Ejercitario } from "./Ejercitario";
 
 export interface Competencia {
-    titulo?:      string;
-    descripcion?: string;
-    niveles?:     Nivele[];
+  id?: number;
+  titulo?: string;
+  descripcion?: string;
+  niveles?: Nivele[];
 }
 
 export interface Nivele {
-    name?:         string;
-    value?:        string;
-    ejercitarios?: Ejercitario[];
+  name?: string;
+  value?: string;
+  status?: boolean;
+  ejercitarios?: Ejercitario[];
 }
-
-
-

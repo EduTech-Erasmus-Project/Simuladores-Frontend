@@ -20,7 +20,7 @@ export class ListaParticipantesComponent implements OnInit {
   ngOnInit(): void {
     this.loadParticipantes();
     let sub = this.usuarioService.event.subscribe((res) => {
-      console.log(res);
+      //console.log(res);
       this.loadParticipantes();
     })
     this._subscriptions.push(sub);
@@ -32,7 +32,7 @@ export class ListaParticipantesComponent implements OnInit {
       const participantes = await this.usuarioService
         .obtenerParticipantes()
         .toPromise();
-      console.log("pendientes", participantes);
+      //console.log("pendientes", participantes);
       this.participantes = participantes;
       this.loadingParticipantes = false;
     } catch (error) {

@@ -1,26 +1,16 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConfirmationService, MessageService } from "primeng/api";
-import { ScrollPanel } from "primeng/scrollpanel";
-import { Table } from "primeng/table";
+import { MenuItem, MessageService } from "primeng/api";
 import { Actividad } from "src/app/core/interfaces/Actividad";
-import { User } from "src/app/core/interfaces/User";
-import { Customer, Representative } from "src/app/demo/domain/customer";
-import { Comentario } from "src/app/core/interfaces/Comentario";
-import { DiscapacidadParticipanteInterface } from "src/app/core/interfaces/DiscapacidadParticipante";
-import { ExperienciaLaboralInterface } from "src/app/core/interfaces/ExperienciaLaboral";
-import { AuthService } from "src/app/service/auth.service";
-import { InformacionParticipanteService } from "src/app/service/informcionParticpante/informacion-participante.service";
-import { DiscapacidadesService } from "src/app/service/discapacidades.service";
-import { forkJoin } from "rxjs";
-import { map } from "rxjs/operators";
 import { ActividadService } from "src/app/service/actividad.service";
 import * as moment from "moment";
 import { CompetenciaService } from "src/app/service/competencia.service";
 import { Ejercitario } from "src/app/core/interfaces/Ejercitario";
 import { UsuarioService } from "src/app/service/usuario.service";
 import { Competencia } from "src/app/core/interfaces/Competencia";
+import pdfMake from "pdfmake/build/pdfmake";
+import { ReportePdf } from "src/app/core/models/Reporte";
 
 @Component({
   selector: "app-participante-info",
@@ -45,6 +35,10 @@ export class ParticipanteInfoComponent implements OnInit {
 
   public charLineNotaData = {};
   public charLineTiempoaData = {};
+
+  public items: MenuItem[];
+
+  public download: boolean = false;
 
   public charLineOptions = {
     plugins: {
@@ -82,7 +76,7 @@ export class ParticipanteInfoComponent implements OnInit {
     private router: Router, 
     private usuarioService: UsuarioService
   ) {
-    console.log(this._Activatedroute.snapshot.params);
+    //console.log(this._Activatedroute.snapshot.params);
 
     if (
       isNaN(+this._Activatedroute.snapshot.params?.idCompetencia) ||
@@ -93,12 +87,39 @@ export class ParticipanteInfoComponent implements OnInit {
     this.idCompetencia = +this._Activatedroute.snapshot.params.idCompetencia;
     this.idParticipante = +this._Activatedroute.snapshot.params.idEstudiante;
 
-    console.log(this.idCompetencia);
-    console.log(this.idParticipante);
+    //console.log(this.idCompetencia);
+    //console.log(this.idParticipante);
   }
 
   ngOnInit(): void {
+    this.items = [
+      {
+        label: "Descargar",
+        icon: "pi pi-download",
+        command: () => {
+          this.downloadCert();
+        },
+      },
+      {
+        label: "Enviar por email",
+        icon: "pi pi-envelope",
+        command: () => {
+          this.downloadCert();
+        },
+      },
+    ];
     this.loadData();
+  }
+
+  async downloadCert(){
+    //console.log()this.download = true;
+   try {
+     let certificado = await this.usuarioService.downloadCertificado(this.idCompetencia, this.idParticipante).toPromise();
+     //console.log(certificado);
+   } catch (error) {
+      console.log(error);
+   }
+
   }
 
   private async loadData() {
@@ -107,6 +128,7 @@ export class ParticipanteInfoComponent implements OnInit {
     let compSub = await this.competenciaService
       .obtenerCompetencia(this.idCompetencia)
       .subscribe((res) => {
+        
         this.competencia = res;
         this.niveles = this.competencia.niveles;
         this.ejercitario = this.competencia.niveles[0].ejercitarios[0].id;
@@ -149,54 +171,21 @@ export class ParticipanteInfoComponent implements OnInit {
     };
   }
 
-  // agregarComentario(scroll: ScrollPanel) {
-  //   let date: Date = new Date();
-  //   var comentarioNuevo: Comentario = {
-  //     //comentario: this.newComentarioParticipanteEjercitario,
-  //     fechaComentario: date,
-  //     //comentarioActividad: this.actividadSeleccionada,
-  //   };
-
-  //   this.confirmationService.confirm({
-  //     key: "agregarComentario",
-  //     message: "Agregar nuevo Comentario",
-  //     icon: "pi pi-exclamation-triangle",
-  //     accept: () => {
-  //       // this.usuarioService.agregarNuevoComentarioActividadParticipante(
-  //       //   comentarioNuevo
-  //       // );
-  //       // this.listadoComentariosActividad.unshift({
-  //       //   idComentario: 0,
-  //       //   //comentario: this.newComentarioParticipanteEjercitario,
-  //       //   fechaComentario: date,
-  //       //   comentarioActividad_id: 0,
-  //       // });
-  //       scroll.refresh();
-  //       this.messageService.add({
-  //         key: "addComentTOAST",
-  //         severity: "success",
-  //         summary: "Comentario agregado",
-  //         detail: "El comentario a sido agregado correctamente",
-  //       });
-  //     },
-  //     reject: () => {
-  //       this.messageService.add({
-  //         key: "addComentTOAST",
-  //         severity: "error",
-  //         summary: "Acción Cancelada",
-  //         detail: "La acción no se llevo a cabo",
-  //       });
-  //     },
-  //   });
-  // }
-
-  // PARA SELECT DE GRAFICA tIPO DE DISCAPACIDAD GENERAL
-  // selGrafica1: any = { name: "Notas", value: "Notas" };
-
-  // opciones: any[] = [
-  //   { name: "Notas", value: "Notas" },
-  //   { name: "Tiempo", value: "Tiempo" },
-  // ];
+  async imprimirReporte() {
+    try {
+      let reporteData = await this.usuarioService
+        .getReporte(this.idCompetencia, this.idParticipante)
+        .toPromise();
+      //console.log("reporte", reporteData);
+      let reporte = new ReportePdf(reporteData);
+      this.download = true;
+      await pdfMake.createPdf(reporte.docDefinition()).download(moment().format('YYYY-MM-DD'));
+      this.download = false;
+    } catch (error) {
+      console.log(error);
+      this.download = false;
+    }
+  }
 
   calificacionPorcentaje(actividad: Actividad): number {
     return Number(
@@ -220,6 +209,8 @@ export class ParticipanteInfoComponent implements OnInit {
           this.idParticipante
         )
         .toPromise();
+
+        //console.log("res", actividades);
       this.actividades = actividades;
       this.loadGrafica();
     } catch (error) {
@@ -233,7 +224,7 @@ export class ParticipanteInfoComponent implements OnInit {
         .obtenerInformacionParticipante(this.idParticipante)
         .toPromise();
       this.usuario = user;
-      console.log(this.usuario);
+      //console.log(this.usuario);
       this.displayMaximizable = true;
     } catch (error) {
       console.log(error);

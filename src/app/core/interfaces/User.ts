@@ -28,4 +28,5 @@ export interface User {
   evaluador?: Evaluador;
   codigo?: string;
   discapacidades?: any[];
+  img?: string;
 }
