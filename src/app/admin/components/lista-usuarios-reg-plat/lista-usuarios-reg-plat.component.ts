@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from 'src/app/service/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-usuarios-reg-plat',
@@ -9,15 +8,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lista-usuarios-reg-plat.component.scss']
 })
 export class ListaUsuariosRegPlatComponent implements OnInit {
-
-  public loadingUsuarios = false;
-  public usuarioApro : any;
-
   private _subscriptions: Subscription[] = [];
-  public displayMaximizable: boolean = false;
-  public idUsuario: number;
-  public usuario:any;
-  public estado:boolean = false;
+  public loadingUsuarios = false;
+  public usuario : any;
+  public displayMaximizable: boolean;
 
   constructor(private usuarioService: UsuarioService  ) {
     
@@ -26,20 +20,15 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadParticipantes()
-    this.usuarioService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
-   
-
   }
   private async loadParticipantes() {
     this.loadingUsuarios = true;
     try {
-      const usuarioAprobado = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
-      console.log("Componente",  usuarioAprobado);
-      this.usuarioApro= usuarioAprobado;
-      console.log(this.usuarioApro.estado)
+      const usuarios = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
+      console.log("Componente",  usuarios);
+      this.usuario = usuarios;
       this.loadingUsuarios = false;
-      this._subscriptions.push(usuarioAprobado);
-
+      this._subscriptions.push( usuarios);
     } catch (error) {
       console.log(error);
     }
@@ -55,18 +44,5 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
     }
 
     }
-    public async bloquarCuenta(id){
-      this.estado= true;
-      
-     
-     await this.usuarioService.bloqueoCuentaUsuario(id).subscribe(result => { this.usuarioService.emitEvent(true);
-       Swal.fire({ icon: 'success', title: 'La cuenta del evaluador a sido bloqueada', showConfirmButton: true, })
-       
-     }, error => {
-       console.log(error);
-       Swal.showValidationMessage( `Request failed: Error inesperado`)
-     })
-   
-     }
-
+    
 }
