@@ -14,14 +14,17 @@
                 <p-button (click)="showModal()" label="Información del participante" icon="pi pi-info-circle">
                 </p-button>
             </div>
-            <div class="p-col-2" style="display: flex; justify-content: flex-end;">
+            <div class="p-col-4" style="display: flex; justify-content: flex-end;">
                 <!-- [loading]="loading[0]" (onClick)="load(0)" -->
-                <p-button label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
+                <p-button [disabled]="download" (click)="imprimirReporte()" label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
             </div>
-            <div class="p-col-2" style="display: flex; justify-content: flex-end;">
-                <!-- [loading]="loading[0]" (onClick)="load(0)" -->
-                <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button>
-            </div>
+            <!-- [loading]="loading[0]" (onClick)="load(0)" -->
+                <!-- <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button> -->
+
+            <!-- <div class="p-col-2" style="display: flex; justify-content: flex-end;">
+                <p-splitButton label="Certificado" [model]="items"
+                    styleClass="p-button-raised p-button-plain p-button-text"></p-splitButton>
+            </div> -->
         </div>
     </div>
 
@@ -133,7 +136,7 @@
                     <ng-template pTemplate="body" let-actividad let-rowIndex="rowIndex">
                         <tr>
                             <td>
-                                {{ rowIndex+1 }}
+                                {{ actividades.length-rowIndex}}
                             </td>
                             <td>
                                 <span class="image-text">
@@ -142,24 +145,22 @@
                             </td>
 
                             <td>
-                                <span class="image-text">{{
-                                    actividad.preguntasCorrectas
-                                    }}/{{
-                                    actividad.totalPreguntas
-                                    }}</span>
+                                <span class="image-text">
+                                    {{actividad.preguntasCorrectas}}/{{actividad.totalPreguntas}}
+                                </span>
                             </td>
                             <td>
                                 {{ actividad.fecha | date: "yyyy/MM/dd" }}
                             </td>
 
                             <td>
-                                <span>{{
-                                    actividad.tiempoTotal
-                                    }}</span>
+                                <span>
+                                    {{actividad.tiempoTotal}} min.
+                                </span>
                             </td>
 
                             <td>
-                                <p-progressBar [value]="calificacionPorcentaje(actividad)" [showValue]="true">
+                                <p-progressBar [value]="actividad.calificacion" [showValue]="true">
                                 </p-progressBar>
                             </td>
 

@@ -18,6 +18,10 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
+import { RouterModule } from '@angular/router';
+import { TopBarPageExpertoComponent } from '../expert/pages/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
+
+
 
 @NgModule({
   declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, NuevoEjercitarioComponent, DatosAdminComponent, UsuariosComponent] ,

@@ -24,9 +24,9 @@ export class ListaPendientesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadPendientes();
-    console.log("pendienstes");
+    //console.log("pendienstes");
     let sub = this.usuarioService.event.subscribe((res) => {
-      console.log(res);
+      //console.log(res);
       this.loadPendientes();
     })
     this._subscriptions.push(sub);
@@ -36,7 +36,7 @@ export class ListaPendientesComponent implements OnInit, OnDestroy {
     this.loadingPendientes = true;
     try {
       const participantes = await this.usuarioService.obtenerParticipantesPendientes().toPromise();
-      console.log("participantes pendientes", participantes);
+      //console.log("participantes pendientes", participantes);
       this.participantesPendientes = participantes;
       this.loadingPendientes = false;
     } catch (error) {
@@ -45,7 +45,7 @@ export class ListaPendientesComponent implements OnInit, OnDestroy {
   }
 
   async approved(id){
-    console.log(id);
+    //console.log(id);
     let data = {
       idParticipante: id,
       estado: true,
@@ -69,7 +69,7 @@ export class ListaPendientesComponent implements OnInit, OnDestroy {
   }
 
   notApproved(id){
-    console.log(id);
+    //console.log(id);
     Swal.fire({
       title: 'Escriba la razón del rechazo',
       input: 'textarea',
@@ -86,14 +86,14 @@ export class ListaPendientesComponent implements OnInit, OnDestroy {
           razon
         }
 
-        console.log(data);
+        //console.log(data);
 
         try {
           let result = await this.usuarioService.aprobarParticipantes(data).toPromise();
           //this.loadParticipantes();
             //this.loadPendientes();
             this.usuarioService.emitEvent(true);
-            console.log(result);
+            //console.log(result);
             Swal.fire({
               icon: 'success',
               title: 'Se ah rechazado el participante',

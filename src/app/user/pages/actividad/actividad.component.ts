@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { forkJoin } from "rxjs";
 import { Actividad } from "src/app/core/interfaces/Actividad";
 import { Comentario } from "src/app/core/interfaces/Comentario";
+import { Pregunta } from "src/app/core/interfaces/Pregunta";
 import { User } from "src/app/core/interfaces/User";
 import { ActividadService } from "src/app/service/actividad.service";
 import { AuthService } from "src/app/service/auth.service";
@@ -20,7 +21,8 @@ export class ActividadComponent implements OnInit {
   public loader: boolean = false;
   public idActividad: number;
 
-  public actividad:Actividad;
+  public actividad:any;
+  public preguntas:Pregunta[];
 
   constructor(
     private actividadService: ActividadService,
@@ -37,7 +39,7 @@ export class ActividadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("idActividad", this.idActividad);
+    //console.log("idActividad", this.idActividad);
     this.loadData();
   }
 
@@ -48,10 +50,12 @@ export class ActividadComponent implements OnInit {
   private async loadData() {
     let sub = forkJoin([
       this.actividadService.getActividad(this.idActividad),
+      this.actividadService.getCorreccionPreguntas(this.idActividad)
     ]).subscribe(
-      ([ actividad]) => {
-        console.log("actividad", actividad);
+      ([ actividad, preguntas]) => {
+        //console.log("actividad", actividad);
         this.actividad = actividad;
+        this.preguntas = preguntas;
       },
       (err) => {
         console.log(err);

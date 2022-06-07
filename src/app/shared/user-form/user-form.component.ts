@@ -97,7 +97,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       this.usuarioService.getPerfil(),
     ]).subscribe(
       ([discapacidades, user]) => {
-        console.log(discapacidades, user);
+        //console.log(discapacidades, user);
         this.discapacidadesArray = discapacidades.discapacidades.map(
           (results) => {
             return {
@@ -163,7 +163,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
       let sub = this.usuarioService.editarPerfil(data).subscribe(
         (res: any) => {
-          console.log("res", res);
+          //console.log("res", res);
           this.authService.user = {
             ...this.authService.user,
             ...res,

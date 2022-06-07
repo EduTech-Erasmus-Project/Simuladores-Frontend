@@ -1,31 +1,25 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { BreadcrumbService } from "src/app/service/breadcrumb.service";
-import { PhotoService } from "src/app/demo/service/photoservice";
-import { Asignacion } from "src/app/core/interfaces/Asignacion";
-import { Escenario } from "src/app/core/interfaces/Escenario";
-import { EjercitarioParticipanteService } from "src/app/service/ejercitarioParticipante/ejercitario-participante.service";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from "src/app/service/auth.service";
-import { EjercitarioService } from "src/app/service/ejercitario.service";
 import { CompetenciaService } from "src/app/service/competencia.service";
 import { forkJoin, Subscription } from "rxjs";
 import { Competencia } from "src/app/core/interfaces/Competencia";
 import { ActividadService } from "src/app/service/actividad.service";
 import { Actividad } from "src/app/core/interfaces/Actividad";
-import { User } from "src/app/core/interfaces/User";
 import { UsuarioService } from "src/app/service/usuario.service";
 import { Evaluador } from "src/app/core/interfaces/Evaluador";
+import { ReportePdf } from "src/app/core/models/Reporte";
+import pdfMake from "pdfmake/build/pdfmake";
 import * as moment from "moment";
 
 @Component({
   selector: "app-presentacion-inicio-user",
   templateUrl: "./presentacion-inicio-user.component.html",
-  styleUrls: ["./presentacion-inicio-user.component.scss"]
+  styleUrls: ["./presentacion-inicio-user.component.scss"],
 })
 export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   public correoParticanteInicio: string = "";
   public competencia: Competencia;
-  public competencias: Competencia[]= [];
+  public competencias: Competencia[] = [];
   private _subscriptions: Subscription[] = [];
   public download = false;
   public actividades: Actividad[] = [];
@@ -36,40 +30,31 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private ejercitarioService: EjercitarioService,
-    private _Activatedroute: ActivatedRoute,
-    private route: ActivatedRoute,
-    private breadcrumbService: BreadcrumbService,
-    private photoService: PhotoService,
-    private competenciaService:CompetenciaService,
-    private actividadService:ActividadService,
-    private usuarioService:UsuarioService
-
+    private competenciaService: CompetenciaService,
+    private actividadService: ActividadService,
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnDestroy(): void {
-    this._subscriptions.forEach(sub => sub.unsubscribe());
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   ngOnInit(): void {
     this.loadData();
   }
 
-  private get user(){
+  private get user() {
     return this.authService.user;
   }
 
   private async loadData() {
     let sub = await forkJoin([
-      this.competenciaService
-      .obtenerCompetencias(),
-      
+      this.competenciaService.obtenerCompetencias(),
     ]).subscribe(
       (data) => {
         this.competencias = data[0];
         this.competencia = this.competencias[0];
-        console.log(this.competencia);
+        this.listarProgreso(this.competencia.niveles[0].ejercitarios[0].id);
       },
       (err) => {
         console.log(err);
@@ -78,7 +63,6 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
     this._subscriptions.push(sub);
   }
 
-  
   realizarEjercitario(urlEjercitario: string, numeroDeEjercitario: number) {
     window.open(
       urlEjercitario +
@@ -89,29 +73,52 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
     );
   }
 
-  async downloadCertificado(){
-    //console.log(idCompetencia);
-    this.download = true;
+  async downloadCertificado() {
+    if (!this.competencia?.niveles[2]?.status) return;
+
+    try {
+      let reporteData = await this.usuarioService
+        .getReporte(this.competencia.id, this.user.participante.id)
+        .toPromise();
+      //console.log("reporte", reporteData);
+      let reporte = new ReportePdf(reporteData);
+      this.download = true;
+      await pdfMake.createPdf(reporte.docDefinition()).download(moment().format('YYYY-MM-DD'));
+      this.download = false;
+    } catch (error) {
+      console.log(error);
+      this.download = false;
+    }
   }
 
-  async listarProgreso(idEjercitario:number) {
+  async listarProgreso(idEjercitario: number) {
     console.log(idEjercitario);
     try {
-      let actividades = await this.actividadService.getParticipanteActividades(idEjercitario).toPromise();
-      console.log(actividades);
+      let actividades = await this.actividadService
+        .getParticipanteActividades(idEjercitario)
+        .toPromise();
+      //console.log(actividades);
       this.actividades = actividades;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async showModalUser(){
+  async showModalUser() {
     try {
-      this.evaluador = await this.usuarioService.getEvaluador(this.user.participante.evaluador).toPromise();
+      this.evaluador = await this.usuarioService
+        .getEvaluador(this.user.participante.evaluador)
+        .toPromise();
       this.displayMaximizable = true;
     } catch (error) {
       console.log(error);
     }
   }
-  
+
+  onChangePanel(event) {
+    //console.log(event);
+    this.listarProgreso(
+      this.competencia.niveles[event.index].ejercitarios[0].id
+    );
+  }
 }

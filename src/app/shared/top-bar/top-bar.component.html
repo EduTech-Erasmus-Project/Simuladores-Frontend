@@ -3,7 +3,7 @@
         <div class="layout-topbar-left">
             <div class="layout-topbar-logo-wrapper">
                 <a [routerLink]="[ '/', ]"  class="layout-topbar-logo">
-                    <img src="assets/img/image2vector.svg" alt="mirage-layout" />
+                    <img src="assets/img/image2vector.svg " alt="mirage-layout" />
                     <span class="app-name">Simuladores Laborales</span>
                 </a>
             </div>
@@ -69,7 +69,7 @@
                     <a>
                         <span class="profile-image-wrapper">
                             <img loading="lazy"
-                            [src]="user?.image || 'assets/img/noimage.png'"
+                            [src]="user?.img | image"
                             [alt]="user?.nombre" style="border-radius: 50%;" width="40" height="40"/>
                         </span>
                         <span class="profile-info-wrapper">
@@ -128,7 +128,7 @@
                     <a>
                         <span class="profile-image-wrapper">
                             <img loading="lazy"
-                            [src]="user?.image || 'assets/img/noimage.png'"
+                            [src]="user?.img | image"
                             [alt]="user?.nombre" style="border-radius: 50%;" width="40" height="40"/>
                         </span>
                         <span class="profile-info-wrapper">

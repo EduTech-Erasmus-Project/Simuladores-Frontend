@@ -33,7 +33,9 @@
             ],
             "scripts": [
               "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js"
+              "node_modules/prismjs/components/prism-typescript.js",
+              "node_modules/pdfmake/build/pdfmake.min.js",
+              "node_modules/pdfmake/build/vfs_fonts.js"
             ],
             "allowedCommonJsDependencies": [
               "@fullcalendar/daygrid",
@@ -61,8 +63,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "6mb"
                 }
               ]
             }

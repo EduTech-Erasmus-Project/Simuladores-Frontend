@@ -93,6 +93,19 @@ const routes: Routes = [
             (m) => m.InformationModule
           ),
       },
+      {
+        path: "campus-virtual",
+        loadChildren: () => 
+          new Promise(() => {
+            // console.log("campus-virtual");
+            // window.open(
+            //   'https://campusvirtual.uazuay.edu.ec/v212/',
+            //   '_blank' // <- This is what makes it open in a new window.
+            // );
+            window.location.href =
+                "https://campusvirtual.uazuay.edu.ec/v212/";
+          }),
+      },
     ],
   },
 ];

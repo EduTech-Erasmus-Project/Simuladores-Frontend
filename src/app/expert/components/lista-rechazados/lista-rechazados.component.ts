@@ -21,9 +21,9 @@ export class ListaRechazadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPendientes();
-    console.log("Rechazados");
+    //console.log("Rechazados");
     let sub = this.usuarioService.event.subscribe((res) => {
-      console.log(res);
+      //console.log(res);
       this.loadPendientes();
     })
     this._subscriptions.push(sub);
@@ -33,6 +33,10 @@ export class ListaRechazadosComponent implements OnInit {
     this.loadingRechazados = true;
     try {
       const participantes = await this.usuarioService.obtenerParticipantesRechazados().toPromise();
+<<<<<<< HEAD
+=======
+      //console.log("participantes pendientes", participantes);
+>>>>>>> d5f87bc2e5604a50df7113d125779cccb1c04ebb
       this.participantesRechazados = participantes;
       this.loadingRechazados = false;
     } catch (error) {
@@ -41,7 +45,7 @@ export class ListaRechazadosComponent implements OnInit {
   }
 
   async approved(id){
-    console.log("id", id);
+    //console.log("id", id);
     let data = {
       idParticipante: id,
       estado: true,

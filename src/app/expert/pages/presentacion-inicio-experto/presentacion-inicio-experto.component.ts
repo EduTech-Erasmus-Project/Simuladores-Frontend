@@ -135,11 +135,7 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   async listarLabelsTipoDeGenero() {
     let sub = await this.usuarioService.recuperarListaDeGenero().subscribe(
       (genero) => {
-        console.log("generos", genero.participanteGenero);
-        console.log(
-          "generos",
-          genero.participanteGenero.map((gen) => Object.keys(gen))
-        );
+        //console.log("generos", genero.participanteGenero);
         this.pieData = {
           labels: genero.participanteGenero.map((gen) => Object.keys(gen)),
           datasets: [
@@ -165,13 +161,13 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   }
 
   async listaEjercitariosPorParticipantes() {
-    console.log("ejercitario metdodo");
+    //console.log("ejercitario metdodo");
     let sub = await this.usuarioService
       .recuperarListaEjercitariosPorParticipantes()
       .subscribe(
         (ejercitarios) => {
-          console.log("ejercitarios", ejercitarios);
-          console.log("ejercitarios", ejercitarios.participanteEjercitario);
+          //console.log("ejercitarios", ejercitarios);
+          //console.log("ejercitarios", ejercitarios.participanteEjercitario);
           this.pieData = {
             labels: ejercitarios.participanteEjercitario.map((eje) =>
               Object.keys(eje)
@@ -214,12 +210,12 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
   }
 
   async onChangeCompetencia(evt) {
-    console.log(evt.value);
+    //console.log(evt.value);
     try {
       let participantes = await this.usuarioService
         .obtenerParticipantesCompetencia(evt.value.id)
         .toPromise();
-      console.log("participantes", participantes);
+      //console.log("participantes", participantes);
       this.participantes = participantes;
     } catch (error) {
       console.log("error", error);

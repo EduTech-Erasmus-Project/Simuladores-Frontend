@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -12,6 +12,8 @@ import { Clipboard } from "@angular/cdk/clipboard";
 import { AuthService } from "src/app/service/auth.service";
 import { UsuarioService } from "src/app/service/usuario.service";
 import { Subscription } from "rxjs";
+import { environment } from "src/environments/environment";
+
 
 @Component({
   selector: "app-user-password",
@@ -19,10 +21,16 @@ import { Subscription } from "rxjs";
   styleUrls: ["./user-password.component.scss"],
 })
 export class UserPasswordComponent implements OnInit, OnDestroy {
+  @ViewChild("inputFile") inputFile: ElementRef;
   public formPassword?: FormGroup;
   public items: MenuItem[];
   public msg: Message[];
   private _subscriptions: Subscription[] = [];
+
+  public fileImage: File;
+  public urlImageLocal: any;
+  public imageSatusErr: boolean = false;
+  public imageUpload: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -80,13 +88,17 @@ export class UserPasswordComponent implements OnInit, OnDestroy {
     return this.authService.user;
   }
 
+  set user(user) {
+    this.authService.user = user;
+  }
+
   copy() {
     this.clipboard.copy(this.authService.user.codigo);
   }
 
   copyLink() {
     this.clipboard.copy(
-      "http://localhost:4200/register?code=" + this.authService.user.codigo
+      `${environment.HOST}/register?code=${this.authService.user.codigo}`
     );
   }
 
@@ -149,5 +161,59 @@ export class UserPasswordComponent implements OnInit, OnDestroy {
     (<any>Object).values(this.formPassword.controls).forEach((control) => {
       control.markAsTouched();
     });
+  }
+
+  onChangePicture(event: any) {
+    this.fileImage = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = (event: any) => {
+      this.urlImageLocal = event.target.result;
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+    //console.log("on change picture", this.urlImageLocal);
+  }
+
+  onEnterFigure() {
+    this.inputFile.nativeElement.click();
+  }
+
+  async onLoadImage() {
+    //console.log("Load image");
+    this.msg = [];
+    this.imageUpload = true;
+    await this.usuarioService.updateImage(this.fileImage).subscribe(
+      (res: any) => {
+        
+        this.msg = [
+          {
+            severity: "success",
+            detail: "La foto de perfil se ah cambiado con éxito",
+          },
+        ];
+        
+        this.user = res.user;
+        //this.loginService.currentUser = this.user;
+
+        //console.log(this.user);
+
+        this.imageSatusErr = false;
+        this.imageUpload = false;
+        this.fileImage = null;
+        this.urlImageLocal = null;
+      },
+      (err) => {
+        //console.log(err);
+        this.msg = [
+          {
+            severity: "error",
+            detail: "Error al cambiar la foto de perfil",
+          },
+        ];
+        this.imageSatusErr = true;
+        this.imageUpload = false;
+      }
+    );
   }
 }

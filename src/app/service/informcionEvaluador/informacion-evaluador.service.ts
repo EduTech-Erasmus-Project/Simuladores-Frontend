@@ -11,7 +11,7 @@ export class InformacionEvaluadorService {
   constructor(private http: HttpClient) {}
 
   public obtenerInformacionEvaluador(id: number): Observable<any> {
-    console.log("getEvaluador");
+    //console.log("getEvaluador");
     const config = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
