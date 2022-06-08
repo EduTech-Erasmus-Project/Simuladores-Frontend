@@ -1,0 +1,86 @@
+<p-table [value]="ejercitario" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >  <ng-template pTemplate="caption">
+					<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+						Listado de ejercitarios
+                        <p-dialog class="dialogo" [style]="{width: '400px'}">
+                            <div style="line-height: 1.5">			
+						</div> 
+                        </p-dialog>
+           
+                        <a routerLink="/dashboard/nuevo-ejercitario"  pButton icon="pi pi-external-link" label="Agregar nuevo Ejercitario" style="width: auto"></a>
+		
+						<span class="p-input-icon-left">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+								placeholder="Global Search" />
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="name">Nombre
+							<p-sortIcon field="name"></p-sortIcon>
+						</th>
+						<th pSortableColumn="competencia">Competencia
+							<p-sortIcon field=""></p-sortIcon>
+						</th>
+						<th pSortableColumn="tipoejercitario">Tipo de ejercitario
+							<p-sortIcon field="representative.name"></p-sortIcon>
+						</th>
+						<th pSortableColumn="duracion">Duracion
+							<p-sortIcon field="duracion"></p-sortIcon>
+						</th>
+                        <th pSortableColumn="nivel">Nivel
+							<p-sortIcon field="nivel"></p-sortIcon>
+						</th>
+						<th pSortableColumn="status">
+							
+						</th>
+						
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-ejercitario let-competencia>
+					
+                    <tr >
+                        <td>
+                            <span class="p-column-title">{{ejercitario.nombreDeEjercitario}}</span>
+                        </td>
+            
+                        <td>
+                            <span class="p-column-title">{{ejercitario.competencia?.titulo}}</span> 
+                        </td>
+            
+                      <td>
+                            <span class="p-column-title">{{ejercitario.tipoDeEjercitario}}</span>
+                        </td>
+            
+                        <td>
+                            <span class="p-column-title">{{ejercitario.duracion}}</span>
+                            
+                        </td>
+                        
+                        <td>
+                            <span class="p-column-title">{{ejercitario.nivel}}</span>
+                        </td>
+                       
+                    
+                        <td>
+							
+                            <button pbutton="" pripple="" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
+							<span class="p-button-label">Ver</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
+							
+                            
+                            <button pbutton="" pripple="" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+							<span class="p-button-label">Editar</span><span class="p-ink"></span></button>
+                                
+                            <button pbutton="" pripple="" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+                            <span class="p-button-label">Preguntas</span><span class="p-ink"></span></button>
+                        </td>
+						
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No customers found.</td>
+					</tr>
+				</ng-template>
+			</p-table>
