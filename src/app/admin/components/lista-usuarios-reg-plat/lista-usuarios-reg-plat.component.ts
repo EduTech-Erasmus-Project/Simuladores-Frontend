@@ -13,6 +13,7 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
   public usuario : any;
   public displayMaximizable: boolean;
 
+
   constructor(private usuarioService: UsuarioService  ) {
     
    }
@@ -31,8 +32,7 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
       this._subscriptions.push( usuarios);
     } catch (error) {
       console.log(error);
-    }
-    
+    } 
   }
   public async showModal(usuario1) {
     this.usuario =usuario1
@@ -45,4 +45,5 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
 
     }
     
+
 }

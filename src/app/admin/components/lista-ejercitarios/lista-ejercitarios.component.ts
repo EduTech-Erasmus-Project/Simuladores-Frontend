@@ -12,7 +12,8 @@ export class ListaEjercitariosComponent implements OnInit {
   public loadingEjercitario = false;
   public ejercitario : any;
   public usuario:any;
-  displayMaximizable: boolean;
+  public displayMaximizable: boolean;
+
   constructor(private ejercitarioService : EjercitarioService) { }
 
   ngOnInit(): void {
@@ -33,6 +34,7 @@ export class ListaEjercitariosComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+
   
   }
   public async showModal(usuario1) {
@@ -44,6 +46,6 @@ export class ListaEjercitariosComponent implements OnInit {
       console.log(error);
     }
 
+}
+}
 
-}
-}

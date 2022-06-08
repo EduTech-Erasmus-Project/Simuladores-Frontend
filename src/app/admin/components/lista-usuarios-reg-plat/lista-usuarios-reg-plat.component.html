@@ -76,6 +76,7 @@
 					
 					<button pbutton="" pripple="" (click)="showModal(usuario.usuario)" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
 					<span class="p-button-label">Desabilitar Cuenta</span><span class="p-ink"></span></button>
+
 				</td>
 			
 			</tr>
@@ -86,7 +87,7 @@
 		</tr>
 	</ng-template>
 </p-table>
-
 <p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
     <app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
 </p-dialog>
+
