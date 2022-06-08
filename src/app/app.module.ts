@@ -18,7 +18,7 @@ import { BreadcrumbService } from "./service/breadcrumb.service";
 import { MenuService } from "./service/app.menu.service";
 import { RouterModule } from "@angular/router";
 import { ConfirmationService, MessageService, SharedModule } from "primeng/api";
-import { PublicModule } from "./public/public.module";
+
 import { UserModule } from "./user/user.module";
 import { AdminModule } from "./admin/admin.module";
 import { QuicklinkModule } from "ngx-quicklink";
@@ -32,6 +32,8 @@ import { PhotoService } from "./demo/service/photoservice";
 import { ProductService } from "./demo/service/productservice";
 import { AuthInterceptor } from "./intercepotors/auth.interceptor";
 import { NgCircleProgressModule } from "ng-circle-progress";
+import { PublicModule } from "./public/public.module";
+
 
 
 

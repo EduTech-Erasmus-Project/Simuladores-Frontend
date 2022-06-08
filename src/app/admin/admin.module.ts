@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -18,13 +19,16 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
-import { RouterModule } from '@angular/router';
-import { TopBarPageExpertoComponent } from '../expert/pages/StructurePage-Experto/top-bar-page-experto/top-bar-page-experto.component';
 
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { UsuariosComponent } from "./pages/usuarios/usuarios.component";
 
+import { RouterModule } from "@angular/router";
 
 @NgModule({
+
   declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, NuevoEjercitarioComponent, DatosAdminComponent, UsuariosComponent] ,
+
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -36,7 +40,6 @@ import { TopBarPageExpertoComponent } from '../expert/pages/StructurePage-Expert
     FileUploadModule,
     NgxDropzoneModule,
     InputTextareaModule,
-
   ]
 })
-export class AdminModule { }
+export class AdminModule {}
