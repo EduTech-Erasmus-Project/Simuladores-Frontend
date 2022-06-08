@@ -136,7 +136,7 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
   }
 
   navigate() {
-    console.log(this.user);
+    //console.log(this.user);
     if(this.user.tipoUser === "admin"){
       this.router.navigate(["/dashboard"]);
     }

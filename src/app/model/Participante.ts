@@ -9,7 +9,7 @@ export class Participante extends Perfil{
     private genero : string
     private numeroDeHijos : number
     private estadoCivil : string
-    private etnia : string
+    private  : string
     private estudiosPrevios : string
     private codigoEstudiante : string
     private nivelDeFormacion : string
@@ -19,7 +19,7 @@ export class Participante extends Perfil{
     constructor(id : number, email : string, nombre : string, apellido : string, 
         telefono : string, pais : string, ciudad : string, direccion : string , estado: string,
         fechaNacimiento : string, carreraUniversitaria : string, genero : string, numeroDeHijos : number,
-        estadoCivil : string, etnia : string, estudiosPrevios : string, codigoEstudianteccion : string, 
+        estadoCivil : string,  : string, estudiosPrevios : string, codigoEstudianteccion : string, 
         nivelDeFormacion : string, aceptacionPendianteResponsable: string,responsable: Responsable){
 
         super(id, email, nombre, apellido, telefono, pais, ciudad, direccion, estado)
@@ -28,7 +28,7 @@ export class Participante extends Perfil{
         this.genero = genero;
         this.numeroDeHijos = numeroDeHijos;
         this.estadoCivil = estadoCivil;
-        this.etnia = etnia;
+        this. = ;
         this.estudiosPrevios = estudiosPrevios;
         this.codigoEstudiante = codigoEstudianteccion;
         this.nivelDeFormacion = nivelDeFormacion;
@@ -146,12 +146,12 @@ export class Participante extends Perfil{
     set setEstadoCivil(estadoCivil: string){
         this.estadoCivil = estadoCivil;
     }
-    get getEtnia(){
-        return this.etnia;
+    get get(){
+        return this.;
     }
 
-    set setEtnia(etnia: string){
-        this.etnia = etnia;
+    set set(: string){
+        this. = ;
     }
     get getEstudiosPrevios(){
         return this.estudiosPrevios;
@@ -210,7 +210,7 @@ export interface ParticipanteAceptacionTabla {
     genero : string
     numeroDeHijos : number
     estadoCivil : string
-    etnia : string
+     : string
     estudiosPrevios : string
     codigoEstudiante : string
     nivelDeFormacion : string
@@ -234,7 +234,7 @@ export interface ParticipanteAceptacionTablaEscenarioResponsable {
     genero : string
     numeroDeHijos : number
     estadoCivil : string
-    etnia : string
+     : string
     estudiosPrevios : string
     codigoEstudiante : string
     nivelDeFormacion : string
