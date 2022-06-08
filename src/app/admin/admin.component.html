@@ -1,3 +1,4 @@
+
 <div class="layout-wrapper" (click)="app.onLayoutClick()" [ngClass]="{'layout-horizontal': app.horizontalMenu,
                 'layout-wrapper-static': app.staticMenuActive,
                 'layout-rightpanel-active': app.rightPanelActive,
@@ -11,6 +12,7 @@
 
     <div class="layout-main">
         <app-top-bar></app-top-bar>
+    
         <!-- <app-breadcrumb></app-breadcrumb> -->
         <div class="layout-content">
             <router-outlet></router-outlet>

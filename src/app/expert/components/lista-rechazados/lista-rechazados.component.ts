@@ -33,7 +33,6 @@ export class ListaRechazadosComponent implements OnInit {
     this.loadingRechazados = true;
     try {
       const participantes = await this.usuarioService.obtenerParticipantesRechazados().toPromise();
-      //console.log("participantes pendientes", participantes);
       this.participantesRechazados = participantes;
       this.loadingRechazados = false;
     } catch (error) {

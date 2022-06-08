@@ -50,6 +50,10 @@ export class UsuarioService {
     return this.http.get<any>(environment.WS_PATH + "obtenerParticipantes/");
   }
 
+  obtenerParticipantesUsuario() {
+    return this.http.get<any>(environment.WS_PATH + "listarUsuarioRegistrado/");
+  }
+
   obtenerParticipantesPendientes(): Observable<any> {
     return this.http.get<any>(
       environment.WS_PATH + "obtenerParticipantesPendientes/"
@@ -82,6 +86,10 @@ export class UsuarioService {
 
   public obtenerInformacionParticipante(id: number): Observable<any> {
     return this.http.get<any>(environment.WS_PATH + "getParticipante/" + id);
+  }
+
+  public bloqueoCuentaUsuario(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "bloqueoCuenta/"+ id);
   }
 
   get event() {

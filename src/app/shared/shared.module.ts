@@ -291,4 +291,6 @@ import { ImagePipe } from "../pipes/image.pipe";
     ImagePipe
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+  
+}

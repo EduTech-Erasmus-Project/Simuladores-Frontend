@@ -1,38 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Customer, Representative } from './domain/customer';
-import { CustomerService } from './domain/customerservice';
-import { ProductService } from './domain/productservice';
-import { Table } from 'primeng/table';
+import { Component, OnInit} from '@angular/core';
+
 
 
 @Component({
   selector: 'app-expertos',
   templateUrl: './expertos.component.html',
-  styleUrls: ['./expertos.component.scss'],
-  styles: [`
-        @media screen and (max-width: 960px) {
-            :host ::ng-deep .p-datatable.p-datatable-customers.rowexpand-table .p-datatable-tbody > tr > td:nth-child(6) {
-                display: flex;
-            }
-        }
+  styleUrls: ['./expertos.component.scss']
 
-    `],
+}
+)
 
-})
+
 export class ExpertosComponent implements OnInit {
-  customers1: Customer[];
-  selectedCustomer1: Customer;
+  
+  constructor() 
 
-  customers2: Customer[];
-  selectedCustomer2: Customer;
-
-  customers3: Customer[];
-  selectedCustomer3: Customer;
-
-  @ViewChild('dt') table: Table;
-  private customerService: CustomerService; private productService: ProductService;
-
-  constructor() {
+  {
+    
 
   }
 
