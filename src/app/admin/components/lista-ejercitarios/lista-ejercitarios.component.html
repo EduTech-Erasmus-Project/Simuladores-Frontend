@@ -85,3 +85,6 @@
 					</tr>
 				</ng-template>
 			</p-table>
+			<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
+</p-dialog>

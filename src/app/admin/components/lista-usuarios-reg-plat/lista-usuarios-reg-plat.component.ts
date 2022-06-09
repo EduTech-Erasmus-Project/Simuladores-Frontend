@@ -8,11 +8,15 @@ import { UsuarioService } from 'src/app/service/usuario.service';
   styleUrls: ['./lista-usuarios-reg-plat.component.scss']
 })
 export class ListaUsuariosRegPlatComponent implements OnInit {
-  private _subscriptions: Subscription[] = [];
-  public loadingUsuarios = false;
-  public usuario : any;
-  public displayMaximizable: boolean;
 
+  public loadingUsuarios = false;
+  public usuarioApro : any;
+
+  private _subscriptions: Subscription[] = [];
+  public displayMaximizable: boolean;
+  public idUsuario: number;
+  public usuario : any;
+  public estado:boolean = false;
 
   constructor(private usuarioService: UsuarioService  ) {
     
@@ -21,15 +25,18 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadParticipantes()
+    this.usuarioService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
+   
   }
   private async loadParticipantes() {
     this.loadingUsuarios = true;
     try {
-      const usuarios = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
-      console.log("Componente",  usuarios);
-      this.usuario = usuarios;
+      const usuarioAprobado = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
+      console.log("Componente",  usuarioAprobado);
+      this.usuarioApro = usuarioAprobado;
+      console.log(this.usuarioApro.estado)
       this.loadingUsuarios = false;
-      this._subscriptions.push( usuarios);
+      this._subscriptions.push(usuarioAprobado);
     } catch (error) {
       console.log(error);
     } 

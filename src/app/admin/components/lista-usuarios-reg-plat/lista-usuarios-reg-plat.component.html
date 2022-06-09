@@ -1,4 +1,4 @@
-<p-table [value]="usuario" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
+<p-table [value]="usuarioApro" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
     <ng-template pTemplate="caption">
 	
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
@@ -39,43 +39,43 @@
 		</tr>
 	</ng-template>
 	        
-        <ng-template pTemplate="body" let-usuario>
+        <ng-template pTemplate="body" let-usuarioApro>
 					
             <tr >
 				<td>
-					<span class="p-column-title">{{usuario.codigo}}</span>
+					<span class="p-column-title">{{usuarioApro.codigo}}</span>
 				</td>
 
 				<td>
-					<span class="p-column-title">{{usuario.nombre}}{{usuario.apellido}}</span> 
+					<span class="p-column-title">{{usuarioApro.nombre}}{{usuarioApro.apellido}}</span> 
 				</td>
 
 				<td>
-					<span class="p-column-title">{{usuario.email}}</span>
+					<span class="p-column-title">{{usuarioApro.email}}</span>
 				</td>
 
 				<td>
-					<span class="p-column-title">{{usuario.genero}}</span>
+					<span class="p-column-title">{{usuarioApro.genero}}</span>
 					
 				</td>
 
 				<td>
-					<span class="p-column-title">{{usuario.direccion}}</span>
+					<span class="p-column-title">{{usuarioApro.direccion}}</span>
 					
 				</td>
 
 				<td>
-					<span class="p-column-title">{{usuario.telefono}}</span>
+					<span class="p-column-title">{{usuarioApro.telefono}}</span>
 					
 				</td>
 				
 			
 				<td>
-					<button pbutton="" pripple="" (click)="showModal(usuario)" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
+					<button pbutton="" pripple="" (click)="showModal(usuarioApro.usuario?.codigo)" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
 						<span class="p-button-label">Ver Perfil</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
 					
-					<button pbutton="" pripple="" (click)="showModal(usuario.usuario)" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
-					<span class="p-button-label">Desabilitar Cuenta</span><span class="p-ink"></span></button>
+					<!-- <button pbutton="" pripple="" (click)="showModal(usuario.usuario)" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+					<span class="p-button-label">Desabilitar Cuenta</span><span class="p-ink"></span></button> -->
 
 				</td>
 			
