@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: "simuladores", component: SimuladoresComponent },
       { path: "usuarios", component: UsuariosComponent },
       { path: "mi-cuenta", component: DatosAdminComponent },
-      { path: "nuevo-ejercitario", component: NuevoEjercitarioComponent }
+      { path: "nuevo-ejercitario/:id", component: NuevoEjercitarioComponent }
     ],
   },
   

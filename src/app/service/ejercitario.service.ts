@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment";
 })
 export class EjercitarioService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   obtenerTotalEjercitarios() {
     return this.http.get<any>(
@@ -15,7 +15,7 @@ export class EjercitarioService {
     );
   }
 
-  informacionCount(){
+  informacionCount() {
     return this.http.get<any>(
       environment.WS_PATH + "informacionCount/"
     );
@@ -23,6 +23,12 @@ export class EjercitarioService {
   obtenerListaejercitario() {
     return this.http.get<any>(
       environment.WS_PATH + "listaEjercitario/"
+    );
+  }
+  
+  obtenerEjercitario(id: number) {
+    return this.http.get<any>(
+      environment.WS_PATH + "listaEjercitario/" + id
     );
   }
 }

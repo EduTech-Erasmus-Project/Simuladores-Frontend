@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EjercitarioService } from 'src/app/service/ejercitario.service';
 
@@ -14,7 +15,7 @@ export class ListaEjercitariosComponent implements OnInit {
   public usuario:any;
   public displayMaximizable: boolean;
 
-  constructor(private ejercitarioService : EjercitarioService) { }
+  constructor(private ejercitarioService : EjercitarioService, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -46,6 +47,9 @@ export class ListaEjercitariosComponent implements OnInit {
       console.log(error);
     }
 
+}
+editarEjercitario(id){
+  this.router.navigate(['dashboard/nuevo-ejercitario', id]);
 }
 }
 

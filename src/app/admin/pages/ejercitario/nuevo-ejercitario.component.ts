@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { User } from "src/app/core/interfaces/User";
 import { AuthService } from "src/app/service/auth.service";
 import { BreadcrumbService } from "src/app/service/breadcrumb.service";
+import { EjercitarioService } from "src/app/service/ejercitario.service";
 import { UsuarioService } from "src/app/service/usuario.service";
 
 @Component({
@@ -62,7 +63,8 @@ export class NuevoEjercitarioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private breadcrumbService: BreadcrumbService,
     private messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private ejercitarioService:EjercitarioService
   ) {
     this.breadcrumbService.setItems([
       { label: 'UI Kit' },
@@ -78,7 +80,6 @@ export class NuevoEjercitarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    // this.getParams();
   }
   onSelect(event) {
     console.log(event);
@@ -103,15 +104,18 @@ export class NuevoEjercitarioComponent implements OnInit {
     });
   }
 
-  async loadData() {
+ loadData() {
+   const id = this.route.snapshot.paramMap.get('id');
+   this.ejercitarioService.obtenerEjercitario(Number(id)).
+   subscribe(res=>{
+     if(res){
+       this.form.patchValue({
+         nombre: res['nombre']
+       });
+     }
+   });
 
   }
-
-  // private getParams() {
-    // const id = this.route.snapshot.paramMap.get('id');
-    // console.warn(id);
-  // }
-
 
   public onSubmit() {
     this.markTouchForm();

@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { Observable } from 'rxjs';
+import { InformacionCount } from '../model/InformacionCount';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class InformacionService {
 
 
   obtenerInformacionCount() {
-    return this.http.get<any>(environment.WS_PATH + "api/informacionCount/");
+    return this.http.get<InformacionCount>(environment.WS_PATH + "informacionCount/");
   }
 
   public emitEvent(data: boolean) {

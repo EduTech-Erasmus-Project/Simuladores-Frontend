@@ -23,7 +23,7 @@ import { InformacionCountComponent } from './informacion-count/informacion-count
     ListaExpertosRegistradosPlaformaComponent,
     PrincipalesDiscapacidadesComponent,
     ListaUsuariosRegPlatComponent,
-    InformacionCountComponent
+    InformacionCountComponent,
   ],
   imports: [ CommonModule, SharedModule ],
   exports: [
@@ -34,7 +34,8 @@ import { InformacionCountComponent } from './informacion-count/informacion-count
     ListaExpertosRechazadosComponent,
     ListaExpertosRegistradosPlaformaComponent,
     PrincipalesDiscapacidadesComponent,
-    ListaUsuariosRegPlatComponent
+    ListaUsuariosRegPlatComponent,
+    InformacionCountComponent,
   ],
 })
 export class ComponentsModule { }
