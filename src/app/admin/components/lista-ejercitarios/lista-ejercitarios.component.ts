@@ -24,18 +24,12 @@ export class ListaEjercitariosComponent implements OnInit {
   }
 
 
-  private async loadEjercitario() {
+  private loadEjercitario() {
     this.loadingEjercitario = true;
-    try {
-      const ejercitarios = await this.ejercitarioService.obtenerListaejercitario().toPromise();
-      console.log("Componente",  ejercitarios);
-      this.ejercitario = ejercitarios;
-      this.loadingEjercitario = false;
-      this._subscriptions.push( ejercitarios);
-    } catch (error) {
-      console.log(error);
-    }
-
+    this.ejercitarioService.obtenerListaejercitario()
+    .subscribe(res=>{
+      this.ejercitario = res;
+    });
   
   }
   public async showModal(usuario1) {
