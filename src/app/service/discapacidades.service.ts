@@ -25,6 +25,9 @@ export class DiscapacidadesService {
   registrarDiscapacidad(data): Observable<any> {
     return this.http.post<any>(environment.WS_PATH + "regisDiscapacidad/",data);
   }
+  public editarDiscapacidad(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "editarDiscapacidad/"+ id);
+  }
 
   public emitEvent(data: boolean) {
     this.evt$.emit(data);

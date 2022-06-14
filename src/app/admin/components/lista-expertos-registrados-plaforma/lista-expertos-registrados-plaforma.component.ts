@@ -57,8 +57,6 @@ export class ListaExpertosRegistradosPlaformaComponent implements OnInit {
 
  public async bloquarCuenta(id){
    this.estado= true;
-   
-  
   await this.expertoService.bloqueoCuentaEvaluador(id).subscribe(result => { this.expertoService.emitEvent(true);
     Swal.fire({ icon: 'success', title: 'La cuenta del evaluador a sido bloqueada', showConfirmButton: true, })
     

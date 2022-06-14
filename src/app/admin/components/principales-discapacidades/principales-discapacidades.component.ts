@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DiscapacidadParticipanteInterface } from 'src/app/core/interfaces/DiscapacidadParticipante';
 import { CompetenciaService } from "src/app/service/competencia.service";
 import { DiscapacidadesService } from 'src/app/service/discapacidades.service';
 import Swal from 'sweetalert2';
@@ -13,8 +14,12 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
   private _subscriptions: Subscription[] = [];
   public loadingDiscapacidades = false;
   public discapacidad : any;
+  public discapacidad1 : DiscapacidadParticipanteInterface
   private titulo!: string;
   private descripcion!: string;
+  
+  public nombre11:string;
+  public descripcion11: string;
   public display= false;
 
 
@@ -57,4 +62,19 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
      })
     
   }
+  
+  private async loadData(id) {
+   
+    let compSub = await this.discapacidadesService.editarDiscapacidad(id).subscribe((res) => {
+        this.discapacidad1 = res;
+        this.nombre11 = this.discapacidad1.tipoDiscapacidad;
+        this.descripcion11 = this.discapacidad1.descripcion;
+        console.log("nombre  ===>   ",this.nombre11 ,"descripcion  ===> ", this.descripcion11)
+      });
+      
+  }
+  public async editarDiscapaciodas(id){
+  console.log(id)
+ 
+   }
 }
