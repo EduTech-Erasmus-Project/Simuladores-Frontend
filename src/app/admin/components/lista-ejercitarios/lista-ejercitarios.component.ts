@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { fakeAsync } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { error } from 'protractor';
+import { Subscriber, Subscription } from 'rxjs';
+import { Ejercitario } from 'src/app/core/interfaces/Ejercitario';
 import { EjercitarioService } from 'src/app/service/ejercitario.service';
-
+import Swal from 'sweetalert2';
+  
 @Component({
   selector: 'app-lista-ejercitarios',
   templateUrl: './lista-ejercitarios.component.html',
@@ -13,14 +17,21 @@ export class ListaEjercitariosComponent implements OnInit {
   public loadingEjercitario = false;
   public ejercitario : any;
   public usuario:any;
+
   public displayMaximizable: boolean;
+  public display = false;
+  public id:any;
+  public editing:boolean=false;
+  private ejercitarios:Ejercitario[];
 
-  constructor(private ejercitarioService : EjercitarioService, private router:Router) { }
+  constructor(private ejercitarioService : EjercitarioService, private router:Router, private activateRoute:ActivatedRoute) { 
 
-  ngOnInit(): void {
+  }
+    ngOnInit(): void {
 
     this.loadEjercitario();
-
+    this.ejercitarioService.event.subscribe(result =>{console.log("hola",result);this.loadEjercitario()})
+    
   }
 
 
@@ -42,8 +53,6 @@ export class ListaEjercitariosComponent implements OnInit {
     }
 
 }
-editarEjercitario(id){
-  this.router.navigate(['dashboard/nuevo-ejercitario', id]);
-}
+
 }
 

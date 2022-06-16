@@ -42,7 +42,12 @@
 	</ng-template>
 	<ng-template pTemplate="body" let-ejercitario let-competencia>
 
-		<tr>	<td>
+		<tr>	
+			<td>
+				<span class="p-column-title">{{ejercitario.nombreDeEjercitario}}</span>
+			</td>
+
+			<td>
 				<span class="p-column-title">{{ejercitario.competencia?.titulo}}</span>
 			</td>
 
@@ -65,11 +70,12 @@
 				<button pbutton="" pripple="" type="button" label="Success" class="p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" 
 					ng-reflect-label="Success" role="link" onclick="window.location='https://simulab.edutech-project.org/media/Ejercicio3/index.html'" >Visual</button>
 					
-				<button pbutton="" pripple="" (click)="editarEjercitario(ejercitario.id)" type="button" label="Info" class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Info">
-					<span class="p-button-label">Editar</span><span class="p-ink"></span></button>
+				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component" 
+				routerLink="/dashboard/editar-ejercitario/{{ejercitario.id}}">Editar</a>
 
-					<button pbutton="" pripple="" type="button" label="Help" class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help">
-						<span class="p-button-label">Preguntas</span><span class="p-ink"></span></button>
+				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help"
+					routerLink="/dashboard/preguntas-ver">Preguntas
+				</a>
 			</td>
 
 		</tr>
