@@ -116,6 +116,11 @@
         <h6>Etnia:</h6>
         <input formControlName="etnia" type="text" pInputText placeholder="Etnia" id="etnia" name="etnia" />
     </div>
+    <div class="control p-col-12 p-xl-4 p-md-6" *ngIf="user?.tipoUser === 'evaluador'">
+        <h6>Instituto:</h6>
+        <input formControlName="institucion" type="text" pInputText placeholder="Instituto"
+            id="institucion" name="institucion" />
+    </div>
 
     <ng-container *ngIf="user?.tipoUser === 'participante'">
         <div class="p-col-12 p-xl-12 p-md-12">

@@ -25,4 +25,6 @@ export class EjercitarioService {
       environment.WS_PATH + "listaEjercitario/"
     );
   }
+
+  
 }

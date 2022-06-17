@@ -30,6 +30,14 @@ export class CompetenciaService {
     return this.http.post<any>(environment.WS_PATH + "registroCompetencia/",data);
   }
 
+  public editarCompetencia(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "editarCompetencia/"+ id);
+  }
+ 
+  public  guardarEditarCompetencia(data): Observable<any> {
+    return this.http.put(environment.WS_PATH + "guardarEditarCompetencia/",data);
+  }
+
   public emitEvent(data: boolean) {
     this.evt$.emit(data);
   }

@@ -29,6 +29,14 @@ export class DiscapacidadesService {
     return this.http.get<any>(environment.WS_PATH + "editarDiscapacidad/"+ id);
   }
 
+  public editarCompetencia(id: number): Observable<any> {
+    return this.http.get<any>(environment.WS_PATH + "editarCompetencia/"+ id);
+  }
+
+  public guardarEditarDiscapacidad(data): Observable<any> {
+    return this.http.post<any>(environment.WS_PATH + "guardarEditarDiscapacidad/",data);
+  }
+
   public emitEvent(data: boolean) {
     this.evt$.emit(data);
   }

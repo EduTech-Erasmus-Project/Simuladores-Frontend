@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DiscapacidadParticipanteInterface } from 'src/app/core/interfaces/DiscapacidadParticipante';
 import { CompetenciaService } from "src/app/service/competencia.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiscapacidadesService } from 'src/app/service/discapacidades.service';
 import Swal from 'sweetalert2';
 
@@ -17,13 +18,17 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
   public discapacidad1 : DiscapacidadParticipanteInterface
   private titulo!: string;
   private descripcion!: string;
-  
+  private  id:number;
   public nombre11:string;
   public descripcion11: string;
   public display= false;
+  public form = this.fb.group({
+    tipoDiscapacidad: ['', Validators.required],
+    descripcion: ['', Validators.required],
+  });
 
 
-  constructor(private discapacidadesService: DiscapacidadesService) { }
+  constructor(private discapacidadesService: DiscapacidadesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     
@@ -45,15 +50,23 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
   }
 
   async approved(){
+
+    if (this.form.invalid) {
+      return Object.values(this.form.controls).forEach(control => {
+        if (control instanceof FormGroup)
+          Object.values(control.controls).forEach(ctrl => ctrl.markAsTouched());
+        else
+          control.markAsTouched();
+      });
+    }
     
     let data = {
-     tipoDiscapacidad:this.titulo,
-     descripcion:this.descripcion
+      tipoDiscapacidad:this.form.controls.tipoDiscapacidad.value,
+      descripcion: this.form.controls.descripcion.value
     }
      await this.discapacidadesService.registrarDiscapacidad(data).subscribe(result => { this.discapacidadesService.emitEvent(true);
       this.display=false;
-      this.titulo="";
-      this.descripcion="";
+      this.form.reset();
      Swal.fire({ icon: 'success', title: 'Se ah registrado correctamente', showConfirmButton: true, })
       
     }, error => {
@@ -62,9 +75,12 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
      })
     
   }
+  public isInvalid(input: string) {
+    return this.form.get(input).invalid && this.form.get(input).touched;
+  }
   
   private async loadData(id) {
-   
+    this.id = id
     let compSub = await this.discapacidadesService.editarDiscapacidad(id).subscribe((res) => {
         this.discapacidad1 = res;
         this.nombre11 = this.discapacidad1.tipoDiscapacidad;
@@ -73,8 +89,20 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
       });
       
   }
-  public async editarDiscapaciodas(id){
-  console.log(id)
+  public async editarDiscapaciodas(){
+    let data = {
+      id:this.id,
+      tipoDiscapacidad:this.nombre11,
+      descripcion:this.descripcion11
+     }
+     
+    await this.discapacidadesService.guardarEditarDiscapacidad(data).subscribe(result => { this.discapacidadesService.emitEvent(true);
+      Swal.fire({ icon: 'success', title: 'Discapacidad Actualizada', showConfirmButton: true, })
+      
+    }, error => {
+      console.log(error);
+      Swal.showValidationMessage( `Request failed: Error inesperado`)
+    })
  
    }
 }

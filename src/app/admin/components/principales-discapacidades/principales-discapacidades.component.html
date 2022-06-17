@@ -1,81 +1,184 @@
-<p-table [value]="discapacidad" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-            Principales Discapacidades
-            <p-dialog class="dialogo" header="Agregar Nueva Discapacidad" [(visible)]="display" modal="modal" [closable]="false" [style]="{width: '400px'}">
-                <div style="line-height: 1.5">
-                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                        <input type="text" pInputText placeholder="Titulo" [(ngModel)]='titulo'>
-                    </div>
-                    <textarea rows="5" cols="30" [(ngModel)]='descripcion' placeholder="Descripcion de la Discapacidad" pInputTextarea></textarea>
-                    
-                </div>
-                <p-footer>
-                    <button type="button" pButton icon="pi pi-check" (click)="approved()" label="Guardar" class="p-button-text"></button>
-                    <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cerrar" class="p-button-text"></button>
-                </p-footer>
-            </p-dialog>
+<p-table
+  [value]="discapacidad"
+  styleClass="p-datatable-customers"
+  [rows]="10"
+  [paginator]="true"
+  [filterDelay]="0"
+>
+  <ng-template pTemplate="caption">
+    <div
+      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+    >
+      Principales Discapacidades
+      <p-dialog
+        class="dialogo"
+        header="Agregar Nueva Discapacidad"
+        [(visible)]="display"
+        modal="modal"
+        [closable]="false"
+        [style]="{ width: '400px' }"
+      >
+        <form class="form" [formGroup]="form" (ngSubmit)="approved()">
+          <div class="form-group">
+            <div style="line-height: 1.5">
+              <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                <input
+                  type="text"
+                  pInputText
+                  placeholder="titulo"
+                  class="form-control"
+                  name="tipoDiscapacidad"
+                  formControlName="tipoDiscapacidad"
+                  [class.is-invalid]="isInvalid('tipoDiscapacidad')"
+                  required
+                />
+                <br>
+                <span class="text-danger" *ngIf="isInvalid('tipoDiscapacidad')">
+                  *El Titulo no puede quedar vacío
+                </span>
+              </div>
+              <textarea
+                rows="5"
+                cols="30"
+                formControlName="descripcion"
+                [class.is-invalid]="isInvalid('descripcion')"
+                pInputTextarea
+              ></textarea>
+              <br>
+              <span class="text-danger" *ngIf="isInvalid('descripcion')"
+                  > * La descripcion no puede quedar vacío
+                </span>
+                <br>
+            </div>
+            <p-footer>
+              <button
+                type="button"
+                pButton
+                icon="pi pi-check"
+                (click)="approved()"
+                label="Guardar"
+                class="p-button-text"
+              ></button>
+              <button
+                type="button"
+                pButton
+                icon="pi pi-times"
+                (click)="display = false"
+                label="Cerrar"
+                class="p-button-text"
+              ></button>
+            </p-footer>
+          </div>
+        </form>
+      </p-dialog>
 
-            <button type="text" (click)="display=true" pButton icon="pi pi-external-link" label="Agregar Nueva Discapacidad" style="width: auto"></button>
+      <button
+        type="text"
+        (click)="display = true"
+        pButton
+        icon="pi pi-external-link"
+        label="Agregar Nueva Discapacidad"
+        style="width: auto"
+      ></button>
 
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
 
-                <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Global Search" />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="name">Nombre
-                <p-sortIcon field="name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="country.name">Descripcion
-                <p-sortIcon field="country.name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="boton.name">
-                <p-sortIcon field="boton.name"></p-sortIcon>
-            </th>
-            
-            
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-discapacidad>
-        <tr >
-            <td>
-                <span class="p-column-title">{{discapacidad.tipoDiscapacidad}}</span>
-            </td>
-            <td>
-                <span class="p-column-title">{{discapacidad.descripcion }}</span>
-                
-            </td>
-            <td>
-                <a (click)="display1=true" (click)="loadData(discapacidad.id)" pButton type="button" data-toggle="modal"  style="margin-left: 2px" class="p-button-success" >Editar Discapacidad</a>
+        <input
+          pInputText
+          type="text"
+          (input)="dtc.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name">
+        Nombre
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="country.name">
+        Descripcion
+        <p-sortIcon field="country.name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="boton.name">
+        <p-sortIcon field="boton.name"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-discapacidad>
+    <tr>
+      <td>
+        <span class="p-column-title">{{ discapacidad.tipoDiscapacidad }}</span>
+      </td>
+      <td>
+        <span class="p-column-title">{{ discapacidad.descripcion }}</span>
+      </td>
+      <td>
+        <a
+          (click)="display1 = true"
+          (click)="loadData(discapacidad.id)"
+          pButton
+          type="button"
+          data-toggle="modal"
+          style="margin-left: 2px"
+          class="p-button-success"
+          >Editar Discapacidad</a
+        >
 
-				<p-dialog  header="Editar Discapacidad" [(visible)]="display1" modal1="modal"  data-toggle="modal" [closable]="false" [style]="{width: '400px'}">
-                    <div style="line-height: 1.5">
-                        <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                            <input type="text" pInputText placeholder="Titulo"  [(ngModel)]='nombre11'>
-                        </div>
-                        <textarea rows="5" cols="30" [(ngModel)]='descripcion11' placeholder="Descripcion de la Discapacidad" pInputTextarea></textarea>
-                        
-                    </div>
-                    <p-footer>
-                        <button type="button" pButton icon="pi pi-check" (click)="approved()" label="Actualizar" class="p-button-text"></button>
-                        <button type="button" pButton icon="pi pi-times" (click)="display1=false" label="Cerrar" class="p-button-text"></button>
-                    </p-footer>
-                </p-dialog>
-                
-                
-               
-			</td>
-            
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="8">No customers found.</td>
-        </tr>
-    </ng-template>
+        <p-dialog
+          header="Editar Discapacidad"
+          [(visible)]="display1"
+          modal1="modal"
+          data-toggle="modal"
+          [closable]="false"
+          [style]="{ width: '400px' }"
+        >
+          <div style="line-height: 1.5">
+            <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+              <input
+                type="text"
+                pInputText
+                placeholder="Titulo"
+                [(ngModel)]="nombre11"
+              />
+            </div>
+            <textarea
+              rows="5"
+              cols="30"
+              [(ngModel)]="descripcion11"
+              placeholder="Descripcion de la Discapacidad"
+              pInputTextarea
+            ></textarea>
+          </div>
+          <p-footer>
+            <button
+              type="button"
+              pButton
+              icon="pi pi-check"
+              (click)="editarDiscapaciodas()"
+              label="Actualizar"
+              class="p-button-text"
+            ></button>
+
+            <button
+              type="button"
+              pButton
+              icon="pi pi-times"
+              (click)="display1 = false"
+              label="Cerrar"
+              class="p-button-text"
+            ></button>
+          </p-footer>
+        </p-dialog>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
 </p-table>
