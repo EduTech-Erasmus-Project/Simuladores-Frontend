@@ -151,9 +151,9 @@
                   </div>
                   <div class="p-col-12 p-md-12 p-lg-12">
                     <div class="p-field p-fluid">
-                      <label for="name">Contraseña*</label>
+                      <label for="password">Contraseña*</label>
                       <div class="viewPass">
-                        <input id="password" [type]="show ? 'text' : 'password'" formControlName="password"
+                        <input id="password" name="password" autocomplete="on" [type]="show ? 'text' : 'password'" formControlName="password"
                           placeholder="Contraseña" pInputText [ngClass]="{
                             'ng-dirty ng-invalid': getErrorRequired('password')
                           }" />
