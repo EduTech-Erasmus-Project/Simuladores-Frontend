@@ -10,6 +10,7 @@ import { BreadcrumbService } from "src/app/service/breadcrumb.service";
 import { CompetenciaService } from "src/app/service/competencia.service";
 import { EjercitarioService } from "src/app/service/ejercitario.service";
 import { UsuarioService } from "src/app/service/usuario.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nuevo-ejercitario',
@@ -28,7 +29,7 @@ export class NuevoEjercitarioComponent implements OnInit {
   public title: string = '';
   public archivo: File;
   competencia: CompetenciaService
-
+  public display = false;
 
 
   public nivels = [
@@ -177,6 +178,7 @@ export class NuevoEjercitarioComponent implements OnInit {
   public onSubmit() {
     this.markTouchForm();
     if (this.form.valid) {
+      this.display = false;
       this.loader = true;
       this.msg = [];
       const id = this.id;
@@ -186,16 +188,22 @@ export class NuevoEjercitarioComponent implements OnInit {
         let sub = this.ejercitarioService.editarEjercitario(data)
           .subscribe(response => {
             console.log(response);
+            Swal.fire({
+              icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
+            });
           });
         this._subscriptions.push(sub);
       } else {
         let sub = this.ejercitarioService.registroEjercitario({ file: this.archivo, ...this.form.value })
           .subscribe(response => {
+             Swal.fire({
+              icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
+            });
             console.log(response)
           })
       }
 
-  }
+    }
   }
 
   public getErrorRequired(field: string) {

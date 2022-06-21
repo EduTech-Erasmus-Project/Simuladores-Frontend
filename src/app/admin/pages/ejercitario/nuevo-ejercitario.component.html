@@ -1,7 +1,7 @@
 <p-messages [(value)]="msg" [enableService]="false"></p-messages>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-   
-    <div class="control p-col-12 p-xl-12 p-md-12">
+    
+    <div class="control p-col-12 p-xl-12 p-md-12"> 
         
       <h1> <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
           {{title}}</h1>
@@ -17,6 +17,7 @@
           </div> 
           
           </div>
+
 
               <h6>Nombre del Ejercitario</h6>
         <input [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nombreDeEjercitario')}" formControlName="nombreDeEjercitario" type="text"
@@ -130,7 +131,7 @@
 
 <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
     <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453"> 
-       
+
         <p-button type="submit"  pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save " class=""></p-button>
     
     </div>

@@ -9,6 +9,9 @@ import { ExpertosComponent } from "./pages/expertos/expertos.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { SimuladoresComponent } from "./pages/simuladores/simuladores.component";
 import { UsuariosComponent } from "./pages/usuarios/usuarios.component";
+import { CrearPreguntaComponent } from "./components/crear-pregunta/crear-pregunta.component";
+import { ListaPreguntaComponent } from "./components/lista-pregunta/lista-pregunta.component";
+import { EditarPreguntaComponent } from "./components/editar-pregunta/editar-pregunta.component";
 
 
 
@@ -23,7 +26,12 @@ const routes: Routes = [
       { path: "simuladores", component: SimuladoresComponent },
       { path: "usuarios", component: UsuariosComponent },
       { path: "mi-cuenta", component: DatosAdminComponent },
-      { path: "nuevo-ejercitario/:id", component: NuevoEjercitarioComponent }
+      { path: "nuevo-ejercitario", component: NuevoEjercitarioComponent, data:{title:"Registro Ejercitario"} },
+      { path: "editar-ejercitario/:id", component: NuevoEjercitarioComponent, data:{title:"Editar Ejercitario"}},
+      { path: "preguntas-ver", component: CrearPreguntaComponent},
+      { path: "registra-pregunta/:id", component: CrearPreguntaComponent},
+      { path: "lista-pregunta/:id", component: ListaPreguntaComponent},
+      { path: "editar-pregunta/:id", component:EditarPreguntaComponent},
     ],
   },
   

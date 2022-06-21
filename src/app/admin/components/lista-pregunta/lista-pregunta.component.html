@@ -1,0 +1,76 @@
+<p-table [value]="pregunta" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
+	<ng-template pTemplate="caption">
+		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+			Listado de Preguntas
+			<p-dialog class="dialogo" [style]="{width: '400px'}">
+				<div style="line-height: 1.5">
+				</div>
+			</p-dialog>
+
+			<a routerLink="/dashboard/registra-pregunta/{{id}}" pButton icon="pi pi-external-link"
+				label="Agregar Nuevas Preguntas" style="width: auto"></a>
+
+			<span class="p-input-icon-left">
+				<i class="pi pi-search"></i>
+				<input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+					placeholder="Global Search" />
+			</span>
+		</div>
+	</ng-template>
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="contenido">Contenido
+				<p-sortIcon field="contenido"></p-sortIcon>
+			</th>
+			<th pSortableColumn="respuestaCorrecta">Respuesta Correcta
+				<p-sortIcon field=""></p-sortIcon>
+			</th>
+			<th pSortableColumn="numeroPregunta">Numero de Pregunta
+				<p-sortIcon field="representative.name"></p-sortIcon>
+			</th>
+
+
+			<th pSortableColumn="status">
+
+			</th>
+
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-pregunta>
+
+		<tr>
+			<td>
+				<span class="p-column-title">{{pregunta.contenido}}</span>
+			</td>
+
+			<td>
+				<span class="p-column-title">{{pregunta.respuestaCorrecta}}</span>
+			</td>
+
+			<td>
+				<span class="p-column-title">{{pregunta.numeroPregunta}}</span>
+			</td>
+
+
+
+			<td>
+
+
+				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component"
+					routerLink="/dashboard/editar-pregunta/{{pregunta.id}}">Editar</a>
+
+
+			</td>
+
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage">
+		<tr>
+			<td colspan="8">No customers found.</td>
+		</tr>
+	</ng-template>
+</p-table>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }"
+	[maximizable]="true" [draggable]="false" [resizable]="false">
+	<app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
+</p-dialog>

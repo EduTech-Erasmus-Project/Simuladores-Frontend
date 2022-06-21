@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+	<div class="card">
+		<div class="p-field p-col-12">
+			<div class="p-fluid p-formgrid p-grid">
+
+				<input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta" formControlName="pregunta"
+					class="p-inputtext p-component">
+			</div>
+
+		</div>
+		<div class="p-field p-col-12">
+			<div class="p-fluid p-formgrid p-grid">
+
+				<textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
+					class="p-inputtextarea p-inputtext p-component" formControlName="respuesta"></textarea>
+
+			</div>
+
+
+		</div>
+		<p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
+			ng-reflect-icon="pi pi-save" class=""></p-button>
+	</div>
+</form>

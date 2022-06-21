@@ -47,11 +47,13 @@ export class ListaCompetenciasComponent implements OnInit {
      titulo:this.titulo,
      descripcion:this.descripcion
     }
-     await this.competenciaService.registrarCompetencia(data).subscribe(result => { this.competenciaService.emitEvent(true);
+     await this.competenciaService.registrarCompetencia(data).subscribe
+     (result => { this.competenciaService.emitEvent(true);
       this.display=false;
       this.titulo="";
       this.descripcion="";
-     Swal.fire({ icon: 'success', title: 'Se ah registrado correctamente', showConfirmButton: true, })
+Swal.fire({ icon: 'success', title: 'Se registro correctamente', showConfirmButton: true, 
+    });
       
     }, error => {
      console.log(error);
