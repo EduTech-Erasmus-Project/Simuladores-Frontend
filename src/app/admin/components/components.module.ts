@@ -9,6 +9,7 @@ import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitar
 import { PrincipalesDiscapacidadesComponent } from './principales-discapacidades/principales-discapacidades.component';
 import { ListaUsuariosRegPlatComponent } from './lista-usuarios-reg-plat/lista-usuarios-reg-plat.component';
 import { InformacionCountComponent } from './informacion-count/informacion-count.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,7 @@ import { InformacionCountComponent } from './informacion-count/informacion-count
     ListaUsuariosRegPlatComponent,
     InformacionCountComponent
   ],
-  imports: [ CommonModule, SharedModule ],
+  imports: [ CommonModule, SharedModule, ReactiveFormsModule],
   exports: [
     
     ListaCompetenciasComponent,

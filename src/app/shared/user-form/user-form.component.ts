@@ -80,6 +80,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       pais: [null, Validators.required],
       ciudad: [null, Validators.required],
       genero: [null, Validators.required],
+      institucion: [null, Validators.required],
       nivelDeFormacion: [null],
       carreraUniversitaria: [null],
       numeroDeHijos: [0],

@@ -81,10 +81,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.pattern("[a-zA-ZñÑáéíóúÁÉÍÓÚs]+")],
       ],
       role: ["user", Validators.required],
+      institucion: ['', Validators.required],
       email: [
         null,
         [
           Validators.required,
+          Validators.email,
           Validators.pattern(
             "^([a-zA-Z0-9_' - '.]+)@([a-zA-Z0-9_' - '.]+).([a-zA-Z]{2,5})$"
           ),

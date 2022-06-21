@@ -17,6 +17,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { RouterModule } from "@angular/router";
 
+
 @NgModule({
 
   declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, NuevoEjercitarioComponent, DatosAdminComponent, UsuariosComponent] ,
