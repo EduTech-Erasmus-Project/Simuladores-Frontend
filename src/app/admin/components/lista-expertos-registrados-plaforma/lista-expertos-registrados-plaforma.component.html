@@ -49,7 +49,10 @@
 			</td>
 			
 			<td>
-				<span class="p-column-title">{{expertoApro.usuario?.estado}}</span>
+				<span class="p-column-title" *ngIf=" expertoApro.usuario?.estado == true ; else other_content_status"  >Activo</span>
+				<ng-template #other_content_status>
+					<span class="p-button-label" >Desactivado</span>		
+				</ng-template>
 				
 			</td>
 			<td>

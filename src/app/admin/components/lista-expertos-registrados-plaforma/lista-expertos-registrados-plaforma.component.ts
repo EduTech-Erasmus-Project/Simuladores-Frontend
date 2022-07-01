@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ExpertoService } from 'src/app/service/experto.service';
 import Swal from 'sweetalert2';
@@ -19,6 +19,7 @@ export class ListaExpertosRegistradosPlaformaComponent implements OnInit {
   public idUsuario: number;
   public usuario:any;
   public estado:boolean = false;
+  public status:string ;
  
   constructor(private expertoService : ExpertoService) { }
 
@@ -54,6 +55,9 @@ export class ListaExpertosRegistradosPlaformaComponent implements OnInit {
       console.log(error);
     }
   }
+public async accountStatus(){
+  this.status="hola"
+}
 
  public async bloquarCuenta(id){
    this.estado= true;

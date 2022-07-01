@@ -81,7 +81,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.pattern("[a-zA-ZñÑáéíóúÁÉÍÓÚs]+")],
       ],
       role: ["user", Validators.required],
-      institucion: ['', Validators.required],
+      institucion: [''],
       email: [
         null,
         [
@@ -184,11 +184,13 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.markAsTouchFormArray();
     this.markTouchForm();
     if (this.form.valid) {
-      //console.log("Form valid");
+      
       let data = this.form.value;
       data.codigo = this.form.get("codigo").value;
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
+     
       let sub = await this.authService.register(data).subscribe(
+      
         (results) => {
           //console.log(results);
           this.registred = true;
@@ -220,6 +222,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
           ];
         }
       );
+      
       this.subscribes.push(sub);
     }
   }
