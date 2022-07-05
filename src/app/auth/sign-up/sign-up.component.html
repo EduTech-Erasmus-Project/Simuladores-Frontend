@@ -122,7 +122,7 @@
                   <div class="p-col-12 p-md-12 p-lg-12" *ngIf="form.get('role').value != 'user'">
                     <div class="p-field p-fluid">
                       <label for="Institucion">Institucion*</label>
-                      <input id="institucion" type="text" formControlName="institucion" placeholder="Institucion" pInputText
+                      <input id="institucion" (onClick)="onChangeRole()" type="text" formControlName="institucion" placeholder="Institucion" pInputText
                         autocomplete="on" [ngClass]="{
                           'ng-dirty ng-invalid':
                             getErrorRequired('institucion') ||
