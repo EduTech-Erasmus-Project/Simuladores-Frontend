@@ -14,6 +14,10 @@ import { ListaPreguntaComponent } from "./components/lista-pregunta/lista-pregun
 import { EditarPreguntaComponent } from "./components/editar-pregunta/editar-pregunta.component";
 
 
+import { ListaRubricaComponent } from "./components/lista-rubrica/lista-rubrica.component";
+
+
+
 
 
 const routes: Routes = [
@@ -31,7 +35,14 @@ const routes: Routes = [
       { path: "preguntas-ver", component: CrearPreguntaComponent},
       { path: "registra-pregunta/:id", component: CrearPreguntaComponent},
       { path: "lista-pregunta/:id", component: ListaPreguntaComponent},
-      { path: "editar-pregunta/:id", component:EditarPreguntaComponent},
+      { path: "editar-pregunta/:eid/:pid", component:EditarPreguntaComponent},
+      
+      
+      { path: "lista-rubrica/:id", component:ListaRubricaComponent},
+   
+      
+
+
     ],
   },
   

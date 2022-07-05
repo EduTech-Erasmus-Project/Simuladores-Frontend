@@ -2,21 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { PreguntaService } from 'src/app/service/pregunta.service';
-
+import Swal from "sweetalert2";
+import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-crear-pregunta',
   templateUrl: './crear-pregunta.component.html',
-  styleUrls: ['./crear-pregunta.component.scss']
+  styleUrls: ['./crear-pregunta.component.scss'],
+  providers: [MessageService]
 })
 export class CrearPreguntaComponent implements OnInit {
-
+  public form?: FormGroup;
   public userForm: FormGroup;
   public loader = false;
   public msg: Message[];
   public id: number;
- 
+
+
 
   constructor(
     private pregunta: PreguntaService,
@@ -61,27 +64,47 @@ export class CrearPreguntaComponent implements OnInit {
       this.loader = true;
       this.msg = [];
       let { questions } = this.userForm.value;
-      questions = questions.map((q, i) => ({ ...q, numeroPregunta: i + 1, preguntaDelEjercitario: this.id }))
-      for (const question of questions) {
-       // const data = { id: this.id, ...question };
+      const questionsList: any[] = questions.map((q, i) => ({ ...q, numeroPregunta: i + 1, preguntaDelEjercitario: this.id }))
+      let complete = false;
+      for (const question of questionsList) {
+        // const data = { id: this.id, ...question };
         //console.warn(data);
 
-      if (this.id && this.id != 0) {
-         let sub = this.pregunta.registroPregunta(question)
-           .subscribe(response => {
-             console.log(response);
-           });}
-       
+        if (this.id && this.id != 0) {
+          let sub = this.pregunta.registroPregunta(question)
+            .pipe(delay(500))
+            .subscribe({
+              next: response => {
+                console.log(response);
+              },
+              error: e => console.error(e),
+              complete: () => {
+                console.warn('Completado!!!');
+                const index = questionsList.indexOf(question);
+                complete = (questionsList[index] === questionsList[questionsList.length - 1]);
+                console.info(questionsList[index], questionsList[questionsList.length - 1], complete);
+                if (complete)
+                  Swal.fire({
+                    icon: 'success', title: 'Se Registro correctamente', showConfirmButton: true,
+                  });
+              },
+            });
 
-       }
+        }
+      }
     }
   }
-
   private markTouchForm() {
     (<any>Object).values(this.userForm.controls).forEach((control) => {
       control.markAsTouched();
     });
   }
-   
-  
+  public getErrorRequired(field: string) {
+    return (
+      this.form.get(field).hasError("required") && this.form.get(field).touched
+    );
+
+
+
+  }
 }

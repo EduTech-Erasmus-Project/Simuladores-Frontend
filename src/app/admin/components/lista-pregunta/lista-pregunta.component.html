@@ -1,7 +1,9 @@
 <p-table [value]="pregunta" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
 	<ng-template pTemplate="caption">
+		<h1> <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
+          Listar Preguntas</h1>
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-			Listado de Preguntas
+			
 			<p-dialog class="dialogo" [style]="{width: '400px'}">
 				<div style="line-height: 1.5">
 				</div>
@@ -27,7 +29,7 @@
 			</th>
 			<th pSortableColumn="numeroPregunta">Numero de Pregunta
 				<p-sortIcon field="representative.name"></p-sortIcon>
-			</th>
+			</th> 
 
 
 			<th pSortableColumn="status">
@@ -47,7 +49,7 @@
 				<span class="p-column-title">{{pregunta.respuestaCorrecta}}</span>
 			</td>
 
-			<td>
+			 <td>
 				<span class="p-column-title">{{pregunta.numeroPregunta}}</span>
 			</td>
 
@@ -57,7 +59,7 @@
 
 
 				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component"
-					routerLink="/dashboard/editar-pregunta/{{pregunta.id}}">Editar</a>
+					routerLink="/dashboard/editar-pregunta/{{id}}/{{pregunta.id}}">Editar</a>
 
 
 			</td>

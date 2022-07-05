@@ -17,13 +17,14 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { RouterModule } from "@angular/router";
 import { PreguntasVerComponent } from './pages/preguntas-ver/preguntas-ver.component';
-
+import {ProgressBarModule} from "angular-progress-bar"
 @NgModule({
 
   declarations: [AdminComponent, HomeComponent, ExpertosComponent, SimuladoresComponent, NuevoEjercitarioComponent, DatosAdminComponent, UsuariosComponent,PreguntasVerComponent] ,
 
   imports: [
    
+    ProgressBarModule,
     CommonModule,
     AdminRoutingModule,
     SharedModule,

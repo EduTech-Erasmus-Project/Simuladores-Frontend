@@ -30,6 +30,8 @@ export class NuevoEjercitarioComponent implements OnInit {
   public archivo: File;
   competencia: CompetenciaService
   public display = false;
+  public porcentaje: number = 0;
+  public isLoading: boolean = false;
 
 
   public nivels = [
@@ -120,12 +122,13 @@ export class NuevoEjercitarioComponent implements OnInit {
     console.warn(event);
     const file = event.addedFiles[0];
     this.archivo = file;
-
+    this.porcentaje = 0;
   }
 
   onRemove(event) {
     console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+    this.archivo = null;
+    // this.files.splice(this.files.indexOf(event), 1);
   }
 
   private createForm() {
@@ -140,6 +143,7 @@ export class NuevoEjercitarioComponent implements OnInit {
       nivel: [null, Validators.required],
       categoria: [null, Validators.required],
       sector: [null, Validators.required],
+      urlEjercitario :[null, Validators.required],
       competencia: [null, Validators.required],
 
     });
@@ -152,10 +156,10 @@ export class NuevoEjercitarioComponent implements OnInit {
         subscribe(res => {
           console.warn(res);
           const { nombreDeEjercitario, tipoDeEjercitario, duracion, nivel
-            , competencia, categoria, sector, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones } = res;
+            , competencia, categoria, sector, urlEjercitario, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones } = res;
 
           console.warn(nombreDeEjercitario, tipoDeEjercitario, duracion, nivel
-            , competencia, categoria, sector, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones);
+            , competencia, categoria, sector, urlEjercitario, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones);
           if (res) {
             this.form.patchValue({
               nombreDeEjercitario: nombreDeEjercitario,
@@ -163,6 +167,7 @@ export class NuevoEjercitarioComponent implements OnInit {
               tipoDeEjercitario: tipoDeEjercitario,
               duracion: duracion,
               sector: sector,
+              urlEjercitario : urlEjercitario,
               nivel: nivel,
               competencia: competencia['id'],
               instruccionPrincipalEjercitario: instruccionPrincipalEjercitario,
@@ -177,6 +182,7 @@ export class NuevoEjercitarioComponent implements OnInit {
 
   public onSubmit() {
     this.markTouchForm();
+    if (!this.archivo) return;
     if (this.form.valid) {
       this.display = false;
       this.loader = true;
@@ -184,10 +190,12 @@ export class NuevoEjercitarioComponent implements OnInit {
       const id = this.id;
       const data = { id, ...this.form.value };
       console.warn(data);
+      this.isLoading = true;
       if (this.id && this.id != 0) {
         let sub = this.ejercitarioService.editarEjercitario(data)
           .subscribe(response => {
             console.log(response);
+            this.isLoading = false;
             Swal.fire({
               icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
             });
@@ -195,11 +203,29 @@ export class NuevoEjercitarioComponent implements OnInit {
         this._subscriptions.push(sub);
       } else {
         let sub = this.ejercitarioService.registroEjercitario({ file: this.archivo, ...this.form.value })
-          .subscribe(response => {
-             Swal.fire({
-              icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
-            });
-            console.log(response)
+          .subscribe({
+            next: (response) => {
+              const res = JSON.parse(JSON.stringify(response));
+              const loaded = res['loaded'];
+              const total = res['total'];
+              if (this.porcentaje >= 100) {
+                this.porcentaje = 100
+                Swal.fire({
+                  icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
+                });
+              } else {
+                this.porcentaje = Number(((loaded / total) * 100).toFixed(1));
+                console.warn(loaded, total, (loaded / total) * 100);
+              }
+            },
+            error: (e) => {
+              this.isLoading = false;
+              console.error(e);
+            },
+            complete: () => {
+              this.isLoading = false;
+              this.archivo = null;
+            },
           })
       }
 

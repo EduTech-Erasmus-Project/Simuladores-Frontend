@@ -1,7 +1,8 @@
 <p-table [value]="ejercitario" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
 	<ng-template pTemplate="caption">
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-			Listado de ejercitarios
+			Listado de Ejercitarios
+
 			<p-dialog class="dialogo" [style]="{width: '400px'}">
 				<div style="line-height: 1.5">
 				</div>
@@ -9,6 +10,7 @@
 
 			<a routerLink="/dashboard/nuevo-ejercitario" pButton icon="pi pi-external-link"
 				label="Agregar nuevo Ejercitario" style="width: auto"></a>
+
 
 			<span class="p-input-icon-left">
 				<i class="pi pi-search"></i>
@@ -42,7 +44,7 @@
 	</ng-template>
 	<ng-template pTemplate="body" let-ejercitario let-competencia>
 
-		<tr>	
+		<tr>
 			<td>
 				<span class="p-column-title">{{ejercitario.nombreDeEjercitario}}</span>
 			</td>
@@ -62,19 +64,33 @@
 
 			<td>
 				<span class="p-column-title">{{ejercitario.nivel}}</span>
+				<!-- <pre>{{ejercitario|json}}</pre> -->
 			</td>
+
+
 
 
 			<td>
 
-				<button pbutton="" pripple="" type="button" label="Success" class="p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" 
-					ng-reflect-label="Success" role="link" onclick="window.location='https://simulab.edutech-project.org/media/Ejercicio3/index.html'" >Visual</button>
-					
-				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component" 
-				routerLink="/dashboard/editar-ejercitario/{{ejercitario.id}}">Editar</a>
+				<button pbutton="" pripple="" type="button" label="Success" 
+					class="p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success"
+					role="link"
+					onclick="javascript:window.open('https://simulab.edutech-project.org/media/Ejercicio3/index.html', '_blank');" >Visual</button>
+				
+		</td>
 
-				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" 
-				ng-reflect-label="Help" routerLink="/dashboard/lista-pregunta/{{ejercitario.id}}">ListarPreguntas
+
+			<td>
+				<a class="p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component"
+					routerLink="/dashboard/editar-ejercitario/{{ejercitario.id}}">Editar</a>
+			</td>
+			<td>
+				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help"
+					routerLink="/dashboard/lista-pregunta/{{ejercitario.id}}">ListarPreguntas
+				</a>
+			</td>
+			<td> <a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help"
+					routerLink="/dashboard/lista-rubrica/{{ejercitario.id}}">ListarRubrica
 				</a>
 			</td>
 

@@ -23,11 +23,12 @@ export class PreguntaService {
     formData.append("contenido", data.contenido);
     formData.append("respuestaCorrecta", data.respuestaCorrecta);
 
-    return this.http.post(environment.WS_PATH + "registroPregunta/", formData, {
-      reportProgress: true,
-      observe: "events",
-      responseType: "json"
-    }
+    return this.http.post(environment.WS_PATH + "registroPregunta/", formData,
+      // {
+      //   reportProgress: true,
+      //   observe: "events",
+      //   responseType: "json"
+      // }
     );
 
   }

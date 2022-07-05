@@ -15,6 +15,10 @@ import { ListaPreguntaComponent } from './lista-pregunta/lista-pregunta.componen
 import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
 
 
+import { ListaRubricaComponent } from './lista-rubrica/lista-rubrica.component';
+
+
+
 
 
 @NgModule({
@@ -31,6 +35,10 @@ import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.compo
     CrearPreguntaComponent,
     ListaPreguntaComponent,
     EditarPreguntaComponent,
+  
+  
+    ListaRubricaComponent,
+
    
   ],
   imports: [ CommonModule, SharedModule,ReactiveFormsModule],

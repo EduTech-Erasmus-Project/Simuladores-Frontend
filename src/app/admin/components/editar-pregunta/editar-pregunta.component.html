@@ -1,6 +1,16 @@
+<div class="control p-col-12 p-xl-12 p-md-12">
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<h1>
 
-	<div class="card">
+		<p-button routerLink="/dashboard/lista-pregunta/{{eid}}" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left"
+		  ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
+	Editar Pregunta	
+	  </h1>
+	<div class="container">
+		<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+        <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453">
+         
+	  <div class="card">
 		<div class="p-field p-col-12">
 			<div class="p-fluid p-formgrid p-grid">
 
@@ -22,4 +32,6 @@
 		<p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
 			ng-reflect-icon="pi pi-save" class=""></p-button>
 	</div>
+	</div>
+		</div></div>
 </form>

@@ -24,7 +24,8 @@ export class EditarPreguntaComponent implements OnInit {
   public displayMaximizable: boolean;
   public display = false;
   public msg: Message[];
-  public id: number;
+  public eid: number;
+  public pid: number;
   private _subscriptions: Subscription[] = [];
 
   constructor(private preguntaService: PreguntaService,
@@ -38,8 +39,10 @@ export class EditarPreguntaComponent implements OnInit {
 
   private loadPregunta() {
     // this.loadingPregunta = true;
-    this.id = Number(this.activateRoute.snapshot.paramMap.get('id'));
-    this.preguntaService.recuperarPreguntaEjercitario(this.id)
+
+    this.eid = Number(this.activateRoute.snapshot.paramMap.get('eid'));
+    this.pid = Number(this.activateRoute.snapshot.paramMap.get('pid'));
+    this.preguntaService.recuperarPreguntaEjercitario(this.pid)
       .subscribe(res => {
         this.preguntaData = res;
         this.form.patchValue({
@@ -56,12 +59,12 @@ export class EditarPreguntaComponent implements OnInit {
       this.display = false;
       this.loader = true;
       this.msg = [];
-      const id = this.id;
+      const id = this.pid;
       const pregunta = this.form.controls.pregunta.value;
       const respuesta = this.form.controls.respuesta.value;
       const data = { ...this.preguntaData, contenido: pregunta, respuestaCorrecta: respuesta };
       console.warn(data);
-      if (this.id && this.id != 0) {
+      if (this.pid && this.pid != 0) {
         let sub = this.preguntaService.editarPregunta(data)
           .subscribe(response => {
             console.log(response);

@@ -43,6 +43,10 @@ export class EjercitarioService {
     );
   }
 
+
+
+
+
   obtenerEjercitario(id: number) {
     return this.http.get<any>(
       environment.WS_PATH + "recuperarEjercitario/" + id
@@ -62,6 +66,7 @@ export class EjercitarioService {
     formData.append("tipoDeEjercitario", data.tipoDeEjercitario);
     formData.append("duracion", data.duracion);
     formData.append("sector", data.sector);
+    formData.append("urlEjercitario", data.urlEjercitario);
     formData.append("nivel", data.nivel);
     formData.append("competencia", data.competencia);
     formData.append("instruccionPrincipalEjercitario", data.instruccionPrincipalEjercitario);
