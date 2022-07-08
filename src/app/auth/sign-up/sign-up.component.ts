@@ -81,7 +81,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.pattern("[a-zA-ZñÑáéíóúÁÉÍÓÚs]+")],
       ],
       role: ["user", Validators.required],
-      institucion: [''],
+      institucion: [null],
       email: [
         null,
         [
@@ -272,8 +272,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if(this.form.get("role").value === "expert"){
       this.form.controls['codigo'].disable();
       this.form.controls['codigo'].setValue(null);
+
+      this.form.controls['institucion'].setValidators([Validators.required]);
+
     }else{
       this.form.controls['codigo'].enable();
+      this.form.controls['institucion'].setValidators([]);
     }
   }
 }
