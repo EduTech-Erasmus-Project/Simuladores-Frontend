@@ -37,65 +37,67 @@
 
                       <div class="p-field">
                         <input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta"
-                          formControlName="contenido" 
-                          class="p-inputtext p-component">
-                        <!-- <div *ngIf="userForm.get('contenido').invalid">
-                          <small class="p-error" *ngIf="getErrorRequired('contenido')">Este campo es
-                            obligatorio.</small>
-                        </div> -->
+                          formControlName="contenido" class="p-inputtext p-component"
+                           >
+                      
+                      <!-- <span class="text-danger " *ngIf="isInvalid('contenido')"> *El Contenido no puede quedar vacío
+                      </span> -->
 
 
+                      <div class="card">
+                        <div class="p-field p-col-12">
+                          <div class="p-fluid p-formgrid p-grid">
 
+                            <textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
+                              class="p-inputtextarea p-inputtext p-component" formControlName="respuestaCorrecta"
+                              >
+                              </textarea>
+                          
+                            <!-- <span class="text-danger" *ngIf="isInvalid('respuestaCorrecta')"> * La respuesta no
+                              puede quedar vacío
+                            </span> -->
 
-                        <div class="card">
-                          <div class="p-field p-col-12">
-                            <div class="p-fluid p-formgrid p-grid">
-
-                              <textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
-                                class="p-inputtextarea p-inputtext p-component"
-                                formControlName="respuestaCorrecta"></textarea>
-
-                              <p-button *ngIf="i>=0" icon="pi pi-trash" class="btn btn-danger float-end mb-3"
-                                label="EliminarPregunta" (click)="removeQuestion(i)" ng-reflect-label="EliminarPregunta"
-                                ng-reflect-icon="pi pi-trash"></p-button>
-                            </div>
-
-
+                            <p-button *ngIf="i>=0" icon="pi pi-trash" class="btn btn-danger float-end mb-3"
+                              label="EliminarPregunta" (click)="removeQuestion(i)" ng-reflect-label="EliminarPregunta"
+                              ng-reflect-icon="pi pi-trash"></p-button>
                           </div>
+
+
                         </div>
                       </div>
-
-
-
-
+                
                     </div>
+
+
+
 
                   </div>
 
-
-                </div>
-                <div class="p-field">
-                  <p-button (click)="addQuestion()" pbutton="" pripple="" label="AnadirPregunta"
-                    icon="pi pi-plus-circle" ng-reflect-label="AnadirPregunta" ng-reflect-icon="pi pi-plus-circle"
-                    class=""></p-button>
-
-
                 </div>
 
 
-                <p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save"
-                  ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save" class=""></p-button>
+              </div>
+              <div class="p-field">
+                <p-button (click)="addQuestion()" pbutton="" pripple="" label="AnadirPregunta" icon="pi pi-plus-circle"
+                  ng-reflect-label="AnadirPregunta" ng-reflect-icon="pi pi-plus-circle" class=""></p-button>
+
+
               </div>
 
 
-
-
+              <p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
+                ng-reflect-icon="pi pi-save" class=""></p-button>
             </div>
+
+
+
 
           </div>
 
         </div>
 
       </div>
-    </div>
-  </form>
+
+      </div></div>
+
+</form>

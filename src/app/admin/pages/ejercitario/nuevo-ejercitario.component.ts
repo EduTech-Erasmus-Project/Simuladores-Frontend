@@ -199,8 +199,10 @@ export class NuevoEjercitarioComponent implements OnInit {
             Swal.fire({
               icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
             });
+           // this.router.navigate(['dashboard/simuladores', this.id]);
           });
-        this._subscriptions.push(sub);
+        this._subscriptions.push(sub); 
+       
       } else {
         let sub = this.ejercitarioService.registroEjercitario({ file: this.archivo, ...this.form.value })
           .subscribe({
@@ -213,6 +215,7 @@ export class NuevoEjercitarioComponent implements OnInit {
                 Swal.fire({
                   icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
                 });
+                // this.router.navigate(['dashboard/simuladores']);
               } else {
                 this.porcentaje = Number(((loaded / total) * 100).toFixed(1));
                 console.warn(loaded, total, (loaded / total) * 100);

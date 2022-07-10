@@ -93,4 +93,15 @@ export class ListaPreguntaComponent implements OnInit {
     });
   }
 
+  eliminar(id:number ){
+    if(confirm('Esta seguro de eliminar')){
+      this.preguntaService.eliminarPregunta(id).subscribe((data) => {
+        console.warn(data);
+        this.preguntaService.obtenerListaPregunta(id);
+
+      },(error) => {
+        console.log(error);
+      })
+    }
+  }
 }

@@ -56,4 +56,8 @@ export class PreguntaService {
     return this.http.put(environment.WS_PATH + "editarPregunta/", pregunta
     );
   }
+  eliminarPregunta(id:Number) {
+    return this.http.delete(environment.WS_PATH + "eliminarPregunta/"+ id
+    );
+}
 }

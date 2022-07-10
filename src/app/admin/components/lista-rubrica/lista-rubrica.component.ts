@@ -94,6 +94,7 @@ export class ListaRubricaComponent implements OnInit {
             Swal.fire({
               icon: 'success', title: 'Se edito correctamente', showConfirmButton: true,
             });
+            this.router.navigate(['dashboard/lista-rubrica', this.rid]);
           });
     } else {
       console.warn(2, data);
@@ -106,6 +107,7 @@ export class ListaRubricaComponent implements OnInit {
             Swal.fire({
               icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
             });
+   
           }, error => {
             console.log(error);
             Swal.showValidationMessage(`Request failed: Error inesperado`)

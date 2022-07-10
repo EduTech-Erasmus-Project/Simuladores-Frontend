@@ -71,6 +71,7 @@ export class EditarPreguntaComponent implements OnInit {
             Swal.fire({
               icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
             });
+            this.router.navigate(['dashboard/lista-pregunta', this.eid]);
           });
         this._subscriptions.push(sub);
       }

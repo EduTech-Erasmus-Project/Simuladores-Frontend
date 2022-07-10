@@ -24,6 +24,7 @@ export class CrearPreguntaComponent implements OnInit {
   constructor(
     private pregunta: PreguntaService,
     private route: ActivatedRoute,
+    private router: Router,
     private _fb: FormBuilder) {
     this.userForm = this._fb.group({
       questions: this._fb.array([this.addQuestionGroup()])
@@ -57,6 +58,9 @@ export class CrearPreguntaComponent implements OnInit {
     return <FormArray>this.userForm.get('questions');
   }
 
+  public isInvalid(input: string) {
+    return this.form.get(input).invalid && this.form.get(input).touched;
+  }
   public onSubmit() {
 
     this.markTouchForm();
@@ -83,10 +87,12 @@ export class CrearPreguntaComponent implements OnInit {
                 const index = questionsList.indexOf(question);
                 complete = (questionsList[index] === questionsList[questionsList.length - 1]);
                 console.info(questionsList[index], questionsList[questionsList.length - 1], complete);
-                if (complete)
+                if (complete) {
                   Swal.fire({
                     icon: 'success', title: 'Se Registro correctamente', showConfirmButton: true,
                   });
+                  this.router.navigate(['dashboard/lista-pregunta', this.id]);
+                }
               },
             });
 
