@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-usuarios-reg-plat',
@@ -28,20 +29,15 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
     this.usuarioService.event.subscribe(result =>{console.log("hola",result);this.loadParticipantes()})
    
   }
-  private async loadParticipantes() {
+  private loadParticipantes() {
     this.loadingUsuarios = true;
-    try {
-      const usuarioAprobado = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
-      console.log("Componente",  usuarioAprobado);
-      this.usuarioApro = usuarioAprobado;
-      console.log(this.usuarioApro.estado)
-      this.loadingUsuarios = false;
-      this._subscriptions.push(usuarioAprobado);
-    } catch (error) {
-      console.log(error);
-    } 
+    this.usuarioService.obtenerParticipantesUsuario()
+    .subscribe(res=>{
+      this.usuarioApro = res;
+    });
   }
   public async showModal(usuario1) {
+    console.warn(usuario1);
     this.usuario =usuario1
     try {
       console.log(this.usuario);
@@ -51,6 +47,17 @@ export class ListaUsuariosRegPlatComponent implements OnInit {
     }
 
     }
-    
+
+    public async bloquearCuenta(id){
+      this.estado= true;    
+     await this.usuarioService.bloqueoCuentaUsuario(id).subscribe(result => { this.usuarioService.emitEvent(true);
+       Swal.fire({ icon: 'success', title: 'La cuenta del evaluador a sido bloqueada', showConfirmButton: true, })
+       
+     }, error => {
+       console.log(error);
+       Swal.showValidationMessage( `Request failed: Error inesperado`)
+     })
+   
+     }
 
 }

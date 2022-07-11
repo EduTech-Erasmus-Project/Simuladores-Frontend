@@ -1,13 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, ActivationEnd, Data, Router } from "@angular/router";
 import * as moment from "moment";
 import { Message, MessageService } from "primeng/api";
-import { Subscription } from "rxjs";
+import { filter, map, Observable, Subscription, zip } from "rxjs";
 import { User } from "src/app/core/interfaces/User";
 import { AuthService } from "src/app/service/auth.service";
 import { BreadcrumbService } from "src/app/service/breadcrumb.service";
+import { CompetenciaService } from "src/app/service/competencia.service";
+import { EjercitarioService } from "src/app/service/ejercitario.service";
 import { UsuarioService } from "src/app/service/usuario.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nuevo-ejercitario',
@@ -18,9 +21,17 @@ import { UsuarioService } from "src/app/service/usuario.service";
 export class NuevoEjercitarioComponent implements OnInit {
   public user?: User;
   public form?: FormGroup;
+  public formData: FormData;
   private _subscriptions: Subscription[] = [];
   public loader = false;
   public msg: Message[];
+  public id: number;
+  public title: string = '';
+  public archivo: File;
+  competencia: CompetenciaService
+  public display = false;
+  public porcentaje: number = 0;
+  public isLoading: boolean = false;
 
 
   public nivels = [
@@ -40,16 +51,16 @@ export class NuevoEjercitarioComponent implements OnInit {
 
   public competencias = [
     {
-      name: "Comeptencia 1",
-      value: "Comeptencia 1",
+      name: "Competencia 1",
+      value: "Competencia 1",
     },
     {
-      name: "Comeptencia 2",
-      value: "Comeptencia 2",
+      name: "Competencia 2",
+      value: "Competencia 2",
     },
     {
-      name: "Comeptencia 3",
-      value: "Comeptencia 3",
+      name: "Competencia 3",
+      value: "Competencia 3",
     },
   ];
 
@@ -59,17 +70,27 @@ export class NuevoEjercitarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private usuarioService: UsuarioService,
     private breadcrumbService: BreadcrumbService,
     private messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private ejercitarioService: EjercitarioService,
+    private competenciaService: CompetenciaService,
+
+
   ) {
     this.breadcrumbService.setItems([
       { label: 'UI Kit' },
       { label: 'File', routerLink: ['/uikit/file'] }
 
     ]);
-
+    let sub = this.getTitle()
+      .subscribe(({ title }) => {
+        this.title = title;
+        // document.title = title;
+      });
+    this._subscriptions.push(sub);
     this.createForm();
   }
   ngOnDestroy(): void {
@@ -78,76 +99,139 @@ export class NuevoEjercitarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    // this.getParams();
+
+    this.competenciaService.obtenerListaCompetencias()
+      .subscribe(dados => {
+        this.competencias = dados.map(item => ({ name: item['titulo'], value: item['id'] }));
+        console.log(dados)
+        console.warn(this.competencias);
+
+      });
   }
+
+  private getTitle(): Observable<Data> {
+    return this.router.events
+      .pipe(
+        filter<any>(event => event instanceof ActivationEnd),
+        filter((event: ActivationEnd) => event.snapshot.firstChild === null),
+        map((event: ActivationEnd) => event.snapshot.data),
+      );
+  }
+
   onSelect(event) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
+    console.warn(event);
+    const file = event.addedFiles[0];
+    this.archivo = file;
+    this.porcentaje = 0;
   }
 
   onRemove(event) {
     console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+    this.archivo = null;
+    // this.files.splice(this.files.indexOf(event), 1);
   }
 
   private createForm() {
+    console.log();
     this.form = this.fb.group({
-      nombre: [null, Validators.required],
-      numeroejercitario: [null, Validators.required],
-      tipoejercitario: [null, Validators.required],
+      tipoDeEjercitario: [null, Validators.required],
+      nombreDeEjercitario: [null, Validators.required],
+      instruccionPrincipalEjercitario: [null, Validators.required],
+      variaciones: [null, Validators.required],
       duracion: [null, Validators.required],
-      principalcompetencia: [null, Validators.required],
+      instruccionesParticipantes: [null, Validators.required],
       nivel: [null, Validators.required],
+      categoria: [null, Validators.required],
+      sector: [null, Validators.required],
+      urlEjercitario :[null, Validators.required],
       competencia: [null, Validators.required],
 
     });
   }
 
-  async loadData() {
+  loadData() {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.id && this.id != 0)
+      this.ejercitarioService.obtenerEjercitario(this.id).
+        subscribe(res => {
+          console.warn(res);
+          const { nombreDeEjercitario, tipoDeEjercitario, duracion, nivel
+            , competencia, categoria, sector, urlEjercitario, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones } = res;
+
+          console.warn(nombreDeEjercitario, tipoDeEjercitario, duracion, nivel
+            , competencia, categoria, sector, urlEjercitario, instruccionPrincipalEjercitario, instruccionesParticipantes, variaciones);
+          if (res) {
+            this.form.patchValue({
+              nombreDeEjercitario: nombreDeEjercitario,
+              categoria: categoria,
+              tipoDeEjercitario: tipoDeEjercitario,
+              duracion: duracion,
+              sector: sector,
+              urlEjercitario : urlEjercitario,
+              nivel: nivel,
+              competencia: competencia['id'],
+              instruccionPrincipalEjercitario: instruccionPrincipalEjercitario,
+              instruccionesParticipantes: instruccionesParticipantes,
+              variaciones: variaciones,
+
+            });
+          }
+        });
 
   }
 
-  // private getParams() {
-    // const id = this.route.snapshot.paramMap.get('id');
-    // console.warn(id);
-  // }
-
-
   public onSubmit() {
     this.markTouchForm();
+    if (!this.archivo) return;
     if (this.form.valid) {
+      this.display = false;
       this.loader = true;
       this.msg = [];
-      let data = this.form.value;
-      let sub = this.usuarioService.editarPerfil(data).subscribe(
-        (res: any) => {
-          console.log("res", res);
-          this.authService.user = {
-            ...this.authService.user,
-            ...res,
-          }
-          this.msg = [
-            {
-              severity: "success",
-              detail: "Perfil actualizado correctamente",
+      const id = this.id;
+      const data = { id, ...this.form.value };
+      console.warn(data);
+      this.isLoading = true;
+      if (this.id && this.id != 0) {
+        let sub = this.ejercitarioService.editarEjercitario(data)
+          .subscribe(response => {
+            console.log(response);
+            this.isLoading = false;
+            Swal.fire({
+              icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
+            });
+           // this.router.navigate(['dashboard/simuladores', this.id]);
+          });
+        this._subscriptions.push(sub); 
+       
+      } else {
+        let sub = this.ejercitarioService.registroEjercitario({ file: this.archivo, ...this.form.value })
+          .subscribe({
+            next: (response) => {
+              const res = JSON.parse(JSON.stringify(response));
+              const loaded = res['loaded'];
+              const total = res['total'];
+              if (this.porcentaje >= 100) {
+                this.porcentaje = 100
+                Swal.fire({
+                  icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
+                });
+                // this.router.navigate(['dashboard/simuladores']);
+              } else {
+                this.porcentaje = Number(((loaded / total) * 100).toFixed(1));
+                console.warn(loaded, total, (loaded / total) * 100);
+              }
             },
-          ];
-          this.loader = false;
-        },
-        (error) => {
-          this.msg = [
-            {
-              severity: "error",
-              detail:
-                "Error al actualizar el perfil intente de nuevo mas tarde",
+            error: (e) => {
+              this.isLoading = false;
+              console.error(e);
             },
-          ];
-          console.log("error", error);
-          this.loader = false;
-        }
-      );
+            complete: () => {
+              this.isLoading = false;
+              this.archivo = null;
+            },
+          })
+      }
 
-      this._subscriptions.push(sub);
     }
   }
 
