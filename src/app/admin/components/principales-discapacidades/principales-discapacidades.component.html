@@ -1,100 +1,48 @@
-<p-table
-  [value]="discapacidad"
-  styleClass="p-datatable-customers"
-  [rows]="10"
-  [paginator]="true"
-  [filterDelay]="0"
->
+<p-table [value]="discapacidad" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
   <ng-template pTemplate="caption">
-    <div
-      class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
-    >
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
       Principales Discapacidades
-      <p-dialog
-        class="dialogo"
-        header="Agregar Nueva Discapacidad"
-        [(visible)]="display"
-        modal="modal"
-        [closable]="false"
-        [style]="{ width: '400px' }"
-      >
+      <p-dialog class="dialogo" header="Agregar Nueva Discapacidad" [(visible)]="display" modal="modal"
+        [closable]="false" [style]="{ width: '400px' }">
         <form class="form" [formGroup]="form" (ngSubmit)="approved()">
           <div class="form-group">
             <div style="line-height: 1.5">
               <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                <input
-                  type="text"
-                  pInputText
-                  placeholder="titulo"
-                  class="form-control"
-                  name="tipoDiscapacidad"
-                  formControlName="tipoDiscapacidad"
-                  [class.is-invalid]="isInvalid('tipoDiscapacidad')"
-                  required
-                  style="width: 24rem; "
-                />  
+                <input type="text" pInputText placeholder="titulo" class="form-control" name="tipoDiscapacidad"
+                  formControlName="tipoDiscapacidad" [class.is-invalid]="isInvalid('tipoDiscapacidad')" required
+                  style="width: 24rem; " />
               </div>
               <span class="text-danger" *ngIf="isInvalid('tipoDiscapacidad')">
                 *El Titulo no puede quedar vacío
-                
+
               </span>
-              
-              <textarea
-                rows="5"
-                cols="30"
-                formControlName="descripcion"
-                [class.is-invalid]="isInvalid('descripcion')"
-                pInputTextarea
-                style="width: 25rem; "
-              ></textarea>
+
+              <textarea rows="5" cols="30" formControlName="descripcion" [class.is-invalid]="isInvalid('descripcion')"
+                pInputTextarea style="width: 25rem; "></textarea>
               <br>
-              <span class="text-danger" *ngIf="isInvalid('descripcion')"
-                  > * La descripcion no puede quedar vacío
-                </span>
-                <br>
+              <span class="text-danger" *ngIf="isInvalid('descripcion')"> * La descripcion no puede quedar vacío
+              </span>
+              <br>
             </div>
             <br>
             <p-footer>
-              <button
-                type="button"
-                pButton
-                icon="pi pi-check"
-                (click)="approved()"
-                label="Guardar"
-                class="p-button-text"
-                style="margin-left: 180px; "
-              ></button>
-              <button
-                type="button"
-                pButton
-                icon="pi pi-times"
-                (click)="display = false"
-                label="Cerrar"
-                class="p-button-text"
-              ></button>
+              <button type="button" pButton icon="pi pi-check" (click)="approved()" label="Guardar"
+                class="p-button-text" style="margin-left: 180px; "></button>
+              <button type="button" pButton icon="pi pi-times" (click)="display = false" label="Cerrar"
+                class="p-button-text"></button>
             </p-footer>
           </div>
         </form>
       </p-dialog>
 
-      <button
-        type="text"
-        (click)="display = true"
-        pButton
-        icon="pi pi-external-link"
-        label="Agregar Nueva Discapacidad"
-        style="width: auto"
-      ></button>
+      <button type="text" (click)="display = true" pButton icon="pi pi-external-link" label="Agregar Nueva Discapacidad"
+        style="width: auto"></button>
 
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
 
-        <input
-          pInputText
-          type="text"
-          (input)="dtc.filterGlobal($event.target.value, 'contains')"
-          placeholder="Global Search"
-        />
+        <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search" />
       </span>
     </div>
   </ng-template>
@@ -122,61 +70,26 @@
         <span class="p-column-title">{{ discapacidad.descripcion }}</span>
       </td>
       <td>
-       
-        <button
-          (click)="display1 = true"
-          (click)="loadData(discapacidad.id)"
-          pButton
-          pRipple
-          label="Editar Discapacidad"
-          class="p-button-raised p-button-success">
+
+        <button (click)="display1 = true" (click)="loadData(discapacidad.id)" pButton pRipple
+          label="Editar Discapacidad" class="p-button-raised p-button-success">
         </button>
-        
-        <p-dialog
-          header="Editar Discapacidad"
-          [(visible)]="display1"
-          modal1="modal"
-          data-toggle="modal"
-          [closable]="false"
-          [style]="{ width: '400px' }"
-        >
+
+        <p-dialog header="Editar Discapacidad" [(visible)]="display1" modal1="modal" data-toggle="modal"
+          [closable]="false" [style]="{ width: '400px' }">
           <div style="line-height: 1.5; margin-left: 13px;">
             <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-              <input
-                type="text"
-                pInputText
-                placeholder="Titulo"
-                [(ngModel)]="nombre11"
-                style="width: 24rem; "
-              />
+              <input type="text" pInputText placeholder="Titulo" [(ngModel)]="nombre11" style="width: 24rem; " />
             </div>
-            <textarea
-              rows="5"
-              cols="30"
-              [(ngModel)]="descripcion11"
-              placeholder="Descripcion de la Discapacidad"
-              pInputTextarea
-              style="width: 25rem"
-            ></textarea>
+            <textarea rows="5" cols="30" [(ngModel)]="descripcion11" placeholder="Descripcion de la Discapacidad"
+              pInputTextarea style="width: 25rem"></textarea>
           </div>
           <p-footer>
-            <button
-              type="button"
-              pButton
-              icon="pi pi-check"
-              (click)="editarDiscapaciodas()"
-              label="Actualizar"
-              class="p-button-text"
-            ></button>
+            <button type="button" pButton icon="pi pi-check" (click)="editarDiscapaciodas()" label="Actualizar"
+              class="p-button-text"></button>
 
-            <button
-              type="button"
-              pButton
-              icon="pi pi-times"
-              (click)="display1 = false"
-              label="Cerrar"
-              class="p-button-text"
-            ></button>
+            <button type="button" pButton icon="pi pi-times" (click)="display1 = false" label="Cerrar"
+              class="p-button-text"></button>
           </p-footer>
         </p-dialog>
       </td>

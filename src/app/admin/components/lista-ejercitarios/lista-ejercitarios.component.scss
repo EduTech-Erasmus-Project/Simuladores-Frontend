@@ -1,0 +1,50 @@
+.enlace {
+    display:inline;
+    border:0;
+    padding:0;
+    margin:0;
+    text-decoration:underline;
+    background:none;
+    color:#000088;
+    font-family: arial, sans-serif;
+    font-size: 1em;
+    line-height:1em;
+  }
+  
+  .enlace:hover {
+    text-decoration:none;
+    color:#0000cc;
+    cursor:pointer;
+  }
+.caja {
+   margin:20px auto 40px auto;	
+   border:1px solid #d9d9d9;
+   height:30px;
+   overflow: hidden;
+   width: 230px;
+   position:relative;
+}
+select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 5px;
+   width: 250px;
+}
+select:focus{ outline: none;}
+
+.caja::after{
+	content:"\025be";
+	display:table-cell;
+	padding-top:7px;
+	text-align:center;
+	width:30px;
+	height:30px;
+	background-color:#d9d9d9;
+	position:absolute;
+	top:0;
+	right:0px;	
+	pointer-events: none;
+}
+  

@@ -43,7 +43,7 @@ export class PrincipalesDiscapacidadesComponent implements OnInit {
       console.log("Componente",  discapacidades);
       this.discapacidad = discapacidades;
       this.loadingDiscapacidades = false;
-      //this._subscriptions.push( discapacidades);
+      this._subscriptions.push(discapacidades);
     } catch (error) {
       console.log(error);
     }

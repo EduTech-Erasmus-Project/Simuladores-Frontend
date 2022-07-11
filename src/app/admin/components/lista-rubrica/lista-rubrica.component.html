@@ -1,0 +1,120 @@
+<p-table [value]="rubricas" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
+	<ng-template pTemplate="caption">
+		<h1>
+			<p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras"
+				icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left"
+				class=""></p-button>
+			Listar Rubrica
+		</h1>
+		<p-dialog class="dialogo" header="Agregar Rubrica" [(visible)]="display" modal="modal" [closable]="false"
+			[style]="{width: '400px'}">
+			<div class="p-field p-col-12 p-md-3">
+				<label for="state">Calificacion</label>
+
+				<div class="caja">
+					<select class="ng-tns-c82-110 ng-pristine ng-valid ng-touched" [(ngModel)]='calificacion'
+						[value]="calificacion">
+						<option value="0">0</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="75">75</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+
+				<textarea rows="5" cols="30" [(ngModel)]='indicador' placeholder="Indicador" pInputTextarea></textarea>
+
+			</div>
+
+			<p-footer>
+				<button type="button" pButton icon="pi pi-check" (click)="guardar()" label="Guardar"
+					class="p-button-text"></button>
+				<button type="button" pButton icon="pi pi-times"
+					(click)="display=false; rid=0; calificacion=0; indicador=''" label="Cerrar"
+					class="p-button-text"></button>
+				<!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
+
+
+			</p-footer>
+		</p-dialog>
+
+		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+			<p-dialog class="dialogo" [style]="{width: '400px'}">
+				<div style="line-height: 1.5">
+				</div>
+			</p-dialog>
+
+			<button (click)="display=true" pbutton="" pripple="" type="button" label="NuevaRubrica"
+				class="p-button-warning p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+				<span class="p-button-label">NuevaRubrica</span>
+				<span class="p-ink" style="height: 76px; width: 76px; top: -17px; left: -4.72919px;">
+				</span>
+			</button>
+
+
+
+			<span class="p-input-icon-left">
+				<i class="pi pi-search"></i>
+				<input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+					placeholder="Global Search" />
+			</span>
+		</div>
+	</ng-template>
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="calificacion">Calificacion
+				<p-sortIcon field="calificacion"></p-sortIcon>
+			</th>
+			<th pSortableColumn="indicador">Indicador
+				<p-sortIcon field="indicador"></p-sortIcon>
+			</th>
+
+			<th pSortableColumn="status">
+
+			</th>
+
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-rubrica>
+
+		<tr>
+			<td>
+				<span class="p-column-title">{{rubrica.calificacion}}</span>
+			</td>
+
+			<td>
+				<span class="p-column-title">{{rubrica.indicador}}</span>
+			</td>
+
+
+
+			<td>
+
+
+				<button
+					(click)="display=true; rid=rubrica.id; indicador=rubrica.indicador; calificacion=rubrica.calificacion"
+					pbutton="" pripple="" type="button" label="EditarRubrica"
+					class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
+					<span class="p-button-label">Editar</span>
+					<span class="p-ink" style="height: 76px; width: 76px; top: -17px; left: -4.72919px;">
+					</span>
+				</button>
+
+				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component"
+					(click)="eliminar(rubrica.id)">Eliminar</a>
+
+			</td>
+
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage">
+		<tr>
+			<td colspan="8">No customers found.</td>
+		</tr>
+	</ng-template>
+</p-table>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }"
+	[maximizable]="true" [draggable]="false" [resizable]="false">
+	<app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
+</p-dialog>

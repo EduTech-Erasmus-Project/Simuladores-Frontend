@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThirdPartyDraggable } from '@fullcalendar/interaction';
 import { Subscription } from 'rxjs';
+import { InformacionCount } from 'src/app/model/InformacionCount';
 import { InformacionService } from 'src/app/service/informacion.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class InformacionCountComponent implements OnInit
 {
   private _subscriptions: Subscription[] = [];
   public loadingInformacion = false;
-  public informacioncount : any;
+  public informacioncount : InformacionCount;
   public display = false;
 
 
@@ -22,17 +23,12 @@ export class InformacionCountComponent implements OnInit
     this.loadInformacion();
   }
 
-  private async loadInformacion(){
+  private loadInformacion(){
     this.loadingInformacion = true;
-  try {
-    const infoCount = await this.informacionService.obtenerInformacionCount().toPromise();
-    console.log("Componente",  infoCount);
-    this.informacioncount = infoCount;
-    this.loadingInformacion = false;
-    this._subscriptions.push( infoCount);
-  } catch (error) {
-    console.log(error);
-  }
+    this.informacionService.obtenerInformacionCount()
+    .subscribe(res=>{
+      this.informacioncount=res;
+    });
 }
 
 }
