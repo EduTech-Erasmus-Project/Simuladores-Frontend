@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { PreguntaService } from 'src/app/service/pregunta.service';
 import Swal from "sweetalert2";
 import * as moment from "moment";
+import { Pregunta } from 'src/app/core/interfaces/Pregunta';
 @Component({
   selector: 'app-lista-pregunta',
   templateUrl: './lista-pregunta.component.html',
@@ -17,10 +18,12 @@ export class ListaPreguntaComponent implements OnInit {
   public loadingPregunta = false;
   public pregunta: any;
   public loader = false;
+ 
 
   private _subscriptions: Subscription[] = [];
   public msg: Message[];
-  public id: number;
+  //public id: number;
+  public id: any;
   public displayMaximizable: boolean;
   public display = false;
   public usuario: any;
@@ -63,11 +66,13 @@ export class ListaPreguntaComponent implements OnInit {
       const id = this.id;
       const data = { id, ...this.form.value };
       console.warn(data);
-      if (this.id && this.id != 0) {      
+      if (this.id && this.id != 0) {
         let sub = this.preguntaService.registroPregunta({ ...this.form.value })
           .subscribe(response => {
             Swal.fire({
               icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
+
+
             });
             console.log(response)
           })
@@ -93,15 +98,36 @@ export class ListaPreguntaComponent implements OnInit {
     });
   }
 
-  eliminar(id:number ){
-    if(confirm('Esta seguro de eliminar')){
-      this.preguntaService.eliminarPregunta(id).subscribe((data) => {
-        console.warn(data);
-        this.preguntaService.obtenerListaPregunta(id);
+  // eliminarPregunta(id:number ){
+  //   if(confirm('Esta seguro de eliminar')){
+  //     this.preguntaService.eliminarPregunta(id).subscribe((data) => {
+  //       console.warn(data);
+  //       this.preguntaService.obtenerListaPregunta(id);
 
-      },(error) => {
-        console.log(error);
-      })
-    }
+  //     },(error) => {
+  //       console.log(error);
+  //     })
+  //   }
+  // }
+  eliminarPregunta(id: number) {
+    this.preguntaService.eliminarPregunta(id)
+      .subscribe(
+        respuesta => {
+          // this.preguntaService.obtenerListaPregunta(id);
+          if (respuesta) {
+            this.pregunta = this.pregunta.filter(ar => ar.id != id)
+            location.reload(); 
+
+            console.log(respuesta);
+
+          }
+          else {
+            delete this.pregunta[id];
+
+
+          }
+        }
+      )
+
   }
 }

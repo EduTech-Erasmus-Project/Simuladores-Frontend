@@ -37,8 +37,8 @@ export class CrearPreguntaComponent implements OnInit {
   private addQuestionGroup(): FormGroup {
     return this._fb.group({
       numeroPregunta: [],
-      contenido: [],
-      respuestaCorrecta: [],
+      contenido: ['', Validators.required],
+      respuestaCorrecta: ['', Validators.required],
       preguntaDelEjercitario: [],
 
     });
