@@ -18,7 +18,7 @@ export class ListaPreguntaComponent implements OnInit {
   public loadingPregunta = false;
   public pregunta: any;
   public loader = false;
- 
+
 
   private _subscriptions: Subscription[] = [];
   public msg: Message[];
@@ -115,8 +115,13 @@ export class ListaPreguntaComponent implements OnInit {
         respuesta => {
           // this.preguntaService.obtenerListaPregunta(id);
           if (respuesta) {
-            this.pregunta = this.pregunta.filter(ar => ar.id != id)
-            location.reload(); 
+            // this.pregunta = this.pregunta.filter(ar => ar.id != id);
+            this.preguntaService.obtenerListaPregunta(this.id)
+              .subscribe(res => {
+                this.pregunta = res;
+              });
+            // location.reload(); 
+
 
             console.log(respuesta);
 
