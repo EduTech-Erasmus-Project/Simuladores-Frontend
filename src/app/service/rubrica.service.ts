@@ -43,6 +43,12 @@ obtenerListaRubrica(id : number) {
   public get event() {
     return this.evt$;
   }
+ eliminarRubrica(id:Number) {
+    return this.http.delete(environment.WS_PATH + "eliminarRubrica/"+ id
+    );
+}
 
 }
+
+
 

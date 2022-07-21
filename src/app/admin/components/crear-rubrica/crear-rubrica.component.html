@@ -1,12 +1,11 @@
-<div class="control p-col-12 p-xl-12 p-md-12">
   <form class="example-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
     <h1>
 
-      <p-button routerLink="/dashboard/lista-pregunta/{{id}}" pbutton="" pripple="" label="Atras"
+      <p-button routerLink="/dashboard/lista-rubrica/{{id}}" pbutton="" pripple="" label="Atras"
         icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class="">
       </p-button>
-      Preguntas Ejercitario
+      Rubrica Ejercitario
     </h1>
 
     <div class="container">
@@ -15,7 +14,7 @@
           <div class="ng-tns-c121-609 p-panel p-component p-panel-toggleable" ng-reflect-ng-class="[object Object]"
             id="p-panel-6">
             <div class="p-panel-header ng-tns-c121-609 ng-star-inserted" id="p-panel-6-titlebar">
-              <span class="p-panel-title ng-tns-c121-609 ng-star-inserted" id="p-panel-6_header">Pregunta
+              <span class="p-panel-title ng-tns-c121-609 ng-star-inserted" id="p-panel-6_header">Rubrica
                 ejercitario</span>
               <div class="p-panel-icons ng-tns-c121-609">
               </div>
@@ -24,46 +23,37 @@
               id="p-panel-6-content" aria-hidden="false" aria-labelledby="p-panel-6-titlebar">
               <div class="p-panel-content ng-tns-c121-609">
 
-                <div class="address-container" *ngFor="let group of questionsArray.controls; let i = index;"
-                  formArrayName="questions">
+                <div class="address-container" *ngFor="let group of rubricaArray.controls; let i = index;"
+                  formArrayName="rubrica">
 
                   <div class="p-fluid" [formGroupName]='i'>
 
                     <div class="p-field">
-                      <span type="text" class="p-panel-title ng-tns-c121-609 ng-star-inserted"
+                      <!-- <span type="text" class="p-panel-title ng-tns-c121-609 ng-star-inserted"
                         id="numeroPregunta">Pregunta
-                        {{i+1}}</span>
+                        {{i+1}}</span> -->
 
 
                       <div class="p-field">
-                        <input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta"
-                          formControlName="contenido" class="p-inputtext p-component" #txtContenido>
-
-                        <span *ngIf="txtContenido.value.length <= 0" class="text-danger"> *El Contenido no puede quedar
-                          vacío
-                        </span>
-
+                        <input id="Rubrica" type="text" pinputtext="" placeholder="Rubrica"
+                          formControlName="calificacion" class="p-inputtext p-component">
 
                         <div class="card">
                           <div class="p-field p-col-12">
                             <div class="p-fluid p-formgrid p-grid">
 
-                              <textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
-                                class="p-inputtextarea p-inputtext p-component" formControlName="respuestaCorrecta" 
-                                #txtrespuestaCorrecta>
-                              </textarea>
+                              <textarea id="Indicador" type="text" rows="4" pinputtextarea="" placeholder="Indicador"
+                                class="p-inputtextarea p-inputtext p-component"
+                                formControlName="indicador"></textarea>
 
-                              <span  *ngIf="txtrespuestaCorrecta.value.length <=0" class="text-danger"> * La respuesta no
-                                puede quedar vacío
-                              </span>
-
-
+                              <p-button *ngIf="i>=0" icon="pi pi-trash" class="btn btn-danger float-end mb-3"
+                                label="EliminarRubrica" (click)="removeRubrica(i)" ng-reflect-label="EliminarRubrica"
+                                ng-reflect-icon="pi pi-trash"></p-button>
                             </div>
 
 
                           </div>
                         </div>
-
                       </div>
 
 
@@ -73,15 +63,11 @@
 
                   </div>
 
-                  <p-button *ngIf="i>=0" icon="pi pi-trash" class="btn btn-danger float-end mb-3"
-                    label="EliminarPregunta" (click)="removeQuestion(i)" ng-reflect-label="EliminarPregunta"
-                    ng-reflect-icon="pi pi-trash"></p-button>
+
                 </div>
                 <div class="p-field">
-
-
-                  <p-button (click)="addQuestion()" pbutton="" pripple="" label="AnadirPregunta"
-                    icon="pi pi-plus-circle" ng-reflect-label="AnadirPregunta" ng-reflect-icon="pi pi-plus-circle"
+                  <p-button (click)="addRubrica()" pbutton="" pripple="" label="AnadirRubrica"
+                    icon="pi pi-plus-circle" ng-reflect-label="AnadirRubrica" ng-reflect-icon="pi pi-plus-circle"
                     class=""></p-button>
 
 
@@ -103,5 +89,4 @@
 
       </div>
     </div>
-
   </form>

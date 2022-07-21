@@ -20,6 +20,7 @@ export class ListaCompetenciasComponent implements OnInit {
   private descripcion11: string;
   public competencia1: Competencia;
   private id: number;
+  
   public form = this.fb.group({
     titulo: ['', Validators.required],
     descripcion: ['', Validators.required],

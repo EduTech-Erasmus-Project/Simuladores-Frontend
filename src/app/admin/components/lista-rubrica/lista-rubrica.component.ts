@@ -24,8 +24,7 @@ export class ListaRubricaComponent implements OnInit {
   // public rubrica: any;
   public usuario: any;
 
-  public calificacion: number = 0;
-  public indicador: string = "";
+
 
   public displayMaximizable: boolean;
   public display = false;
@@ -46,6 +45,7 @@ export class ListaRubricaComponent implements OnInit {
 
   }
   ngOnInit(): void {
+
 
     this.loadRubrica();
     this.rubricaService.event.subscribe(result => { console.log("hola", result); this.loadRubrica() })
@@ -74,46 +74,74 @@ export class ListaRubricaComponent implements OnInit {
   }
 
   public async guardar() {
-
+    if (this.form.invalid) {
+      return Object.values(this.form.controls).forEach(control => {
+        if (control instanceof FormGroup)
+          Object.values(control.controls).forEach(ctrl => ctrl.markAsTouched());
+        else
+          control.markAsTouched();
+      });
+    }
     let data: any = {
-      calificacion: this.calificacion,
-      indicador: this.indicador,
+      calificacion: this.form.controls.calificacion.value,
+      indicador: this.form.controls.indicador.value,
       ejercitario_id: this.id
     }
-    // console.log(this.rid, data);
+    console.log(this.rid, data);
     if (this.rid != 0) {
       data = { id: this.rid, ...data }
       console.warn(1, data);
-        this.rubricaService.editarRubrica(data)
-          .subscribe(res => {
-            this.rubricaService.emitEvent(true);
-            this.display = false;
-            this.rid = 0;
-            this.calificacion = 0;
-            this.indicador = "";
-            Swal.fire({
-              icon: 'success', title: 'Se edito correctamente', showConfirmButton: true,
-            });
-            this.router.navigate(['dashboard/lista-rubrica', this.rid]);
+      this.rubricaService.editarRubrica(data)
+        .subscribe(res => {
+          this.rubricaService.emitEvent(true);
+          this.display = false;
+          this.rid = 0;
+          this.form.reset();
+          Swal.fire({
+            icon: 'success', title: 'Se edito correctamente', showConfirmButton: true,
           });
+          this.router.navigate(['dashboard/lista-rubrica', this.rid]);
+        });
     } else {
       console.warn(2, data);
-        this.rubricaService.registroRubrica(data).subscribe
-          (result => {
-            this.rubricaService.emitEvent(true);
-            this.display = false;
-            this.calificacion = 0;
-            this.indicador = "";
-            Swal.fire({
-              icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
-            });
-   
-          }, error => {
-            console.log(error);
-            Swal.showValidationMessage(`Request failed: Error inesperado`)
-          })
+      this.rubricaService.registroRubrica(data).subscribe
+        (result => {
+          this.rubricaService.emitEvent(true);
+          this.display = false;
+          this.form.reset();
+          Swal.fire({
+            icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
+          });
+
+        }, error => {
+          console.log(error);
+          Swal.showValidationMessage(`Request failed: Error inesperado`)
+        })
 
     }
+  }
+  public isInvalid(input: string) {
+    return this.form.get(input).invalid && this.form.get(input).touched;
+  }
+  eliminarRubrica(id: number) {
+    this.rubricaService.eliminarRubrica(id)
+      .subscribe(
+        respuesta => {
+          if (respuesta) {
+            this.rubricas = this.rubricas.filter(ar => ar.id != id)
+
+
+            console.log(respuesta);
+
+          }
+          else {
+            delete this.rubrica[id];
+
+
+          }
+        }
+      )
+
   }
 }
 

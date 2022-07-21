@@ -6,36 +6,48 @@
 				class=""></p-button>
 			Listar Rubrica
 		</h1>
-		<p-dialog class="dialogo" header="Agregar Rubrica" [(visible)]="display" modal="modal" [closable]="false"
+		<p-dialog class="dialogo" header="Rubrica" [(visible)]="display" modal="modal" [closable]="false"
 			[style]="{width: '400px'}">
-			<div class="p-field p-col-12 p-md-3">
-				<label for="state">Calificacion</label>
+			<form class="form" [formGroup]="form" (ngSubmit)="guardar()">
+				<div class="form-group">
+					<div class="p-field p-col-12 p-md-3">
+						<label for="state">Calificacion</label>
 
-				<div class="caja">
-					<select class="ng-tns-c82-110 ng-pristine ng-valid ng-touched" [(ngModel)]='calificacion'
-						[value]="calificacion">
-						<option value="0">0</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="75">75</option>
-						<option value="100">100</option>
-					</select>
+						<div class="caja">
+							<select class="styled-select" formControlName="calificacion">
+								<option value="0">0</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="75">75</option>
+								<option value="100">100</option>
+							</select>
+							<span class="text-danger" *ngIf="isInvalid('calificacion')"> * La descripcion no puede
+								quedar
+								vacío
+							</span>
+						</div>
+
+						<textarea rows="5" cols="30" placeholder="Indicador" formControlName="indicador"
+							[class.is-invalid]="isInvalid('indicador')" pInputTextarea></textarea>
+						<span class="text-danger" *ngIf="isInvalid('indicador')"> * Llenar campos vacios
+						</span>
+
+					</div>
+
+					<div>
+						<p-footer>
+							<button type="button" pButton icon="pi pi-check" (click)="guardar()" label="Guardar"
+								class="p-button-text"></button>
+							<button type="button" pButton icon="pi pi-times"
+								(click)="display=false; rid=0; calificacion=0; indicador=''" label="Cerrar"
+								class="p-button-text"></button>
+							<!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
+
+
+						</p-footer>
+					</div>
 				</div>
-
-				<textarea rows="5" cols="30" [(ngModel)]='indicador' placeholder="Indicador" pInputTextarea></textarea>
-
-			</div>
-
-			<p-footer>
-				<button type="button" pButton icon="pi pi-check" (click)="guardar()" label="Guardar"
-					class="p-button-text"></button>
-				<button type="button" pButton icon="pi pi-times"
-					(click)="display=false; rid=0; calificacion=0; indicador=''" label="Cerrar"
-					class="p-button-text"></button>
-				<!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
-
-
-			</p-footer>
+			</form>
 		</p-dialog>
 
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
@@ -102,7 +114,7 @@
 				</button>
 
 				<a class="p-button-info p-mr-2 p-mb-2 p-ripple p-button p-component"
-					(click)="eliminar(rubrica.id)">Eliminar</a>
+					(click)="eliminarRubrica(rubrica.id)">Eliminar</a>
 
 			</td>
 

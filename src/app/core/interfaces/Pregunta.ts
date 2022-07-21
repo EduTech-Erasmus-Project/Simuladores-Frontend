@@ -1,4 +1,5 @@
 export interface Pregunta {
+  id?: number;
   respuesta?: Respuesta;
   respuesta_correcta?: RespuestaCorrecta;
 }
