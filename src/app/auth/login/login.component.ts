@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       Swal.fire({
         allowOutsideClick: false,
         icon: "info",
-        text: this.msj,
+        text: "Iniciando sesión.",
       });
       Swal.showLoading();
 
