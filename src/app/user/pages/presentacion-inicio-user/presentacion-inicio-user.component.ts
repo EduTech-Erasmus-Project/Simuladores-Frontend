@@ -27,6 +27,7 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   public displayMaximizable: boolean = false;
   //public usuario:User;
   public evaluador: Evaluador;
+  private nivelIdx: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -52,6 +53,7 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
       this.competenciaService.obtenerCompetencias(),
     ]).subscribe(
       (data) => {
+        //console.log(data);
         this.competencias = data[0];
         this.competencia = this.competencias[0];
         this.listarProgreso(this.competencia.niveles[0].ejercitarios[0].id);
@@ -117,8 +119,19 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
 
   onChangePanel(event) {
     //console.log(event);
+    this.actividades = [];
+    this.nivelIdx = event.index;
     this.listarProgreso(
-      this.competencia.niveles[event.index].ejercitarios[0].id
+      Number(this.competencia?.niveles[event.index]?.ejercitarios[0]?.id)
     );
   }
+
+  onChangeCompetencia(event) {
+    //console.log(event);
+    this.actividades = [];
+    this.listarProgreso(
+      Number(this.competencia?.niveles[this.nivelIdx]?.ejercitarios[0]?.id)
+    );
+  }
+
 }
