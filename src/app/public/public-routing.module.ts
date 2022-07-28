@@ -48,44 +48,44 @@ const routes: Routes = [
           breadcrumb: "Registro",
         },
       },
-      {
-        path: "restart-password",
-        loadChildren: () =>
-          import("../auth/recover-password/recover-password.module").then(
-            (m) => m.RecoverPasswordModule
-          ),
-        data: {
-          breadcrumb: "Reestablecer contraseña",
-        },
-      },
-      {
-        path: "password-resed/:uidb64/:token",
-        loadChildren: () =>
-          import("../auth/password-resed/password-resed.module").then(
-            (m) => m.PasswordResedModule
-          ),
-        data: {
-          breadcrumb: "Reestablecer contraseña",
-        },
-      },
-      {
-        path: "reset/:?",
-        loadChildren: () =>
-          import("../auth/reset/reset.module").then((m) => m.ResetModule),
-        data: {
-          breadcrumb: "Contraseña reestablecida",
-        },
-      },
-      {
-        path: "emailMessage",
-        loadChildren: () =>
-          import("../auth/emailMessage/email-message.module").then(
-            (m) => m.EmailMessageModule
-          ),
-        data: {
-          breadcrumb: "Enlace enviado",
-        },
-      },
+      // {
+      //   path: "restart-password",
+      //   loadChildren: () =>
+      //     import("../auth/recover-password/recover-password.module").then(
+      //       (m) => m.RecoverPasswordModule
+      //     ),
+      //   data: {
+      //     breadcrumb: "Reestablecer contraseña",
+      //   },
+      // },
+      // {
+      //   path: "password-resed/:uidb64/:token",
+      //   loadChildren: () =>
+      //     import("../auth/password-resed/password-resed.module").then(
+      //       (m) => m.PasswordResedModule
+      //     ),
+      //   data: {
+      //     breadcrumb: "Reestablecer contraseña",
+      //   },
+      // },
+      // {
+      //   path: "reset/:?",
+      //   loadChildren: () =>
+      //     import("../auth/reset/reset.module").then((m) => m.ResetModule),
+      //   data: {
+      //     breadcrumb: "Contraseña reestablecida",
+      //   },
+      // },
+      // {
+      //   path: "emailMessage",
+      //   loadChildren: () =>
+      //     import("../auth/emailMessage/email-message.module").then(
+      //       (m) => m.EmailMessageModule
+      //     ),
+      //   data: {
+      //     breadcrumb: "Enlace enviado",
+      //   },
+      // },
       {
         path: "information",
         loadChildren: () =>
