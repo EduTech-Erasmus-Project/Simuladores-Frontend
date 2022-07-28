@@ -1,37 +1,71 @@
-<div class="control p-col-12 p-xl-12 p-md-12">
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-	<h1>
+<div class="card">
+	<h3>
+		<p-button routerLink="/dashboard/lista-pregunta/{{eid}}" pbutton="" pripple="" label="Atras"
+			icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left"
+			class=""></p-button>
+		Editar Pregunta
+	</h3>
+	<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="p-fluid">
+			<div class="p-grid">
+				<div class="p-col-12 p-md-12">
+					<p>Pregunta *</p>
+					<input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta" formControlName="contenido"
+						class="p-inputtext p-component" #txtContenido>
+					<span *ngIf="txtContenido.value.length <= 0" class="text-danger"> *El Contenido no puede
+						quedar
+						vacío
+					</span>
+				</div>
 
-		<p-button routerLink="/dashboard/lista-pregunta/{{eid}}" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left"
-		  ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
-	Editar Pregunta	
-	  </h1>
-	<div class="container">
-		<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-        <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453">
-         
-	  <div class="card">
-		<div class="p-field p-col-12">
-			<div class="p-fluid p-formgrid p-grid">
+				<div class="p-col-12 p-md-12">
+					<p>Respuesta *</p>
+					<textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
+						class="p-inputtextarea p-inputtext p-component" formControlName="respuestaCorrecta"
+						#txtrespuestaCorrecta>
+				  </textarea>
 
-				<input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta" formControlName="pregunta"
-					class="p-inputtext p-component">
+					<span *ngIf="txtrespuestaCorrecta.value.length <=0" class="text-danger"> * La respuesta
+						no
+						puede quedar vacío
+					</span>
+				</div>
+				<div class="p-col-12 p-md-12">
+					<p-button type="submit" pbutton pripple label="Guardar" icon="pi pi-save"
+						ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save" class=""></p-button>
+				</div>
 			</div>
-
 		</div>
-		<div class="p-field p-col-12">
-			<div class="p-fluid p-formgrid p-grid">
+		<!-- <div class="container">
+			<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
+				<div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453">
 
-				<textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
-					class="p-inputtextarea p-inputtext p-component" formControlName="respuesta"></textarea>
+					<div class="card">
+						<div class="p-field p-col-12">
+							<div class="p-fluid p-formgrid p-grid">
 
+								<input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta"
+									formControlName="pregunta" class="p-inputtext p-component">
+							</div>
+
+						</div>
+						<div class="p-field p-col-12">
+							<div class="p-fluid p-formgrid p-grid">
+
+								<textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
+									class="p-inputtextarea p-inputtext p-component"
+									formControlName="respuesta"></textarea>
+
+							</div>
+
+
+						</div>
+						<p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save"
+							ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save" class=""></p-button>
+					</div>
+				</div>
 			</div>
+		</div> -->
 
-
-		</div>
-		<p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
-			ng-reflect-icon="pi pi-save" class=""></p-button>
-	</div>
-	</div>
-		</div></div>
-</form>
+	</form>
+</div>

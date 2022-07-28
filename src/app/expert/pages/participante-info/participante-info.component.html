@@ -2,29 +2,32 @@
     <div class="p-col-12 p-xl-12 p-md-12">
         <div class="p-grid card">
             <div class="p-col-12">
-                <h5>Competencia - {{competencia?.titulo}}</h5>
+                <h5>Competencia - {{ competencia?.titulo }}</h5>
             </div>
             <div class="p-col-2">
-                <p-dropdown [options]="niveles" (onChange)="onChangeNivel()" [(ngModel)]="nivel" optionLabel="name" optionValue="value"></p-dropdown>
+                <p-dropdown [options]="niveles" (onChange)="onChangeNivel()" [(ngModel)]="nivel" optionLabel="name"
+                    optionValue="value"></p-dropdown>
             </div>
             <div class="p-col-3">
-                <p-dropdown [options]="ejercitarios" (onChange)="onChangeEjercitario()" [(ngModel)]="ejercitario" optionLabel="nombreDeEjercitario" optionValue="id"></p-dropdown>
+                <p-dropdown [options]="ejercitarios" (onChange)="onChangeEjercitario()" [(ngModel)]="ejercitario"
+                    optionLabel="nombreDeEjercitario" optionValue="id"></p-dropdown>
             </div>
-            <div class="p-col-3" style="display: flex; justify-content: flex-end;">
+            <div class="p-col-3" style="display: flex; justify-content: flex-end">
                 <p-button (click)="showModal()" label="Información del participante" icon="pi pi-info-circle">
                 </p-button>
             </div>
-            <div class="p-col-4" style="display: flex; justify-content: flex-end;">
+            <div class="p-col-2" style="display: flex; justify-content: flex-end">
                 <!-- [loading]="loading[0]" (onClick)="load(0)" -->
-                <p-button [disabled]="download" (click)="imprimirReporte()" label="Imprimir reporte" icon="pi pi-file-pdf"></p-button>
+                <p-button [disabled]="download" (click)="imprimirReporte()" label="Imprimir reporte"
+                    icon="pi pi-file-pdf"></p-button>
             </div>
             <!-- [loading]="loading[0]" (onClick)="load(0)" -->
-                <!-- <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button> -->
+            <!-- <p-button label="Imprimir certificado" icon="pi pi-file-pdf"></p-button>  -->
 
-            <!-- <div class="p-col-2" style="display: flex; justify-content: flex-end;">
-                <p-splitButton label="Certificado" [model]="items"
+            <div class="p-col-2" style="display: flex; justify-content: flex-end">
+                <p-splitButton  label="Certificado" [model]="items"
                     styleClass="p-button-raised p-button-plain p-button-text"></p-splitButton>
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -62,22 +65,22 @@
 
     <div class="p-col-12 p-xl-6 p-md-12">
         <div class="p-grid p-dir-col p-nogutter">
-            <div class="p-col-12">
-
-            </div>
+            <div class="p-col-12"></div>
         </div>
     </div>
 
     <div class="p-col-12 p-lg-12">
         <div class="card orders-table" style="min-height: 33vh">
             <ng-container *ngIf="competencia; else elseTableTemplate">
-                <p-table #dt1 [value]="actividades" dataKey="idActividad" [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" styleClass="p-datatable-gridlines" [paginator]="true" currentPageReportTemplate="Mostrar {first} hasta {last} de
+                <p-table #dt1 [value]="actividades" dataKey="idActividad" [rows]="5" [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" styleClass="p-datatable-gridlines"
+                    [paginator]="true" currentPageReportTemplate="Mostrar {first} hasta {last} de
           {totalRecords}
           registros" [globalFilterFields]="[
-          'calificacionActividad',
-          'numeroTotalDePreguntasDelEjercitario',
-          'fechaDeActividad',
-          'totalRespuestasCorrectasIngresadasParticipante'
+            'calificacionActividad',
+            'numeroTotalDePreguntasDelEjercitario',
+            'fechaDeActividad',
+            'totalRespuestasCorrectasIngresadasParticipante'
           ]">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex">
@@ -95,58 +98,52 @@
                             <th>
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     N° de intento
-
                                 </div>
                             </th>
                             <th pSortableColumn="numeroTotalDeRespuestasContestadasPorElParticipante">
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Preguntas Contestadas
-
                                 </div>
                             </th>
 
                             <th pSortableColumn="totalRespuestasCorrectasIngresadasParticipante">
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Respuestas Correctas
-
                                 </div>
                             </th>
                             <th pSortableColumn="fechaDeActividad">
-                                <div class="p-d-flex p-jc-between p-ai-center">
-                                    Fecha
-                                </div>
+                                <div class="p-d-flex p-jc-between p-ai-center">Fecha</div>
                             </th>
 
                             <th pSortableColumn="tiempoTotalResolucionEjercitario">
                                 <div class="p-d-flex p-jc-between p-ai-center">
                                     Tiempo de Resolución
-
                                 </div>
                             </th>
                             <th pSortableColumn="calificacionActividad">
-                                <div class="p-d-flex p-jc-between p-ai-center">
-                                    Nota
-                                </div>
+                                <div class="p-d-flex p-jc-between p-ai-center">Nota</div>
                             </th>
-                            <th>
-
-                            </th>
+                            <th></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-actividad let-rowIndex="rowIndex">
                         <tr>
                             <td>
-                                {{ actividades.length-rowIndex}}
+                                {{ actividades.length - rowIndex }}
                             </td>
                             <td>
                                 <span class="image-text">
-                                    {{actividad.preguntasContestadas}}/{{actividad.totalPreguntas}}
+                                    {{ actividad.preguntasContestadas }}/{{
+                                    actividad.totalPreguntas
+                                    }}
                                 </span>
                             </td>
 
                             <td>
                                 <span class="image-text">
-                                    {{actividad.preguntasCorrectas}}/{{actividad.totalPreguntas}}
+                                    {{ actividad.preguntasCorrectas }}/{{
+                                    actividad.totalPreguntas
+                                    }}
                                 </span>
                             </td>
                             <td>
@@ -154,9 +151,7 @@
                             </td>
 
                             <td>
-                                <span>
-                                    {{actividad.tiempoTotal}} min.
-                                </span>
+                                <span> {{ actividad.tiempoTotal }} min. </span>
                             </td>
 
                             <td>
@@ -167,17 +162,20 @@
                             <td style="text-align: center">
                                 <!-- <button (click)="showModalComentarios(actividad.id)" pButton type="button" class="p-button-primary" icon="pi pi-comments"></button>
                                 <button (click)="modalPreguntas= true" pButton type="button" class="p-button-primary" style="margin-left: 1em;" icon="pi pi-check-circle"></button> -->
-                                <a [routerLink]="[ '/expert/actividad', actividad.id ]" pButton type="button" title="Resumen de la actividad" class="p-button-primary" style="margin-left: 1em" icon="pi pi-bookmark"></a>
+                                <a [routerLink]="['/expert/actividad', actividad.id]" pButton type="button"
+                                    title="Resumen de la actividad" class="p-button-primary" style="margin-left: 1em"
+                                    icon="pi pi-bookmark"></a>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
-                            <td colspan="7">No se encontro actividades en este ejercitario.</td>
+                            <td colspan="7">
+                                No se encontro actividades en este ejercitario.
+                            </td>
                         </tr>
                     </ng-template>
                 </p-table>
-
             </ng-container>
             <ng-template #elseTableTemplate>
                 <p>Seleccione un ejercitario par aver la información</p>
@@ -186,9 +184,10 @@
     </div>
 </div>
 
-
-<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
-    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario.usuario" [discapacidadesData]="usuario.DiscapacidadParticipante"></app-perfil>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }"
+    [maximizable]="true" [draggable]="false" [resizable]="false">
+    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario.usuario"
+        [discapacidadesData]="usuario.DiscapacidadParticipante"></app-perfil>
 </p-dialog>
 
 <!-- <p-dialog header="Comentarios" [(visible)]="modalComentarios" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [draggable]="false" [resizable]="false">

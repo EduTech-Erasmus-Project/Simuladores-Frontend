@@ -69,7 +69,7 @@ export class EditarRubricaComponent implements OnInit {
       if (this.idRubrica && this.idRubrica != 0) {
         let sub = this.rubricaService.editarRubrica(data)
           .subscribe(response => {
-            console.log(response);
+            //console.log(response);
             Swal.fire({
               icon: 'success', title: 'Se actualizo correctamente', showConfirmButton: true,
             });

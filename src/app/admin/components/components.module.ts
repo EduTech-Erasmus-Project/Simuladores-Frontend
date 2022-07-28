@@ -13,13 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CrearPreguntaComponent } from './crear-pregunta/crear-pregunta.component';
 import { ListaPreguntaComponent } from './lista-pregunta/lista-pregunta.component';
 import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
-
-
 import { ListaRubricaComponent } from './lista-rubrica/lista-rubrica.component';
-
-
-
-
 
 @NgModule({
   declarations: [

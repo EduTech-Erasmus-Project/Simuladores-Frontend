@@ -73,7 +73,7 @@ export class CrearRubricaComponent implements OnInit {
             .pipe(delay(500))
             .subscribe({
               next: response => {
-                console.log(response);
+                //console.log(response);
               },
               error: e => console.error(e),
               complete: () => {

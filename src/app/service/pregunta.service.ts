@@ -17,13 +17,13 @@ export class PreguntaService {
   constructor(private http: HttpClient) { }
 
   registroPregunta(data: any) {
-    let formData = new FormData();
-    formData.append("numeroPregunta", data.numeroPregunta);
-    formData.append("id", data.preguntaDelEjercitario);
-    formData.append("contenido", data.contenido);
-    formData.append("respuestaCorrecta", data.respuestaCorrecta);
+    // let formData = new FormData();
+    // formData.append("numeroPregunta", data.numeroPregunta);
+    // formData.append("id", data.preguntaDelEjercitario);
+    // formData.append("contenido", data.contenido);
+    // formData.append("respuestaCorrecta", data.respuestaCorrecta);
 
-    return this.http.post(environment.WS_PATH + "registroPregunta/", formData,
+    return this.http.post(environment.WS_PATH + "registroPregunta/", data,
       // {
       //   reportProgress: true,
       //   observe: "events",

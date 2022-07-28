@@ -37,9 +37,9 @@ export class EjercitarioService {
     );
   }
 
-  editarEjercitario(ejercitario: Ejercitario) {
+  editarEjercitario(ejercitario: Ejercitario, id:number) {
     return this.http.put(
-      environment.WS_PATH + "editarEjercitario/",
+      environment.WS_PATH + "editarEjercitario/"+ id,
       ejercitario
     );
   }
