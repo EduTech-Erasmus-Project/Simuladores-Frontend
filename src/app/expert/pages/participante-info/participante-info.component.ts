@@ -11,6 +11,9 @@ import { UsuarioService } from "src/app/service/usuario.service";
 import { Competencia } from "src/app/core/interfaces/Competencia";
 import pdfMake from "pdfmake/build/pdfmake";
 import { ReportePdf } from "src/app/core/models/Reporte";
+import { environment } from "src/environments/environment";
+import { Subscription } from "rxjs";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-participante-info",
@@ -28,9 +31,10 @@ export class ParticipanteInfoComponent implements OnInit {
   public loading: boolean = true;
   public actividades: Actividad[];
   public competencia: Competencia;
-  public usuario:any;
+  public usuario: any;
+  private _subscriptions: Subscription[] = [];
 
-  public idActividad : number;
+  public idActividad: number;
   public displayMaximizable: boolean = false;
 
   public charLineNotaData = {};
@@ -73,11 +77,9 @@ export class ParticipanteInfoComponent implements OnInit {
     private messageService: MessageService,
     private actividadService: ActividadService,
     private competenciaService: CompetenciaService,
-    private router: Router, 
+    private router: Router,
     private usuarioService: UsuarioService
   ) {
-    //console.log(this._Activatedroute.snapshot.params);
-
     if (
       isNaN(+this._Activatedroute.snapshot.params?.idCompetencia) ||
       isNaN(+this._Activatedroute.snapshot.params?.idEstudiante)
@@ -86,9 +88,6 @@ export class ParticipanteInfoComponent implements OnInit {
     }
     this.idCompetencia = +this._Activatedroute.snapshot.params.idCompetencia;
     this.idParticipante = +this._Activatedroute.snapshot.params.idEstudiante;
-
-    //console.log(this.idCompetencia);
-    //console.log(this.idParticipante);
   }
 
   ngOnInit(): void {
@@ -104,22 +103,41 @@ export class ParticipanteInfoComponent implements OnInit {
         label: "Enviar por email",
         icon: "pi pi-envelope",
         command: () => {
-          this.downloadCert();
+          this.sendCert();
         },
       },
     ];
     this.loadData();
   }
 
-  async downloadCert(){
-    //console.log()this.download = true;
-   try {
-     let certificado = await this.usuarioService.downloadCertificado(this.idCompetencia, this.idParticipante).toPromise();
-     //console.log(certificado);
-   } catch (error) {
+  private async sendCert() {
+    try {
+      let cert: any = await this.usuarioService
+        .sendCertificado(this.idCompetencia, this.idParticipante)
+        .toPromise();
+      //console.log(cert);
+      Swal.fire({ icon: 'success', title: 'Enviado ', text: 'Se ha enviado un email con el certificado al estudiante.', showConfirmButton: true, })
+    } catch (error) {
       console.log(error);
-   }
+      Swal.fire({ icon: 'error', title: 'Error', text: error.message, showConfirmButton: true, })
+    }
+  }
 
+  private async downloadCert() {
+    try {
+      let cert: any = await this.usuarioService
+        .downloadCertificado(this.idCompetencia, this.idParticipante)
+        .toPromise();
+      //console.log(cert);
+      var pom = document.createElement("a");
+      pom.setAttribute("href", environment.HOST + cert.certificado);
+      pom.draggable = true;
+      pom.classList.add("dragout");
+      pom.setAttribute("target", "_blank");
+      pom.click();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private async loadData() {
@@ -128,7 +146,9 @@ export class ParticipanteInfoComponent implements OnInit {
     let compSub = await this.competenciaService
       .obtenerCompetencia(this.idCompetencia)
       .subscribe((res) => {
-        
+
+        //console.log(res);
+
         this.competencia = res;
         this.niveles = this.competencia.niveles;
         this.ejercitario = this.competencia.niveles[0].ejercitarios[0].id;
@@ -136,13 +156,14 @@ export class ParticipanteInfoComponent implements OnInit {
         this.onChangeEjercitario();
         this.loading = false;
       });
+    this._subscriptions.push(compSub);
   }
 
   private loadGrafica() {
     this.charLineNotaData = {
-      labels: this.actividades.map((act) =>
-        moment(act.fecha).format("DD/MM/YYYY")
-      ).reverse(),
+      labels: this.actividades
+        .map((act) => moment(act.fecha).format("DD/MM/YYYY"))
+        .reverse(),
       datasets: [
         {
           label: "Nota",
@@ -155,9 +176,9 @@ export class ParticipanteInfoComponent implements OnInit {
       ],
     };
     this.charLineTiempoaData = {
-      labels: this.actividades.map((act) =>
-        moment(act.fecha).format("DD/MM/YYYY")
-      ).reverse(),
+      labels: this.actividades
+        .map((act) => moment(act.fecha).format("DD/MM/YYYY"))
+        .reverse(),
       datasets: [
         {
           label: "Tiempo",
@@ -179,7 +200,9 @@ export class ParticipanteInfoComponent implements OnInit {
       //console.log("reporte", reporteData);
       let reporte = new ReportePdf(reporteData);
       this.download = true;
-      await pdfMake.createPdf(reporte.docDefinition()).download(moment().format('YYYY-MM-DD'));
+      await pdfMake
+        .createPdf(reporte.docDefinition())
+        .download(moment().format("YYYY-MM-DD"));
       this.download = false;
     } catch (error) {
       console.log(error);
@@ -210,7 +233,7 @@ export class ParticipanteInfoComponent implements OnInit {
         )
         .toPromise();
 
-        //console.log("res", actividades);
+      //console.log("res", actividades);
       this.actividades = actividades;
       this.loadGrafica();
     } catch (error) {

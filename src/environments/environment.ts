@@ -7,7 +7,7 @@ export const environment = {
   //WS_PATH: "http://192.168.100.184:8080/api/",
   WS_PATH: "http://localhost:8000/api/",
   key: "mySecretKey",
-  HOST: "http://localhost:4200"
+  HOST: "http://localhost:8000"
 };
 
 /*

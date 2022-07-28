@@ -92,7 +92,7 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   }
 
   async listarProgreso(idEjercitario: number) {
-    console.log(idEjercitario);
+    //console.log(idEjercitario);
     try {
       let actividades = await this.actividadService
         .getParticipanteActividades(idEjercitario)

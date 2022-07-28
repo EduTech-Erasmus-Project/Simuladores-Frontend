@@ -122,4 +122,8 @@ export class UsuarioService {
     //console.log(idCompetencia, idParticipante);
     return this.http.get(environment.WS_PATH + "descargarCertificado/" + idCompetencia + "/" + idParticipante);
   }
+
+  sendCertificado(idCompetencia, idParticipante){
+    return this.http.get(environment.WS_PATH + "enviarCertificado/" + idCompetencia + "/" + idParticipante);
+  }
 }

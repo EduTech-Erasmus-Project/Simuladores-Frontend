@@ -21,14 +21,14 @@
 	</ng-template>
 	<ng-template pTemplate="header">
 		<tr>
-			<th pSortableColumn="name">Nombre
-				<p-sortIcon field="name"></p-sortIcon>
+			<th pSortableColumn="nombreDeEjercitario">Nombre
+				<p-sortIcon field="nombreDeEjercitario"></p-sortIcon>
 			</th>
-			<th pSortableColumn="competencia">Competencia
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="titulo">Competencia
+				<p-sortIcon field="titulo"></p-sortIcon>
 			</th>
 			<th pSortableColumn="tipoejercitario">Tipo de ejercitario
-				<p-sortIcon field="representative.name"></p-sortIcon>
+				<p-sortIcon field="tipoDeEjercitario"></p-sortIcon>
 			</th>
 			<th pSortableColumn="duracion">Duracion
 				<p-sortIcon field="duracion"></p-sortIcon>
@@ -36,7 +36,7 @@
 			<th pSortableColumn="nivel">Nivel
 				<p-sortIcon field="nivel"></p-sortIcon>
 			</th>
-			<th pSortableColumn="status">
+			<th width="350em">
 
 			</th>
 
@@ -67,30 +67,19 @@
 				<!-- <pre>{{ejercitario|json}}</pre> -->
 			</td>
 
+			<td style="text-align: center">
+				<a [href]="ejercitario.urlEjercitario" target="_blank" pbutton pripple
+					class="p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component"
+					role="link">Ver</a>
 
-
-
-			<td>
-
-				<button pbutton="" pripple="" type="button" label="Success" 
-					class="p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success"
-					role="link"
-					onclick="javascript:window.open('https://simulab.edutech-project.org/media/Ejercicio3/index.html', '_blank');" >Visual</button>
-				
-		</td>
-
-
-			<td>
 				<a class="p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component"
 					routerLink="/dashboard/editar-ejercitario/{{ejercitario.id}}">Editar</a>
-			</td>
-			<td>
-				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help"
-					routerLink="/dashboard/lista-pregunta/{{ejercitario.id}}">ListarPreguntas
+				<!-- ng-reflect-label="Help" -->
+				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component"
+					routerLink="/dashboard/lista-pregunta/{{ejercitario.id}}">Preguntas
 				</a>
-			</td>
-			<td> <a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Help"
-					routerLink="/dashboard/lista-rubrica/{{ejercitario.id}}">ListarRubrica
+				<a class="p-button-help p-mr-2 p-mb-2 p-ripple p-button p-component"
+					routerLink="/dashboard/lista-rubrica/{{ejercitario.id}}">Rubrica
 				</a>
 			</td>
 

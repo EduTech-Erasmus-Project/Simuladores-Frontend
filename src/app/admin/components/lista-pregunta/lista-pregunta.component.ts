@@ -1,138 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { PreguntaService } from 'src/app/service/pregunta.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Message } from "primeng/api";
+import { Subscription } from "rxjs";
+import { PreguntaService } from "src/app/service/pregunta.service";
 import Swal from "sweetalert2";
 import * as moment from "moment";
-import { Pregunta } from 'src/app/core/interfaces/Pregunta';
+import { Pregunta } from "src/app/core/interfaces/Pregunta";
 @Component({
-  selector: 'app-lista-pregunta',
-  templateUrl: './lista-pregunta.component.html',
-  styleUrls: ['./lista-pregunta.component.scss']
+  selector: "app-lista-pregunta",
+  templateUrl: "./lista-pregunta.component.html",
+  styleUrls: ["./lista-pregunta.component.scss"],
 })
-export class ListaPreguntaComponent implements OnInit {
+export class ListaPreguntaComponent implements OnInit, OnDestroy {
   public form?: FormGroup;
   public formData: FormData;
   public loadingPregunta = false;
   public pregunta: any;
   public loader = false;
 
-
   private _subscriptions: Subscription[] = [];
   public msg: Message[];
-  //public id: number;
   public id: any;
   public displayMaximizable: boolean;
   public display = false;
   public usuario: any;
 
-  constructor(private preguntaService: PreguntaService, private router: Router, private activateRoute: ActivatedRoute) { }
+  constructor(
+    private preguntaService: PreguntaService,
+    private router: Router,
+    private activateRoute: ActivatedRoute
+  ) {}
+
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((sub) => sub.unsubscribe());
+  }
 
   ngOnInit(): void {
-
     this.loadPregunta();
-    this.preguntaService.event.subscribe(result => { console.log("hola", result); this.loadPregunta() })
-
   }
 
-  private loadPregunta() {
+  private async loadPregunta() {
     this.loadingPregunta = true;
-    this.id = Number(this.activateRoute.snapshot.paramMap.get('id'));
-    this.preguntaService.obtenerListaPregunta(this.id)
-      .subscribe(res => {
+    this.id = Number(this.activateRoute.snapshot.paramMap.get("id"));
+    let sub = await this.preguntaService
+      .obtenerListaPregunta(this.id)
+      .subscribe((res) => {
         this.pregunta = res;
       });
-
+    this._subscriptions.push(sub);
   }
 
-  public async showModal(usuario1) {
-    this.usuario = usuario1
-    try {
-      console.log(this.usuario);
-      this.displayMaximizable = true;
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-  public onSubmit() {
-    this.markTouchForm();
-    if (this.form.valid) {
-      this.display = false;
-      this.loader = true;
-      this.msg = [];
-      const id = this.id;
-      const data = { id, ...this.form.value };
-      console.warn(data);
-      if (this.id && this.id != 0) {
-        let sub = this.preguntaService.registroPregunta({ ...this.form.value })
-          .subscribe(response => {
-            Swal.fire({
-              icon: 'success', title: 'Se registro correctamente', showConfirmButton: true,
-
-
-            });
-            console.log(response)
-          })
+  public async eliminarPregunta(id: number) {
+    let sub = await this.preguntaService.eliminarPregunta(id).subscribe(
+      (respuesta) => {
+        this.loadPregunta();
+        Swal.fire({
+          icon: "success",
+          title: "Se ha eliminado correctamente",
+          showConfirmButton: true,
+        });
+      },
+      (error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Se ha producido un error al eliminar",
+          showConfirmButton: true,
+        });
       }
-
-    }
-  }
-
-  public getErrorRequired(field: string) {
-    return (
-      this.form.get(field).hasError("required") && this.form.get(field).touched
     );
-  }
-
-
-  get years() {
-    return `${moment().year() - 50}:${moment().year() - 10}`;
-  }
-
-  private markTouchForm() {
-    (<any>Object).values(this.form.controls).forEach((control) => {
-      control.markAsTouched();
-    });
-  }
-
-  // eliminarPregunta(id:number ){
-  //   if(confirm('Esta seguro de eliminar')){
-  //     this.preguntaService.eliminarPregunta(id).subscribe((data) => {
-  //       console.warn(data);
-  //       this.preguntaService.obtenerListaPregunta(id);
-
-  //     },(error) => {
-  //       console.log(error);
-  //     })
-  //   }
-  // }
-  eliminarPregunta(id: number) {
-    this.preguntaService.eliminarPregunta(id)
-      .subscribe(
-        respuesta => {
-          // this.preguntaService.obtenerListaPregunta(id);
-          if (respuesta) {
-            // this.pregunta = this.pregunta.filter(ar => ar.id != id);
-            this.preguntaService.obtenerListaPregunta(this.id)
-              .subscribe(res => {
-                this.pregunta = res;
-              });
-            // location.reload(); 
-
-
-            console.log(respuesta);
-
-          }
-          else {
-            delete this.pregunta[id];
-
-
-          }
-        }
-      )
-
+    this._subscriptions.push(sub);
   }
 }

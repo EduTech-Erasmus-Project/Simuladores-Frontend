@@ -40,28 +40,9 @@ export class PasswordResedComponent implements OnInit {
       uidb64: this.rutaActiva.snapshot.params.uidb64,
       token: this.rutaActiva.snapshot.params.token
     };
-    this.loadData();
+    //this.loadData();
   }
-  async loadData() {
-    // let resToken = await this.searchService.getTokenRestPassword(this.Credencial.uidb64, this.Credencial.token).subscribe(res => {
 
-    //   if (res.success == true) {
-    //     this.verifyToken = res;
-    //     //console.log("Res desde aqui", res);
-    //     this.tokenVerify = true;
-    //   }
-
-    // }, (err) => {
-
-    //   if (err.error.error == "Token is no valid, please request a new one") {
-    //     this.showError('Enlace de verififcacion incorrecto');
-    //     this.tokenVerify = false;
-    //   }
-
-    // });
-
-    // this.subscribes.push(resToken);
-  }
   createForm() {
     this.angForm = this.fb.group({
       passwordNew: [
