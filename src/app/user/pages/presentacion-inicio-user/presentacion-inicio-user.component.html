@@ -37,7 +37,7 @@
                     <div class="p-grid">
                         <div class="p-col-6 p-md-5" style="display: flex">
                             <h4 style="margin-right: 0.5em; margin: 0">Competencias:</h4>
-                            <p-dropdown [(ngModel)]="competencia" [options]="competencias"
+                            <p-dropdown (onChange)="onChangeCompetencia($event)" [(ngModel)]="competencia" [options]="competencias" 
                                 placeholder="Seleccione una competencia" optionLabel="titulo">
                             </p-dropdown>
                         </div>

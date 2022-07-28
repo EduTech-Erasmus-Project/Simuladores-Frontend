@@ -68,6 +68,8 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
       (data) => {
         this.totalEjercitarios = data[0].total;
         this.competencias = data[1];
+        //this.loadParticipantes(this.competencias[0].id);
+        this.competencia = this.competencias[0];
         this.totalParticipantes = data[2].totalParticipantes;
       },
       (err) => {
@@ -209,16 +211,20 @@ export class PresentacionInicioExpertoComponent implements OnInit, OnDestroy {
     }
   }
 
-  async onChangeCompetencia(evt) {
-    //console.log(evt.value);
+  private async loadParticipantes(id) {
     try {
       let participantes = await this.usuarioService
-        .obtenerParticipantesCompetencia(evt.value.id)
+        .obtenerParticipantesCompetencia(id)
         .toPromise();
       //console.log("participantes", participantes);
       this.participantes = participantes;
     } catch (error) {
       console.log("error", error);
     }
+  }
+
+  async onChangeCompetencia(evt) {
+    //console.log(evt.value);
+    this.loadParticipantes(evt.value.id);
   }
 }
