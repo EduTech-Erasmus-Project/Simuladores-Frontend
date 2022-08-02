@@ -110,7 +110,7 @@ import { ImagePipe } from "../pipes/image.pipe";
     MenuitemComponent,
     UserPasswordComponent,
     UserFormComponent,
-    ImagePipe
+    ImagePipe,
   ],
   imports: [
     CommonModule,
@@ -288,7 +288,7 @@ import { ImagePipe } from "../pipes/image.pipe";
     MenuitemComponent,
     UserPasswordComponent,
     UserFormComponent,
-    ImagePipe
+    ImagePipe,
   ],
 })
 export class SharedModule {

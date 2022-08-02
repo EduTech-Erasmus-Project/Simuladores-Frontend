@@ -82,6 +82,7 @@
                                             {{ ejercitario?.instruccionesParticipantes }}
                                         </p>
                                     </div>
+                                    <a href="{{ ejercitario.urlEjercitario }}" target="_blank" pButton pRipple label="Vista Previa" class="p-button-primary"></a>
                                     <!-- <p-button (onClick)="onBuscarParticipantes(ejercitario.id)" label="Listar participantes" styleClass="p-button-sm"></p-button> -->
                                 </p-card>
                             </ng-container>
@@ -156,7 +157,9 @@
                                 </div>
                             </th>
 
-                            <th style="width: 8rem"></th>
+                            <th style="width: 8rem">
+                                Acciones
+                            </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-participante>
@@ -193,9 +196,9 @@
                     'participanteInfo',
                     competencia.id,
                     participante.id
-                  ]" pButton type="button" class="p-button-primary" icon="pi pi-search">
+                  ]" pButton title="Información de actividades" class="p-button-primary" icon="pi pi-search">
                                 </a>
-                                <a (click)="showModal(participante.id)" pButton type="button" style="margin-left: 1rem"
+                                <a (click)="showModal(participante.id)" pButton title="Información del participante" style="margin-left: 1rem"
                                     class="p-button-primary ml-1" icon="pi pi-user">
                                 </a>
                             </td>

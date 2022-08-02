@@ -19,9 +19,14 @@
 </p>
 
 <div class="input-comentario" style="padding-top: 2em">
-    <span class="p-float-label">
-        <textarea [(ngModel)]="comentario" id="float-input" width="100%" rows="5" pInputTextarea></textarea>
-        <label for="float-input">Comentario</label>
-    </span>
+    <div class="comentario" style="text-align: left">
+        <span class="p-float-label">
+            <textarea #coment [ngClass]="{'ng-dirty': error}" [(ngModel)]="comentario" id="float-input" width="100%" rows="5" pInputTextarea></textarea>
+            <label for="float-input">Comentario</label>
+        </span>
+        <small *ngIf="error" id="email-help"
+        class="p-error">Pro favor llene el campo de comentario *</small>
+    </div>
+    
     <p-button (click)="comentar()" label="Comentar"></p-button>
 </div>
