@@ -1,134 +1,205 @@
 <p-messages [(value)]="msg" [enableService]="false"></p-messages>
 <form [formGroup]="form" class="p-grid">
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Nombres *:</h6>
-        <input [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nombre')}" formControlName="nombre" type="text"
-            pInputText placeholder="Nombres" id="nombre" name="nombre" />
-        <div *ngIf="form.get('nombre').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es obligatorio.</small>
+        <div class="p-field p-fluid">
+            <label for="nombre">Nombres *:</label>
+            <input [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('nombre') }" formControlName="nombre"
+                type="text" pInputText placeholder="Nombres" id="nombre" name="nombre"
+                aria-describedby="nombre-description" />
+            <div *ngIf="form.get('nombre').invalid">
+                <small id="nombre-description" class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Apellidos *:</h6>
-        <input formControlName="apellido" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('apellido')}" type="text"
-            pInputText placeholder="Apellidos" id="apellido" name="apellido" />
+        <div class="p-field p-fluid">
+            <label for="apellido">Apellidos *:</label>
+            <input formControlName="apellido" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('apellido') }"
+                type="text" pInputText placeholder="Apellidos" id="apellido" name="apellido"
+                aria-describedby="apellido-description" />
 
-        <div *ngIf="form.get('apellido').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('apellido')">Este campo es obligatorio.</small>
+            <div *ngIf="form.get('apellido').invalid">
+                <small id="apellido-description" class="p-error" *ngIf="getErrorRequired('apellido')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Teléfono *:</h6>
-        <input formControlName="telefono" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('telefono')}" type="text"
-            pInputText placeholder="Teléfono" id="telefono" name="telefono" />
-        <div *ngIf="form.get('telefono').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('telefono')">Este campo es obligatorio.</small>
+        <div class="p-field p-fluid">
+            <label for="telefono">Teléfono *:</label>
+            <input formControlName="telefono" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('telefono') }"
+                type="text" pInputText placeholder="Teléfono" id="telefono" name="telefono"
+                aria-describedby="telefono-description" />
+            <div *ngIf="form.get('telefono').invalid">
+                <small id="telefono-description" class="p-error" *ngIf="getErrorRequired('telefono')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Fecha de nacimiento *:</h6>
-        <p-calendar formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [showIcon]="true"
+        <div class="p-field p-fluid">
+            <label for="date">Fecha de nacimiento *:</label>
+            <!-- <p-calendar formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [showIcon]="true"
             [monthNavigator]="true" [yearNavigator]="true" [yearRange]="years" dateFormat="yy-mm-dd" [ngClass]="{
-    'ng-dirty ng-invalid': getErrorRequired('fechaNacimiento')
-  }">
+        'ng-dirty ng-invalid': getErrorRequired('fechaNacimiento')
+      }">
         </p-calendar>
         <div *ngIf="form.get('fechaNacimiento').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es
-                obligatorio.</small>
+            <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es obligatorio.</small>
+        </div> -->
+
+            <!-- [localization]="localization" -->
+            <duet-date-picker (duetChange)="onChangeDate($event)" identifier="date" [ngClass]="{
+                      'invalid-date':
+                        getErrorRequired('fechaNacimiento')
+                    }" aria-describedby="date-description" width="100%" min="1970-01-01">
+            </duet-date-picker>
+            <div *ngIf="form.get('fechaNacimiento').invalid">
+                <small id="date-description" class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este
+                    campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>País *:</h6>
-        <input formControlName="pais" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('pais')}" type="text"
-            pInputText placeholder="País" id="pais" name="pais" />
-        <div *ngIf="form.get('pais').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('pais')">Este campo es obligatorio.</small>
+        <div class="p-field p-fluid">
+            <label for="pais">País *:</label>
+            <input formControlName="pais" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('pais') }" type="text"
+                pInputText placeholder="País" id="pais" name="pais" aria-describedby="pais-description" />
+            <div *ngIf="form.get('pais').invalid">
+                <small id="pais-description" class="p-error" *ngIf="getErrorRequired('pais')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Ciudad *:</h6>
-        <input formControlName="ciudad" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('ciudad')}" type="text"
-            pInputText placeholder="Ciudad" id="ciudad" name="ciudad" />
+        <div class="p-field p-fluid">
+            <label for="ciudad">Ciudad *:</label>
+            <input formControlName="ciudad" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('ciudad') }"
+                type="text" pInputText placeholder="Ciudad" id="ciudad" name="ciudad"
+                aria-describedby="ciudad-description" />
 
-        <div *ngIf="form.get('ciudad').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('ciudad')">Este campo es obligatorio.</small>
+            <div *ngIf="form.get('ciudad').invalid">
+                <small id="ciudad-description" class="p-error" *ngIf="getErrorRequired('ciudad')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Dirección *:</h6>
-        <input formControlName="direccion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('direccion')}" type="text"
-            pInputText placeholder="Dirección" id="direccion" name="direccion" />
+        <div class="p-field p-fluid">
+            <label for="direccion">Dirección *:</label>
+            <input formControlName="direccion" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('direccion') }"
+                type="text" pInputText placeholder="Dirección" id="direccion" name="direccion"
+                aria-describedby="direccion-description" />
 
-        <div *ngIf="form.get('ciudad').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('direccion')">Este campo es obligatorio.</small>
+            <div *ngIf="form.get('ciudad').invalid">
+                <small id="direccion-description" class="p-error" *ngIf="getErrorRequired('direccion')">Este campo es
+                    obligatorio.</small>
+            </div>
         </div>
     </div>
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Genero *:</h6>
-        <p-dropdown formControlName="genero" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('genero')}"
+        <div class="p-field p-fluid">
+            <label for="genero">Genero *:</label>
+            <!-- <p-dropdown formControlName="genero" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('genero') }"
             [options]="generos" placeholder="genero" optionLabel="name" optionValue="value" [showClear]="true">
         </p-dropdown>
         <div *ngIf="form.get('genero').invalid">
             <small class="p-error" *ngIf="getErrorRequired('genero')">Este campo es obligatorio.</small>
+        </div> -->
+
+            <select class="dropdown-custom" name="genero" id="genero" formControlName="genero"
+                [ngClass]="{'invalid': getErrorRequired('genero')}" placeholder="Genero"
+                aria-describedby="genero-description">
+                <option *ngFor="let item of generos" [value]="item.value">
+                    {{ item.name }}
+                </option>
+            </select>
+            <div *ngIf="form.get('genero').invalid">
+                <small id="genero-description" class="p-error" *ngIf="getErrorRequired('genero')">Este
+                    campo es obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Nivel de formación *:</h6>
-        <input formControlName="nivelDeFormacion"
-            [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nivelDeFormacion')}" type="text" pInputText
-            placeholder="Nivel de formación" id="nivelDeFormacion" name="nivelDeFormacion" />
+        <div class="p-field p-fluid">
+            <label for="nivelDeFormacion">Nivel de formación *:</label>
+            <input formControlName="nivelDeFormacion" [ngClass]="{
+        'ng-dirty ng-invalid': getErrorRequired('nivelDeFormacion')
+      }" type="text" pInputText placeholder="Nivel de formación" id="nivelDeFormacion" name="nivelDeFormacion" />
 
-        <div *ngIf="form.get('nivelDeFormacion').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('nivelDeFormacion')">Este campo es
-                obligatorio.</small>
+            <div *ngIf="form.get('nivelDeFormacion').invalid">
+                <small class="p-error" *ngIf="getErrorRequired('nivelDeFormacion')">Este campo es obligatorio.</small>
+            </div>
         </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Carrera Universitaria:</h6>
-        <input formControlName="carreraUniversitaria" type="text" pInputText placeholder="Carrera Universitaria"
-            id="carreraUniversitaria" name="carreraUniversitaria" />
+        <div class="p-field p-fluid">
+            <label for="carreraUniversitaria">Carrera Universitaria:</label>
+            <input formControlName="carreraUniversitaria" type="text" pInputText placeholder="Carrera Universitaria"
+                id="carreraUniversitaria" name="carreraUniversitaria" />
+        </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Estudios previos:</h6>
-        <input formControlName="estudiosPrevios" type="text" pInputText placeholder="Estudios previos"
-            id="estudiosPrevios" name="estudiosPrevios" />
+        <div class="p-field p-fluid">
+            <label for="estudiosPrevios">Estudios previos:</label>
+            <input formControlName="estudiosPrevios" type="text" pInputText placeholder="Estudios previos"
+                id="estudiosPrevios" name="estudiosPrevios" />
+        </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Hijos:</h6>
-        <input formControlName="numeroDeHijos" type="number" min="0" pInputText placeholder="Hijos" id="numeroDeHijos"
-            name="numeroDeHijos" />
+        <div class="p-field p-fluid">
+            <label for="numeroDeHijos">Hijos:</label>
+            <input formControlName="numeroDeHijos" type="number" min="0" pInputText placeholder="Hijos"
+                id="numeroDeHijos" name="numeroDeHijos" />
+        </div>
     </div>
 
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Estado civil:</h6>
-        <p-dropdown formControlName="estadoCivil" [options]="estadoCivil" placeholder="Estado civil" optionLabel="name"
-            optionValue="value" [showClear]="true"></p-dropdown>
+        <div class="p-field p-fluid">
+            <div class="p-field p-fluid">
+                <label for="numeroDeHijos">Estado civil:</label>
+                <!-- <p-dropdown formControlName="estadoCivil" [options]="estadoCivil" placeholder="Estado civil" optionLabel="name"
+            optionValue="value" [showClear]="true"></p-dropdown> -->
+                <select class="dropdown-custom" name="estadoCivil" id="estadoCivil" formControlName="estadoCivil"
+                    [ngClass]="{'invalid': getErrorRequired('estadoCivil')}" placeholder="Estado civil:">
+                    <option *ngFor="let item of estadoCivil" [value]="item.value">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="control p-col-12 p-xl-4 p-md-6">
-        <h6>Etnia:</h6>
-        <input formControlName="etnia" type="text" pInputText placeholder="Etnia" id="etnia" name="etnia" />
+        <div class="p-field p-fluid">
+            <label for="etnia">Etnia:</label>
+            <input formControlName="etnia" type="text" pInputText placeholder="Etnia" id="etnia" name="etnia" />
+        </div>
     </div>
     <div class="control p-col-12 p-xl-4 p-md-6" *ngIf="user?.tipoUser === 'evaluador'">
-        <h6>Instituto:</h6>
-        <input formControlName="institucion" type="text" pInputText placeholder="Instituto"
-            id="institucion" name="institucion" />
+        <div class="p-field p-fluid">
+            <label for="institucion">Instituto:</label>
+            <input formControlName="institucion" type="text" pInputText placeholder="Instituto" id="institucion"
+                name="institucion" />
+        </div>
     </div>
 
     <ng-container *ngIf="user?.tipoUser === 'participante'">
         <div class="p-col-12 p-xl-12 p-md-12">
             <div class="p-field p-fluid terms">
-                <p-checkbox formControlName="disability" (onChange)="changeDiscapacidad($event)" binary="true"
-                    name="groupname">
+                <p-checkbox inputId="disability" formControlName="disability" (onChange)="changeDiscapacidad($event)"
+                    binary="true" name="groupname">
                 </p-checkbox>
-                Tiene alguna discapacidad.
+                <label for="disability">Tiene alguna discapacidad.</label>
             </div>
         </div>
 
@@ -138,22 +209,31 @@
             </p-divider>
         </div>
 
-
         <ng-container formArrayName="discapacidades">
-            <ng-container [formGroup]="discapacidades" *ngFor="
-            let discapacidades of discapacidades.controls;
-            let i = index
-          ">
+            <ng-container [formGroup]="discapacidades"
+                *ngFor="let discapacidades of discapacidades.controls; let i = index">
                 <div class="p-col-12 p-md-4 p-lg-5">
                     <div class="p-field p-fluid">
                         <label for="discapacidad">Discapasidad*</label>
-                        <p-dropdown formControlName="id" optionValue="id" [options]="discapacidadesArray"
+                        <!-- <p-dropdown formControlName="id" optionValue="id" [options]="discapacidadesArray"
                             id="discapacidad" placeholder="Tipo de discapacidad" optionLabel="name" [ngClass]="{
                   'ng-dirty ng-invalid': getArrayErrorRequired(
                     i,
                     'code'
                   )
-                }" [showClear]="true"></p-dropdown>
+                }" [showClear]="true"></p-dropdown> -->
+
+                        <select class="dropdown-custom" name="discapacidad" id="discapacidad" formControlName="id"
+                            [ngClass]="{'invalid': getArrayErrorRequired(i, 'code')}" placeholder="Discapacidad"
+                            aria-describedby="code-arr-description">
+                            <option *ngFor="let item of discapacidadesArray" [value]="item.id">
+                                {{ item.name }}
+                            </option>
+                        </select>
+                        <div *ngIf="discapacidades.get('id').invalid">
+                            <small id="code-arr-description" class="p-error" *ngIf="getArrayErrorRequired(i, 'id')">Este
+                                campo es obligatorio.</small>
+                        </div>
                     </div>
                 </div>
 
@@ -163,24 +243,21 @@
                             <label for="level">Grado*</label>
                             <input id="level" formControlName="grado" type="text" placeholder="Grado de discapasidad"
                                 [ngClass]="{
-                    'ng-dirty ng-invalid': getArrayErrorRequired(
-                      i,
-                      'grado'
-                    )
-                  }" pInputText />
+                  'ng-dirty ng-invalid': getArrayErrorRequired(i, 'grado')
+                }" pInputText />
                         </div>
                     </div>
                 </div>
-                <div class="p-col-12 p-md-4 p-lg-2" style="display: flex; align-items: center;">
-                    <button (click)="removeDiscapacidad(i)" pButton pRipple type="button" icon="pi pi-trash"
-                        class="p-button-rounded p-button-danger p-button-text"></button>
-                    <button (click)="addDiscapacidad()" pButton pRipple type="button" icon="pi pi-plus"
-                        class="p-button-rounded p-button-text"></button>
+                <div class="p-col-12 p-md-4 p-lg-2" style="display: flex; align-items: center">
+                    <button title="Eliminar discapacidad" (click)="removeDiscapacidad(i)" pButton pRipple type="button"
+                        icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+                    <button title="Agregar discapacidad" (click)="addDiscapacidad()" pButton pRipple type="button"
+                        icon="pi pi-plus" class="p-button-rounded p-button-text"></button>
                 </div>
             </ng-container>
         </ng-container>
     </ng-container>
-    <div class="control p-col-12 p-xl-12 p-md-12" style="display: flex; justify-content: flex-end;">
+    <div class="control p-col-12 p-xl-12 p-md-12" style="display: flex; justify-content: flex-end">
         <p-button [disabled]="loader" (click)="onSubmit()" label="Guardar" icon="pi pi-check" loading="true"></p-button>
     </div>
 </form>

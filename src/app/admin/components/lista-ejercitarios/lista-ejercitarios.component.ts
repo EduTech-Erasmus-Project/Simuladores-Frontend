@@ -36,7 +36,7 @@ export class ListaEjercitariosComponent implements OnInit {
   ngOnInit(): void {
     this.loadEjercitario();
     this.ejercitarioService.event.subscribe((result) => {
-      console.log("hola", result);
+      //console.log("hola", result);
       this.loadEjercitario();
     });
   }

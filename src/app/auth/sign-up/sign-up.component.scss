@@ -47,7 +47,10 @@
 }
 
 :host ::ng-deep .invalid-date{
+    
     .duet-date__input{
+        width: 100%;
         border-color: #f44336 !important;
     }
 }
+

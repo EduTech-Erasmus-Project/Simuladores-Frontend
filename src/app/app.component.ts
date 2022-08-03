@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     private menuService: MenuService,
     private primengConfig: PrimeNGConfig
   ) {
-    console.log("APP-ROOT");
+    //console.log("APP-ROOT");
   }
 
   ngOnInit(): void {

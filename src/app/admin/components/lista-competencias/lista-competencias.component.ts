@@ -100,12 +100,7 @@ export class ListaCompetenciasComponent implements OnInit {
         this.competencia1 = res;
         this.nombre11 = this.competencia1.titulo;
         this.descripcion11 = this.competencia1.descripcion;
-        console.log(
-          "nombre  ===>   ",
-          this.nombre11,
-          "descripcion  ===> ",
-          this.descripcion11
-        );
+        
       });
   }
   public async editarCompetencia() {

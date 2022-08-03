@@ -54,7 +54,7 @@ export class EditarPreguntaComponent implements OnInit {
       .recuperarPreguntaEjercitario(this.pid)
       .subscribe((res) => {
         //this.preguntaData = res;
-        console.log(res);
+        //console.log(res);
         this.form.patchValue(res);
       });
     this._subscriptions.push(sub);

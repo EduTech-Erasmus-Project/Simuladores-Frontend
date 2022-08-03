@@ -154,6 +154,13 @@ export class UserPasswordComponent implements OnInit, OnDestroy {
           }
         );
       this._subscriptions.push(sub);
+    }else{
+      this.msg = [
+        {
+          severity: "error",
+          detail: "Por favor complete el formulario.",
+        },
+      ];
     }
   }
 

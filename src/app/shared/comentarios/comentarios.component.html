@@ -1,12 +1,12 @@
-<p-card [style]="{ width: '100%', 'margin-bottom': '1em' }" *ngFor="let comentario of comentarios">
+<p-card tabindex="0" [style]="{ width: '100%', 'margin-bottom': '1em' }" *ngFor="let comentario of comentarios">
     <div class="user">
 
         <ng-container *ngIf="(!evaluador && comentario.evaluador) || (evaluador && comentario.participante); else elseTemplate">
-            <h6 *ngIf="!evaluador && comentario.evaluador">{{comentario.evaluador.usuario.nombre}} {{comentario.evaluador.usuario.apellido}}</h6>
-            <h6 *ngIf="evaluador && comentario.participante">{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</h6>
+            <p *ngIf="!evaluador && comentario.evaluador">{{comentario.evaluador.usuario.nombre}} {{comentario.evaluador.usuario.apellido}}</p>
+            <p *ngIf="evaluador && comentario.participante">{{comentario.participante.usuario.nombre}} {{comentario.participante.usuario.apellido}}</p>
         </ng-container>
         <ng-template #elseTemplate>
-            <h6>Yo</h6>
+            <p>Yo</p>
         </ng-template>
 
         <span>{{ date(comentario.fechaComentario) }}</span>
@@ -21,11 +21,11 @@
 <div class="input-comentario" style="padding-top: 2em">
     <div class="comentario" style="text-align: left">
         <span class="p-float-label">
-            <textarea #coment [ngClass]="{'ng-dirty': error}" [(ngModel)]="comentario" id="float-input" width="100%" rows="5" pInputTextarea></textarea>
+            <textarea #coment [ngClass]="{'ng-dirty ng-invalid': error}" [(ngModel)]="comentario" id="float-input" width="100%" rows="5" pInputTextarea aria-describedby="comment-description"></textarea>
             <label for="float-input">Comentario</label>
         </span>
-        <small *ngIf="error" id="email-help"
-        class="p-error">Pro favor llene el campo de comentario *</small>
+        <small *ngIf="error" id="comment-description"
+        class="p-error">Pro favor llene el campo de comentario.</small>
     </div>
     
     <p-button (click)="comentar()" label="Comentar"></p-button>

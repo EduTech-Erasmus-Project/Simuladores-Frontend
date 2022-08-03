@@ -6,48 +6,35 @@
           <div class="p-grid">
             <div class="p-col-6 p-md-5" style="display: flex">
               <h4 style="margin-right: 0.5em; margin: 0">Competencias:</h4>
-              <p-dropdown
+              <!-- <p-dropdown
                 (onChange)="onChangeCompetencia($event)"
                 [(ngModel)]="competencia"
                 [options]="competencias"
                 placeholder="Seleccione una competencia"
                 optionLabel="titulo"
               >
-              </p-dropdown>
+              </p-dropdown> -->
+
+              <select (change)="onChangeCompetencia($event)" class="dropdown-custom " name="discapacidad"
+                id="discapacidad" placeholder="Seleccione una competencia"
+                aria-describedby="code-arr-description">
+                <option *ngFor="let item of competencias" [value]="item.id">{{item.titulo}}</option>
+              </select>
+
             </div>
-            <div
-              class="p-col-6 p-md-7"
-              style="display: flex; justify-content: flex-end"
-            >
-              <p-button
-                [disabled]="!competencia?.niveles[2]?.status || download"
-                (click)="downloadCertificado()"
-                [ngStyle]="{ 'margin-left': '0.5em' }"
-                label="Descargar Reporte"
-                [icon]="download ? 'pi pi-spin pi-spinner' : 'pi pi-download'"
-              ></p-button>
-              <p-button
-                (click)="showModalUser()"
-                [ngStyle]="{ 'margin-left': '0.5em' }"
-                label="Ver Perfil del docente"
-                icon="pi pi-user"
-              ></p-button>
+            <div class="p-col-6 p-md-7" style="display: flex; justify-content: flex-end">
+              <p-button [disabled]="!competencia?.niveles[2]?.status || download" (click)="downloadCertificado()"
+                [ngStyle]="{ 'margin-left': '0.5em' }" label="Descargar Reporte"
+                [icon]="download ? 'pi pi-spin pi-spinner' : 'pi pi-download'"></p-button>
+              <p-button (click)="showModalUser()" [ngStyle]="{ 'margin-left': '0.5em' }" label="Ver Perfil del docente"
+                icon="pi pi-user"></p-button>
             </div>
           </div>
           <p-tabView (onChange)="onChangePanel($event)" *ngIf="competencia">
-            <p-tabPanel
-              [disabled]="!nivel.status"
-              [header]="nivel.name"
-              *ngFor="let nivel of competencia.niveles"
-            >
-              <ng-container
-                *ngIf="nivel.ejercitarios.length > 0; else ejercotarioTemplate"
-              >
-                <p-card
-                  [header]="ejercitario?.nombreDeEjercitario"
-                  [style]="{ 'margin-bottom': '1em' }"
-                  *ngFor="let ejercitario of nivel.ejercitarios"
-                >
+            <p-tabPanel [disabled]="!nivel.status" [header]="nivel.name" *ngFor="let nivel of competencia.niveles">
+              <ng-container *ngIf="nivel.ejercitarios.length > 0; else ejercotarioTemplate">
+                <p-card [header]="ejercitario?.nombreDeEjercitario" [style]="{ 'margin-bottom': '1em' }"
+                  *ngFor="let ejercitario of nivel.ejercitarios">
                   <div class="p-grid">
                     <div class="info p-col-12 p-xl-9 p-md-9">
                       <p>
@@ -67,39 +54,23 @@
                         {{ ejercitario?.instruccionesParticipantes }}
                       </p>
                       <div class="buttons">
-                        <p-button
-                          (click)="listarProgreso(ejercitario.id)"
-                          label="Ver mi progreso"
-                        ></p-button>
+                        <p-button (click)="listarProgreso(ejercitario.id)" label="Ver mi progreso"></p-button>
 
                         <!-- <a href="{{ url }}"pButton pRipple label="Realizar Actividad" class="p-button-primary"></a> -->
 
-                        <p-button
-                          [ngStyle]="{ 'margin-left': '10px' }"
-                          (click)="
+                        <p-button [ngStyle]="{ 'margin-left': '10px' }" (click)="
                             realizarEjercitario(
                               ejercitario.urlEjercitario,
                               ejercitario.id
                             )
-                          "
-                          label="Realizar Actividad"
-                        ></p-button>
+                          " label="Realizar Actividad"></p-button>
                       </div>
                     </div>
                     <div class="p-col-12 p-xl-3 p-md-3 progress">
-                      <circle-progress
-                        [percent]="ejercitario.progreso"
-                        [radius]="100"
-                        [outerStrokeWidth]="16"
-                        [innerStrokeWidth]="8"
-                        [outerStrokeColor]="'#78C000'"
-                        [innerStrokeColor]="'#C7E596'"
-                        [animation]="true"
-                        [animationDuration]="300"
-                        subtitle="Mi progreso"
-                        subtitleFontSize="14"
-                        subtitleFontWeight="200"
-                      >
+                      <circle-progress [percent]="ejercitario.progreso" [radius]="100" [outerStrokeWidth]="16"
+                        [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'"
+                        [animation]="true" [animationDuration]="300" subtitle="Mi progreso" subtitleFontSize="14"
+                        subtitleFontWeight="200">
                       </circle-progress>
                     </div>
                   </div>
@@ -120,36 +91,23 @@
 
   <div class="p-col-12 p-lg-12">
     <div class="card orders-table" style="min-height: 33vh">
-      <p-table
-        [value]="actividades"
-        dataKey="idActividad"
-        [rows]="5"
-        [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [loading]="loading"
-        styleClass="p-datatable-gridlines"
-        [paginator]="true"
+      <p-table [value]="actividades" dataKey="idActividad" [rows]="5" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" styleClass="p-datatable-gridlines" [paginator]="true"
         currentPageReportTemplate="Mostrar {first} hasta {last} de
         {totalRecords}
-        registros"
-        [globalFilterFields]="[
+        registros" [globalFilterFields]="[
           'calificacionActividad',
           'numeroTotalDePreguntasDelEjercitario',
           'fechaDeActividad',
           'totalRespuestasCorrectasIngresadasParticipante'
-        ]"
-      >
+        ]">
         <ng-template pTemplate="caption">
           <div class="p-d-flex">
             Mis Intentos
             <span class="p-input-icon-left p-ml-auto">
               <i class="pi pi-search"></i>
-              <input
-                pInputText
-                type="text"
-                (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                placeholder="Buscar"
-              />
+              <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                placeholder="Buscar" />
             </span>
           </div>
         </ng-template>
@@ -158,16 +116,12 @@
             <th>
               <div class="p-d-flex p-jc-between p-ai-center">N° de intento</div>
             </th>
-            <th
-              pSortableColumn="numeroTotalDeRespuestasContestadasPorElParticipante"
-            >
+            <th pSortableColumn="numeroTotalDeRespuestasContestadasPorElParticipante">
               <div class="p-d-flex p-jc-between p-ai-center">
                 Preguntas Contestadas
               </div>
             </th>
-            <th
-              pSortableColumn="totalRespuestasCorrectasIngresadasParticipante"
-            >
+            <th pSortableColumn="totalRespuestasCorrectasIngresadasParticipante">
               <div class="p-d-flex p-jc-between p-ai-center">
                 Respuestas Correctas
               </div>
@@ -194,16 +148,14 @@
             <td>
               <span class="image-text">
                 {{ actividad.preguntasContestadas }}/{{
-                  actividad.totalPreguntas
+                actividad.totalPreguntas
                 }}
               </span>
             </td>
             <td>
-              <span class="image-text"
-                >{{ actividad.preguntasCorrectas }}/{{
-                  actividad.totalPreguntas
-                }}</span
-              >
+              <span class="image-text">{{ actividad.preguntasCorrectas }}/{{
+                actividad.totalPreguntas
+                }}</span>
             </td>
             <td>
               {{ actividad.fecha | date: "yyyy/MM/dd" }}
@@ -212,22 +164,13 @@
               <span>{{ actividad.tiempoTotal }} Minutos</span>
             </td>
             <td>
-              <p-progressBar
-                [value]="actividad.calificacion || 0"
-                [showValue]="true"
-              >
+              <p-progressBar [value]="actividad.calificacion || 0" [showValue]="true">
               </p-progressBar>
             </td>
             <td style="text-align: center">
-              <a
-                [routerLink]="['actividad', actividad.id]"
-                pButton
-                type="button"
-                title="Retroalimentación de la actividad"
-                class="p-button-primary"
-                style="margin-left: 1em"
-                icon="pi pi-bookmark"
-              ></a>
+              <a [routerLink]="['actividad', actividad.id]" pButton type="button"
+                title="Retroalimentación de la actividad" class="p-button-primary" style="margin-left: 1em"
+                icon="pi pi-bookmark"></a>
             </td>
           </tr>
         </ng-template>
@@ -241,17 +184,7 @@
   </div>
 </div>
 
-<p-dialog
-  header="Información del Docente"
-  [(visible)]="displayMaximizable"
-  [modal]="true"
-  [style]="{ width: '75vw' }"
-  [maximizable]="true"
-  [draggable]="false"
-  [resizable]="false"
->
-  <app-perfil
-    *ngIf="displayMaximizable"
-    [usuario]="evaluador.usuario"
-  ></app-perfil>
+<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }"
+  [maximizable]="true" [draggable]="false" [resizable]="false">
+  <app-perfil *ngIf="displayMaximizable" [usuario]="evaluador.usuario"></app-perfil>
 </p-dialog>

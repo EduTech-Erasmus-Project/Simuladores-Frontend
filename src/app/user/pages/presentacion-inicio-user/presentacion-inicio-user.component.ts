@@ -127,11 +127,19 @@ export class PresentacionInicioUserComponent implements OnInit, OnDestroy {
   }
 
   onChangeCompetencia(event) {
-    //console.log(event);
+    console.log({value: event.target.value});
     this.actividades = [];
+    this.competencia = this.competencias.find(
+      (comp) => comp.id == event.target.value
+      );
+
     this.listarProgreso(
       Number(this.competencia?.niveles[this.nivelIdx]?.ejercitarios[0]?.id)
     );
+
+    // this.listarProgreso(
+    //   Number(this.competencia?.niveles[this.nivelIdx]?.ejercitarios[0]?.id)
+    // );
   }
 
 }

@@ -32,7 +32,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public discapacidadesArray: any[];
   public validateCode:boolean = false;
 
-  localization = {
+  public localization = {
     buttonLabel: "Elige fecha",
     placeholder: "yyyy-mm-dd",
     selectedDateMessage: "La fecha seleccionada es",
@@ -185,7 +185,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   async onSave() {
-    //this.msgs = [];
+    this.msgs = [];
     if(
     this.getErrorMaxLength('codigo') ||
     this.getErrorMinLength('codigo') ||  
@@ -206,7 +206,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       data.codigo = this.form.get("codigo").value;
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
 
-      console.log("data send", data);
+      //console.log("data send", data);
      
       let sub = await this.authService.register(data).subscribe(
       
@@ -231,15 +231,26 @@ export class SignUpComponent implements OnInit, OnDestroy {
             return;
           }
           
+          if(err.error.code === "invalid_code"){
+            this.msgs = [
+              {
+                severity: "error",
+                summary: "Error",
+                detail: "El codigo del docente es invalido.",
+              },
+            ];
+            return;
+          }
 
-          // this.msgs = [
-          //   {
-          //     severity: "error",
-          //     summary: "Error",
-          //     detail: "Error al registrar intente de nuevo mas tarde.",
-          //   },
-          // ];
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar intente de nuevo mas tarde.'});
+          this.msgs = [
+            {
+              severity: "error",
+              summary: "Error",
+              detail: JSON.stringify(err.error),
+            },
+          ];
+          //4HeQ4F
+          //this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar intente de nuevo mas tarde.'});
         }
       );
       

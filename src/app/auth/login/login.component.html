@@ -36,7 +36,7 @@
                                     formControlName="password" placeholder="Ingresa su contraseña" pPassword
                                     [feedback]="false" />
                                 
-                                    <button title="Ver contraseña" aria-level="Ver contraseña" tabindex="0" (keyup.enter)="show = !show"
+                                    <button type="button" title="Ver contraseña" aria-level="Ver contraseña" tabindex="0" 
                                         [ngClass]="{ 'pi-eye': !show, 'pi-eye-slash': show }" class="pi" (click)="show = !show"></button>
                             </div>
                             <!-- <i class="pi pi-lock"></i> -->
