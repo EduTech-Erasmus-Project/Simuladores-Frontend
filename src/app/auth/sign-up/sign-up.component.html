@@ -1,9 +1,11 @@
+<p-toast closable="false"></p-toast>
+
 <div class="login-body layout-light">
   <div class="login-content animate__animated animate__fadeIn">
     <div class="login-panel">
       <div class="login-panel-content">
         <div class="logo">
-          <img src="assets/img/image2vector.svg" alt="mirage-layout" />
+          <img src="assets/img/image2vector.svg" alt="Logo EduTech" />
         </div>
         <h2>Crea tu cuenta</h2>
         <div class="p-fluid">
@@ -45,11 +47,13 @@
                           'ng-dirty ng-invalid':
                             getErrorRequired('nombre') ||
                             getErrorPattern('nombre')
-                        }" />
+                        }" aria-describedby="name-description" />
 
                       <div *ngIf="form.get('nombre').invalid">
-                        <small class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es obligatorio.</small>
-                        <small class="p-error" *ngIf="getErrorPattern('nombre')">Los caracteres del nombre no son
+                        <small id="name-description" class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es
+                          obligatorio.</small>
+                        <small id="name-description" class="p-error" *ngIf="getErrorPattern('nombre')">Los caracteres
+                          del nombre no son
                           validos.</small>
                       </div>
                     </div>
@@ -62,27 +66,42 @@
                           'ng-dirty ng-invalid':
                             getErrorRequired('apellido') ||
                             getErrorPattern('apellido')
-                        }" />
+                        }" aria-describedby="lastname-description" />
 
                       <div *ngIf="form.get('apellido').invalid">
-                        <small class="p-error" *ngIf="getErrorRequired('apellido')">Este campo es obligatorio.</small>
-                        <small class="p-error" *ngIf="getErrorPattern('apellido')">Los caracteres del nombre no son
+                        <small id="lastname-description" class="p-error" *ngIf="getErrorRequired('apellido')">Este campo
+                          es obligatorio.</small>
+                        <small id="lastname-description" class="p-error" *ngIf="getErrorPattern('apellido')">Los
+                          caracteres del nombre no son
                           validos.</small>
                       </div>
                     </div>
                   </div>
 
                   <div class="field p-col-12 p-md-12 p-lg-6">
-                    <label for="icon">Fecha de nacimiento*</label>
-                    <p-calendar formControlName="fechaNacimiento" placeholder="Fecha de nacimiento" [showIcon]="true"
+                    <label for="date">Fecha de nacimiento*</label>
+                    <!-- <p-calendar inputId="date"  formControlName="fechaNacimiento" placeholder="yyyy-mm-dd" 
                       [monthNavigator]="true" [yearNavigator]="true" [yearRange]="years" dateFormat="yy-mm-dd"
                       [ngClass]="{
                         'ng-dirty ng-invalid':
                           getErrorRequired('fechaNacimiento')
-                      }">
+                      }" aria-describedby="date-description">
                     </p-calendar>
                     <div *ngIf="form.get('fechaNacimiento').invalid">
-                      <small class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es
+                      <small id="date-description" class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este campo es
+                        obligatorio.</small>
+                    </div> -->
+                    <!-- <app-wai-calendar></app-wai-calendar> -->
+
+                    <duet-date-picker (duetChange)="onChangeDate($event)" [localization]="localization"
+                      identifier="date" [ngClass]="{
+                      'invalid-date':
+                        getErrorRequired('fechaNacimiento')
+                    }" aria-describedby="date-description" width="100%" min="1970-01-01">
+                    </duet-date-picker>
+                    <div *ngIf="form.get('fechaNacimiento').invalid">
+                      <small id="date-description" class="p-error" *ngIf="getErrorRequired('fechaNacimiento')">Este
+                        campo es
                         obligatorio.</small>
                     </div>
                   </div>
@@ -94,7 +113,7 @@
                         <div class="p-field-radiobutton">
                           <p-radioButton formControlName="genero" name="genero" value="Hombre" inputId="male" [ngClass]="{
                               'ng-dirty ng-invalid': getErrorRequired('genero')
-                            }">
+                            }" title="Genero Hombre" aria-describedby="genero-description">
                           </p-radioButton>
                           <label for="male">Hombre</label>
                         </div>
@@ -102,35 +121,38 @@
                           <p-radioButton formControlName="genero" name="genero" value="Mujer" inputId="female"
                             [ngClass]="{
                               'ng-dirty ng-invalid': getErrorRequired('genero')
-                            }">
+                            }" aria-describedby="genero-description">
                           </p-radioButton>
                           <label for="female">Mujer</label>
                         </div>
                         <div class="p-field-radiobutton">
-                          <p-radioButton formControlName="genero" name="genero" value="LGBT" inputId="LGBT" [ngClass]="{
+                          <p-radioButton formControlName="genero" name="genero" value="LGBTI" inputId="LGBTI" [ngClass]="{
                               'ng-dirty ng-invalid': getErrorRequired('genero')
-                            }">
+                            }" aria-describedby="genero-description">
                           </p-radioButton>
                           <label for="LGBTI">LGBTI</label>
                         </div>
                       </div>
                       <div *ngIf="form.get('genero').invalid">
-                        <small class="p-error" *ngIf="getErrorRequired('genero')">Este campo es obligatorio.</small>
+                        <small id="genero-description" class="p-error" *ngIf="getErrorRequired('genero')">Este campo es
+                          obligatorio.</small>
                       </div>
                     </div>
                   </div>
                   <div class="p-col-12 p-md-12 p-lg-12" *ngIf="form.get('role').value != 'user'">
                     <div class="p-field p-fluid">
-                      <label for="Institucion">Institucion*</label>
-                      <input id="institucion" (onClick)="onChangeRole()" type="text" formControlName="institucion" placeholder="Institucion" pInputText
-                        autocomplete="on" [ngClass]="{
+                      <label for="institucion">Institucion*</label>
+                      <input id="institucion" (onClick)="onChangeRole()" type="text" formControlName="institucion"
+                        placeholder="Institucion" pInputText autocomplete="on" [ngClass]="{
                           'ng-dirty ng-invalid':
                             getErrorRequired('institucion') ||
                             getErrorPattern('institucion')
-                        }" />
+                        }" aria-describedby="institucion-description" />
                       <div *ngIf="form.get('institucion').invalid">
-                        <small class="p-error" *ngIf="getErrorRequired('institucion')">Este campo es obligatorio.</small>
-                        <small class="p-error" *ngIf="getErrorPattern('institucion')">La Institucion  es invalido.</small>
+                        <small id="institucion-description" class="p-error" *ngIf="getErrorRequired('institucion')">Este
+                          campo es obligatorio.</small>
+                        <small id="institucion-description" class="p-error" *ngIf="getErrorPattern('institucion')">La
+                          Institucion es invalido.</small>
                       </div>
                     </div>
                   </div>
@@ -142,10 +164,12 @@
                           'ng-dirty ng-invalid':
                             getErrorRequired('email') ||
                             getErrorPattern('email')
-                        }" />
+                        }" aria-describedby="email-description" />
                       <div *ngIf="form.get('email').invalid">
-                        <small class="p-error" *ngIf="getErrorRequired('email')">Este campo es obligatorio.</small>
-                        <small class="p-error" *ngIf="getErrorPattern('email')">El correo es invalido.</small>
+                        <small id="email-description" class="p-error" *ngIf="getErrorRequired('email')">Este campo es
+                          obligatorio.</small>
+                        <small id="email-description" class="p-error" *ngIf="getErrorPattern('email')">El correo es
+                          invalido.</small>
                       </div>
                     </div>
                   </div>
@@ -153,16 +177,22 @@
                     <div class="p-field p-fluid">
                       <label for="password">Contraseña*</label>
                       <div class="viewPass">
-                        <input id="password" name="password" autocomplete="on" [type]="show ? 'text' : 'password'" formControlName="password"
-                          placeholder="Contraseña" pInputText [ngClass]="{
+                        <input id="password" name="password" autocomplete="on" [type]="show ? 'text' : 'password'"
+                          formControlName="password" placeholder="Contraseña" pInputText [ngClass]="{
                             'ng-dirty ng-invalid': getErrorRequired('password')
-                          }" />
-                        <i tabindex="0" (keyup.enter)="show = !show"
-                          [ngClass]="{ 'pi-eye': !show, 'pi-eye-slash': show }" class="pi" (click)="show = !show"></i>
+                          }" aria-describedby="password-description" />
+
+                        <button type="button" title="Ver contraseña" aria-level="Ver contraseña" tabindex="0"
+                           [ngClass]="{ 'pi-eye': !show, 'pi-eye-slash': show }" class="pi"
+                          (click)="show = !show"></button>
+
+                        <!-- <i aria-level="Ver contraseña" tabindex="0" (keyup.enter)="show = !show"
+                          [ngClass]="{ 'pi-eye': !show, 'pi-eye-slash': show }" class="pi" (click)="show = !show"></i> -->
                       </div>
 
                       <div *ngIf="form.get('password').invalid">
-                        <small id="password" class="p-error" *ngIf="getErrorRequired('password')">Este campo es
+                        <small id="password-description" id="password" class="p-error"
+                          *ngIf="getErrorRequired('password')">Este campo es
                           obligatorio.</small>
                       </div>
                     </div>
@@ -184,10 +214,10 @@
                   <ng-container *ngIf="form.get('role').value === 'user'">
                     <div class="p-col-12 p-md-12 p-lg-12">
                       <div class="p-field p-fluid terms">
-                        <p-checkbox formControlName="disability" (onChange)="changeDiscapacidad($event)" binary="true"
-                          name="groupname">
+                        <p-checkbox inputId="disability" formControlName="disability"
+                          (onChange)="changeDiscapacidad($event)" binary="true" name="groupname">
                         </p-checkbox>
-                        Tiene alguna discapacidad.
+                        <label for="disability">Tiene alguna discapacidad.</label>
                       </div>
                     </div>
 
@@ -197,15 +227,34 @@
                           let i = index
                         ">
                         <div class="p-col-12 p-md-12 p-lg-6">
-                          <div class="p-field p-fluid">
+                          <div class="p-field p-fluid" style="display: flex; flex-direction:column;">
                             <label for="discapacidad">Discapasidad*</label>
-                            <p-dropdown formControlName="code" optionValue="code" [options]="discapacidadesArray"
+                            <!-- <p-dropdown formControlName="code" optionValue="code" [options]="discapacidadesArray"
                               id="discapacidad" placeholder="Tipo de discapacidad" optionLabel="name" [ngClass]="{
                                 'ng-dirty ng-invalid': getArrayErrorRequired(
                                   i,
                                   'code'
                                 )
-                              }" [showClear]="true"></p-dropdown>
+                              }" [showClear]="true"></p-dropdown> -->
+
+                            <select  class="dropdown-custom " name="discapacidad" id="discapacidad"
+                              formControlName="code" [ngClass]="{
+                                'invalid': getArrayErrorRequired(
+                                  i,
+                                  'code'
+                                )
+                              }" placeholder="Discapacidad" aria-describedby="code-arr-description">
+                              <option *ngFor="let item of discapacidadesArray" [value]="item.code">{{item.name}}
+                              </option>
+                            </select>
+                            <div *ngIf="discapacidades.get('code').invalid">
+                              <small id="code-arr-description" class="p-error"
+                                *ngIf="getArrayErrorRequired(i, 'code')">Este campo es
+                                obligatorio.</small>
+                            </div>
+
+
+
                           </div>
                         </div>
 
@@ -219,11 +268,17 @@
                                     i,
                                     'grado'
                                   )
-                                }" pInputText />
+                                }" pInputText aria-describedby="grado-arr-description" />
+
+                                <div *ngIf="discapacidades.get('grado').invalid">
+                                  <small id="grado-arr-description"  class="p-error"
+                                    *ngIf="getArrayErrorRequired(i, 'grado')">Este campo es
+                                    obligatorio.</small>
+                                </div>
                             </div>
-                            <button (click)="removeDiscapacidad(i)" pButton pRipple type="button" icon="pi pi-trash"
+                            <button title="Eliminar discapacidad" (click)="removeDiscapacidad(i)" pButton pRipple type="button" icon="pi pi-trash"
                               class="p-button-rounded p-button-danger p-button-text"></button>
-                            <button (click)="addDiscapacidad()" pButton pRipple type="button" icon="pi pi-plus"
+                            <button title="Agregar discapacidad" (click)="addDiscapacidad()" pButton pRipple type="button" icon="pi pi-plus"
                               class="p-button-rounded p-button-text"></button>
                           </div>
                         </div>
@@ -233,11 +288,12 @@
 
                   <div class="p-col-12 p-md-12 p-lg-12">
                     <div class="p-field p-fluid terms">
-                      <p-checkbox [ngClass]="{
+                      <p-checkbox inputId="terms" [ngClass]="{
                           'ng-dirty ng-invalid': getErrorTerms('terms')
                         }" binary="true" name="groupname" formControlName="terms">
                       </p-checkbox>
-                      <a target="_blank" [routerLink]="['/information']">Acepto los términos y condiciones.</a>
+                      <label for="terms"><a target="_blank" [routerLink]="['/information']">Acepto los términos y
+                          condiciones.</a></label>
                     </div>
                     <!-- <div *ngIf="!terms.value && (terms.dirty || terms.touched)">
                                             <small id="educacionL " class="p-error"
@@ -247,14 +303,19 @@
 
                   <div class="p-col-12 p-md-12 p-lg-12 p-grid">
                     <div class="p-col-12 p-md-12 p-lg-6">
-                      <input id="code" type="text" formControlName="codigo" placeholder="Codigo de docente" pInputText
+                      <input type="text" formControlName="codigo" placeholder="Codigo de docente" pInputText
                         autocomplete="off" maxlength="6" [ngClass]="{
                           'ng-dirty ng-invalid':
                             getErrorRequired('codigo') ||
                             getErrorMaxLength('codigo') ||
                             getErrorMinLength('codigo') ||
                             validateCode
-                        }" />
+                        }" aria-describedby="codigo-description" />
+                      <div *ngIf="form.get('codigo').invalid">
+                        <small id="codigo-description" id="password" class="p-error"
+                          *ngIf="getErrorRequired('codigo')">Este campo es
+                          obligatorio.</small>
+                      </div>
                     </div>
                     <div class="p-col-12 p-md-12 p-lg-6">
                       <p-button (click)="onSave()" type="button" label="Registrarme"></p-button>

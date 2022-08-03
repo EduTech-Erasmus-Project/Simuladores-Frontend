@@ -137,7 +137,7 @@ export class ListaRubricaComponent implements OnInit {
   }
 
   public editarRubrica(rubrica:any){
-    console.log(rubrica);
+    //console.log(rubrica);
     this.form.reset();
     this.form.patchValue(rubrica);
     this.display=true; 

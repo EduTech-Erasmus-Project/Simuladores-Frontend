@@ -10,3 +10,16 @@ $gutter: .5rem; //for primeflex grid system
 @import "assets/demo/flags/flags.css";
 @import "assets/layout/custom-style";
 
+
+.dropdown-custom {
+    width: 100%;
+    border: 1px solid #ced4da;
+    height: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    color: #495057;
+
+    &.invalid{
+        border-color: #f44336 !important;
+    }
+}

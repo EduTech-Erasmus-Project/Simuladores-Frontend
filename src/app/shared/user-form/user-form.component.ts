@@ -54,6 +54,22 @@ export class UserFormComponent implements OnInit, OnDestroy {
     },
   ];
 
+  public localization = {
+    buttonLabel: "Elige fecha",
+    placeholder: "yyyy-mm-dd",
+    selectedDateMessage: "La fecha seleccionada es",
+    prevMonthLabel: "Mes anterior",
+    nextMonthLabel: "Próximo mes",
+    monthSelectLabel: "Mes",
+    yearSelectLabel: "Año",
+    closeLabel: "Cerrar ventana de fecha",
+    calendarHeading: "Elige una fecha",
+    dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    monthNamesShort: ["En", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    locale: "es-ES",
+  }
+
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
@@ -81,7 +97,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       ciudad: [null, Validators.required],
       genero: [null, Validators.required],
       institucion: [null, Validators.required],
-      nivelDeFormacion: [null],
+      nivelDeFormacion: [null, Validators.required],
       carreraUniversitaria: [null],
       numeroDeHijos: [0],
       estadoCivil: [null],
@@ -191,6 +207,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
       );
 
       this._subscriptions.push(sub);
+    }else{
+      this.msg = [
+        {
+          severity: "error",
+          detail: "Por favor complete el formulario.",
+        },
+      ];
     }
   }
 
@@ -223,5 +246,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
         control.markAsTouched();
       });
     });
+  }
+
+  public onChangeDate(event){
+    //console.log(event.target.value);
+    this.form.get("fechaNacimiento").setValue(event.target.value);
   }
 }

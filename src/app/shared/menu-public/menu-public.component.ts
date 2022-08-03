@@ -82,13 +82,13 @@ export class MenuPublicComponent implements OnInit, OnDestroy{
           exact: true,
         },
       },
-      {
-        label: "Simuladores", //translate.translations.menu.aboutUs,
-        routerLink: "simulators",
-        routerLinkActiveOptions: {
-          exact: true,
-        },
-      },
+      // {
+      //   label: "Simuladores", //translate.translations.menu.aboutUs,
+      //   routerLink: "simulators",
+      //   routerLinkActiveOptions: {
+      //     exact: true,
+      //   },
+      // },
       // {
       //   label: "Acerca de", //translate.translations.menu.aboutUs,
       //   routerLink: "about",
