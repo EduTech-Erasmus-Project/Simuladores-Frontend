@@ -17,12 +17,14 @@
 
 .viewPass {
     position: relative;
-    i {
+    button {
         position: absolute;
         top: 8px;
         right: 10px;
         padding: 5px;
         cursor: pointer;
+        border: none;
+        background-color: transparent;
     }
 }
 
@@ -37,5 +39,18 @@
 
 .login-panel {
     padding: 25px 0 !important;
-    height: 79vh !important;
+    height: 100% !important;
 }
+
+.register{
+    min-height: 47.5vh; 
+}
+
+:host ::ng-deep .invalid-date{
+    
+    .duet-date__input{
+        width: 100%;
+        border-color: #f44336 !important;
+    }
+}
+

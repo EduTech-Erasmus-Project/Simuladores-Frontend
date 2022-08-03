@@ -1,62 +1,106 @@
-<p-table [value]="competencia" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-            Listado de competencias
-            <p-dialog class="dialogo" header="Agregar Competencia" [(visible)]="display" modal="modal" [closable]="false" [style]="{width: '400px'}">
-                <div style="line-height: 1.5">
-                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                        <input type="text" pInputText placeholder="Titulo" [(ngModel)]='titulo'>
-                    </div>
-                    <textarea rows="5" cols="30"  [(ngModel)]='descripcion' placeholder="Descripcion de la competencia" pInputTextarea></textarea>
-                    
-                </div>
-                <p-footer>
-                    <button type="button" pButton icon="pi pi-check" (click)="approved()"  label="Guardar" class="p-button-text"></button>
-                    <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cerrar" class="p-button-text"></button>
-<!-- <a [routerLink]="['dashboard/nuevo-ejercitario', 123]">Navegar</a> -->
-                    
+<p-table [value]="competencia" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0">
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+      Listado de competencias
+      <button type="text" (click)="display = true" pButton icon="pi pi-external-link" label="Agregar nueva competencia"
+        style="width: auto"></button>
 
-                </p-footer>
-            </p-dialog>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
 
-            <button type="text" (click)="display=true" pButton icon="pi pi-external-link" label="Agregar nueva competencia" style="width: auto"></button>
+        <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search" />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="titulo">
+        Nombre
+        <p-sortIcon field="titulo"></p-sortIcon>
+      </th>
+      <th pSortableColumn="descripcion">
+        Descripcion
+        <p-sortIcon field="descripcion"></p-sortIcon>
+      </th>
+      <th width="200em">
+        
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-competencia>
+    <tr>
+      <td>
+        <span class="p-column-title">{{ competencia.titulo }}</span>
+      </td>
+      <td>
+        <span class="p-column-title">{{ competencia.descripcion }}</span>
+      </td>
+      <td>
 
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
+        <button (click)="loadData(competencia.id)" pButton pRipple label="Editar Competencia"
+          class="p-button-raised p-button-success">
+        </button>
 
-                <input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Global Search" />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="name">Nombre
-                <p-sortIcon field="name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="country.name">Descripcion
-                <p-sortIcon field="country.name"></p-sortIcon>
-            </th>
-            
-            
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-competencia>
-        <tr >
-            <td>
-                <span class="p-column-title">{{competencia.titulo}}</span>
-            </td>
-            <td>
-                <span class="p-column-title">{{competencia.descripcion}}</span>
-                
-            </td>
-            
-          
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="8">No customers found.</td>
-        </tr>
-    </ng-template>
+
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
 </p-table>
+
+
+<p-dialog class="dialogo" header="Agregar Competencia" [(visible)]="display" modal="modal" [closable]="false"
+  [style]="{ width: '400px' }">
+  <form class="form" [formGroup]="form" (ngSubmit)="approved()">
+    <div class="form-group">
+      <div style="line-height: 1.5">
+        <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+
+          <input type="text" pInputText placeholder="Titulo" class="form-control" name="titulo" formControlName="titulo"
+            [class.is-invalid]="isInvalid('titulo')" required style="width: 24rem; " />
+
+
+        </div>
+        <span class="text-danger " *ngIf="isInvalid('titulo')"> *El titulo no puede quedar vacío
+        </span>
+
+        <textarea rows="5" cols="30" placeholder="Descripcion de la competencia" formControlName="descripcion"
+          [class.is-invalid]="isInvalid('descripcion')" pInputTextarea style="width: 25rem; "></textarea>
+
+      </div>
+      <span class="text-danger" *ngIf="isInvalid('descripcion')"> * La descripcion no puede quedar vacío
+      </span>
+
+      <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="approved()" label="Guardar" class="p-button-text"
+          style="margin-left: 180px; "></button>
+        <button type="button" pButton icon="pi pi-times" (click)="display = false" label="Cerrar"
+          class="p-button-text"></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>
+
+
+<p-dialog header="Editar Competencia" [(visible)]="display1" modal1="modal" data-toggle="modal" [closable]="false"
+  [style]="{ width: '400px' }">
+  <div style="line-height: 1.5">
+    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+      <input type="text" pInputText placeholder="Titulo" [(ngModel)]="nombre11" style="width: 24rem; " />
+    </div>
+    <textarea rows="5" cols="30" [(ngModel)]="descripcion11" placeholder="Descripcion de la Competencia" pInputTextarea
+      style="width: 25rem; "></textarea>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="editarCompetencia()" label="Actualizar"
+      class="p-button-text"></button>
+
+    <button type="button" pButton icon="pi pi-times" (click)="display1 = false" label="Cerrar"
+      class="p-button-text"></button>
+  </p-footer>
+</p-dialog>

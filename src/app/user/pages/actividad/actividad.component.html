@@ -5,7 +5,7 @@
                 <div class="card widget-statistics" style="min-height: 33vh">
                     <div class="header">
                         <p><span>Fecha: </span>{{actividad.actividad.fecha | date: "yyyy/MM/dd HH:mm"}}</p>
-                        <p><span>Correctas: </span>{{actividad.actividad.calificacion}}/{{actividad.actividad.totalPreguntas}}</p>
+                        <p><span>Correctas: </span>{{actividad.actividad.preguntasCorrectas}}/{{actividad.actividad.totalPreguntas}}</p>
                         <p><span>Preguntas: </span>{{actividad.actividad.totalPreguntas}}</p>
                         <p><span>Tiempo: </span>{{actividad.actividad.tiempoTotal}}min</p>
                     </div>

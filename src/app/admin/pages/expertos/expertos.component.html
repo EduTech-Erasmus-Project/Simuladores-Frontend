@@ -1,26 +1,17 @@
 <div class="p-grid table-demo">
-	<div class="p-col-12">
-		<div class="card">
-				<app-lista-experto-por-aprobar></app-lista-experto-por-aprobar>
-		</div>
-	</div>
+
+	<p-tabView>
+		<p-tabPanel header="Expertos por aprobar">
+			<app-lista-experto-por-aprobar></app-lista-experto-por-aprobar>
+		</p-tabPanel>
+		<p-tabPanel header="Expertos rechazados">
+			<app-lista-expertos-rechazados></app-lista-expertos-rechazados>
+		</p-tabPanel>
+	</p-tabView>
 
 	<div class="p-col-12">
 		<div class="card">
-				<app-lista-expertos-rechazados></app-lista-expertos-rechazados>
-			
-		</div>
-	
-	</div>
-
-
-<div class="p-col-12">
-
-		<div class="card">
-				<app-lista-expertos-registrados-plaforma></app-lista-expertos-registrados-plaforma>
+			<app-lista-expertos-registrados-plaforma></app-lista-expertos-registrados-plaforma>
 		</div>
 	</div>
-
-
-</div>	
-
+</div>

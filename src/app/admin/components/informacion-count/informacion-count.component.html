@@ -1,0 +1,63 @@
+<div class="p-grid layout-dashboard">
+    <div class="p-col ng-tns-c234-613">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-1">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-messages.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Usuarios</h5>
+                <span>Usuarios registrados</span>
+            </div>
+            <div *ngIf="informacioncount != null || informacioncount != undefined" class="p-col-3 overview-box-status">
+               {{informacioncount.usuarios}}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="p-col ng-tns-c234-613">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-2">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-checkins.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Ejercitarios</h5>
+                <span>Ejercitarios Registrados</span>
+            </div>
+            <div *ngIf="informacioncount != null || informacioncount != undefined" class="p-col-3 overview-box-status">
+                {{informacioncount.ejercitarios}}
+             </div>
+        </div>
+    </div>
+
+
+    <div class="p-col ng-tns-c234-613">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-3">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-filessynced.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Expertos</h5>
+                <span>Expertos Registrados</span>
+            </div>
+            <div *ngIf="informacioncount != null || informacioncount != undefined" class="p-col-3 overview-box-status">
+               {{informacioncount.expertos}}
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col ng-tns-c234-613">
+        <div class="p-grid p-nogutter widget-overview-box overview-box-4">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-usersonline.png" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h5>Competencias</h5>
+                <span>Competencias Registrados</span>
+            </div>
+            <div *ngIf="informacioncount != null || informacioncount != undefined" class="p-col-3 overview-box-status">
+               {{informacioncount.competencias}}
+            </div>
+        </div>
+    </div>
+</div>

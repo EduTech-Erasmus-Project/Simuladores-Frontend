@@ -1,122 +1,161 @@
-<p-messages [(value)]="msg" [enableService]="false"></p-messages>
-<form [formGroup]="form" class="">
-   
+<!-- <p-messages [(value)]="msg" [enableService]="false"></p-messages> -->
+<div class="card">
+  <!-- <div class="p-grid">
+        <div class="p-col-12 p-xl-3 p-md-3">
+            <app-user-password></app-user-password>
+        </div>
+
+        <div class="p-col-0 p-xl-1 p-md-1">
+            <p-divider layout="vertical"> </p-divider>
+        </div>
+
+        <div class="p-col-12 p-xl-8 p-md-8">
+            <app-user-form></app-user-form>
+        </div>
+    </div> -->
+
+  <h4>
+    <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left"
+      ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
+    Nuevo Simulador
+  </h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-grid">
     <div class="control p-col-12 p-xl-12 p-md-12">
-        
-      <h1> <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Atras" icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class=""></p-button>
-          Agregar Nuevo Ejercitario</h1>
-          <div class="contenedor">
-         <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-            <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453"> 
-         <ngx-dropzone (change)="onSelect($event)">
-            <ngx-dropzone-label>Selecciona Archivo</ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-            </ngx-dropzone-preview>
-         </ngx-dropzone> 
-          </div> 
-          
-          </div>
+      <h6>Archivo zip *:</h6>
+      <div *ngIf="!id">
+        <ngx-dropzone (change)="onSelect($event)" *ngIf="porcentaje === 0"
+          class="ng-invalid ng-dirty ng-tns-c49-151 ng-untouched ng-pristine ng-valid" [accept]="'.zip'">
+          <ngx-dropzone-label>Selecciona Archivo</ngx-dropzone-label>
 
-              <h6>Nombre del Ejercitario</h6>
-        <input [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nombre')}" formControlName="nombre" type="text"
-            pInputText placeholder="Nombre de Ejercitario" id="nombre" name="nombre" />
-        <div *ngIf="form.get('nombre').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('nombre')">Este campo es obligatorio.</small>
-        </div>
-   
-     
-        <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-            <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <!-- <div class="control p-col-12 p-xl-4 p-md-12"> -->
-        <h6>Numero de Ejercitario</h6>
-        <input formControlName="numeroejercitario" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('numeroejercitario')}" type="text"
-            pInputText placeholder="Numero de Ejercitario" id="numeroejercitario" name="numeroejercitario" />
-        <div *ngIf="form.get('numeroejercitario').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('numeroejercitario')">Este campo es obligatorio.</small>
-        </div>
-        </div> 
-    
-
-    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
-        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <h6>Tipo de Ejercitario</h6>
-        <input formControlName="tipoejercitario" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('tipoejercitario')}" type="text"
-            pInputText placeholder="Tipo de Ejercitario" id="tipoejercitario" name="tipoejercitario" />
-        <div *ngIf="form.get('tipoejercitario').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('tipoejercitario')">Este campo es obligatorio.</small>
-        </div>
+          <ngx-dropzone-preview *ngIf="archivo" [removable]="true" (removed)="onRemove($event)" [file]="archivo">
+            <ngx-dropzone-label>{{ archivo.name }} ({{ archivo.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+        <span class="ng-invalid ng-dirty ng-tns-c49-151 ng-untouched ng-pristine ng-valid" *ngIf="!archivo">
+          *El archivo es requerido.
+        </span>
+        <p _ngcontent-c0="">
+          <progress-bar [progress]="porcentaje" [color]="'#488aff'">
+          </progress-bar>
+        </p>
+      </div>
+    </div>
+    <div class="control p-col-12 p-xl-6 p-md-6">
+      <h6>Nombre del Ejercitario *</h6>
+      <input [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('nombreDeEjercitario')
+        }" formControlName="nombreDeEjercitario" type="text" pInputText placeholder="Nombre de Ejercitario"
+        id="nombreDeEjercitario" name="nombreDeEjercitario" style="width: 100%" />
+      <div *ngIf="form.get('nombreDeEjercitario').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('nombreDeEjercitario')">Este campo es obligatorio.</small>
+      </div>
     </div>
 
-        <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
-            <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <h6>Duracion</h6>
-        <input formControlName="duracion" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('duracion')}" type="text"
-            pInputText placeholder="Duracion" id="duracion" name="duracion" />
-        <div *ngIf="form.get('duracion').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('duracion')">Este campo es obligatorio.</small>
-        </div>
+    <div class="control p-col-12 p-xl-6 p-md-6">
+      <h6>Categoria</h6>
+      <input formControlName="categoria" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('categoria')
+        }" type="text" pInputText placeholder="Categoria" id="categoria" name="categoria" style="width: 100%" />
     </div>
-        </div>
-    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
-        <div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <h6>Principal Competencia</h6>
-        <input formControlName="principalcompetencia" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('principalcompetencia')}" type="text"
-            pInputText placeholder="Tipo de Ejercitario" id="principalcompetencia" name="principalcompetencia" />
-        <div *ngIf="form.get('principalcompetencia').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('principalcompetencia')">Este campo es obligatorio.</small>
-        </div>
-    </div>
-    
-    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
-        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <h6>Nivel</h6>
-        <p-dropdown formControlName="nivel" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('nivel')}"
-          [options]="nivels" placeholder="nivel" optionLabel="name" optionValue="value" [showClear]="true">
-    </p-dropdown>
-        <div *ngIf="form.get('nivel').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('nivel')">Este campo es obligatorio.</small>
-        </div>
-   </div>
 
-    <!-- <div class="control p-col-12 p-xl-4 p-md-6"> -->
-        <div _ngcontent-hwi-c234="" class="control p-col ng-tns-c234-453">
-        <h6>Competencia</h6>
-        <p-dropdown formControlName="competencia" [ngClass]="{'ng-dirty ng-invalid':getErrorRequired('competencia')}"
-          [options]="competencias" placeholder="competencia" optionLabel="name" optionValue="value" [showClear]="true">
-        </p-dropdown>
-        
-        <div *ngIf="form.get('competencia').invalid">
-            <small class="p-error" *ngIf="getErrorRequired('competencia')">Este campo es obligatorio.</small>
-        </div>
+    <div class="control p-col-12 p-xl-6 p-md-6">
+      <h6>Tipo de Ejercitario *</h6>
+      <input formControlName="tipoDeEjercitario" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('tipoDeEjercitario')
+        }" type="text" pInputText placeholder="Tipo de Ejercitario" id="tipoDeEjercitario" name="tipoDeEjercitario"
+        style="width: 100%" />
+      <div *ngIf="form.get('tipoDeEjercitario').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('tipoDeEjercitario')">Este campo es obligatorio.</small>
+      </div>
     </div>
+
+    <div class="control p-col-12 p-xl-3 p-md-3">
+      <h6>Sector</h6>
+      <input formControlName="sector" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('sector') }" type="text"
+        pInputText placeholder="Sector" id="sector" name="sector" style="width: 100%" />
+      <div *ngIf="form.get('sector').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('sector')">Este campo es obligatorio.</small>
+      </div>
+    </div>
+    <div class="control p-col-12 p-xl-3 p-md-3">
+      <h6>Duracion *</h6>
+      <input formControlName="duracion" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('duracion')
+        }" type="number" pInputText placeholder="Duracion" id="duracion" name="duracion" style="width: 100%" />
+      <div *ngIf="form.get('duracion').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('duracion')">Este campo es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="control p-col-12 p-xl-3 p-md-3">
+      <h6>Nivel *</h6>
+      <p-dropdown formControlName="nivel" [ngClass]="{ 'ng-dirty ng-invalid': getErrorRequired('nivel') }"
+        [options]="nivels" placeholder="nivel" optionLabel="name" optionValue="value" [showClear]="true">
+      </p-dropdown>
+      <div *ngIf="form.get('nivel').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('nivel')">Este campo es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="control p-col-12 p-xl-3 p-md-3">
+      <h6>Competencia *</h6>
+      <p-dropdown formControlName="competencia" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('competencia')
+        }" [options]="competencias" placeholder="competencia" optionLabel="name" optionValue="value"
+        [showClear]="true">
+      </p-dropdown>
+
+      <div *ngIf="form.get('competencia').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('competencia')">Este campo es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="control p-col-12 p-xl-6 p-md-6">
+      <h6>Url Ejercitario</h6>
+      <input formControlName="urlEjercitario" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('urlEjercitario')
+        }" type="text" pInputText placeholder="urlEjercitario" id="urlEjercitario" name="urlEjercitario"
+        style="width: 100%" />
+      <div *ngIf="form.get('urlEjercitario').invalid">
+        <small class="p-error" *ngIf="getErrorRequired('urlEjercitario')">Este campo es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="control p-col-12 p-xl-12 p-md-12">
+      <h6>Instrucion Principal *</h6>
+      <textarea formControlName="instruccionPrincipalEjercitario" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired(
+            'instruccionPrincipalEjercitario'
+          )
+        }" rows="5" style="width: 100%" placeholder="Instrucion Principal"
+        placeholder="instruccionPrincipalEjercitario" pInputTextarea>
+      </textarea>
+    </div>
+
+    <div class="control p-col-12 p-xl-12 p-md-12">
+      <h6>Instrucion Participantes *</h6>
+
+      <textarea formControlName="instruccionesParticipantes" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('instruccionesParticipantes')
+        }" rows="5" style="width: 100%" placeholder="Instrucion Participantes" placeholder="instruccionesParticipantes"
+        pInputTextarea>
+      </textarea>
+    </div>
+
+    <div class="control p-col-12 p-xl-12 p-md-12">
+      <h6>Variaciones</h6>
+
+      <textarea formControlName="variaciones" [ngClass]="{
+          'ng-dirty ng-invalid': getErrorRequired('variaciones')
+        }" rows="5" style="width: 100%" placeholder="Variaciones" placeholder="variaciones" pInputTextarea>
+      </textarea>
+    </div>
+
+    <div class="control p-col-12 p-xl-12 p-md-12" style="text-align: center;">
+      <p-button type="submit" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
+        [disabled]="isLoading" ng-reflect-icon="pi pi-save ">
+      </p-button>
+    </div>
+  </form>
 </div>
-
-
-<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-    <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453">
-   
-			<textarea rows="5" cols="30" placeholder="Instrucion Principal" pInputTextarea>
-
-            </textarea>
-       
-        
-       
-			<textarea rows="5" cols="30" placeholder="Instruciones de Ejercitario" pInputTextarea>
-
-            </textarea>
-        </div>
-          </div>
-
-
-<div _ngcontent-hwi-c234="" class="control p-grid ng-tns-c234-453">
-    <div _ngcontent-hwi-c234="" class="control p-col-6 p-offset-3 ng-tns-c234-453"> 
-        <p-button routerLink="/dashboard/simuladores" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar" ng-reflect-icon="pi pi-save " class=""></p-button>
-    </div>
-</div>
-         
-       </div>
-
-</div>
-</form>

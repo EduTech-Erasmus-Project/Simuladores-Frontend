@@ -1,8 +1,8 @@
-<p-table [value]="usuario" styleClass="p-datatable-customers" [rows]="10" [paginator]="true" [filterDelay]="0" >    
-    <ng-template pTemplate="caption">
-	
+<p-table *ngIf="usuarioApro" [value]="usuarioApro" styleClass="p-datatable-customers" [rows]="10" [paginator]="true"
+	[filterDelay]="0">
+	<ng-template pTemplate="caption">
 		<div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-			Lista de Usuarios registrados en la plataforma
+			Lista de usuarios registrados en la plataforma
 			<span class="p-input-icon-left">
 				<i class="pi pi-search"></i>
 				<input pInputText type="text" (input)="dtc.filterGlobal($event.target.value, 'contains')"
@@ -12,74 +12,81 @@
 	</ng-template>
 	<ng-template pTemplate="header">
 		<tr>
-			<th pSortableColumn="name">codigo
-				<p-sortIcon field="name"></p-sortIcon>
+			<th pSortableColumn="nombre">Nombre y Apellido
+				<p-sortIcon field="nombre"></p-sortIcon>
 			</th>
-			<th pSortableColumn="">Nombre y Apellido
+			<th pSortableColumn="email">Email
 				<p-sortIcon field=""></p-sortIcon>
 			</th>
-			<th pSortableColumn="">Email
-				<p-sortIcon field=""></p-sortIcon>
-			</th>
-			<th pSortableColumn="">Genero
+			<th pSortableColumn="email">Genero
 				<p-sortIcon field=""></p-sortIcon>
 			</th>
 
-            <th pSortableColumn="">Direccion
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="direccion">Direccion
+				<p-sortIcon field="direccion"></p-sortIcon>
 			</th>
 
-            <th pSortableColumn="">Telefono
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="telefono">Telefono
+				<p-sortIcon field="telefono"></p-sortIcon>
 			</th>
-			<th pSortableColumn="boton">
-				
+			<th pSortableColumn="estado">Estado Cuenta
+				<p-sortIcon field="estado"></p-sortIcon>
 			</th>
-			
+			<th [style]="{'width': '20em'}" pSortableColumn="boton">
+
+			</th>
 		</tr>
 	</ng-template>
-	        
-        <ng-template pTemplate="body" let-usuario>
-					
-            <tr >
-				<td>
-					<span class="p-column-title">{{usuario.codigo}}</span>
-				</td>
+	<ng-template pTemplate="body" let-usuarioApro>
+		<tr>
+			<td>
+				<span class="p-column-title">{{usuarioApro.nombre}} {{usuarioApro.apellido}}</span>
+			</td>
 
-				<td>
-					<span class="p-column-title">{{usuario.nombre}}{{usuario.apellido}}</span> 
-				</td>
+			<td>
+				<span class="p-column-title">{{usuarioApro.email}}</span>
+			</td>
 
-				<td>
-					<span class="p-column-title">{{usuario.email}}</span>
-				</td>
+			<td>
+				<span class="p-column-title">{{usuarioApro.genero}}</span>
 
-				<td>
-					<span class="p-column-title">{{usuario.genero}}</span>
-					
-				</td>
+			</td>
 
-				<td>
-					<span class="p-column-title">{{usuario.direccion}}</span>
-					
-				</td>
+			<td>
+				<span class="p-column-title">{{usuarioApro.direccion}}</span>
 
-				<td>
-					<span class="p-column-title">{{usuario.telefono}}</span>
-					
-				</td>
-				
-			
-				<td>
-					<button pbutton="" pripple="" (click)="showModal(usuario)" type="button" label="Success" class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Success">
-						<span class="p-button-label">Ver Perfil</span><span class="p-ink" style="height: 71px; width: 71px; top: -14.5px; left: 2.70312px;"></span></button>
-					
-					<button pbutton="" pripple="" (click)="showModal(usuario.usuario)" type="button" label="Danger" class="p-button-raised p-button-danger p-mr-2 p-mb-2 p-ripple p-button p-component" ng-reflect-label="Danger">
-					<span class="p-button-label">Desabilitar Cuenta</span><span class="p-ink"></span></button>
-				</td>
-			
-			</tr>
-		</ng-template>
+			</td>
+
+			<td>
+				<span class="p-column-title">{{usuarioApro.telefono}}</span>
+
+			</td>
+
+			<td>
+				<span class="p-column-title">{{usuarioApro.estado ? "Activo" : "Desactivado"}}</span>
+			</td>
+
+			<td>
+				<div style="display: flex; justify-content: center;">
+					<button pbutton pripple (click)="showModal(usuarioApro)" type="button" label="Success"
+						class="p-button-raised p-button-success p-mr-2 p-mb-2 p-ripple p-button p-component"
+						ng-reflect-label="Success">
+						<span class="p-button-label">Ver Perfil</span><span class="p-ink"></span></button>
+						
+					<button  pbutton pripple (click)="bloquearCuenta(usuarioApro.id)"
+						type="button" label="Warning"
+						class="p-button-raised p-mr-2 p-mb-2 p-ripple p-button p-component"
+						[ngClass]="{'p-button-warning': !usuarioApro.estado, 'p-button-danger': usuarioApro.estado}"
+						>
+						<span class="p-button-label">{{usuarioApro.estado ? "Desabilitar Cuenta" : "Habilitar Cuenta"}}</span>
+					</button>
+
+				</div>
+
+			</td>
+
+		</tr>
+	</ng-template>
 	<ng-template pTemplate="emptymessage">
 		<tr>
 			<td colspan="8">No customers found.</td>
@@ -87,6 +94,7 @@
 	</ng-template>
 </p-table>
 
-<p-dialog header="Información del Docente" [(visible)]="displayMaximizable" [modal]="true" [style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
-    <app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
+<p-dialog header="Usuario Registrado en la Plataforma" [(visible)]="displayMaximizable" [modal]="true"
+	[style]="{ width: '75vw' }" [maximizable]="true" [draggable]="false" [resizable]="false">
+	<app-perfil *ngIf="displayMaximizable" [usuario]="usuario"></app-perfil>
 </p-dialog>

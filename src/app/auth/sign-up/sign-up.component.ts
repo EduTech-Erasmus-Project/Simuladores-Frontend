@@ -11,7 +11,7 @@ import {
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 
-import { Message } from "primeng/api";
+import { Message, MessageService } from "primeng/api";
 import * as moment from "moment";
 import { AuthService } from "src/app/service/auth.service";
 import { DiscapacidadesService } from "src/app/service/discapacidades.service";
@@ -32,11 +32,28 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public discapacidadesArray: any[];
   public validateCode:boolean = false;
 
+  public localization = {
+    buttonLabel: "Elige fecha",
+    placeholder: "yyyy-mm-dd",
+    selectedDateMessage: "La fecha seleccionada es",
+    prevMonthLabel: "Mes anterior",
+    nextMonthLabel: "Próximo mes",
+    monthSelectLabel: "Mes",
+    yearSelectLabel: "Año",
+    closeLabel: "Cerrar ventana de fecha",
+    calendarHeading: "Elige una fecha",
+    dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    monthNamesShort: ["En", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    locale: "es-ES",
+  }
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private authService: AuthService,
     private discapacidadesService: DiscapacidadesService,
+    private messageService: MessageService
     
   ) {
     this.route.queryParams.subscribe((params) => {
@@ -81,10 +98,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.pattern("[a-zA-ZñÑáéíóúÁÉÍÓÚs]+")],
       ],
       role: ["user", Validators.required],
+      institucion: [null],
       email: [
         null,
         [
           Validators.required,
+          Validators.email,
           Validators.pattern(
             "^([a-zA-Z0-9_' - '.]+)@([a-zA-Z0-9_' - '.]+).([a-zA-Z]{2,5})$"
           ),
@@ -182,11 +201,15 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.markAsTouchFormArray();
     this.markTouchForm();
     if (this.form.valid) {
-      //console.log("Form valid");
+      
       let data = this.form.value;
       data.codigo = this.form.get("codigo").value;
       data.fechaNacimiento = moment(data.fechaNacimiento).format("YYYY-MM-DD");
+
+      //console.log("data send", data);
+     
       let sub = await this.authService.register(data).subscribe(
+      
         (results) => {
           //console.log(results);
           this.registred = true;
@@ -208,17 +231,32 @@ export class SignUpComponent implements OnInit, OnDestroy {
             return;
           }
           
+          if(err.error.code === "invalid_code"){
+            this.msgs = [
+              {
+                severity: "error",
+                summary: "Error",
+                detail: "El codigo del docente es invalido.",
+              },
+            ];
+            return;
+          }
 
           this.msgs = [
             {
               severity: "error",
               summary: "Error",
-              detail: "Error al registrar intente de nuevo mas tarde.",
+              detail: JSON.stringify(err.error),
             },
           ];
+          //4HeQ4F
+          //this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar intente de nuevo mas tarde.'});
         }
       );
+      
       this.subscribes.push(sub);
+    }else{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'El formulario es invalido, por favor rellene todos los campos.'});
     }
   }
 
@@ -267,8 +305,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if(this.form.get("role").value === "expert"){
       this.form.controls['codigo'].disable();
       this.form.controls['codigo'].setValue(null);
+
+      this.form.controls['institucion'].setValidators([Validators.required]);
+
     }else{
       this.form.controls['codigo'].enable();
+      this.form.controls['institucion'].setValidators([]);
     }
+  }
+
+  public onChangeDate(event){
+    //console.log(event.target.value);
+    this.form.get("fechaNacimiento").setValue(event.target.value);
   }
 }

@@ -17,6 +17,7 @@ export class ComentariosComponent implements OnInit {
   public comentario: string = "";
   public loadingPublicar: boolean = false;
   public loader: boolean = false;
+  public error: boolean = false;
 
   public comentarios: Comentario[] = [];
 
@@ -50,20 +51,27 @@ export class ComentariosComponent implements OnInit {
   }
 
   comentar() {
-    this.loadingPublicar = true;
-    let comentarioObj: Comentario = {
-      comentario: this.comentario,
-      actividad: this.idActividad,
-    };
-    this.comentarioService.comentar(comentarioObj).subscribe((result) => {
-      //console.log(result);
-      this.loadData();
+    if (this.comentario.length > 0) {
+      this.error = false;
       this.loadingPublicar = true;
-      this.comentario = "";
-    }, (error) => {
-      console.log(error);
-      this.loadingPublicar = true;
-    });
+      let comentarioObj: Comentario = {
+        comentario: this.comentario,
+        actividad: this.idActividad,
+      };
+      this.comentarioService.comentar(comentarioObj).subscribe((result) => {
+        //console.log(result);
+        this.loadData();
+        this.loadingPublicar = true;
+        this.comentario = "";
+      }, (error) => {
+        console.log(error);
+        this.loadingPublicar = true;
+      });
+      
+    }else{
+      this.error = true;
+    }
+   
   }
 
 }

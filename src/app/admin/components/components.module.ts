@@ -8,22 +8,34 @@ import { ListaCompetenciasComponent } from './lista-competencias/lista-competenc
 import { ListaEjercitariosComponent } from './lista-ejercitarios/lista-ejercitarios.component';
 import { PrincipalesDiscapacidadesComponent } from './principales-discapacidades/principales-discapacidades.component';
 import { ListaUsuariosRegPlatComponent } from './lista-usuarios-reg-plat/lista-usuarios-reg-plat.component';
-
-
-
+import { InformacionCountComponent } from './informacion-count/informacion-count.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CrearPreguntaComponent } from './crear-pregunta/crear-pregunta.component';
+import { ListaPreguntaComponent } from './lista-pregunta/lista-pregunta.component';
+import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
+import { ListaRubricaComponent } from './lista-rubrica/lista-rubrica.component';
 
 @NgModule({
   declarations: [
-   
+    
     ListaCompetenciasComponent,
     ListaEjercitariosComponent,
     ListaExpertoPorAprobarComponent,
     ListaExpertosRechazadosComponent,
     ListaExpertosRegistradosPlaformaComponent,
     PrincipalesDiscapacidadesComponent,
-    ListaUsuariosRegPlatComponent
+    ListaUsuariosRegPlatComponent,
+    InformacionCountComponent,
+    CrearPreguntaComponent,
+    ListaPreguntaComponent,
+    EditarPreguntaComponent,
+  
+  
+    ListaRubricaComponent,
+
+   
   ],
-  imports: [ CommonModule, SharedModule ],
+  imports: [ CommonModule, SharedModule, ReactiveFormsModule],
   exports: [
     
     ListaCompetenciasComponent,
@@ -32,7 +44,10 @@ import { ListaUsuariosRegPlatComponent } from './lista-usuarios-reg-plat/lista-u
     ListaExpertosRechazadosComponent,
     ListaExpertosRegistradosPlaformaComponent,
     PrincipalesDiscapacidadesComponent,
-    ListaUsuariosRegPlatComponent
+    ListaUsuariosRegPlatComponent,
+    InformacionCountComponent,
+    CrearPreguntaComponent,
+    ListaPreguntaComponent,
   ],
 })
 export class ComponentsModule { }

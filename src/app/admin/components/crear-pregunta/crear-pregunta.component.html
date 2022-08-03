@@ -1,0 +1,75 @@
+<div class="card">
+  <h3>
+
+    <p-button routerLink="/dashboard/lista-pregunta/{{id}}" pbutton="" pripple="" label="Atras"
+      icon="pi pi-chevron-circle-left" ng-reflect-label="Save" ng-reflect-icon="pi pi-chevron-circle-left" class="">
+    </p-button>
+    Agregar preguntas
+  </h3>
+
+
+
+  <form class="example-form" [formGroup]="userForm">
+
+
+
+    <div class="p-panel p-component p-panel-toggleable">
+      <div class="p-panel-header ng-star-inserted" id="p-panel-6-titlebar">
+        <span class="p-panel-title ng-star-inserted" id="p-panel-6_header">Preguntas</span>
+        <div class="p-panel-icons ">
+        </div>
+      </div>
+      <div role="region" class="p-toggleable-content ng-trigger ng-trigger-panelContent" id="p-panel-6-content"
+        aria-hidden="false" aria-labelledby="p-panel-6-titlebar">
+        <div class="p-panel-content" formArrayName="questions">
+
+          <div [formGroup]="questions" class="address-container" *ngFor="let questions of questionsArray.controls; let i = index;">
+
+            <div class="p-fluid">
+
+              <div class="p-grid">
+                <div class="p-col-12 p-md-12">
+                  <h6>Pregunta {{secuencial + i}}</h6>
+                  {{questions.get("numeroPregunta").setValue(secuencial + i)}}
+                  <!-- <input type="hiden" formControlName="numeroPregunta"> -->
+
+                  <input id="Pregunta" type="text" pinputtext="" placeholder="Pregunta" formControlName="contenido"
+                    class="p-inputtext p-component" #txtContenido>
+                  <span *ngIf="txtContenido.value.length <= 0" class="text-danger"> *El Contenido no puede
+                    quedar
+                    vacío
+                  </span>
+                </div>
+
+                <div class="p-col-12 p-md-12">
+                  <textarea id="Respuesta" type="text" rows="4" pinputtextarea="" placeholder="Respuesta"
+                    class="p-inputtextarea p-inputtext p-component" formControlName="respuestaCorrecta"
+                    #txtrespuestaCorrecta>
+                      </textarea>
+
+                  <span *ngIf="txtrespuestaCorrecta.value.length <=0" class="text-danger"> * La respuesta
+                    no
+                    puede quedar vacío
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="p-col-12 p-md-12" style="display: flex; justify-content: flex-end;">
+              <p-button *ngIf="i>=0" icon="pi pi-trash" class="btn btn-danger" label="Eliminar Pregunta"
+                (click)="removeQuestion(i)" ng-reflect-label="Eliminar Pregunta" ng-reflect-icon="pi pi-trash">
+              </p-button>
+            </div>
+            <p-divider></p-divider>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="p-field p-mt-2" style="display: flex; justify-content: space-between;">
+    <p-button (click)="addQuestion()" pbutton="" pripple="" label="Agregar Pregunta" icon="pi pi-plus-circle"
+      ng-reflect-label="Agregar Pregunta" ng-reflect-icon="pi pi-plus-circle" class=""></p-button>
+    <p-button (click)="onSubmit()" type="button" pbutton="" pripple="" label="Guardar" icon="pi pi-save" ng-reflect-label="Guardar"
+      ng-reflect-icon="pi pi-save" class=""></p-button>
+  </div>
+</div>

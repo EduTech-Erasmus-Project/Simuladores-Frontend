@@ -1,48 +1,67 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UsuarioService } from 'src/app/service/usuario.service';
+import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { UsuarioService } from "src/app/service/usuario.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-lista-usuarios-reg-plat',
-  templateUrl: './lista-usuarios-reg-plat.component.html',
-  styleUrls: ['./lista-usuarios-reg-plat.component.scss']
+  selector: "app-lista-usuarios-reg-plat",
+  templateUrl: "./lista-usuarios-reg-plat.component.html",
+  styleUrls: ["./lista-usuarios-reg-plat.component.scss"],
 })
 export class ListaUsuariosRegPlatComponent implements OnInit {
-  private _subscriptions: Subscription[] = [];
   public loadingUsuarios = false;
-  public usuario : any;
-  public displayMaximizable: boolean;
+  public usuarioApro: any;
 
-  constructor(private usuarioService: UsuarioService  ) {
-    
-   }
+  private _subscriptions: Subscription[] = [];
+  public displayMaximizable: boolean;
+  public idUsuario: number;
+  public usuario: any;
+  public estado: boolean = false;
+
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-
-    this.loadParticipantes()
+    this.loadParticipantes();
+    this.usuarioService.event.subscribe((result) => {
+      //console.log("hola", result);
+      this.loadParticipantes();
+    });
   }
-  private async loadParticipantes() {
+  private loadParticipantes() {
     this.loadingUsuarios = true;
-    try {
-      const usuarios = await this.usuarioService.obtenerParticipantesUsuario().toPromise();
-      console.log("Componente",  usuarios);
-      this.usuario = usuarios;
-      this.loadingUsuarios = false;
-      this._subscriptions.push( usuarios);
-    } catch (error) {
-      console.log(error);
-    }
-    
+    this.usuarioService.obtenerParticipantesUsuario().subscribe((res) => {
+      this.usuarioApro = res;
+    });
   }
   public async showModal(usuario1) {
-    this.usuario =usuario1
+    console.warn(usuario1);
+    this.usuario = usuario1;
     try {
-      console.log(this.usuario);
+      //console.log(this.usuario);
       this.displayMaximizable = true;
     } catch (error) {
       console.log(error);
     }
+  }
 
-    }
-    
+  public async bloquearCuenta(id) {
+    // this.estado = true;
+    //console.log("id", id);
+    await this.usuarioService.bloqueoCuentaUsuario(id).subscribe(
+      (result) => {
+
+        //console.log("result estado cuenta", result);
+        this.usuarioService.emitEvent(true);
+        Swal.fire({
+          icon: "success",
+          title: `La cuenta del usuario a sido ${result.estado ? "activada" : "desactivada"} `,
+          showConfirmButton: true,
+        });
+      },
+      (error) => {
+        console.log(error);
+        Swal.showValidationMessage(`Request failed: Error inesperado`);
+      }
+    );
+  }
 }

@@ -1,18 +1,22 @@
 
-input{
-    width: 100%;
-}
+// input{
+//     width: 100%;
+// }
+
+// :host ::ng-deep .p-dropdown {
+//     width: 100%;
+// }
+
+// :host ::ng-deep .p-calendar {
+//     width: 100%;
+// }
+// .contenedor{
+//      margin-left: 20rem;
+//      margin-right: 20rem;
+//     text-align: center;
+    
+// }
 
 :host ::ng-deep .p-dropdown {
     width: 100%;
-}
-
-:host ::ng-deep .p-calendar {
-    width: 100%;
-}
-.contenedor{
-     margin-left: 20rem;
-     margin-right: 20rem;
-    text-align: center;
-    
 }

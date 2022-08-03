@@ -7,6 +7,7 @@ import { MenuService } from "./service/app.menu.service";
   templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit {
+  
   horizontalMenu: boolean = true;
 
   darkMode = false;
@@ -63,7 +64,9 @@ export class AppComponent implements OnInit {
     public renderer: Renderer2,
     private menuService: MenuService,
     private primengConfig: PrimeNGConfig
-  ) {}
+  ) {
+    //console.log("APP-ROOT");
+  }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;

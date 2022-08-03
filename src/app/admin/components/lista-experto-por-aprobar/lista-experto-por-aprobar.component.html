@@ -11,22 +11,20 @@
 	</ng-template>
 	<ng-template pTemplate="header">
 		<tr>
-			<th pSortableColumn="name">Nombre
-				<p-sortIcon field="name"></p-sortIcon>
+			<th pSortableColumn="nombre">Nombre
+				<p-sortIcon field="nombre"></p-sortIcon>
 			</th>
-			<th pSortableColumn="">Fecha de Registro
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="last_login">Fecha de Registro
+				<p-sortIcon field="last_login"></p-sortIcon>
 			</th>
-			<th pSortableColumn="">Profecion
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="carreraUniversitaria">Profecion
+				<p-sortIcon field="carreraUniversitaria"></p-sortIcon>
 			</th>
-			<th pSortableColumn="">Direccion
-				<p-sortIcon field=""></p-sortIcon>
+			<th pSortableColumn="direccion">Direccion
+				<p-sortIcon field="direccion"></p-sortIcon>
 			</th>
-			<th pSortableColumn="boton ">
-				
+			<th width="100em">
 			</th>
-			
 		</tr>
 	</ng-template>
 	<ng-template pTemplate="body" let-expertoPen>
@@ -35,7 +33,7 @@
 				<span class="p-column-title">{{expertoPen.usuario?.nombre}}</span>
 			</td>
 			<td>
-				
+				<span class="p-column-title">{{expertoPen.usuario?.last_login}}</span>
 			</td>
 			<td>
 				<span class="p-column-title">{{expertoPen.usuario?.carreraUniversitaria}}</span>
@@ -44,7 +42,6 @@
 				<span class="p-column-title">{{expertoPen.usuario?.direccion}}</span>
 			</td>
 			<td>
-				<span class="p-column-title"></span>
 				<a pTooltip="Aprobar" (click)="approved(expertoPen?.id,expertoPen.usuario?.id)"  pButton type="button" style="margin-left: 2px" class="p-button-success" icon="pi pi-check">
 				</a>
 				<a pTooltip="Rechazar" (click)="notApproved(expertoPen?.id,expertoPen.usuario?.id)" pButton type="button" style="margin-left: 2px" class="p-button-danger" icon="pi pi-times">
